@@ -23,7 +23,7 @@
 				private String title;
 				private String content; --> 
 			<div class="modal-body">
-				<form method="post" action="add">
+				<form method="post" action="/plan/schedulePlan/add">
 					UserId : <input type="text" name="userId"><br> 
 					Title : <input type="text" name="title"><br> 
 					Content : <input type="text" name="content"><br>
