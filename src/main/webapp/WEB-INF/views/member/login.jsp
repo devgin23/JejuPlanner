@@ -54,6 +54,9 @@
       margin: 8px 0;
       box-sizing: border-box;
     }
+    table{
+ 
+    }
   </style>
 
 </head>

@@ -26,10 +26,6 @@ public class MemberVO {
 	private int userAge;
 	private Date regDate;
 	
-	
-	
-
-	
 	public String getUserId() {
 		return userId;
 	}
