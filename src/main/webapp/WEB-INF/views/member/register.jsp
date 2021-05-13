@@ -18,7 +18,7 @@
         <!-- Respond.js 으로 IE8 에서 반응형 기능을 활성화 -->
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <!-- custom js -->
-        <script src="<c:url value="/resources/js/register.js"/>"></script>
+        <script src="<c:url value="/resources/js/register.js?version=11"/>"></script>
         <style>
             .custom-align{
                 text-align: center;
@@ -67,13 +67,15 @@
 
             <!-- content -->
             <div class="custom-align-content">
-                <form class="form-horizontal" role="form" method="post" accept-charset="UTF-8">
+                <form class="form-horizontal" role="form" method="post" accept-charset="UTF-8" id="regForm">
                     <div class="form-group" id="divId">
                         <label for="inputId" class="col-lg-2 control-label">아이디</label>
                         <div class="col-lg-10">
                             <input type="text" class="form-control onlyAlphabetAndNumber" id="userId" name="userId" data-rule-required="true" placeholder="30자이내의 알파벳, 언더스코어(_), 숫자만 입력 가능합니다." maxlength="30">
+                            <button class="idCheck" type="button" id="idCheck" name="idCheck" onclick="fn_idCheck();" value="N">중복확인</button>
                         </div>
                     </div>
+                    
                     <div class="form-group" id="divPassword">
                         <label for="inputPassword" class="col-lg-2 control-label">비밀번호</label>
                         <div class="col-lg-10">

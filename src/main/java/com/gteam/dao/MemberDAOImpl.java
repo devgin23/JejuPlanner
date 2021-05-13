@@ -32,4 +32,9 @@ public class MemberDAOImpl implements MemberDAO{
 		
 		return sql.selectOne(namespace+".loginMapper", vo);
 	}
+
+	@Override
+	public int idCheck(MemberVO vo) throws Exception {
+		return sql.selectOne(namespace+".idCheck", vo);
+	}
 }

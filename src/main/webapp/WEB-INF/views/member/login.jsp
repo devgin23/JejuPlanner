@@ -69,44 +69,29 @@
 		      <div class=v1>
 		        <table width=250 border=0 cellspacing=0 cellpadding=1 align=center >
 		          <tr>
-		            <td align=center width=35%><button class="button">아이디</button></td>
+		            <td align=center width=35%><button type="button" class="button">아이디</button></td>
 		            <td width=65%> <input type="text" id="userId" name="userId"></td>
 		          </tr>
 		          <tr>
-		            <td align=center  width=35%><button class="button">비밀번호</button></td>
+		            <td align=center  width=35%><button type="button" class="button">비밀번호</button></td>
 		            <td  width=65%> <input type="password" id="userPw" name="userPw"></td>
 		          </tr>
 		          <tr>
-		            <td align=center  width=100% colspan=2> <button class="submit">로그인</button></td>
-		          </tr>
-		          <tr>
-		            <td align=center class="find"><a href="#">아이디 찾기</a></td>
-		            <td align=right class="join"><a href="/member/register">회원가입</a></td>
+		          	<td align=center  width=50%> <button class="button" type="button" onclick="location.href='/member/register'">회원가입</button></td>
+		            <td align=center  width=50%> <button class="submit">로그인</button></td>
 		          </tr>
 	        	</table>
 	       	 </div>
  			</div>
  			</c:if>
-	        <c:if test="${member != null}">
-			  <div>
-			  	<p>${member.userId}님 환영 합니다.</p>
-			  	<a href="/member/logout"><button id="logoutBtn" type="button">로그아웃</button></a>
-			  </div>
-			  </c:if>
 			  <c:if test="${msg == false}">
-			  	<p style="color: red;">로그인 실패! 아이디와 비밀번호를 확인해주세요.</p>
+			  	<script>
+			  		alert("로그인 실패! 아이디와 비밀번호를 확인해주세요.");
+			  	</script>
 			  </c:if>
 	  </form>
   </div>
-  <!-- 로그아웃 버튼 맵핑 -->
-<script type="text/javascript">
-	$(document).ready(function(){
-		$("#logoutBtn").on("click", function(){
-			location.href="member/logout";
-		})
-		
-	})
-</script>
+
 
   
 </body>

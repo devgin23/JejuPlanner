@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -46,16 +47,35 @@ public class MemberController {
 		log.info("register.jsp");
 	}
 	// 회원가입
+	
 	@RequestMapping(value="/member/register", method=RequestMethod.POST)
 	public String postRegister(MemberVO vo) {
+		log.info("post register");
+		//아이디 중복 체크
 		try {
-		service.register(vo);
+			int idResult=service.idCheck(vo);
+			if(idResult==1) {
+				
+				return "redirect:/member/register";
+			}else if(idResult==0){
+				service.register(vo);
+			}
 		}catch(Exception e) {
 			e.printStackTrace();
 			log.info("MemberController에서 MemberService 호출 시 에러");
 		}
 		return "redirect:/";
 	}
+	
+	// 회원가입 시 아이디 중복 체크 
+	@ResponseBody
+	@RequestMapping(value="/member/register/idCheck", method = RequestMethod.POST)
+	public int idCheck(MemberVO vo) throws Exception{
+		log.info("idCheck");
+		// 중복이면 1, 아니면 0 을 반환
+		return service.idCheck(vo);
+	}
+	
 	//로그인
 	//RedirectAttributes => 일회성으로 데이터를 전달할 때 사용
 	@RequestMapping(value = "/member/login", method = RequestMethod.POST)
@@ -107,10 +127,7 @@ public class MemberController {
 		log.info("Modal Plan Add");
       cart.add(vo);
 
-     
-
-      //localhost:8080/cart로 요청을 보냄
-
+      //localhost:port/cart로 요청을 보냄
       return "redirect:/plan/schedulePlan";
 	}
 }

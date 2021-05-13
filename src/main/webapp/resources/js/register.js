@@ -4,11 +4,37 @@ function emulAcceptCharset(form) {
     }
     return true;
 }
+//아이디 중복검증 결과값 전역변수 선언
+var idCheckResult = 1;
+//아이디 중복검증
+function fn_idCheck(){
+	$.ajax({
+		url : "/member/register/idCheck",	//클라이언트가 요청보내는 주소
+		type : "post",						//HTTP 요청방식 (GET, POST)
+		data : {"userId" : $("#userId").val()}, //HTTP 요청과 함께 보내는 데이터
+		success : function(data){			//서버단으로 요청 전송이 성공하면 success 실행	
+			if(data==1){
+				idCheckResult = data;
+				//id Overlap
+				$("#idCheck").attr("value", "O");
+				alert("중복된 아이디입니다.");
+			}else if(data==0){
+				idCheckResult = data;
+				$("#idCheck").attr("value", "Y");
+				alert("사용가능한 아이디입니다.");
+			}
+		}
+	})
+}
+
+
 
 $(function(){
     //모달을 전역변수로 선언
     var modalContents = $(".modal-contents");
     var modal = $("#defaultModal");
+    
+    
     
     $('.onlyAlphabetAndNumber').keyup(function(event){
         if (!(event.keyCode >=37 && event.keyCode<=40)) {
@@ -105,14 +131,14 @@ $(function(){
     //------- validation 검사
     $( "form" ).submit(function( event ) {
         
-        var divId = $('#divId');
+        var divId = $('#userId');
+        var idCheckVal = $('#idCheck');
         var divPassword = $('#divPassword');
         var divPasswordCheck = $('#divPasswordCheck');
         var divName = $('#divName');
         var divNickname = $('#divNickname');
         var divMail = $('#divMail');
         
-
         
         //아이디 검사
         if($('#userId').val()==""){
@@ -127,6 +153,26 @@ $(function(){
             divId.removeClass("has-error");
             divId.addClass("has-success");
         }
+        //아이디 중복 검사
+        var idCheckVal = $("#idCheck").val();
+        //아이디 중복검사 미실행 시
+    	if(idCheckVal == "N"){
+    		modalContents.text("아이디를 중복 확인을 주시기 바랍니다.");
+            modal.modal('show');
+            return false;
+    	}
+    	//아이디 중복 시
+    	else if(idCheckVal == "O"){
+    		modalContents.text("중복된 아이디 입니다.");
+    		modal.modal('show');
+    		return false;
+    	}
+    	//아이디 중복검사 통과 시
+    	else if(idCheckVal == "Y"){
+    		divId.removeClass("has-error");
+            divId.addClass("has-success");
+    	}
+        
         
         //패스워드 검사
         if($('#userPw').val()==""){
