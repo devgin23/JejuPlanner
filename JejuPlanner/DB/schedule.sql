@@ -6,6 +6,6 @@ CREATE TABLE `scheduleTest` (
 	`planDay` VARCHAR(5) NOT NULL,
 	`startTime` INT NULL DEFAULT '900',
 	`rowNo` INT NOT NULL,
-	INDEX `SCHEDULE_FK_SETTest` (`planNo`, `userId`) USING BTREE,
-	CONSTRAINT `SCHEDULE_FK_SETTest` FOREIGN KEY (`planNo`, `userId`) REFERENCES `project`.`plan` (`planNo`, `userId`) ON UPDATE NO ACTION ON DELETE CASCADE
+	INDEX `SCHEDULE_FK_SET` (`planNo`, `userId`) USING BTREE,
+	CONSTRAINT `SCHEDULE_FK_SET` FOREIGN KEY (`planNo`, `userId`) REFERENCES `project`.`plan` (`planNo`, `userId`) ON UPDATE NO ACTION ON DELETE CASCADE
 )
