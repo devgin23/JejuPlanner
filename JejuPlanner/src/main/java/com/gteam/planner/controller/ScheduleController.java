@@ -16,7 +16,7 @@ import com.gteam.planner.service.ScheduleService;
 public class ScheduleController {
 	
 	@Autowired
-	ScheduleService service;
+	private ScheduleService service;
 	
 	//일정목록화면
 	@RequestMapping(value="/schedulelist", method = RequestMethod.GET)
