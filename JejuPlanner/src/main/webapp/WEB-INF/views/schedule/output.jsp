@@ -72,7 +72,7 @@
 	<!-- 일정 출력 끝 -->
 </div>
 <br/>
-<a href="/controller/addschedule">일정 추가하기</a>
+<a href="/schedule/add">일정 추가하기</a>
 
 	<!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"
