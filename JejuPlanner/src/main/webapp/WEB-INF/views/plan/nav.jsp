@@ -8,10 +8,11 @@
     
       <ul class="nav navbar-nav ">
         <li class="nav-item">
-          <a class="nav-link" href="/plan/schedulePlan">일정 만들기</a>
+          <a class="nav-link" href="#">일정 만들기</a>
         </li>
         <li class="nav-item  ">
-          <a class="nav-link" href="#">내 일정 보관</a>
+          <a class="nav-link" href="/plan/list/user?userId=${member.userId}">내 일정 보관</a>
+          <button type="button" onclick="alert('${member.userId}');">클릭</button>
         </li>
         <li class="nav-item  ">
           <a class="nav-link" href="#">공유 일정</a>
