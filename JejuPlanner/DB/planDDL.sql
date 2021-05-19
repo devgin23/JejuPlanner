@@ -8,4 +8,4 @@ CREATE TABLE `plan` (
 	PRIMARY KEY (`planNo`, `userId`) USING BTREE,
 	INDEX `PLAN_FK_SET` (`userId`) USING BTREE,
 	CONSTRAINT `PLAN_FK_SET` FOREIGN KEY (`userId`) REFERENCES `project`.`member` (`userId`) ON UPDATE NO ACTION ON DELETE CASCADE
-)
+)l
