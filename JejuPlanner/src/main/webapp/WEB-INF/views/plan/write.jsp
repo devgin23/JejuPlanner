@@ -23,7 +23,7 @@ KAKAO MAP 시작 --!> .map_wrap, .map_wrap * {
 .map_wrap {
 	position: relative;
 	width: 100%;
-	height: 350px;
+	height: 850px;
 }
 
 #category {
@@ -308,7 +308,7 @@ p {
 	</section>
 
 <!-- KAKAO MAP JavaScript -->
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=발급받은 APP KEY를 사용하세요&libraries=services"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=bfe80ccda6d4728072437d233285847b&libraries=services"></script>
 <script>
 // 마커를 클릭했을 때 해당 장소의 상세정보를 보여줄 커스텀오버레이입니다
 var placeOverlay = new kakao.maps.CustomOverlay({zIndex:1}), 
