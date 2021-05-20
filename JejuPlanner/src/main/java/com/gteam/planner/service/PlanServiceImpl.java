@@ -37,15 +37,6 @@ public class PlanServiceImpl implements PlanService{
 	//계획 조회
 	@Override
 	public PlanVO planView(int planNo, String userId) throws Exception {
-		
-		//날짜포맷
-		DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-		
-		String startDate = format.format(dao.planView(planNo, userId).getStartDate());
-		
-		
-		log.info("Service 날짜 출력 " + dao.planView(planNo, userId).getStartDate());
-		
 		return dao.planView(planNo, userId);
 	}
 

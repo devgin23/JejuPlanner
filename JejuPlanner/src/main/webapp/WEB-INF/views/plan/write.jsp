@@ -71,7 +71,7 @@
 	</script> -->
 	<body>
 		<header>
-			<%@include file="nav.jsp" %>
+			<%@include file="../nav.jsp" %>
 		</header>
 		
 		

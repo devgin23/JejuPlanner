@@ -71,7 +71,7 @@ public class PlanController {
 	public String planViewForUser(Model model,@RequestParam("planNo") int planNo, @RequestParam("userId") String userId) throws Exception {
 		PlanVO view = planService.planView(planNo, userId);
 		model.addAttribute("view", view);
-		return "/plan/write";
+		return "/plan/view";
 	}
 	
 }
