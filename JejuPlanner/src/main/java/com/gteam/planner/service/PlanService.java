@@ -13,4 +13,8 @@ public interface PlanService {
 	//유저별 계획 목록
 	List<PlanVO> listForUser(String userId) throws Exception;
 
+	//계획조회
+	PlanVO planView(int planNo, String userId) throws Exception;
+
+
 }

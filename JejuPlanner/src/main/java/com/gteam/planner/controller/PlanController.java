@@ -66,4 +66,12 @@ public class PlanController {
 		return "/plan/list";
 	}
 	
+	//계획 조회하기
+	@RequestMapping(value="/plan/view", method = RequestMethod.GET)
+	public String planViewForUser(Model model,@RequestParam("planNo") int planNo, @RequestParam("userId") String userId) throws Exception {
+		PlanVO view = planService.planView(planNo, userId);
+		model.addAttribute("view", view);
+		return "/plan/write";
+	}
+	
 }

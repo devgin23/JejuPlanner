@@ -65,7 +65,7 @@
 				<td>${list.planTitle}</td>
 				<td>${list.planTotalDay} 일</td>
 				<td>${list.planHit}</td>
-				<td><button type="button" onclick="">열람</button>
+				<td><button type="button" onclick="location.href='/plan/view?planNo=${list.planNo}&userId=${member.userId}'">열람</button>
 			</tr>
 			</c:forEach>
 		</tbody>

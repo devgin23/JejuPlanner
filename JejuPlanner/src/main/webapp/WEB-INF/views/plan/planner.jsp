@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <!DOCTYPE html>
 <html>
@@ -23,19 +24,21 @@
   }
 </style>
 
+
 <title>계획 입력 폼</title>
 </head>
 <body>
-
-<!--
-	private int planNo;
+<!-- 
+	private int bno;			//임시로 주석처리해놓음 (DB에 없는 필드)
+	private int planNo;			//조회 및 정렬용 필드 추가 (DB엔 있는 필드인데 VO에 없었음)(05-18)
 	private String userId;
-	private String descript;
-	private String addr;
-	private int planDay;
-	private int startTime;
-	private int rowNo;
--->
+	private Date regDate;		//VO에는 있으나 DB에 없는 필드임 추가 필요함
+	private String planTitle;	//필드명 변경 title -> planTitle(05-18)
+	private Date startDate; 
+	private String content;    필드 삭제(05-18)
+	private int planTotalDay; 	//필드추가(05-18)
+	private int planHit;		//필드추가(05-18)
+	 -->
 	
 	<!-- 계획 입력 -->
 	<div class="col-md-12 input-form">
@@ -45,7 +48,7 @@
 			<table>
 			<tr>
 				<td>계획 번호 :</td> 
-				<td><input type="text" class="form-control form-control-sm" placeholder="임시 값 ${formData.planNo}" readonly></td> <!-- 임시 필드 -->
+				<td><input type="text" class="form-control form-control-sm" placeholder="${view.planNo}" readonly></td> <!-- 임시 필드 -->
 				<td><input type="hidden" name="planNo" value=${formData.planNo}></input> hidden예정</td>
 			</tr>
 			<tr>
@@ -54,11 +57,14 @@
 			</tr>
 			<tr>
 				<td>여행 제목 : </td>
-				<td><input type="text" class="form-control" name="planTitle"/></td>
+				<td><input type="text" class="form-control" name="planTitle" value="${view.planTitle}"/></td>
 			</tr>
 			<tr>
 				<td>여행 날짜 : </td>
-				<td><input type="date" class="form-control" id="currentDate" name="planDate"/></td>
+				<td>
+				<input type="date" date-date="" data-date-format="yyyy-MM-dd" class="form-control" id="currentDate" name="satrtDate" value="${view.startDate}"/>
+				</td>
+				<td>출력 : "<fmt:formatDate value="${view.startDate}" pattern="yyyy-MM-dd"/></td>
 				<td>
 			<div class="dropdown">
 				<button class="btn btn-day btn-secondary dropdown-toggle" id="method_status" type="button" id="dropdownMenuButton" data-toggle="dropdown">
@@ -109,9 +115,9 @@ $(function(){
 </script>
 
 <!-- 여행날짜 기본 값 삽입 스크립트 -->
-<script>
+<!-- <script>
   document.getElementById('currentDate').value = new Date().toISOString().substring(0, 10);;
-</script>
+</script> -->
 
 </body>
 </html>
