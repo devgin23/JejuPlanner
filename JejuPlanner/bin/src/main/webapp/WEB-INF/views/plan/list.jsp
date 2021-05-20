@@ -28,15 +28,12 @@
 <body>
 
 	<!-- 
-	private int bno;			//임시로 주석처리해놓음 (DB에 없는 필드)
-	private int planNo;			//조회 및 정렬용 필드 추가 (DB엔 있는 필드인데 VO에 없었음)(05-18)
+	private int planNo;			//필드이름 테이블이랑 똑같이 변경해봄 마음에 안들면 다시 원복함   bno -> planNo(05-18)
 	private String userId;
-	private Date regDate;		//VO에는 있으나 DB에 없는 필드임 추가 필요함
-	private String planTitle;	//필드명 변경 title -> planTitle(05-18)
-	private Date startDate; 
-	private String content;    필드 삭제(05-18)
+	private Date regDate;
+	private String title;
 	private int planTotalDay; 	//필드추가(05-18)
-	private int planHit;		//필드추가(05-18)
+	private int planHit;
 	 -->
 
 <div class="row">
