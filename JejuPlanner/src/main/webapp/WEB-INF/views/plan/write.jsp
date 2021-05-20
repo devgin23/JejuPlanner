@@ -81,7 +81,7 @@
 					<!-- 로그인 유무 확인/로그인 시 -->
 					<c:if test="${member.userId != null}">
 					<div class="row h-100">
-			        	<div class="col-8 map-area">로그인 되어 있음</div>
+			        	<div class="col-8 map-area">맵이다 여기가!!!</div>
 			        	<div class="col-4 plan-area">
 			        	<%@ include file="planner.jsp" %>
 			        	<%@ include file="schedule.jsp" %>
