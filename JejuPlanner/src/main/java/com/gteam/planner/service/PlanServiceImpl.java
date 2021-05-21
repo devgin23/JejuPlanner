@@ -39,5 +39,11 @@ public class PlanServiceImpl implements PlanService{
 	public PlanVO planView(int planNo, String userId) throws Exception {
 		return dao.planView(planNo, userId);
 	}
+	
+	//계획 수정
+	@Override
+	public void planModify(PlanVO vo) throws Exception {
+		dao.planModify(vo);
+	}
 
 }

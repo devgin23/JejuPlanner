@@ -19,26 +19,21 @@
   background-color: powderblue;
   }
   
-  .output-form {
-  background-color: #D2FFD2;
+  /* 버튼 disabled 처리 시 회색 되는거 스타일 변경 */
+  button[type="button"]:disabled { 
+  background-color: #e9ecef; 
+  color: #212529;
+  opacity: 1;
+  border:none;
   }
 </style>
-
 
 <title>계획 조회하기</title>
 </head>
 <body>
-<!-- 
-	private int bno;			//임시로 주석처리해놓음 (DB에 없는 필드)
-	private int planNo;			//조회 및 정렬용 필드 추가 (DB엔 있는 필드인데 VO에 없었음)(05-18)
-	private String userId;
-	private Date regDate;		//VO에는 있으나 DB에 없는 필드임 추가 필요함
-	private String planTitle;	//필드명 변경 title -> planTitle(05-18)
-	private Date startDate; 
-	private String content;    필드 삭제(05-18)
-	private int planTotalDay; 	//필드추가(05-18)
-	private int planHit;		//필드추가(05-18)
-	 -->
+	<header>
+		<%@include file="../nav.jsp" %>
+	</header>
 	
 	<!-- 계획 입력 -->
 	<div class="col-md-12 input-form">
@@ -47,13 +42,8 @@
 		<form method="post" action="">
 			<table>
 			<tr>
-				<td>계획 번호 :</td> 
-				<td><input type="text" class="form-control form-control-sm" placeholder="${view.planNo}" readonly></td> <!-- 임시 필드 -->
-				<td><input type="hidden" name="planNo" value=${formData.planNo}></input> hidden예정</td>
-			</tr>
-			<tr>
 				<td>아 이 디 : </td>
-				<td><input type="text" class="form-control" name="userId" placeholder="${member.userId}" readonly/></td><td>hidden예정</td>
+				<td><input type="text" class="form-control" name="userId" placeholder="${view.userId}" readonly/></td>
 			</tr>
 			<tr>
 				<td>여행 제목 : </td>
@@ -62,50 +52,51 @@
 			<tr>
 				<td>여행 날짜 : </td>
 				<td><input type="date" class="form-control" id="currentDate" name="satrtDate" value="<fmt:formatDate value="${view.startDate}" pattern="yyyy-MM-dd"/>" readonly/></td>
-				<td>
-			<div class="dropdown">
-				<button class="btn btn-day btn-secondary dropdown-toggle" id="method_status" type="button" id="dropdownMenuButton" data-toggle="dropdown">
-				    1일
-				</button>
-				<ul id="method_type" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-					<li class="dropdown-item"><a href="#">1일</a></li>
-				    <li class="dropdown-item"><a href="#">2일</a></li>
-				    <li class="dropdown-item"><a href="#">3일</a></li>
-				    <li class="dropdown-item"><a href="#">4일</a></li>
-				    <li class="dropdown-item"><a href="#">5일</a></li>
-				    <li class="dropdown-item"><a href="#">6일</a></li>
-				    <li class="dropdown-item"><a href="#">7일</a></li>
-				    <li class="dropdown-item"><a href="#">8일</a></li>
-				    <li class="dropdown-item"><a href="#">9일</a></li>
-   				</ul>
-			</div>
-				</td>
 			</tr>
 			<tr>
-				<td><button type="submit" class="btn btn-primary mb-3">작성</button></td>
+				<td>여행 일수 : </td>
+				<td>
+					<div class="dropdown">
+						<button class="btn btn-day btn-secondary dropdown-toggle" id="method_status" type="button" id="dropdownMenuButton" data-toggle="dropdown" disabled>
+						    ${view.planTotalDay}일
+						</button>
+						<ul id="method_type" class="dropdown-menu">
+							<li class="dropdown-item"><a href="#">1일</a></li>
+						    <li class="dropdown-item"><a href="#">2일</a></li>
+						    <li class="dropdown-item"><a href="#">3일</a></li>
+						    <li class="dropdown-item"><a href="#">4일</a></li>
+						    <li class="dropdown-item"><a href="#">5일</a></li>
+						    <li class="dropdown-item"><a href="#">6일</a></li>
+						    <li class="dropdown-item"><a href="#">7일</a></li>
+						    <li class="dropdown-item"><a href="#">8일</a></li>
+						    <li class="dropdown-item"><a href="#">9일</a></li>
+		   				</ul>
+		   			</div>
+   				</td>
+			</tr>
+			<tr>
+				<td><button type="button" class="btn btn-primary mb-3" onclick="location.href='/plan/write'">수정</button></td>
 			</tr>
 			</table>
 		</form>
 	</div>
 	<!-- 계획 입력 끝 -->
 	
-<!-- Option 1: Bootstrap Bundle with Popper -->
-<!--
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"
-  integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8"
-  crossorigin="anonymous">
-</script> -->
-
-<!-- 중요! 위 스크립트 안먹혀서 아래걸로 바꿔놓음 -->
-<!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<!-- 부트스트랩 스크립트 -->	
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
- -->
 
-<!-- 여행날짜 기본 값 삽입 스크립트 -->
-<!-- <script>
-  document.getElementById('currentDate').value = new Date().toISOString().substring(0, 10);;
-</script> -->
-
+<!-- 드롭다운 값변경 스크립트 -->
+<script>
+$(function(){
+    $(".dropdown-menu li a").click(function(){
+    	$(".btn-day:first-child").text($(this).text());
+    	$(".btn-day:first-child").val($(this).text());
+   });
+});
+</script>
+	
+	
 </body>
 </html>

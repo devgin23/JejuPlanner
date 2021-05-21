@@ -19,3 +19,7 @@ VALUES ('member1', '제주여행1', '3');
 
 INSERT INTO `plan` (userId, planTitle, planTotalDay) 
 VALUES ('member2', '제주여행2', '3');
+
+UPDATE plan 
+SET	planTitle = '제주TEST', startDate = '2022-01-01', planTotalDate = '7'
+WHERE userId = 'member1' AND planNo = '1';

@@ -23,7 +23,7 @@
   }
 </style>
 
-<title>공유 계획 목록</title>
+<title>내 계획 목록</title>
 </head>
 
 <body>
@@ -34,7 +34,7 @@
 	<div class="row">
 		<!-- 계획 출력 시작 -->
 		<div class="col-md-6 output-form">
-		<p>공유 계획 목록</p>
+		<p>내 계획 목록</p>
 		<table style="background-color:#f9b208">
 			<thead>
 				<tr>

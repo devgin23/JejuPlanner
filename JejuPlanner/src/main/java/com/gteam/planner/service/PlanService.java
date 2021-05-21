@@ -16,5 +16,7 @@ public interface PlanService {
 	//계획조회
 	PlanVO planView(int planNo, String userId) throws Exception;
 
+	void planModify(PlanVO vo) throws Exception;
+
 
 }

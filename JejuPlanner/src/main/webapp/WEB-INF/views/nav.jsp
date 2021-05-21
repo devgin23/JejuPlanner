@@ -1,20 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
   <!-- 네비게이션 바-->
-
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark navbar-fixed-top">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">GDJ32 G조</a>
+    <a class="navbar-brand" href="/plan/write">GDJ32 G조</a>
     
       <ul class="nav navbar-nav ">
         <li class="nav-item">
-          <a class="nav-link" href="#">일정 만들기</a>
+          <a class="nav-link" href="/plan/write">일정 만들기</a>
         </li>
         <li class="nav-item  ">
-          <a class="nav-link" href="/plan/list/user?userId=${member.userId}">내 일정 보관</a>
+          <a class="nav-link" href="#" onclick="javascript:document.planListForUser.submit();">내 일정 보관</a>
         </li>
         <li class="nav-item  ">
-          <a class="nav-link" href="#">공유 일정</a>
+          <a class="nav-link" href="/plan/list">공유 일정</a>
         </li>
         <li class="nav-item ">
           <a class="nav-link" href="#">이용 안내</a>
@@ -32,3 +31,7 @@
  </div>
 </nav>
 
+<!-- 내 일정 보관 열람 POST처리를 위한 form -->
+<form name="planListForUser" action="/plan/list/user" method="POST">
+	<input type="hidden" name="userId" value="${member.userId}"></input>
+</form>

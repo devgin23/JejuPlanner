@@ -1,5 +1,6 @@
 package com.gteam.planner.dao;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -32,13 +33,18 @@ public class PlanDaoImpl implements PlanDao {
 	@Override
 	public PlanVO planView(int planNo, String userId) throws Exception {
 		
-		HashMap data = new HashMap();
+		HashMap<String, Object> data = new HashMap<>();
 		
 		data.put("planNo", planNo);
 		data.put("userId", userId);
 		
 		return sql.selectOne(namespace + ".planView", data);
-		
+	}
+	
+	//계획 수정
+	@Override
+	public void planModify(PlanVO vo) {
+		sql.update(namespace + ".planView", vo);
 	}
 		
 	
