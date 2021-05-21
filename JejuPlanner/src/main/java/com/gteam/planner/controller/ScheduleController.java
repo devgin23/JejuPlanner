@@ -23,6 +23,7 @@ public class ScheduleController {
 	public String outputList(Model model) throws Exception {
 		System.out.println("목록화면입니다.");
 		
+		//일정 리스트 넘겨주기
 		List<ScheduleVO> list = service.list();
 		model.addAttribute("list", list);
 
