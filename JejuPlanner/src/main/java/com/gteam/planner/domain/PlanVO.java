@@ -17,7 +17,7 @@ CREATE TABLE `plan` (
 	INDEX `PLAN_FK_SET` (`userId`) USING BTREE,
 	CONSTRAINT `PLAN_FK_SET` FOREIGN KEY (`userId`) REFERENCES `project`.`member` (`userId`) ON UPDATE NO ACTION ON DELETE CASCADE
 );
-	);*/
+*/
 	
 	private int planNo;			//AUTO_INCREMENT
 	private String userId;		//(planNo + userId 기본키)

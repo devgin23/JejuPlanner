@@ -18,7 +18,6 @@ CREATE TABLE `member` (
 */
 
 public class MemberVO {
-
 	private String userId;
 	private String userPw;
 	private int userNo;
