@@ -5,23 +5,27 @@ import java.util.Date;
 public class PlanVO {
     
 	/*
-	CREATE TABLE prj_board 
-	 (bno INT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
-	  userId VARCHAR(20) NOT NULL,
-	  regDate DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-	  title VARCHAR(50) NOT NULL,
-	  content TEXT NOT NULL
+CREATE TABLE `plan` (
+	`planNo` INT(10) NOT NULL AUTO_INCREMENT,
+	`userId` VARCHAR(50) NOT NULL,
+	`regDate` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`planTitle` VARCHAR(200) NOT NULL,
+	`startDate` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`planTotalDay` INT NOT NULL,
+	`planHit` INT NOT NULL DEFAULT '0',
+	PRIMARY KEY (`planNo`, `userId`) USING BTREE,
+	INDEX `PLAN_FK_SET` (`userId`) USING BTREE,
+	CONSTRAINT `PLAN_FK_SET` FOREIGN KEY (`userId`) REFERENCES `project`.`member` (`userId`) ON UPDATE NO ACTION ON DELETE CASCADE
+);
 	);*/
 	
-	//private int bno;			//임시로 주석처리해놓음 (DB에 없는 필드)
-	private int planNo;			//조회 및 정렬용 필드 추가 (DB엔 있는 필드인데 VO에 없었음)(05-18)
-	private String userId;
-	private Date regDate;		//VO에는 있으나 DB에 없는 필드임 추가 필요함
-	private String planTitle;	//필드명 변경 title -> planTitle(05-18)
+	private int planNo;			//AUTO_INCREMENT
+	private String userId;		//(planNo + userId 기본키)
+	private Date regDate;		
+	private String planTitle;	
 	private Date startDate; 
-	//private String content;    필드 삭제(05-18)
-	private int planTotalDay; 	//필드추가(05-18)
-	private int planHit;		//필드추가(05-18)
+	private int planTotalDay; 	
+	private int planHit;		
 	
 	public int getPlanNo() {
 		return planNo;

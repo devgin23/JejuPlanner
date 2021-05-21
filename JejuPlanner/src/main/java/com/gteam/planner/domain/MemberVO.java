@@ -3,17 +3,19 @@ package com.gteam.planner.domain;
 import java.util.Date;
 
 /* SQL DDL
- * CREATE TABLE member(
-userId VARCHAR(30) NOT NULL,
-userPw VARCHAR(100) NOT NULL,
-userNo INT PRIMARY KEY AUTO_INCREMENT,
-userNickname VARCHAR(30) NOT NULL,
-userGender VARCHAR(2) NOT NULL,
-userAge INT(3) NOT NULL,
-userMail VARCHAR(30) NOT NULL,
-regDate TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-unique(userNickname)
-);*/
+CREATE TABLE `member` (
+	`userId` VARCHAR(30) NOT NULL,
+	`userPw` VARCHAR(30) NOT NULL,
+	`userNo` INT NOT NULL AUTO_INCREMENT,
+	`userNickname` VARCHAR(50) NOT NULL,
+	`userGender` VARCHAR(2) NOT NULL,
+	`userAge` INT NOT NULL,
+	`userMail` VARCHAR(40) NOT NULL,
+	`regDate` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	PRIMARY KEY (`userNo`, `userId`),
+	UNIQUE INDEX `userId` (`userId`)
+);
+*/
 
 public class MemberVO {
 
