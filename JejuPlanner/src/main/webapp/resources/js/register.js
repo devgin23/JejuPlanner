@@ -4,27 +4,31 @@ function emulAcceptCharset(form) {
     }
     return true;
 }
-//아이디 중복검증 결과값 전역변수 선언
-var idCheckResult = 1;
+
 //아이디 중복검증
 function fn_idCheck(){
-	$.ajax({
-		url : "/member/register/idCheck",	//클라이언트가 요청보내는 주소
-		type : "post",						//HTTP 요청방식 (GET, POST)
-		data : {"userId" : $("#userId").val()}, //HTTP 요청과 함께 보내는 데이터
-		success : function(data){			//서버단으로 요청 전송이 성공하면 success 실행	
-			if(data==1){
-				idCheckResult = data;
-				//id Overlap
-				$("#idCheck").attr("value", "O");
-				alert("중복된 아이디입니다.");
-			}else if(data==0){
-				idCheckResult = data;
-				$("#idCheck").attr("value", "Y");
-				alert("사용가능한 아이디입니다.");
+	var userId = $("#userId").val();
+	if(userId==''){
+		$("#idCheck").attr("value", "B");
+		alert('아이디를 입력해 주세요.');
+	}else{
+		$.ajax({
+			url : "/member/register/idCheck",	//클라이언트가 요청보내는 주소
+			type : "post",						//HTTP 요청방식 (GET, POST)
+			data : {userId}, //HTTP 요청과 함께 보내는 데이터
+			success : function(data){			//서버단으로 요청 전송이 성공하면 success 실행	
+				if(data==1){
+					//id Overlap
+					$("#idCheck").attr("value", "D");
+					alert("중복된 아이디입니다.");
+				}else if(data==0){
+					$("#idCheck").attr("value", "Y");
+					alert("사용가능한 아이디입니다.");
+				}
 			}
-		}
-	})
+		});
+	}
+	
 }
 
 
@@ -162,8 +166,13 @@ $(function(){
             return false;
     	}
     	//아이디 중복 시
-    	else if(idCheckVal == "O"){
+    	else if(idCheckVal == "D"){
     		modalContents.text("중복된 아이디 입니다.");
+    		modal.modal('show');
+    		return false;
+    	}
+    	else if(idCheckVal == "B"){
+    		modalContents.text("아이디를 입력해 주세요.")
     		modal.modal('show');
     		return false;
     	}

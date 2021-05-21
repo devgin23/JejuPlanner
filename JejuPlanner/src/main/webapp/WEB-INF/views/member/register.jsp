@@ -18,7 +18,7 @@
         <!-- Respond.js 으로 IE8 에서 반응형 기능을 활성화 -->
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <!-- custom js -->
-        <script src="<c:url value="/resources/js/register.js"/>"></script>
+        <script type="text/javascript" src="/resources/js/register.js"/></script>
         <style>
             .custom-align{
                 text-align: center;
