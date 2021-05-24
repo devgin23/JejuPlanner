@@ -28,11 +28,16 @@
   }
 </style>
 
+
+
 <title>계획 조회하기</title>
 </head>
 <body>
 	<header>
 		<%@include file="../nav.jsp" %>
+		
+		<!-- 열람 유저가 본인이 아닐 시 버튼 비활성화 -->
+
 	</header>
 	
 	<!-- 계획 입력 -->
@@ -48,6 +53,7 @@
 			<tr>
 				<td>아 이 디 : </td>
 				<td><input type="text" class="form-control userId" name="userId" value="${view.userId}" readonly/></td>
+				<td>${member.userId}, ${view.userId}</td>
 			</tr>
 			<tr>
 				<td>여행 제목 : </td>
@@ -93,6 +99,10 @@
 		<!-- 계획삭제 끝 -->
 	</div>
 	
+	<!-- 부트스트랩 스크립트 -->	
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 	
 	<!-- 수정 활성화 스크립트 -->
 	<script>
@@ -103,10 +113,11 @@
 	}
 	</script>
 	
-	<!-- 부트스트랩 스크립트 -->	
-	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
-	
+	<!-- 다른 사용자일 시 버튼 막기 -->
+	<script>
+	if("${member.userId}" != "${view.userId}")
+		$(".btn").attr("disabled", true);
+	</script>
+		
 </body>
 </html>
