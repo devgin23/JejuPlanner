@@ -1,14 +1,18 @@
 package com.gteam.planner.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.gteam.planner.domain.PlaceVO;
 import com.gteam.planner.domain.ScheduleVO;
 import com.gteam.planner.service.ScheduleService;
 
@@ -45,6 +49,17 @@ public class ScheduleController {
 		service.write(vo);
 		
 		return "/schedule/input";
+	}
+	
+	@RequestMapping(value="/plan/fromMap", method = RequestMethod.POST)
+	@ResponseBody
+	public Object fromMap(@RequestBody PlaceVO vo) throws Exception {
+		System.out.println("vo 출력 : " + vo.toString());
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("placeName", vo.getPlaceName());
+	    map.put("placeAddress", vo.getPlaceAddress());
+	    
+		return map;
 	}
 	
 }

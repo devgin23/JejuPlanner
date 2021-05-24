@@ -104,7 +104,7 @@ function removeMarker() {
 // 클릭한 마커에 대한 장소 상세정보를 커스텀 오버레이로 표시하는 함수입니다
 function displayPlaceInfo (place) {
     var content = '<div class="placeinfo">' +
-                    '   <a class="title" href="' + place.place_url + '" target="_blank" title="' + place.place_name + '">' + place.place_name + '</a>';   
+                    '   <div id="btn" class="title" type="button" title="' + place.place_name + '">' + place.place_name + '</div>';   
     if (place.road_address_name) {
         content += '    <span title="' + place.road_address_name + '">' + place.road_address_name + '</span>' +
                     '  <span class="jibun" title="' + place.address_name + '">(지번 : ' + place.address_name + ')</span>';
@@ -118,6 +118,28 @@ function displayPlaceInfo (place) {
     contentNode.innerHTML = content;
     placeOverlay.setPosition(new kakao.maps.LatLng(place.y, place.x));
     placeOverlay.setMap(map);  
+    var frm = {
+    		placeName : place.place_name,
+    		placeAddress : place.road_address_name
+    }
+    $('#btn').on('click', function() {
+		$.ajax({
+			url : "/plan/fromMap",
+			type : "POST",
+			data : JSON.stringify(frm),
+			contentType : "application/json; charset=utf-8;",
+			dataType : "json",
+			success : function(data1) {
+				alert(JSON.stringify(frm));
+				$('#place').html(
+						'<p>' + data1.placeName + '<br>' + data1.placeAddress + '</p>');
+				console.log(data1);
+			},
+			error : function() {
+				alert("simpleWithObject err");
+			}
+		});
+	}); 
 }
 // 각 카테고리에 클릭 이벤트를 등록합니다
 function addCategoryClickEvent() {
@@ -154,3 +176,4 @@ function changeCategoryClass(el) {
         el.className = 'on';
     } 
 } 
+
