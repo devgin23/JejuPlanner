@@ -39,11 +39,15 @@
 	<div class="col-md-12 input-form">
 		<p>계획 조회</p>
 			
-		<form method="post" action="">
+		<form method="post" action="/plan/view/modify">
 			<table>
 			<tr>
+				<!-- planNo hidden 필드 -->
+				<td><input type="hidden" class="form-control" name="planNo" value="${view.planNo}" /></td>
+			</tr>
+			<tr>
 				<td>아 이 디 : </td>
-				<td><input type="text" class="form-control" name="userId" placeholder="${view.userId}" readonly/></td>
+				<td><input type="text" class="form-control userId" name="userId" value="${view.userId}" readonly/></td>
 			</tr>
 			<tr>
 				<td>여행 제목 : </td>
@@ -51,52 +55,58 @@
 			</tr>
 			<tr>
 				<td>여행 날짜 : </td>
-				<td><input type="date" class="form-control" id="currentDate" name="satrtDate" value="<fmt:formatDate value="${view.startDate}" pattern="yyyy-MM-dd"/>" readonly/></td>
+				<td><input type="date" class="form-control" id="currentDate" name="startDate" value="<fmt:formatDate value="${view.startDate}" pattern="yyyy-MM-dd"/>" readonly/></td>
 			</tr>
 			<tr>
 				<td>여행 일수 : </td>
 				<td>
-					<div class="dropdown">
-						<button class="btn btn-day btn-secondary dropdown-toggle" id="method_status" type="button" id="dropdownMenuButton" data-toggle="dropdown" disabled>
-						    ${view.planTotalDay}일
-						</button>
-						<ul id="method_type" class="dropdown-menu">
-							<li class="dropdown-item"><a href="#">1일</a></li>
-						    <li class="dropdown-item"><a href="#">2일</a></li>
-						    <li class="dropdown-item"><a href="#">3일</a></li>
-						    <li class="dropdown-item"><a href="#">4일</a></li>
-						    <li class="dropdown-item"><a href="#">5일</a></li>
-						    <li class="dropdown-item"><a href="#">6일</a></li>
-						    <li class="dropdown-item"><a href="#">7일</a></li>
-						    <li class="dropdown-item"><a href="#">8일</a></li>
-						    <li class="dropdown-item"><a href="#">9일</a></li>
-		   				</ul>
-		   			</div>
-   				</td>
+					<select class="form-select" id="planTotalDay" name="planTotalDay" disabled>
+					  <option value="1" selected>1일</option>
+					  <option value="2">2일</option>
+					  <option value="3">3일</option>
+					  <option value="4">4일</option>
+					  <option value="5">5일</option>
+					  <option value="6">6일</option>
+					  <option value="7">7일</option>
+					</select>
+				</td>
 			</tr>
 			<tr>
-				<td><button type="button" class="btn btn-primary mb-3" onclick="location.href='/plan/write'">수정</button></td>
+			<td><br/></td>
+			</tr>
+			<tr>
+				<td><button type="button" class="btn btn-primary mb-3" onclick="modify_btn();">수정</button></td>
+				<td><button type="submit" class="btn btn-primary mb-3">저장</button></td>
+			</tr>
+			<tr>
 			</tr>
 			</table>
 		</form>
+		<!-- 계획 입력 끝 -->
+		
+		<!-- 계획삭제 폼 -->
+		<form method="post" action="/plan/view/delete">
+			<input type="hidden" value="${view.planNo}" name="planNo"/>
+			<input type="hidden" value="${view.userId}" name="userId"/>
+			<button type="submit" class="btn btn-primary mb-3">삭제</button>
+		</form>
+		<!-- 계획삭제 끝 -->
 	</div>
-	<!-- 계획 입력 끝 -->
 	
-<!-- 부트스트랩 스크립트 -->	
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
-
-<!-- 드롭다운 값변경 스크립트 -->
-<script>
-$(function(){
-    $(".dropdown-menu li a").click(function(){
-    	$(".btn-day:first-child").text($(this).text());
-    	$(".btn-day:first-child").val($(this).text());
-   });
-});
-</script>
 	
+	<!-- 수정 활성화 스크립트 -->
+	<script>
+	function modify_btn() {
+		alert("readonly제거");
+		$('input').not('input.userId').removeAttr('readonly');
+		$('#planTotalDay').removeAttr('disabled');
+	}
+	</script>
+	
+	<!-- 부트스트랩 스크립트 -->	
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 	
 </body>
 </html>

@@ -45,5 +45,12 @@ public class PlanServiceImpl implements PlanService{
 	public void planModify(PlanVO vo) throws Exception {
 		dao.planModify(vo);
 	}
+	
+	//계획 삭제
+	@Override
+	public void planDelete(int planNo, String userId) throws Exception {
+		log.info("Service인자출력 : " + planNo + userId);
+		dao.planDelete(planNo, userId);
+	}
 
 }

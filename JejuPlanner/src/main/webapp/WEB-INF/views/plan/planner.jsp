@@ -47,23 +47,18 @@
 				<td>
 					<input type="date" class="form-control" id="currentDate" name="satrtDate" value="<fmt:formatDate value="${view.startDate}" pattern="yyyy-MM-dd"/>"/>
 				</td>
+			<tr>
+				<td>여행 일수 : </td>
 				<td>
-			<div class="dropdown">
-				<button class="btn btn-day btn-secondary dropdown-toggle" type="button" id="planTotalDay" data-toggle="dropdown">
-				    1일
-				</button>
-				<ul class="dropdown-menu">
-					<li class="dropdown-item"><a href="#">1일</a></li>
-				    <li class="dropdown-item"><a href="#">2일</a></li>
-				    <li class="dropdown-item"><a href="#">3일</a></li>
-				    <li class="dropdown-item"><a href="#">4일</a></li>
-				    <li class="dropdown-item"><a href="#">5일</a></li>
-				    <li class="dropdown-item"><a href="#">6일</a></li>
-				    <li class="dropdown-item"><a href="#">7일</a></li>
-				    <li class="dropdown-item"><a href="#">8일</a></li>
-				    <li class="dropdown-item"><a href="#">9일</a></li>
-   				</ul>
-			</div>
+					<select class="form-select" id="planTotalDay" name="planTotalDay">
+					  <option value="1" selected>1일</option>
+					  <option value="2">2일</option>
+					  <option value="3">3일</option>
+					  <option value="4">4일</option>
+					  <option value="5">5일</option>
+					  <option value="6">6일</option>
+					  <option value="7">7일</option>
+					</select>
 				</td>
 			</tr>
 			<tr>
@@ -79,16 +74,6 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
-
-<!-- 드롭다운 값변경 스크립트 -->
-<script>
-$(function(){
-    $(".dropdown-menu li a").click(function(){
-    	$(".btn-day:first-child").text($(this).text());
-    	$(".btn-day:first-child").val($(this).text());
-   });
-});
-</script>
 
 <!-- 여행날짜 기본 값 삽입 스크립트 -->
 <script>

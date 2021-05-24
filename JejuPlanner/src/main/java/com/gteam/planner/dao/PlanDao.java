@@ -17,6 +17,9 @@ public interface PlanDao {
 
 	//계획 수정
 	void planModify(PlanVO vo);
+
+	//계획 삭제
+	void planDelete(int planNo, String userId) throws Exception;
 	
 
 }

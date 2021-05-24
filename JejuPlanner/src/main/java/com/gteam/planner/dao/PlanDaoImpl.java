@@ -5,13 +5,18 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.gteam.planner.controller.PlanController;
 import com.gteam.planner.domain.PlanVO;
 
 @Repository
 public class PlanDaoImpl implements PlanDao {
+	
+	private static final Logger log = LoggerFactory.getLogger(PlanController.class);
 	
 	@Autowired
 	private SqlSession sql;
@@ -44,10 +49,20 @@ public class PlanDaoImpl implements PlanDao {
 	//계획 수정
 	@Override
 	public void planModify(PlanVO vo) {
-		sql.update(namespace + ".planView", vo);
+		sql.update(namespace + ".planModify", vo);
+	}
+	
+	//계획 삭제
+	@Override
+	public void planDelete(int planNo, String userId) throws Exception {
+		log.info("Dao인자출력 : " + planNo + userId);
+		HashMap<String, Object> data = new HashMap<>();
+		
+		data.put("planNo", planNo);
+		data.put("userId", userId);
+		
+		sql.delete(namespace + ".planDelete", data);
+		
 	}
 		
-	
-	
-
 }

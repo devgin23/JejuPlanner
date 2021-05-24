@@ -2,6 +2,8 @@ package com.gteam.planner.domain;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class PlanVO {
     
 	/*
@@ -22,9 +24,11 @@ CREATE TABLE `plan` (
 	private int planNo;			//AUTO_INCREMENT
 	private String userId;		//(planNo + userId 기본키)
 	private Date regDate;		
-	private String planTitle;	
-	private Date startDate; 
-	private int planTotalDay; 	
+	private String planTitle;
+	//Date type mismatch 에러 해결
+	@DateTimeFormat(pattern="yyyy-MM-dd")
+	private Date startDate;
+	private int planTotalDay;
 	private int planHit;		
 	
 	public int getPlanNo() {
@@ -68,6 +72,12 @@ CREATE TABLE `plan` (
 	}
 	public void setPlanHit(int planHit) {
 		this.planHit = planHit;
+	}
+	
+	@Override
+	public String toString() {
+		return "PlanVO [planNo=" + planNo + ", userId=" + userId + ", regDate=" + regDate + ", planTitle=" + planTitle
+				+ ", startDate=" + startDate + ", planTotalDay=" + planTotalDay + ", planHit=" + planHit + "]";
 	}
 	
 	

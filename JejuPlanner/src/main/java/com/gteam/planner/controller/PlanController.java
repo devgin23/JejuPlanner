@@ -69,6 +69,7 @@ public class PlanController {
 	public String planListForUser(Model model, @RequestParam("userId") String userId) throws Exception {
 		List<PlanVO> list = planService.listForUser(userId);
 		model.addAttribute("list", list);
+		
 		return "/plan/list_user";
 	}
 	
@@ -77,14 +78,24 @@ public class PlanController {
 	public String planViewForUser(Model model,@RequestParam("planNo") int planNo, @RequestParam("userId") String userId) throws Exception {
 		PlanVO view = planService.planView(planNo, userId);
 		model.addAttribute("view", view);
+		
 		return "/plan/view";
 	}
 	
 	//계획 수정하기
 	@RequestMapping(value="/plan/view/modify", method = RequestMethod.POST)
-	public String planModify(Model model) throws Exception{
+	public String planModify(PlanVO vo) throws Exception{
+		planService.planModify(vo);
 		
-		return "/plan/view";
+		return "/plan/write";
+	}
+	
+	//계획 삭제하기
+	@RequestMapping(value="/plan/view/delete", method = RequestMethod.POST)
+	public String planDelete(@RequestParam("planNo") int planNo, @RequestParam("userId") String userId) throws Exception{
+		log.info("Controller인자출력 : " + planNo + userId);
+		planService.planDelete(planNo, userId);
+		return "/plan/write";
 	}
 	
 }
