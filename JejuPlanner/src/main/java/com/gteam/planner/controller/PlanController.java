@@ -60,18 +60,19 @@ public class PlanController {
 	}
 	
 	//게시판에 계획 리스트 출력
-	@RequestMapping(value="/plan/list", method = RequestMethod.GET)
-	public void planList(Model model) throws Exception {
+	@RequestMapping(value="/plan/list", method=RequestMethod.GET)
+	public String planList(Model model) throws Exception {
 		List<PlanVO> list = planService.list();
 		model.addAttribute("list", list);
+		return "/plan/list";
 	}
 	
 	//유저별 계획 리스트 출력
-	@RequestMapping(value="/plan/list/user", method = RequestMethod.GET)
+	@RequestMapping(value="/plan/list/user", method=RequestMethod.POST)
 	public String planListForUser(Model model, @RequestParam("userId") String userId) throws Exception {
 		List<PlanVO> list = planService.listForUser(userId);
 		model.addAttribute("list", list);
-		return "/plan/list";
+		return "/plan/list_user";
 	}
 	
 	//계획 조회하기
@@ -79,7 +80,6 @@ public class PlanController {
 	public String planViewForUser(Model model,@RequestParam("planNo") int planNo, @RequestParam("userId") String userId) throws Exception {
 		PlanVO view = planService.planView(planNo, userId);
 		model.addAttribute("view", view);
-		
 		return "/plan/view";
 	}
 	
@@ -87,7 +87,6 @@ public class PlanController {
 	@RequestMapping(value="/plan/view/modify", method = RequestMethod.POST)
 	public String planModify(PlanVO vo) throws Exception{
 		planService.planModify(vo);
-		
 		return "/plan/write";
 	}
 	
