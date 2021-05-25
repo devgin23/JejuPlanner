@@ -29,13 +29,16 @@
 		<form id="planFrm" name="planFrm">
 			<table>
 			<tr>
+			<%-- <td><input type="text" class="form-control" id="userId" name="userId" value="${member.userId}"/></td> --%>
+			</tr>
+			<tr>
 				<td>여행 제목 : </td>
-				<td><input type="text" class="form-control" name="planTitle" }/></td>
+				<td><input type="text" class="form-control" id="planTitle" name="planTitle" value="${view.planTitle}"/></td>
 			</tr>
 			<tr>
 				<td>여행 날짜 : </td>
 				<td>
-					<input type="date" class="form-control" id="startDate" name="satrtDate" value="<fmt:formatDate value="${view.startDate}" pattern="yyyy-MM-dd"/>"/>
+					<input type="date" class="form-control" id="startDate" name="startDate" value="<fmt:formatDate value="${view.startDate}" pattern="yyyy-MM-dd"/>"/>
 				</td>
 			<td>
 			<div class="dropdown">
@@ -62,7 +65,7 @@
 	</div>
 	<!-- 계획 입력 끝 -->
 	<div id="schDiv"></div>
-	<div id="place">장소 div</div>
+	<!-- <div id="place">장소 div</div> -->
 	
 	<!-- 일정 추가 Modal -->
 	<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static"
@@ -102,5 +105,5 @@
 </body>
 
 <!-- Custom JavaScript -->
-<script type="text/javascript" src="/resources/js/planner.js"></script>
+<script type="text/javascript" src="/resources/js/planner.js?ver=1"></script>
 </html>

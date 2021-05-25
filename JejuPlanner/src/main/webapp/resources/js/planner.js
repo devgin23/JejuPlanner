@@ -16,7 +16,7 @@ $(function(){
    // method="post" action="/plan/write/planAdd"
 	$('#planFrmSubmit').on('click', function(){
 		//사용자 ID
-		userId = "${member.userId}";
+		userId = $('#userId').val();
 		//계획타이틀 값
 		planTitle = $('#planTitle').val();
 		//시작일 값
