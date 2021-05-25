@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gteam.planner.mappers.plan">
+
+		<!-- 계획 목록 -->
+		<select id="list" resultType="com.gteam.planner.domain.PlanVO">
+			SELECT planNo, userId, planTitle, startDate, planTotalDay, planHit 
+			FROM plan
+		</select>
+		
+		<!-- 유저별 계획 목록 -->
+		<select id="listForUser" parameterType="String" resultType="com.gteam.planner.domain.PlanVO">
+			SELECT planNo, userId, planTitle, startDate, planTotalDay, planHit 
+			FROM plan 
+			WHERE userId = #{userId}
+		</select>
+		
+		<!-- 계획 조회 -->
+		<select id="planView" parameterType="hashMap" resultType="com.gteam.planner.domain.PlanVO">
+			SELECT planNo, userId, planTitle, startDate, planTotalDay, planHit 
+			FROM plan 
+			WHERE userId = #{userId} AND planNo = #{planNo}
+		</select>
+		
+		<!-- 계획 수정 -->
+		<update id="planModify" parameterType="com.gteam.planner.domain.PlanVO">
+			UPDATE plan 
+			SET	planTitle = #{planTitle}, startDate = #{startDate}, planTotalDay = #{planTotalDay} 
+			WHERE userId = #{userId} AND planNo = #{planNo}
+		</update>
+		
+		<!-- 계획 삭제 -->
+		<delete id="planDelete" parameterType="com.gteam.planner.domain.PlanVO">
+			DELETE 
+			FROM plan 
+			WHERE planNo = #{planNo} AND userId = #{userId};
+		</delete>
+
+
+</mapper>
