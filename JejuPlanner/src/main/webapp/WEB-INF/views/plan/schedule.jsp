@@ -40,7 +40,7 @@
 <button type="button" class="btn btn-primary" data-bs-toggle="modal"
 	data-bs-target="#staticBackdrop">Launch static backdrop modal</button>
 <div id="disp">일정 div</div>
-
+<div id="place">장소 div</div>
 
  <!-- method="post" action="/plan/write/add" -->
 <script>
