@@ -27,7 +27,6 @@
                 display: center;
                 vertical-align: middle;
             }
-
         </style>
     </head>
     <body>

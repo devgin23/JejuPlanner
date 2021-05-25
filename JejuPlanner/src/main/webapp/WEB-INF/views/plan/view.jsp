@@ -35,9 +35,6 @@
 <body>
 	<header>
 		<%@include file="../nav.jsp" %>
-		
-		<!-- 열람 유저가 본인이 아닐 시 버튼 비활성화 -->
-
 	</header>
 	
 	<!-- 계획 입력 -->

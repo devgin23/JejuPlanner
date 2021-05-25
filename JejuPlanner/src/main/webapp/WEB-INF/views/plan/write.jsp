@@ -45,7 +45,6 @@
 						<!-- KAKAO MAP VIEW 영역 끝-->
 			        	<div class="col-4 plan-area">
 				        	<%@ include file="planner.jsp" %>
-				        	<%@ include file="schedule.jsp" %>
 			    		</div>
 		    		</div>
 			    	</c:if>
