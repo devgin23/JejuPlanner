@@ -1,5 +1,6 @@
 package com.gteam.planner.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -39,7 +40,17 @@ public class PlanServiceImpl implements PlanService{
 			dao.planSchAdd(schVo);
 		}
 		log.info("Insert Plan END");
-		
+	}
+	
+	//일정 List 객체
+	@Override
+	public Map<String, Object> schAdd(ScheduleVO vo) throws Exception {
+		Map<String, Object> schMap = new HashMap<>();
+		schMap.put("planDay", vo.getPlanDay());
+		schMap.put("descript", vo.getDescript());
+		schMap.put("addr", vo.getAddr());
+		schMap.put("startTime", vo.getStartTime());
+		return schMap;
 	}
 	
 	//게시판용 계획 목록

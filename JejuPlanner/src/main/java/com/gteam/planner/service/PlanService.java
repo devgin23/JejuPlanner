@@ -4,10 +4,14 @@ import java.util.List;
 import java.util.Map;
 
 import com.gteam.planner.domain.PlanVO;
+import com.gteam.planner.domain.ScheduleVO;
 
 public interface PlanService {
 
-	//일정 설정 추가 및 PlanNo 확인
+	//일정 List 객체
+	public Map<String, Object> schAdd(ScheduleVO vo)throws Exception;
+	
+	//계획 설정 추가, PlanNo 확인, 계획 DB 추가
 	public void planAdd(PlanVO vo, List<Map<String,Object>> schList) throws Exception;
 	
 	//게시판용 계획 목록

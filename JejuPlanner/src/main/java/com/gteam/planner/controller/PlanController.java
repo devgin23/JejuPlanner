@@ -48,16 +48,11 @@ public class PlanController {
 	//일정 추가
 	@RequestMapping(value="/plan/write/schAdd", method=RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> schAdd(ScheduleVO vo) {
+	public Map<String, Object> schAdd(ScheduleVO vo) throws Exception{
 		log.info("Modal Schedule Add");
-		Map<String, Object> schMap = new HashMap<>();
-		schMap.put("planDay", vo.getPlanDay());
-		schMap.put("descript", vo.getDescript());
-		schMap.put("addr", vo.getAddr());
-		schMap.put("startTime", vo.getStartTime());
-		schList.add(schMap);
+		schList.add(planService.schAdd(vo));
 		log.info("schList: " + schList.toString());
-      return schMap;
+      return planService.schAdd(vo);
 	}
 	
 	//계획 추가
