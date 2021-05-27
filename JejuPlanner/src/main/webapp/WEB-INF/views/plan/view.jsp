@@ -82,6 +82,9 @@
 				<td><button type="submit" class="btn btn-primary mb-3">저장</button></td>
 			</tr>
 			<tr>
+			<%-- <c:forEach items="${view}" var="view">
+			<td>${view.scheduleVO}</td>
+			</c:forEach> --%>
 			</tr>
 			</table>
 		</form>

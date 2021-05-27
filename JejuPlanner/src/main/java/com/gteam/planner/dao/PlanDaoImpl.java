@@ -35,7 +35,7 @@ public class PlanDaoImpl implements PlanDao {
 	}
 	
 	//계획 조회
-	@Override
+/*	@Override
 	public PlanVO planView(int planNo, String userId) throws Exception {
 		
 		HashMap<String, Object> data = new HashMap<>();
@@ -44,6 +44,12 @@ public class PlanDaoImpl implements PlanDao {
 		data.put("userId", userId);
 		
 		return sql.selectOne(namespace + ".planView", data);
+	}*/
+	
+	//계획 + 일정 조회
+	@Override
+	public List<PlanVO> planView(int planNo) throws Exception {
+		return sql.selectList(namespace + ".planView", planNo);
 	}
 	
 	//계획 수정

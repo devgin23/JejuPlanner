@@ -60,7 +60,6 @@
 						<!-- 열람방식 POST처리 -->
 						<form action="/plan/view" method="post">
 							<input type="hidden" name="planNo" value="${list.planNo}"></input>
-							<input type="hidden" name="userId" value="${list.userId}"></input>
 							<input type="submit" value="열람">
 						</form>
 						<!-- 열람방식 POST처리 끝-->

@@ -75,12 +75,13 @@ public class PlanController {
 		return "/plan/list_user";
 	}
 	
-	//계획 조회하기
+	//계획 + 일정 조회하기
 	@RequestMapping(value="/plan/view", method = RequestMethod.POST)
-	public String planViewForUser(Model model,@RequestParam("planNo") int planNo, @RequestParam("userId") String userId) throws Exception {
-		PlanVO view = planService.planView(planNo, userId);
+	public String planView(Model model,@RequestParam("planNo") int planNo) throws Exception {
+		List<PlanVO> view = planService.planView(planNo);
 		model.addAttribute("view", view);
-		return "/plan/view";
+		log.info("ControllerTest : " + view.get(0).toString());
+		return "/plan/view_sch";
 	}
 	
 	//계획 수정하기
