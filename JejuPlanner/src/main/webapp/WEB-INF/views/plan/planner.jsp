@@ -24,76 +24,78 @@
 
 </head>
 <body>	
-	<!-- 계획 입력 -->
-	<div class="col-md-12 input-form">
-		<form id="planFrm" name="planFrm">
-			<table>
-			<tr>
-				<td>여행 제목 : </td>
-				<td><input type="text" class="form-control" id="planTitle" name="planTitle" value="${view.planTitle}"/></td>
-			</tr>
-			<tr>
-				<td>여행 날짜 : </td>
+	<div style="overflow:auto; width:100%; height:100%;">
+		<!-- 계획 입력 -->
+		<div class="col-md-12 input-form">
+			<form id="planFrm" name="planFrm">
+				<table>
+				<tr>
+					<td>여행 제목 : </td>
+					<td><input type="text" class="form-control" id="planTitle" name="planTitle" value="${view.planTitle}"/></td>
+				</tr>
+				<tr>
+					<td>여행 날짜 : </td>
+					<td>
+						<input type="date" class="form-control" id="startDate" name="startDate" value="<fmt:formatDate value="${view.startDate}" pattern="yyyy-MM-dd"/>"/>
+					</td>
 				<td>
-					<input type="date" class="form-control" id="startDate" name="startDate" value="<fmt:formatDate value="${view.startDate}" pattern="yyyy-MM-dd"/>"/>
-				</td>
-			<td>
-			<div class="dropdown">
-				<button class="btn btn-day btn-secondary dropdown-toggle" id="method_status" type="button" id="dropdownMenuButton" data-toggle="dropdown">
-				 일수
-				</button>
-				<ul id="method_type" class="dropdown-menu">
-					<li class="dropdown-item"><a href="#" id="planTotalDay" value="1"><div>1일</div></a></li>
-				    <li class="dropdown-item"><a href="#" id="planTotalDay" value="2"><div>2일</div></a></li>
-				    <li class="dropdown-item"><a href="#" id="planTotalDay" value="3"><div>3일</div></a></li>
-				    <li class="dropdown-item"><a href="#" id="planTotalDay" value="4"><div>4일</div></a></li>
-				    <li class="dropdown-item"><a href="#" id="planTotalDay" value="5"><div>5일</div></a></li>
-				    <li class="dropdown-item"><a href="#" id="planTotalDay" value="6"><div>6일</div></a></li>
-				    <li class="dropdown-item"><a href="#" id="planTotalDay" value="7"><div>7일</div></a></li>
-   				</ul>
-			</div>
-				</td>
-			</tr>
-			<tr>
-				<td><input type="button" class="btn btn-primary mb-3" id="planFrmSubmit" name="planFrmSubmit" value="작성"></input></td>
-			</tr>
-			</table>
-		</form>
-	</div>
-	<!-- 계획 입력 끝 -->
-	<div id="schDiv"></div>
-	<!-- <div id="place">장소 div</div> -->
-	
-	<!-- 일정 추가 Modal -->
-	<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static"
-		data-bs-keyboard="false" tabindex="-1"
-		aria-labelledby="staticBackdropLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="staticBackdropLabel">일정 짜기</h5>
-					<button type="button" class="btn-close" data-bs-dismiss="modal"
-						aria-label="Close"></button>
+				<div class="dropdown">
+					<button class="btn btn-day btn-secondary dropdown-toggle" id="method_status" type="button" id="dropdownMenuButton" data-toggle="dropdown">
+					 일수
+					</button>
+					<ul id="method_type" class="dropdown-menu">
+						<li class="dropdown-item"><a href="#" id="planTotalDay" value="1"><div>1일</div></a></li>
+					    <li class="dropdown-item"><a href="#" id="planTotalDay" value="2"><div>2일</div></a></li>
+					    <li class="dropdown-item"><a href="#" id="planTotalDay" value="3"><div>3일</div></a></li>
+					    <li class="dropdown-item"><a href="#" id="planTotalDay" value="4"><div>4일</div></a></li>
+					    <li class="dropdown-item"><a href="#" id="planTotalDay" value="5"><div>5일</div></a></li>
+					    <li class="dropdown-item"><a href="#" id="planTotalDay" value="6"><div>6일</div></a></li>
+					    <li class="dropdown-item"><a href="#" id="planTotalDay" value="7"><div>7일</div></a></li>
+	   				</ul>
 				</div>
-				<!--private int planNo;
-					private String userId;
-					private String descript;
-					private String addr;
-					private int planDay;
-					private int startTime;
-					private int rowNo; --> 
-				<div class="modal-body">
-					<form id="schFrm">
-						<input type="hidden" id="userId" name="userId" value="${member.userId}">
-						<label>Day</label>
-						<input type="text" id="schDay" name="planDay" value="" readonly style="width:20px; text-align: center"/><br/>
-						내용 		: <input type="text" name="descript"><br> 
-						장소 		: <input type="text" name="addr"><br> 
-						시작시간 	: <input type="text" name="startTime"><br>
-					</form>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-						<input type="button" id="schFrmSubmit" class="btn btn-primary" data-bs-dismiss="modal" value="추가">
+					</td>
+				</tr>
+				<tr>
+					<td><input type="button" class="btn btn-primary mb-3" id="planFrmSubmit" name="planFrmSubmit" value="작성"></input></td>
+				</tr>
+				</table>
+			</form>
+		</div>
+		<!-- 계획 입력 끝 -->
+		<div id="schDiv"></div>
+		<!-- <div id="place">장소 div</div> -->
+		
+		<!-- 일정 추가 Modal -->
+		<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static"
+			data-bs-keyboard="false" tabindex="-1"
+			aria-labelledby="staticBackdropLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="staticBackdropLabel">일정 짜기</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal"
+							aria-label="Close"></button>
+					</div>
+					<!--private int planNo;
+						private String userId;
+						private String descript;
+						private String addr;
+						private int planDay;
+						private int startTime;
+						private int rowNo; --> 
+					<div class="modal-body">
+						<form id="schFrm">
+							<input type="hidden" id="userId" name="userId" value="${member.userId}">
+							<label>Day</label>
+							<input type="text" id="schDay" name="planDay" value="" readonly style="width:20px; text-align: center"/><br/>
+							내용 		: <input type="text" name="descript"><br> 
+							장소 		: <input type="text" name="addr"><br> 
+							시작시간 	: <input type="text" name="startTime"><br>
+						</form>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+							<input type="button" id="schFrmSubmit" class="btn btn-primary" data-bs-dismiss="modal" value="추가">
+						</div>
 					</div>
 				</div>
 			</div>
