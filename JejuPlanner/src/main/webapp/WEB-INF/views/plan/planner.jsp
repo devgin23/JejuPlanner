@@ -7,10 +7,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<!-- 중요! 위 스크립트 안먹혀서 아래걸로 바꿔놓음 -->
+
+<!-- Bootstrap Script -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>  
 <style>
   .input-form {
   background-color: powderblue;
@@ -22,19 +23,7 @@
 </style>
 
 </head>
-<body>
-	<!-- 
-	private int bno;			//임시로 주석처리해놓음 (DB에 없는 필드)
-	private int planNo;			//조회 및 정렬용 필드 추가 (DB엔 있는 필드인데 VO에 없었음)(05-18)
-	private String userId;
-	private Date regDate;		//VO에는 있으나 DB에 없는 필드임 추가 필요함
-	private String planTitle;	//필드명 변경 title -> planTitle(05-18)
-	private Date startDate; 
-	private String content;    필드 삭제(05-18)
-	private int planTotalDay; 	//필드추가(05-18)
-	private int planHit;		//필드추가(05-18)
-	 -->
-	
+<body>	
 	<!-- 계획 입력 -->
 	<div class="col-md-12 input-form">
 		<form id="planFrm" name="planFrm">
@@ -48,19 +37,19 @@
 				<td>
 					<input type="date" class="form-control" id="startDate" name="startDate" value="<fmt:formatDate value="${view.startDate}" pattern="yyyy-MM-dd"/>"/>
 				</td>
-				<td>
+			<td>
 			<div class="dropdown">
 				<button class="btn btn-day btn-secondary dropdown-toggle" id="method_status" type="button" id="dropdownMenuButton" data-toggle="dropdown">
 				 일수
 				</button>
-				<ul id="method_type" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-					<li class="dropdown-item"><a href="#" id="planTotalDay" value="1">1일</a></li>
-				    <li class="dropdown-item"><a href="#" id="planTotalDay" value="2">2일</a></li>
-				    <li class="dropdown-item"><a href="#" id="planTotalDay" value="3">3일</a></li>
-				    <li class="dropdown-item"><a href="#" id="planTotalDay" value="4">4일</a></li>
-				    <li class="dropdown-item"><a href="#" id="planTotalDay" value="5">5일</a></li>
-				    <li class="dropdown-item"><a href="#" id="planTotalDay" value="6">6일</a></li>
-				    <li class="dropdown-item"><a href="#" id="planTotalDay" value="7">7일</a></li>
+				<ul id="method_type" class="dropdown-menu">
+					<li class="dropdown-item"><a href="#" id="planTotalDay" value="1"><div>1일</div></a></li>
+				    <li class="dropdown-item"><a href="#" id="planTotalDay" value="2"><div>2일</div></a></li>
+				    <li class="dropdown-item"><a href="#" id="planTotalDay" value="3"><div>3일</div></a></li>
+				    <li class="dropdown-item"><a href="#" id="planTotalDay" value="4"><div>4일</div></a></li>
+				    <li class="dropdown-item"><a href="#" id="planTotalDay" value="5"><div>5일</div></a></li>
+				    <li class="dropdown-item"><a href="#" id="planTotalDay" value="6"><div>6일</div></a></li>
+				    <li class="dropdown-item"><a href="#" id="planTotalDay" value="7"><div>7일</div></a></li>
    				</ul>
 			</div>
 				</td>
@@ -73,6 +62,7 @@
 	</div>
 	<!-- 계획 입력 끝 -->
 	<div id="schDiv"></div>
+	<!-- <div id="place">장소 div</div> -->
 	
 	<!-- 일정 추가 Modal -->
 	<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static"
@@ -112,5 +102,5 @@
 </body>
 
 <!-- Custom JavaScript -->
-<script type="text/javascript" src="/resources/js/planner.js"></script>
+<script type="text/javascript" src="/resources/js/planner.js?ver=3"></script>
 </html>

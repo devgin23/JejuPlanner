@@ -5,14 +5,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.gteam.planner.dao.ScheduleDao;
+import com.gteam.planner.dao.ScheduleDAO;
 import com.gteam.planner.domain.ScheduleVO;
 
 @Service
 public class ScheduleServiceImpl implements ScheduleService{
 	
 	@Autowired
-	private ScheduleDao dao;
+	private ScheduleDAO dao;
 	
 	//일정 목록 출력
 	@Override

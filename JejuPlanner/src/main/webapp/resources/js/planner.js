@@ -16,13 +16,13 @@ $(function(){
    // method="post" action="/plan/write/planAdd"
 	$('#planFrmSubmit').on('click', function(){
 		//사용자 ID
-		userId = "${member.userId}";
+		userId = $('#userId').val();
 		//계획타이틀 값
 		planTitle = $('#planTitle').val();
 		//시작일 값
 		startDate = $('#startDate').val();
 		$.ajax({
-		   url: "/plan/write/planAdd",
+		   url: "/plan/write/planSet",
 		   data: {userId: userId, planTitle: planTitle, startDate: startDate, planTotalDay: planTotalDay},
 		   dataType:"json",
 		   type: "POST",
@@ -31,11 +31,14 @@ $(function(){
 			   var planOutput = '';
 			   for(var i = 1; i<=planTotalDay; i++){
 				   var createDay = '<h4>'+ 'DAY'+ i + '</h4>';
-				   createDay += '<button type="button" class="btn btn-primary" data-bs-toggle="modal"data-bs-target="#staticBackdrop" id="addSchBtn">';
+				   createDay += '<button type="button" class="btn btn-primary" data-bs-toggle="modal"data-bs-target="#staticBackdrop" id="schAddBtn">';
 				   createDay += '일정 생성';
 				   createDay += '</button>';
 				   createDay += '<div id=disp'+i+'></div>';
 				   createDay += '<br/>';
+				   if(i == planTotalDay){
+					   createDay += '<button type="button" class="btn btn-primary"  id="planAddBtn" onclick="location.href=\'/plan/write/planAdd\'">계획 등록</button>';
+				   }
 				   planOutput = planOutput + createDay;
 			   }
 			   $("#schDiv").html(planOutput);
@@ -46,7 +49,7 @@ $(function(){
 		});
 	});
 	//일정 생성 버튼마다 day 순서 받아오기
-	$(document).on("click", "#addSchBtn", function(){
+	$(document).on("click", "#schAddBtn", function(){
 		//버튼 tag만! index 값 변수로 받기
         idx = $('button').index(this);
 		//modal schDay input에 값 추가

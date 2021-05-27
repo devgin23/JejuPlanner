@@ -3,15 +3,39 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gteam.planner.mappers.plan">
-
+		
+		<!-- 계획 DB 추가 -->
+		<insert id="planAdd" parameterType="com.gteam.planner.domain.PlanVO">
+			INSERT INTO plan(userId, planTitle, planTotalDay, startDate)
+			 VALUES(#{userId}, #{planTitle}, #{planTotalDay}, #{startDate})
+		</insert>
+		
+		<!-- 계획 번호 확인--> 
+		<select id="planNoGet" resultType="int">
+			SELECT Max(planNo)
+			 FROM plan
+		</select> 
+		<!-- `planNo` INT NOT NULL,
+		`userId` VARCHAR(50) NOT NULL,
+		`descript` VARCHAR(200) NULL DEFAULT NULL,
+		`addr` VARCHAR(50) NOT NULL,
+		`planDay` VARCHAR(5) NOT NULL,
+		`startTime` INT NULL DEFAULT '900',
+		`rowNo` INT, -->
+		<!-- 일정 DB 추가 -->
+		<insert id="planSchAdd" parameterType="com.gteam.planner.domain.PlanVO">
+			INSERT INTO schedule(planNo, userId, descript, addr, planDay, startTime)
+			 VALUES(#{planNo}, #{userId}, #{descript}, #{addr}, #{planDay}, #{startTime})
+		</insert>
+		
 		<!-- 계획 목록 -->
-		<select id="list" resultType="com.gteam.planner.domain.PlanVO">
+		<select id="planList" resultType="com.gteam.planner.domain.PlanVO">
 			SELECT planNo, userId, planTitle, startDate, planTotalDay, planHit 
 			FROM plan
 		</select>
 		
 		<!-- 유저별 계획 목록 -->
-		<select id="listForUser" parameterType="String" resultType="com.gteam.planner.domain.PlanVO">
+		<select id="planListForUser" parameterType="String" resultType="com.gteam.planner.domain.PlanVO">
 			SELECT planNo, userId, planTitle, startDate, planTotalDay, planHit 
 			FROM plan 
 			WHERE userId = #{userId}
