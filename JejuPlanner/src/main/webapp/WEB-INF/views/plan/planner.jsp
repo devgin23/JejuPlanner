@@ -21,8 +21,8 @@
   background-color: #D2FFD2;
   }
 </style>
-
 </head>
+
 <body>	
 	<div style="overflow:auto; width:100%; height:100%;">
 		<!-- 계획 입력 -->
