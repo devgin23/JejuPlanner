@@ -21,14 +21,14 @@ public class PlanServiceImpl implements PlanService{
 	
 	//게시판용 계획 목록
 	@Override
-	public List<PlanVO> list() throws Exception {
-		return dao.list();
+	public List<PlanVO> planList() throws Exception {
+		return dao.planList();
 	}
 	
 	//유저별 계획 목록
 	@Override
-	public List<PlanVO> listForUser(String userId) throws Exception {
-		return dao.listForUser(userId);
+	public List<PlanVO> planListForUser(String userId) throws Exception {
+		return dao.planListForUser(userId);
 	}
 	
 	//계획 조회

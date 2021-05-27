@@ -8,10 +8,10 @@ public interface PlanService {
 
 	
 	//게시판용 계획 목록
-	List<PlanVO> list() throws Exception;
+	List<PlanVO> planList() throws Exception;
 
 	//유저별 계획 목록
-	List<PlanVO> listForUser(String userId) throws Exception;
+	List<PlanVO> planListForUser(String userId) throws Exception;
 
 	//계획조회
 	PlanVO planView(int planNo, String userId) throws Exception;
@@ -19,6 +19,7 @@ public interface PlanService {
 	//계획수정
 	void planModify(PlanVO vo) throws Exception;
 
+	//계회갓ㄱ제
 	void planDelete(int planNo, String userId) throws Exception;
 
 

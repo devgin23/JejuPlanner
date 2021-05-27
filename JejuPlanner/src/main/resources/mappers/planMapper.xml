@@ -5,13 +5,13 @@
 <mapper namespace="com.gteam.planner.mappers.plan">
 
 		<!-- 계획 목록 -->
-		<select id="list" resultType="com.gteam.planner.domain.PlanVO">
+		<select id="planList" resultType="com.gteam.planner.domain.PlanVO">
 			SELECT planNo, userId, planTitle, startDate, planTotalDay, planHit 
 			FROM plan
 		</select>
 		
 		<!-- 유저별 계획 목록 -->
-		<select id="listForUser" parameterType="String" resultType="com.gteam.planner.domain.PlanVO">
+		<select id="planListForUser" parameterType="String" resultType="com.gteam.planner.domain.PlanVO">
 			SELECT planNo, userId, planTitle, startDate, planTotalDay, planHit 
 			FROM plan 
 			WHERE userId = #{userId}

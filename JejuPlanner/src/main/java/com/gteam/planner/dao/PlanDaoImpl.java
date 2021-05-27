@@ -24,14 +24,14 @@ public class PlanDaoImpl implements PlanDao {
 	
 	//게시판용 계획 목록
 	@Override
-	public List<PlanVO> list() throws Exception {
-		return sql.selectList(namespace + ".list");
+	public List<PlanVO> planList() throws Exception {
+		return sql.selectList(namespace + ".planList");
 	}
 	
 	//유저별 계획 목록
 	@Override
-	public List<PlanVO> listForUser(String userId) throws Exception{
-		return sql.selectList(namespace + ".listForUser", userId);
+	public List<PlanVO> planListForUser(String userId) throws Exception{
+		return sql.selectList(namespace + ".planListForUser", userId);
 	}
 	
 	//계획 조회

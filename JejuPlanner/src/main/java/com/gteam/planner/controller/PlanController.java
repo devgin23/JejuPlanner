@@ -45,7 +45,7 @@ public class PlanController {
 	//일정 추가
 	@RequestMapping(value="/plan/write/schAdd", method=RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> addSchedule(ScheduleVO vo) {
+	public Map<String, Object> schAdd(ScheduleVO vo) {
 		log.info("Modal Schedule Add");
 		log.info(vo.toString());
 		Map<String, Object> map = new HashMap<>();
@@ -62,7 +62,7 @@ public class PlanController {
 	//게시판에 계획 리스트 출력
 	@RequestMapping(value="/plan/list", method=RequestMethod.GET)
 	public String planList(Model model) throws Exception {
-		List<PlanVO> list = planService.list();
+		List<PlanVO> list = planService.planList();
 		model.addAttribute("list", list);
 		return "/plan/list";
 	}
@@ -70,7 +70,7 @@ public class PlanController {
 	//유저별 계획 리스트 출력
 	@RequestMapping(value="/plan/list/user", method=RequestMethod.POST)
 	public String planListForUser(Model model, @RequestParam("userId") String userId) throws Exception {
-		List<PlanVO> list = planService.listForUser(userId);
+		List<PlanVO> list = planService.planListForUser(userId);
 		model.addAttribute("list", list);
 		return "/plan/list_user";
 	}
