@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.gteam.planner.controller.PlanController;
-import com.gteam.planner.dao.PlanDao;
+import com.gteam.planner.dao.PlanDAO;
 import com.gteam.planner.domain.PlanVO;
 
 @Repository
@@ -17,7 +17,7 @@ public class PlanServiceImpl implements PlanService{
 	private static final Logger log = LoggerFactory.getLogger(PlanController.class);
 	
 	@Autowired
-	private PlanDao dao;
+	private PlanDAO dao;
 	
 	//게시판용 계획 목록
 	@Override

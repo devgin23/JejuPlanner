@@ -31,11 +31,14 @@ $(function(){
 			   var planOutput = '';
 			   for(var i = 1; i<=planTotalDay; i++){
 				   var createDay = '<h4>'+ 'DAY'+ i + '</h4>';
-				   createDay += '<button class="btn btn-primary"id="addSchBtn"type="button"data-bs-toggle="collapse" data-bs-target="#collapseExample"aria-expanded="false"aria-controls="collapseExample">';
+				   createDay += '<button class="btn btn-primary"id="schAddBtn"type="button"data-bs-toggle="collapse" data-bs-target="#collapseExample"aria-expanded="false"aria-controls="collapseExample">';
 				   createDay += '일정 생성';
 				   createDay += '</button>';
 				   createDay += '<div id=disp'+i+'></div>';
 				   createDay += '<br/>';
+				   if(i == planTotalDay){
+					   createDay += '<button type="button" class="btn btn-primary submitBtn"  id="planAddBtn" onclick="location.href=\'/plan/write/planAdd\'" style="float:right;">일정 등록</button>';
+				   }
 				   planOutput = planOutput + createDay;
 			   }
 			   $("#schDiv").html(planOutput);
@@ -46,7 +49,7 @@ $(function(){
 		});
 	});
 	//일정 생성 버튼마다 day 순서 받아오기
-	$(document).on("click", "#addSchBtn", function(){
+	$(document).on("click", "#schAddBtn", function(){
 		//버튼 tag만! index 값 변수로 받기
         idx = $('button').index(this);
 		//modal schDay input에 값 추가

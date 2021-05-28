@@ -14,7 +14,7 @@ import com.gteam.planner.controller.PlanController;
 import com.gteam.planner.domain.PlanVO;
 
 @Repository
-public class PlanDaoImpl implements PlanDao {
+public class PlanDAOImpl implements PlanDAO {
 	
 	private static final Logger log = LoggerFactory.getLogger(PlanController.class);
 	
