@@ -31,10 +31,10 @@ public class PlanServiceImpl implements PlanService{
 		return dao.planListForUser(userId);
 	}
 	
-	//계획 + 일정 조회
+	//계획 조회
 	@Override
-	public List<PlanVO> planView(int planNo) throws Exception {
-		return dao.planView(planNo);
+	public PlanVO planView(int planNo, String userId) throws Exception {
+		return dao.planView(planNo, userId);
 	}
 	
 	//계획 수정

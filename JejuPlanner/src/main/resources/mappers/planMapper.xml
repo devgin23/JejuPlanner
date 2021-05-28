@@ -18,20 +18,20 @@
 		</resultMap>
 		
 		<!-- 계획 조회 -->
-		<!-- <select id="planView" parameterType="hashMap" resultType="com.gteam.planner.domain.PlanVO">
+		<select id="planView" parameterType="hashMap" resultType="com.gteam.planner.domain.PlanVO">
 			SELECT planNo, userId, planTitle, startDate, planTotalDay, planHit 
 			FROM plan 
 			WHERE userId = #{userId} AND planNo = #{planNo}
-		</select> -->
+		</select>
 		
 		<!-- 계획 + 일정 조회 -->
-		<select id="planView" parameterType="int" resultType="com.gteam.planner.domain.PlanVO">
+		<!-- <select id="planView" parameterType="int" resultType="com.gteam.planner.domain.PlanVO">
 			SELECT p.planNo, p.userId, p.planTitle, p.planTotalDay,
 				   s.descript, s.addr 
 			FROM plan as p JOIN schedule as s 
 			ON p.planNo = s.planNo 
 			WHERE p.planNo = #{planNo}
-		</select>
+		</select> -->
 		
 		<!-- 계획 목록 -->
 		<select id="planList" resultType="com.gteam.planner.domain.PlanVO">

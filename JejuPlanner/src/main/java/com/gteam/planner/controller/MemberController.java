@@ -90,8 +90,6 @@ public class MemberController {
 			return "redirect:/plan/write";
 		}
 		
-		
-		
 	}
 	//로그아웃
 	@RequestMapping(value = "/member/logout", method = RequestMethod.GET)

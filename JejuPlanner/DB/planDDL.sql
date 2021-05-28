@@ -11,19 +11,26 @@ CREATE TABLE `plan` (
 	PRIMARY KEY (`planNo`, `userId`) USING BTREE,
 	INDEX `PLAN_FK_SET` (`userId`) USING BTREE,
 	CONSTRAINT `PLAN_FK_SET` FOREIGN KEY (`userId`) REFERENCES `project`.`member` (`userId`) ON UPDATE NO ACTION ON DELETE CASCADE
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /* INSERT DUMMY DATA */
 INSERT INTO `plan` (userId, planTitle, planTotalDay) 
-VALUES ('member1', '제주여행1', '3');
+VALUES ('member2', '제주플래너', '5');
 
 INSERT INTO `plan` (userId, planTitle, planTotalDay) 
 VALUES ('member2', '제주여행2', '3');
 
-UPDATE plan 
-SET	planTitle = '제주TEST', startDate = '2022-01-01', planTotalDay = '7'
-WHERE userId = 'member1' AND planNo = '1';
-
 DELETE 
 			FROM plan 
 			WHERE planNo = '1' AND userId = 'member1';
+			
+			
+			
+			SELECT p.planNo, p.userId, p.planTitle, p.planTotalDay,
+				   s.descript, s.addr 
+			FROM plan as p JOIN schedule as s 
+			ON p.planNo = s.planNo 
+			WHERE p.planNo = 1
+			
+			COMMIT;
+			
