@@ -31,8 +31,8 @@
 		<%@include file="../nav.jsp" %>
 	</header>
 	
-	<div class="row">
 		<!-- 계획 출력 시작 -->
+	<div class="row">
 		<div class="col-md-6 output-form">
 		<p>공유 계획 목록</p>
 		<table style="background-color:#f9b208">
@@ -48,19 +48,19 @@
 			</thead>
 			
 			<tbody>
-				<c:forEach items="${list}" var="list">
+				<c:forEach items="${planList}" var="planList">
 				<tr>
-					<td>${list.planNo}</td>
-					<td>${list.userId}</td>
-					<td><fmt:formatDate value="${list.startDate}" pattern="yyyy-MM-dd"/></td>
-					<td>${list.planTitle}</td>
-					<td>${list.planTotalDay} 일</td>
-					<td>${list.planHit}</td>
+					<td>${planList.planNo}</td>
+					<td>${planList.userId}</td>
+					<td><fmt:formatDate value="${planList.startDate}" pattern="yyyy-MM-dd"/></td>
+					<td>${planList.planTitle}</td>
+					<td>${planList.planTotalDay} 일</td>
+					<td>${planList.planHit}</td>
 					<td>
 						<!-- 열람방식 POST처리 -->
 						<form action="/plan/view" method="post">
-							<input type="hidden" name="planNo" value="${list.planNo}"></input>
-							<input type="hidden" name="userId" value="${list.userId}"></input>
+							<input type="hidden" name="planNo" value="${planList.planNo}"></input>
+							<input type="hidden" name="userId" value="${planList.userId}"></input>
 							<input type="submit" value="열람">
 						</form>
 						<!-- 열람방식 POST처리 끝-->
@@ -72,10 +72,9 @@
 		</table>
 		<br/>
 		<button type="button" onclick="location.href='/plan/write'">돌아가기</button>
-		</div>
-		<!-- 계획 출력 끝 -->
-		
+		</div>		
 	</div>
+		<!-- 계획 출력 끝 -->
 	<br/>
 
 	<!-- Option 1: Bootstrap Bundle with Popper -->

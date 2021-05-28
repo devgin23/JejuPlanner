@@ -4,6 +4,35 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gteam.planner.mappers.plan">
 
+		<!-- 일정 + 계획 조인쿼리를 위한 선언 -->
+		<resultMap type="com.gteam.planner.domain.PlanVO" id="planResult">
+			<id property="planNo" column="planNo"></id>
+			<result column="userId" property="userId"></result>
+			<result column="planTitle" property="planTitle"></result>
+			<result column="planTotalDay" property="planTotalDay"></result>
+			<collection property="scheduleVOList" javaType="java.util.ArrayList" ofType="com.gteam.planner.domain.ScheduleVO">
+				<id property="planNo" column="planNo"></id>
+				<result property="addr" column="addr"></result>
+				<result property="descript" column="descript"></result>
+			</collection>
+		</resultMap>
+		
+		<!-- 계획 조회 -->
+		<select id="planView" parameterType="hashMap" resultType="com.gteam.planner.domain.PlanVO">
+			SELECT planNo, userId, planTitle, startDate, planTotalDay, planHit 
+			FROM plan 
+			WHERE userId = #{userId} AND planNo = #{planNo}
+		</select>
+		
+		<!-- 계획 + 일정 조회 -->
+		<!-- <select id="planView" parameterType="int" resultType="com.gteam.planner.domain.PlanVO">
+			SELECT p.planNo, p.userId, p.planTitle, p.planTotalDay,
+				   s.descript, s.addr 
+			FROM plan as p JOIN schedule as s 
+			ON p.planNo = s.planNo 
+			WHERE p.planNo = #{planNo}
+		</select> -->
+		
 		<!-- 계획 목록 -->
 		<select id="planList" resultType="com.gteam.planner.domain.PlanVO">
 			SELECT planNo, userId, planTitle, startDate, planTotalDay, planHit 
@@ -15,13 +44,6 @@
 			SELECT planNo, userId, planTitle, startDate, planTotalDay, planHit 
 			FROM plan 
 			WHERE userId = #{userId}
-		</select>
-		
-		<!-- 계획 조회 -->
-		<select id="planView" parameterType="hashMap" resultType="com.gteam.planner.domain.PlanVO">
-			SELECT planNo, userId, planTitle, startDate, planTotalDay, planHit 
-			FROM plan 
-			WHERE userId = #{userId} AND planNo = #{planNo}
 		</select>
 		
 		<!-- 계획 수정 -->

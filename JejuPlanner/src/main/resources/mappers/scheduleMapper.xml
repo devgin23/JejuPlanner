@@ -4,20 +4,11 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gteam.planner.mappers.schedule">
 
-		<!-- 일정 목록 -->
-		<select id="list" resultType="com.gteam.planner.domain.ScheduleVO">
-			SELECT planNo, userId, descript, addr, startTime, rowNo 
+		<!-- 일정 조회 -->
+		<select id="scheduleList" parameterType="int" resultType="com.gteam.planner.domain.ScheduleVO">
+			SELECT planNo, userId, descript, addr, startTime 
 			FROM schedule
-			ORDER BY rowNo
+			WHERE planNo = #{planNo}
 		</select>
-
-		<!-- 일정 삽입 -->
-		<insert id="write" parameterType="com.gteam.planner.domain.ScheduleVO">
-		<!-- 	<selectKey keyProperty="rowNo" resultType="int" order="BEFORE">
-			SELECT COUNT(*) FROM schedule WHERE userId = #{userId} AND planNo = #{planNo} 서브쿼리세팅
-			</selectKey> -->
-			INSERT into schedule(planNo, userId, addr, descript, planDay, rowNo) 
-			VALUES(${planNo}, #{userId}, #{addr}, #{descript}, ${planDay}, ${rowNo})
-		</insert>
 
 </mapper>

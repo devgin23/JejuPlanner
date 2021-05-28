@@ -11,7 +11,7 @@ CREATE TABLE `member` (
 	`regDate` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	PRIMARY KEY (`userNo`, `userId`),
 	UNIQUE INDEX `userId` (`userId`)
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /* INSERT DUMMY DATA */
 INSERT INTO member (userId, userPw, userNickname, userGender, userAge, userMail) 

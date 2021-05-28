@@ -13,13 +13,13 @@ public interface PlanService {
 	//유저별 계획 목록
 	List<PlanVO> planListForUser(String userId) throws Exception;
 
-	//계획조회
+	//계획 조회
 	PlanVO planView(int planNo, String userId) throws Exception;
 
-	//계획수정
+	//계획 수정
 	void planModify(PlanVO vo) throws Exception;
 
-	//계회갓ㄱ제
+	//계회 삭제
 	void planDelete(int planNo, String userId) throws Exception;
 
 

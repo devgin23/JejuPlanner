@@ -1,6 +1,7 @@
 package com.gteam.planner.domain;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -29,7 +30,9 @@ CREATE TABLE `plan` (
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date startDate;
 	private int planTotalDay;
-	private int planHit;		
+	private int planHit;
+	//쿼리로 조인할 VO
+	private List<ScheduleVO> scheduleVOList;
 	
 	public int getPlanNo() {
 		return planNo;
@@ -72,6 +75,12 @@ CREATE TABLE `plan` (
 	}
 	public void setPlanHit(int planHit) {
 		this.planHit = planHit;
+	}
+	public List<ScheduleVO> getScheduleVOList() {
+		return scheduleVOList;
+	}
+	public void setScheduleVO(List<ScheduleVO> scheduleVOList) {
+		this.scheduleVOList = scheduleVOList;
 	}
 	
 	@Override

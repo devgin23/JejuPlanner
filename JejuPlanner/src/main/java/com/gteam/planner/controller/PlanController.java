@@ -19,13 +19,18 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import com.gteam.planner.domain.PlanVO;
 import com.gteam.planner.domain.ScheduleVO;
 import com.gteam.planner.service.PlanService;
+import com.gteam.planner.service.ScheduleService;
 
 @Controller
 public class PlanController {
 	private static final Logger log = LoggerFactory.getLogger(PlanController.class);
 	
 	@Autowired
-	PlanService planService;
+	private PlanService planService;
+	
+	@Autowired
+	private ScheduleService scheduleService;
+	
 	//일정 추가 리스트
 	List<Map<String,Object>> list = new ArrayList<>();
 	
@@ -62,24 +67,33 @@ public class PlanController {
 	//게시판에 계획 리스트 출력
 	@RequestMapping(value="/plan/list", method=RequestMethod.GET)
 	public String planList(Model model) throws Exception {
-		List<PlanVO> list = planService.planList();
-		model.addAttribute("list", list);
+		List<PlanVO> planList = planService.planList();
+		model.addAttribute("planList", planList);
 		return "/plan/list";
 	}
 	
 	//유저별 계획 리스트 출력
 	@RequestMapping(value="/plan/list/user", method=RequestMethod.POST)
 	public String planListForUser(Model model, @RequestParam("userId") String userId) throws Exception {
-		List<PlanVO> list = planService.planListForUser(userId);
-		model.addAttribute("list", list);
+		List<PlanVO> planListForUser = planService.planListForUser(userId);
+		model.addAttribute("planListForUser", planListForUser);
 		return "/plan/list_user";
 	}
 	
 	//계획 조회하기
 	@RequestMapping(value="/plan/view", method = RequestMethod.POST)
-	public String planViewForUser(Model model,@RequestParam("planNo") int planNo, @RequestParam("userId") String userId) throws Exception {
-		PlanVO view = planService.planView(planNo, userId);
-		model.addAttribute("view", view);
+	public String planView(Model model,@RequestParam("planNo") int planNo, @RequestParam("userId") String userId) throws Exception {
+		
+		//계획 호출
+		PlanVO planView = planService.planView(planNo, userId);
+		model.addAttribute("planView", planView);
+		
+		//일정 호출
+		List<ScheduleVO> scheduleList = scheduleService.scheduleList(planNo);
+		model.addAttribute("scheduleList", scheduleList);
+		System.out.println(scheduleList.size());
+		System.out.println(scheduleList.get(1).toString());
+		
 		return "/plan/view";
 	}
 	

@@ -90,7 +90,6 @@ public class MemberController {
 			return "redirect:/plan/write";
 		}
 		
-		
 	}
 	//로그아웃
 	@RequestMapping(value = "/member/logout", method = RequestMethod.GET)
@@ -101,27 +100,5 @@ public class MemberController {
 		
 		return "redirect:/";
 	}
-//	//로그인 후 일정 만들기 화면으로 이동
-//	@RequestMapping(value="/plan/schedulePlan", method = RequestMethod.GET)
-//	public void schedulePlanning(Model model) throws Exception{
-//		if (!model.containsAttribute("cart")) {
-//			model.addAttribute("cart", new ArrayList<PlanVO>());
-//		}
-//		
-//	}
-//	
-//	@RequestMapping(value="/plan/schedulePlan/add", method=RequestMethod.POST)
-//	public String addSchedule(
-//			//입력 파라미터인 name, price, cnt가 goods에 일괄 바인딩 됨
-//            //goods라는 이름의 Model로 저장(Request Scope)
-//            @ModelAttribute PlanVO vo, 
-//            //세션에서 cart라는 이름의 Model을 가져와 cart에 할당
-//            @ModelAttribute("cart") List<PlanVO> cart) {
-//      // cart라는 Model(ArrayList)에 사용자가 입력한 항목들을 가진 goods 객체를 Add
-//		log.info("Modal Plan Add");
-//      cart.add(vo);
-//
-//      //localhost:port/cart로 요청을 보냄
-//      return "redirect:/plan/schedulePlan";
-//	}
+
 }

@@ -1,16 +1,5 @@
 package com.gteam.planner.domain;
 
-/* SQL DDL
- * CREATE TABLE `scheduleTest` (
-	`planNo` INT NOT NULL,
-	`userId` VARCHAR(50) NOT NULL,
-	`descript` VARCHAR(200) NULL DEFAULT NULL,
-	`addr` VARCHAR(50) NOT NULL,
-	`planDay` VARCHAR(5) NOT NULL,
-	`startTime` INT NULL DEFAULT '900',
-	`rowNo` INT NOT NULL,
- */
-
 public class ScheduleVO {
 	
 /*
@@ -32,7 +21,6 @@ public class ScheduleVO {
 	private String descript;
 	private String addr;
 	private int planDay;
-	
 	private int startTime;
 	private int rowNo;
 	

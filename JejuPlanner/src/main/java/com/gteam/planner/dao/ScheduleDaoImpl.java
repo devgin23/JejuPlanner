@@ -3,9 +3,12 @@ package com.gteam.planner.dao;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.gteam.planner.controller.ScheduleController;
 import com.gteam.planner.domain.ScheduleVO;
 
 @Repository
@@ -17,15 +20,9 @@ public class ScheduleDaoImpl implements ScheduleDao{
 	
 	//일정 목록
 	@Override
-	public List<ScheduleVO> list() throws Exception {
-		return sql.selectList(namespace + ".list");
-	}
-	
-	//일정추가
-	@Override
-	public void write(ScheduleVO vo) throws Exception {
-		System.out.println("DAO 출력 : " + vo.getPlanNo());
-		sql.insert(namespace + ".write", vo);
+	public List<ScheduleVO> scheduleList(int planNo) throws Exception {
+		System.out.println("스케줄DAO 인자 확인 " + planNo);
+		return sql.selectList(namespace + ".scheduleList", planNo);
 	}
 	
 }

@@ -10,14 +10,18 @@ CREATE TABLE `schedule` (
 	`rowNo` INT,
 	INDEX `SCHEDULE_FK_SET` (`planNo`, `userId`) USING BTREE,
 	CONSTRAINT `SCHEDULE_FK_SET` FOREIGN KEY (`planNo`, `userId`) REFERENCES `project`.`plan` (`planNo`, `userId`) ON UPDATE NO ACTION ON DELETE CASCADE
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /* INSERT DUMMY DATA */
 INSERT INTO `schedule` (planNo, userId, descript, addr, planDay) 
-VALUES ('1', 'member1', '조식', '제주호텔', '3');
+VALUES ('2', 'member2', 'asdf', 'asdf', '3');
 
 INSERT INTO `schedule` (planNo, userId, descript, addr, planDay) 
 VALUES ('1', 'member1', '등산', '한라산', '3');
+
+INSERT INTO `schedule` (planNo, userId, descript, addr, planDay) 
+VALUES ('1', 'member1', 'test', 'test', '3');
+
 
 INSERT INTO `schedule` (planNo, userId, descript, addr, planDay) 
 VALUES ('2', 'member2', '코딩', '제주호텔', '3');

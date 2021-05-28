@@ -16,20 +16,15 @@ public class ScheduleServiceImpl implements ScheduleService{
 	
 	//일정 목록 출력
 	@Override
-	public List<ScheduleVO> list() throws Exception {
-		return dao.list();
+	public List<ScheduleVO> scheduleList(int planNo) throws Exception {
+		System.out.println("스케줄 서비스 인자 확인 : " + planNo);
+		return dao.scheduleList(planNo);
 	}
 	
 	//일정 객체 출력
-	@Override
+/*	@Override
 	public ScheduleVO formData() throws Exception {
 		return dao.list().get(0);
-	}
-	
-	//일정 삽입
-	@Override
-	public void write(ScheduleVO vo) throws Exception {
-		dao.write(vo);
-	}
+	}*/
 
 }

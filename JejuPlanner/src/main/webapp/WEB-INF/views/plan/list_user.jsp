@@ -48,19 +48,19 @@
 			</thead>
 			
 			<tbody>
-				<c:forEach items="${list}" var="list">
+				<c:forEach items="${planListForUser}" var="planListForUser">
 				<tr>
-					<td>${list.planNo}</td>
-					<td>${list.userId}</td>
-					<td><fmt:formatDate value="${list.startDate}" pattern="yyyy-MM-dd"/></td>
-					<td>${list.planTitle}</td>
-					<td>${list.planTotalDay} 일</td>
-					<td>${list.planHit}</td>
+					<td>${planListForUser.planNo}</td>
+					<td>${planListForUser.userId}</td>
+					<td><fmt:formatDate value="${planListForUser.startDate}" pattern="yyyy-MM-dd"/></td>
+					<td>${planListForUser.planTitle}</td>
+					<td>${planListForUser.planTotalDay} 일</td>
+					<td>${planListForUser.planHit}</td>
 					<td>
 						<!-- 열람방식 POST처리 -->
 						<form action="/plan/view" method="post">
-							<input type="hidden" name="planNo" value="${list.planNo}"></input>
-							<input type="hidden" name="userId" value="${list.userId}"></input>
+							<input type="hidden" name="planNo" value="${planListForUser.planNo}"></input>
+							<input type="hidden" name="userId" value="${planListForUser.userId}"></input>
 							<input type="submit" value="열람">
 						</form>
 						<!-- 열람방식 POST처리 끝-->
