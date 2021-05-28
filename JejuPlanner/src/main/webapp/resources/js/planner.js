@@ -31,7 +31,7 @@ $(function(){
 			   var planOutput = '';
 			   for(var i = 1; i<=planTotalDay; i++){
 				   var createDay = '<h4>'+ 'DAY'+ i + '</h4>';
-				   createDay += '<button type="button" class="btn btn-primary" data-bs-toggle="modal"data-bs-target="#staticBackdrop" id="addSchBtn">';
+				   createDay += '<button class="btn btn-primary"id="addSchBtn"type="button"data-bs-toggle="collapse" data-bs-target="#collapseExample"aria-expanded="false"aria-controls="collapseExample">';
 				   createDay += '일정 생성';
 				   createDay += '</button>';
 				   createDay += '<div id=disp'+i+'></div>';
@@ -76,6 +76,11 @@ $(function(){
 	        },
 	        error: function(){
 	            alert("일정 추가 실패!");
+	        },
+	        complete: function(){
+	        	$('#contentInit').val('');
+        		$('#placeInit').val('');
+        		$('#startTimeInit').val('');
 	        }
 	    });
 	});
