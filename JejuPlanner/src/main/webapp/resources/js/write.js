@@ -131,8 +131,7 @@ function displayPlaceInfo (place) {
 			dataType : "json",
 			success : function(data1) {
 				alert(JSON.stringify(frm));
-				$('#place').html(
-						'<p>' + data1.placeName + '<br>' + data1.placeAddress + '</p>');
+				$('#placeInit').val(data1.placeName + ' ' + data1.placeAddress);
 				console.log(data1);
 			},
 			error : function() {
