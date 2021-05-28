@@ -1,7 +1,6 @@
 package com.gteam.planner.controller;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -30,8 +29,10 @@ public class PlanController {
 	@Autowired
 	private ScheduleService scheduleService;
 	
+	//계획 초기 설정 저장 객체
+	List<PlanVO> planSetList = new ArrayList<>();
 	//일정 추가 리스트
-	List<Map<String,Object>> list = new ArrayList<>();
+	List<Map<String,Object>> schList = new ArrayList<>();
 	
 	//로그인 후 일정 만들기 화면으로 이동
 	@RequestMapping(value="/plan/write", method = RequestMethod.GET)
@@ -41,26 +42,29 @@ public class PlanController {
 	//계획 초기 설정
 	@RequestMapping(value="/plan/write/planSet", method=RequestMethod.POST)
 	@ResponseBody
-	public PlanVO planAdd(PlanVO vo)throws Exception{
+	public PlanVO planSet(PlanVO vo)throws Exception{
 		log.info(vo.toString());
+		planSetList.add(vo);
 		return vo;
 	}
 	
 	//일정 추가
 	@RequestMapping(value="/plan/write/schAdd", method=RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> schAdd(ScheduleVO vo) {
+	public Map<String, Object> schAdd(ScheduleVO vo) throws Exception{
 		log.info("Modal Schedule Add");
-		log.info(vo.toString());
-		Map<String, Object> map = new HashMap<>();
-		map.put("planDay", vo.getPlanDay());
-		map.put("descript", vo.getDescript());
-		map.put("addr", vo.getAddr());
-		map.put("startTime", vo.getStartTime());
-		list.add(map);
-		log.info("map: " + map.toString());
-		log.info("list: " + list.toString());
-      return map;
+		schList.add(planService.schAdd(vo));
+		log.info("schList: " + schList.toString());
+      return planService.schAdd(vo);
+	}
+	//계획 추가
+	@RequestMapping(value="plan/write/planAdd", method=RequestMethod.GET)
+	public String planAdd() throws Exception {
+		planService.planAdd(planSetList.get(0), schList);
+		planSetList.clear();
+		schList.clear();
+		log.info("계획 추가 완료");
+		return "redirect:/plan/write";
 	}
 	
 	//게시판에 계획 리스트 출력

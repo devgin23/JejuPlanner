@@ -88,7 +88,6 @@
 	<!-- 계획 짜는 DIV -->
 	<div id="schDiv"></div>
 
-	
 
 </body>
 
