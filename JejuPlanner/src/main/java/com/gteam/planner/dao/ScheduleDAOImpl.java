@@ -12,7 +12,7 @@ import com.gteam.planner.controller.ScheduleController;
 import com.gteam.planner.domain.ScheduleVO;
 
 @Repository
-public class ScheduleDaoImpl implements ScheduleDao{
+public class ScheduleDAOImpl implements ScheduleDAO{
 	
 	@Autowired
 	private SqlSession sql;
