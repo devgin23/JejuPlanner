@@ -13,6 +13,7 @@
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 <style>
+
   .input-form {
   	background-color: powderblue;
   }
@@ -32,7 +33,9 @@
 
 </head>
 <body>
+	<div style="overflow:auto; width:100%; height:100%;">
 	<!-- 계획 입력 -->
+	<div class="col-md-12">
 	<form id="planFrm" name="planFrm" >
 		<div class="row">
 			<div class="form-group col-sm-12">
@@ -66,6 +69,7 @@
 			</div>
 		</div>
 	</form>
+	</div>
 	<!-- 계획 입력 끝 -->
 	
 	<!-- 일정 추가 collapse -->
@@ -87,8 +91,7 @@
 	
 	<!-- 계획 짜는 DIV -->
 	<div id="schDiv"></div>
-
-
+	</div>
 </body>
 
 
