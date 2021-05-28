@@ -5,9 +5,9 @@ CREATE TABLE `schedule` (
 	`userId` VARCHAR(50) NOT NULL,
 	`descript` VARCHAR(200) NULL DEFAULT NULL,
 	`addr` VARCHAR(50) NOT NULL,
-	`planDay` VARCHAR(5) NOT NULL,
+	`planDay` INT NOT NULL DEFAULT '0',
 	`startTime` INT NULL DEFAULT '900',
-	`rowNo` INT,
+	`rowNo` INT DEFAULT '0',
 	INDEX `SCHEDULE_FK_SET` (`planNo`, `userId`) USING BTREE,
 	CONSTRAINT `SCHEDULE_FK_SET` FOREIGN KEY (`planNo`, `userId`) REFERENCES `project`.`plan` (`planNo`, `userId`) ON UPDATE NO ACTION ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

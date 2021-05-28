@@ -3,12 +3,9 @@ package com.gteam.planner.dao;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.gteam.planner.controller.ScheduleController;
 import com.gteam.planner.domain.ScheduleVO;
 
 @Repository

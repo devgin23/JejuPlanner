@@ -22,7 +22,7 @@ $(function(){
 		//시작일 값
 		startDate = $('#startDate').val();
 		$.ajax({
-		   url: "/plan/write/planAdd",
+		   url: "/plan/write/planSet",
 		   data: {userId: userId, planTitle: planTitle, startDate: startDate, planTotalDay: planTotalDay},
 		   dataType:"json",
 		   type: "POST",
