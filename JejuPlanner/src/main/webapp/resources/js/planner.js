@@ -37,7 +37,7 @@ $(function(){
 				   createDay += '<div id=disp'+i+'></div>';
 				   createDay += '<br/>';
 				   if(i == planTotalDay){
-					   createDay += '<button type="button" class="btn btn-primary"  id="planAddBtn" onclick="location.href=\'/plan/write/planAdd\'">계획 등록</button>';
+					   createDay += '<button type="button" class="btn btn-primary submitBtn"  id="planAddBtn" onclick="location.href=\'/plan/write/planAdd\'" style="float:right;">일정 등록</button>';
 				   }
 				   planOutput = planOutput + createDay;
 			   }

@@ -33,11 +33,15 @@
 	       	 </div>
  			</div>
  			</c:if>
-			  <c:if test="${msg == false}">
-			  	<script>
+ 			<!-- 로그인 정보 존재 시 일정 만들기로 Redirect -->
+ 			<c:if test="${member != null}">
+ 				<% response.sendRedirect("/plan/write"); %>
+ 			</c:if>
+			<c:if test="${msg == false}">
+				<script>
 			  		alert("로그인 실패! 아이디와 비밀번호를 확인해주세요.");
-			  	</script>
-			  </c:if>
+				</script>
+			</c:if>
 	  </form>
   </div>
 

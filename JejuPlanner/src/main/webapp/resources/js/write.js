@@ -6,8 +6,8 @@ var placeOverlay = new kakao.maps.CustomOverlay({zIndex:1}),
  
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = {
-        center: new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
-        level: 5 // 지도의 확대 레벨
+        center: new kakao.maps.LatLng(33.48909548183946, 126.51336764016197), // 지도의 중심좌표
+        level: 7 // 지도의 확대 레벨
     };  
 // 지도를 생성합니다    
 var map = new kakao.maps.Map(mapContainer, mapOption); 
@@ -23,7 +23,7 @@ addEventHandle(contentNode, 'mousedown', kakao.maps.event.preventMap);
 addEventHandle(contentNode, 'touchstart', kakao.maps.event.preventMap);
 // 커스텀 오버레이 컨텐츠를 설정합니다
 placeOverlay.setContent(contentNode);  
-// 각 카테고리에 클릭 이벤트를 등록합니다
+// 각 카테고리에 클릭 이벤트를 등록합니다	
 addCategoryClickEvent();
 // 엘리먼트에 이벤트 핸들러를 등록하는 함수입니다
 function addEventHandle(target, type, callback) {

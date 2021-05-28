@@ -189,3 +189,7 @@ p {
 .col-4, .plan-area{
 	padding-right:0px;
 }
+html, body{
+	margin: 0;
+	padding: 0;
+}
