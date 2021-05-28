@@ -4,6 +4,24 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gteam.planner.mappers.plan">
 
+		<!-- 계획 DB 추가 -->
+		<insert id="planAdd" parameterType="com.gteam.planner.domain.PlanVO">
+			INSERT INTO plan(userId, planTitle, planTotalDay, startDate)
+			 VALUES(#{userId}, #{planTitle}, #{planTotalDay}, #{startDate})
+		</insert>
+		
+		<!-- 계획 번호 확인--> 
+		<select id="planNoGet" resultType="int">
+			SELECT Max(planNo)
+			 FROM plan
+		</select> 
+		
+		<!-- 일정 DB 추가 -->
+		<insert id="planSchAdd" parameterType="com.gteam.planner.domain.PlanVO">
+			INSERT INTO schedule(planNo, userId, descript, addr, planDay, startTime)
+			 VALUES(#{planNo}, #{userId}, #{descript}, #{addr}, #{planDay}, #{startTime})
+		</insert>
+		
 		<!-- 일정 + 계획 조인쿼리를 위한 선언 -->
 		<resultMap type="com.gteam.planner.domain.PlanVO" id="planResult">
 			<id property="planNo" column="planNo"></id>

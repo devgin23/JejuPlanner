@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.gteam.planner.controller.PlanController;
 import com.gteam.planner.domain.PlanVO;
+import com.gteam.planner.domain.ScheduleVO;
 
 @Repository
 public class PlanDAOImpl implements PlanDAO {
@@ -20,6 +21,22 @@ public class PlanDAOImpl implements PlanDAO {
 	@Autowired
 	private SqlSession sql;
 	private static String namespace = "com.gteam.planner.mappers.plan";
+	
+	//계획 설정 추가
+	@Override
+	public void planAdd(PlanVO vo) throws Exception {
+		sql.insert(namespace+".planAdd", vo);
+	}
+	
+	//PlanNo 가져오기
+	@Override
+	public int planNoCheck(PlanVO vo) throws Exception {
+		int result = sql.selectOne(namespace+".planNoGet", vo);
+		log.info("planNo: " + String.valueOf(result));
+		return result;
+	}
+	
+	
 	
 	//게시판용 계획 목록
 	@Override
@@ -63,5 +80,10 @@ public class PlanDAOImpl implements PlanDAO {
 		sql.delete(namespace + ".planDelete", data);
 		
 	}
-		
+
+	//계획 일정 개별 추가
+	@Override
+	public void planSchAdd(ScheduleVO vo) throws Exception {
+		sql.insert(namespace+".planSchAdd", vo);
+	}
 }

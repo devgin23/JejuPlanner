@@ -1,6 +1,8 @@
 package com.gteam.planner.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import com.gteam.planner.controller.PlanController;
 import com.gteam.planner.dao.PlanDAO;
 import com.gteam.planner.domain.PlanVO;
+import com.gteam.planner.domain.ScheduleVO;
 
 @Repository
 public class PlanServiceImpl implements PlanService{
@@ -18,6 +21,37 @@ public class PlanServiceImpl implements PlanService{
 	
 	@Autowired
 	private PlanDAO dao;
+	
+	//계획 설정 추가
+		@Override
+		public void planAdd(PlanVO vo, List<Map<String, Object>> schList) throws Exception {
+		dao.planAdd(vo);
+		int planNo = dao.planNoCheck(vo);
+		for(int i = 0; i<schList.size(); i++) {
+			ScheduleVO schVo = new ScheduleVO();
+			//vo 값 세팅
+			schVo.setPlanNo(planNo);
+			schVo.setUserId(vo.getUserId());
+			schVo.setDescript(schList.get(i).get("descript").toString());
+			schVo.setAddr(schList.get(i).get("addr").toString());
+			schVo.setPlanDay(Integer.parseInt(schList.get(i).get("planDay").toString()));
+			schVo.setStartTime(Integer.parseInt(schList.get(i).get("startTime").toString()));
+			log.info(schVo.toString());
+			dao.planSchAdd(schVo);
+		}
+		log.info("Insert Plan END");
+	}
+	
+	//일정 List 객체
+	@Override
+	public Map<String, Object> schAdd(ScheduleVO vo) throws Exception {
+		Map<String, Object> schMap = new HashMap<>();
+		schMap.put("planDay", vo.getPlanDay());
+		schMap.put("descript", vo.getDescript());
+		schMap.put("addr", vo.getAddr());
+		schMap.put("startTime", vo.getStartTime());
+		return schMap;
+	}
 	
 	//게시판용 계획 목록
 	@Override

@@ -3,9 +3,19 @@ package com.gteam.planner.dao;
 import java.util.List;
 
 import com.gteam.planner.domain.PlanVO;
+import com.gteam.planner.domain.ScheduleVO;
 
 public interface PlanDAO {
-
+	
+	//계획 추가
+	public void planAdd(PlanVO vo) throws Exception;
+	
+	//계획 번호 확인
+	public int planNoCheck(PlanVO vo) throws Exception;
+	
+	//일정 개별 추가
+	public void planSchAdd(ScheduleVO vo) throws Exception;
+	
 	//게시판용 계획 목록
 	List<PlanVO> planList() throws Exception;
 
