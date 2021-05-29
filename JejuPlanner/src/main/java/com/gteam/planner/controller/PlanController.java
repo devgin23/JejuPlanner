@@ -94,9 +94,7 @@ public class PlanController {
 		//일정 호출
 		List<ScheduleVO> scheduleList = scheduleService.scheduleList(planNo);
 		model.addAttribute("scheduleList", scheduleList);
-		System.out.println(scheduleList.size());
-		System.out.println(scheduleList.get(1).toString());
-		
+		System.out.println("planDay : "+scheduleList.get(1).getPlanDay());
 		return "/plan/view";
 	}
 	
