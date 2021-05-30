@@ -65,7 +65,6 @@
 			</div>
 			<div class="form-group col-sm-2">
 				<input type="button" class="btn btn-primary mb-3" id="planFrmSubmit" name="planFrmSubmit" value="작성" style="float:right; margin-top: 25px;">
-			
 			</div>
 		</div>
 	</form>
@@ -82,7 +81,10 @@
 					style="width: 20px; text-align: center" /><br /> 
 					내용 : <input	type="text" id="contentInit" name="descript"><br> 
 					장소 : <input	type="text" id="placeInit" name="addr"><br> 
-					시작시간 : <input type="text" id="startTimeInit" name="startTime"><br>
+					<!-- 시작시간 : <input type="text" id="startTimeInit" name="startTime"><br> -->
+					시작시간 : <select class="startTime form-select" id="startTimeInit" name="startTime">
+							</select>
+					<br>
 			</form>
 			<input type="button" id="schFrmSubmit" class="btn btn-primary" data-bs-target="#collapseExample"
 						data-bs-toggle="collapse" value="추가">
@@ -91,12 +93,10 @@
 	
 	<!-- 계획 짜는 DIV -->
 	<div id="schDiv"></div>
+<button id="sortTable">Sort</button>
 	</div>
 </body>
 
-
-
-
 <!-- Custom JavaScript -->
-<script type="text/javascript" src="/resources/js/planner.js"></script>
+<script type="text/javascript" src="/resources/js/planner.js?ver=4"></script>
 </html>
