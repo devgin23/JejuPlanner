@@ -81,7 +81,6 @@
 					style="width: 20px; text-align: center" /><br /> 
 					내용 : <input	type="text" id="contentInit" name="descript"><br> 
 					장소 : <input	type="text" id="placeInit" name="addr"><br> 
-					<!-- 시작시간 : <input type="text" id="startTimeInit" name="startTime"><br> -->
 					시작시간 : <select class="startTime form-select" id="startTimeInit" name="startTime">
 							</select>
 					<br>
