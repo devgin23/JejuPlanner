@@ -7,17 +7,25 @@ $(function(){
 	var startDate;
 	var planTotalDay;
 	
-	//startTime select에 사용될 변수 선언
-	for(var i = 1; i<=24; i++){
-		if(i<10){
-		$(".startTime").append("<option value="+i+">0"+ i + ":00</option>"); //10시 이전에는 0 붙게 조건문 걸음 ex) 9:00 -> 09:00
-	}
-		else{
-			$(".startTime").append("<option value="+i+">"+ i + ":00</option>");			
-		}
-		//기본값 09:00로 함
-		$('select option[value="9"]').attr("selected",true);
-	}
+	//collapse 생성 함수
+	function createCollapse(i) {
+		var createStringCollap;
+		createStringCollap = '<div>hello bitches!'+i+'</div>';
+		createStringCollap += '<div class="card card-body">';
+		createStringCollap += '<form id="schFrm">';
+		createStringCollap += '<input type="hidden" id="userId" name="userId" value="${member.userId}">';
+		createStringCollap += '<label>Day</label>';
+		createStringCollap += '<input type="text" id="schDay" name="planDay" value="" readonly	style="width: 20px; text-align: center"/><br/>';
+		createStringCollap += '내용 : <input	type="text" id="contentInit" name="descript"><br>';
+		createStringCollap += '장소 : <input	type="text" id="placeInit" name="addr"><br>';
+		createStringCollap += '시작시간 : <select class="startTime form-select" id="startTimeInit" name="startTime"></select><br></form>';
+		createStringCollap += '<input type="button" id="schFrmSubmit" class="btn btn-primary" data-bs-target="#collapseExample" data-bs-toggle="collapse'+i+'" value="추가">';
+		createStringCollap += '</div>';
+		
+		$("#collapse"+i).html(createStringCollap);
+	};
+	
+	
 	
 	//드롭다운 값변경 스크립트
     $(".dropdown-menu li a").click(function(){
@@ -44,9 +52,10 @@ $(function(){
 			   var planOutput = '';
 			   for(var i = 1; i<=planTotalDay; i++){
 				   var createDay = '<h4>'+ 'DAY'+ i + '</h4>';
-				   createDay += '<button class="btn btn-primary"id="schAddBtn"type="button"data-bs-toggle="collapse" data-bs-target="#collapseExample"aria-expanded="false"aria-controls="collapseExample">';
+				   createDay += '<button class="btn btn-primary"id="schAddBtn"type="button"data-bs-toggle="collapse" data-bs-target="#collapse'+i+'"aria-expanded="false"aria-controls="collapseExample">';
 				   createDay += '일정 생성';
 				   createDay += '</button>';
+				   createDay += '<div class="collapse" id="collapse'+i+'"></div>'
 				   /*createDay += '<div id=disp'+i+'></div>';*/
 				   createDay += '<table id="disp'+i+'" class="schTable table table-borderless">';
 				   createDay += '<thead class="thead">'
@@ -60,6 +69,10 @@ $(function(){
 				   planOutput = planOutput + createDay;
 			   }
 			   $("#schDiv").html(planOutput);
+			   for(var i = 1; i<=planTotalDay; i++){
+				   createCollapse(i);
+				   
+			   }
 		   },
 		   error: function(){
 		       alert("일정 추가 실패!");
@@ -126,6 +139,8 @@ $(function(){
 	    });
 	});
 	
+	
+	
 	$(document).on("click", "#sortTable", function sortTable() {
 		var table, rows, i, j, x, y;
 		var tableNum = 0;
@@ -154,6 +169,18 @@ $(function(){
 			tableNum++;
 		}
 	});
+	
+	//startTime select에 사용될 변수 선언
+	for(var i = 1; i<=24; i++){
+		if(i<10){
+		$(".startTime").append("<option value="+i+">0"+ i + ":00</option>"); //10시 이전에는 0 붙게 조건문 걸음 ex) 9:00 -> 09:00
+	}
+		else{
+			$(".startTime").append("<option value="+i+">"+ i + ":00</option>");			
+		}
+		//기본값 09:00로 함
+		$('select option[value="9"]').attr("selected",true);
+	}
 });
 
 
