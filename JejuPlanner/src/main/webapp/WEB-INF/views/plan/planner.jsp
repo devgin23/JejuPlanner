@@ -92,10 +92,9 @@
 	
 	<!-- 계획 짜는 DIV -->
 	<div id="schDiv"></div>
-<button id="sortTable">Sort</button>
 	</div>
 </body>
 
 <!-- Custom JavaScript -->
-<script type="text/javascript" src="/resources/js/planner.js?ver=4"></script>
+<script type="text/javascript" src="/resources/js/planner.js"></script>
 </html>

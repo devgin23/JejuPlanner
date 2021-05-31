@@ -107,8 +107,9 @@ $(function(){
         				schOutput+= '<td>' + data.descript + '</td>';
         				schOutput+= '<td>' + data.addr + '</td>';
         				var hour = data.startTime;
+        				if(hour < 10) hour = "0" + hour; //1자리 수 일시 0 포맷 추가
         				var min = '00';
-        				schOutput+= '<td>' + hour + '시' + min + '분' + '</td>';
+        				schOutput+= '<td>' + hour + ':' + min + '' + '</td>';
         				schOutput+= '</tr>';
         				$("#disp"+i).append(schOutput);
         				schOutput+= '</tbody>';
@@ -126,33 +127,36 @@ $(function(){
 	    });
 	});
 	
-	$(document).on("click", "#sortTable", function sortTable() {
-		var table, rows, i, j, x, y;
-		var tableNum = 0;
-		console.log("planTotalDay : ");
-		
-		//table loop
-		while(tableNum<planTotalDay){
-			console.log("tableNum : " + table);
-			table = $(".schTable")[tableNum];
-			console.log(table);
-			rows = table.rows;
+	//일정정렬 스크립트
+	$(document).on("click", "#schFrmSubmit", function sortTable() {
+		setTimeout(function() { // 동시에 입력된 일정은 정렬 안되는 문제 있어서 delay를 0.1초 주었음
+			var table, rows, i, j, x, y;
+			var tableNum = 0;
+			console.log("planTotalDay : ");
 			
-			//버블정렬, 컬럼명은 무시해야하기 때문에 1부터 시작
-			for (i = 1; i<(rows.length - 1); i++) {
-				for(j = 1; j<(rows.length - i); j++) {
-					
-					//switching ,(getElementsByTagName("td")[0]에서 [0]의 의미는 첫 번째 필드를 지목한다는 뜻) 
-					if(parseInt(rows[j].getElementsByTagName("td")[0].innerHTML) > parseInt(rows[j + 1].getElementsByTagName("td")[0].innerHTML)) {
+			//table loop
+			while(tableNum<planTotalDay){
+				console.log("tableNum : " + table);
+				table = $(".schTable")[tableNum];
+				console.log(table);
+				rows = table.rows;
+				
+				//버블정렬, 컬럼명은 무시해야하기 때문에 1부터 시작
+				for (i = 1; i<(rows.length - 1); i++) {
+					for(j = 1; j<(rows.length - i); j++) {
 						
-						//구조 분해 할당 : [3, 5] = [5, 3]  --> [5, 3]
-						[rows[j].getElementsByTagName("td")[0].innerHTML,rows[j + 1].getElementsByTagName("td")[0].innerHTML]
-						=[rows[j+1].getElementsByTagName("td")[0].innerHTML,rows[j].getElementsByTagName("td")[0].innerHTML];
+						//switching ,(getElementsByTagName("td")[0]에서 [0]의 의미는 첫 번째 필드를 지목한다는 뜻) 
+						if(parseInt(rows[j].getElementsByTagName("td")[0].innerHTML) > parseInt(rows[j + 1].getElementsByTagName("td")[0].innerHTML)) {
+							
+							//구조 분해 할당 : [3, 5] = [5, 3]  --> [5, 3]
+							[rows[j].getElementsByTagName("td")[0].innerHTML,rows[j + 1].getElementsByTagName("td")[0].innerHTML]
+							=[rows[j+1].getElementsByTagName("td")[0].innerHTML,rows[j].getElementsByTagName("td")[0].innerHTML];
+						}
 					}
 				}
+				tableNum++;
 			}
-			tableNum++;
-		}
+		}, 100);
 	});
 });
 
