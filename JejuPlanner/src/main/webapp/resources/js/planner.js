@@ -15,7 +15,7 @@ $(function(){
 		createStringCollap += '<form id="schFrm">';
 		createStringCollap += '<input type="hidden" id="userId" name="userId" value="${member.userId}">';
 		createStringCollap += '<label>Day</label>';
-		createStringCollap += '<input type="text" id="schDay" name="planDay" value="" readonly	style="width: 20px; text-align: center"/><br/>';
+		createStringCollap += '<input type="text" id="schDay'+i+'" name="schDay" value="" readonly	style="width: 20px; text-align: center"/><br/>';
 		createStringCollap += '내용 : <input	type="text" id="contentInit" name="descript"><br>';
 		createStringCollap += '장소 : <input	type="text" id="placeInit" name="addr"><br>';
 		createStringCollap += '시작시간 : <select class="startTime form-select" id="startTimeInit" name="startTime"></select><br></form>';
@@ -83,8 +83,21 @@ $(function(){
 	$(document).on("click", "#schAddBtn", function(){
 		//버튼 tag만! index 값 변수로 받기
         idx = $('button').index(this);
-		//modal schDay input에 값 추가
-        $("#schDay").attr({"value":idx});
+        //modal schDay input에 값 추가
+        $("#schDay"+idx).attr({"value":idx});
+        
+        //startTime select에 사용될 변수 선언
+    	for(var i = 6; i<=24; i++){
+    		if(i<10){
+    		$(".startTime").append("<option value="+i+">0"+ i + ":00</option>"); //10시 이전에는 0 붙게 조건문 걸음 ex) 9:00 -> 09:00
+    	}
+    		else{
+    			$(".startTime").append("<option value="+i+">"+ i + ":00</option>");			
+    		}
+    		
+    		//기본값 09:00로 함
+    		$('select option[value="9"]').attr("selected",true);
+    	}
     });
 	
 	//method="post" action="/plan/write/schAdd"
@@ -170,17 +183,7 @@ $(function(){
 		}
 	});
 	
-	//startTime select에 사용될 변수 선언
-	for(var i = 1; i<=24; i++){
-		if(i<10){
-		$(".startTime").append("<option value="+i+">0"+ i + ":00</option>"); //10시 이전에는 0 붙게 조건문 걸음 ex) 9:00 -> 09:00
-	}
-		else{
-			$(".startTime").append("<option value="+i+">"+ i + ":00</option>");			
-		}
-		//기본값 09:00로 함
-		$('select option[value="9"]').attr("selected",true);
-	}
+	
 });
 
 

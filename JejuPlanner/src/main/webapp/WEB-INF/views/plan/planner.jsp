@@ -71,7 +71,7 @@
 	</div>
 	<!-- 계획 입력 끝 -->
 	
-	<!-- 일정 추가 collapse -->
+	<%-- <!-- 일정 추가 collapse -->
 	<div class="collapse" id="collapseExample">
 		<div class="card card-body">
 			<form id="schFrm">
@@ -84,7 +84,7 @@
 			</form>
 			<input type="button" id="schFrmSubmit" class="btn btn-primary" data-bs-target="#collapseExample" data-bs-toggle="collapse" value="추가">
 		</div>
-	</div>
+	</div> --%>
 	
 	<!-- 계획 짜는 DIV -->
 	<div id="schDiv"></div>
