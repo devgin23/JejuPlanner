@@ -125,43 +125,39 @@ $(function(){
 	        }
 	    });
 	});
-});
-
-
-$(document).on("click", "#sortTable", function sortTable() {
-	var table, rows, switching, i, x, y, shouldSwitch;
 	
-	table = $(".schTable")[0]; // [0]는 몇번 째 테이블에 접근할 것인지 명시해주는 키워드 (id 선택자를 쓰면 없어도 됨)
-	switching = true;
-	
-	while (switching) {
+	$(document).on("click", "#sortTable", function sortTable() {
+		var table, rows, i, j, x, y;
+		var tableNum = 0;
+		console.log("planTotalDay : ");
 		
-		switching = false;
-		rows = table.rows;
-		
-		//table head는 무시해야하기 때문에 i = 1부터 시작
-		for (i = 1; i < (rows.length - 1); i++) {
-			index = i;
+		//table loop
+		while(tableNum<planTotalDay){
+			console.log("tableNum : " + table);
+			table = $(".schTable")[tableNum];
+			console.log(table);
+			rows = table.rows;
 			
-			// ("TD")[0]는 첫번 째 필드를 의미한다. (startTime에 접근한다는 뜻)
-			x = rows[i].getElementsByTagName("td")[0].innerHTML;
-			y = rows[i + 1].getElementsByTagName("td")[0].innerHTML;
-			
-			console.log("x의 값 : " + x);
-			console.log("y의 값 : " + y);
-			
-			if (x > y) {
-				shouldSwitch = true;
-				break;
+			//버블정렬, 컬럼명은 무시해야하기 때문에 1부터 시작
+			for (i = 1; i<(rows.length - 1); i++) {
+				for(j = 1; j<(rows.length - i); j++) {
+					
+					//switching ,(getElementsByTagName("td")[0]에서 [0]의 의미는 첫 번째 필드를 지목한다는 뜻) 
+					if(parseInt(rows[j].getElementsByTagName("td")[0].innerHTML) > parseInt(rows[j + 1].getElementsByTagName("td")[0].innerHTML)) {
+						
+						//구조 분해 할당 : [3, 5] = [5, 3]  --> [5, 3]
+						[rows[j].getElementsByTagName("td")[0].innerHTML,rows[j + 1].getElementsByTagName("td")[0].innerHTML]
+						=[rows[j+1].getElementsByTagName("td")[0].innerHTML,rows[j].getElementsByTagName("td")[0].innerHTML];
+					}
+				}
 			}
+			tableNum++;
 		}
-		if (shouldSwitch) {
-			rows[i].parentNode.insertBefore(rows[i + 1], rows[i]); //insertBefore : 특정 위치 앞에 노드 삽입
-			switching = true;
-
-		}
-	}
+	});
 });
+
+
+
 
 
 
