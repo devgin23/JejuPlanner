@@ -32,6 +32,6 @@
 </nav>
 
 <!-- 내 일정 보관 열람 POST처리를 위한 form -->
-<form name="planListForUser" action="/plan/list/user" method="POST">
+<form name="planListForUser" action="/plan/list/user" method="POST" style="margin:0px;">
 	<input type="hidden" name="userId" value="${member.userId}"></input>
 </form>

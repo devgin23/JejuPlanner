@@ -5,7 +5,7 @@ $(function(){
 	var userId;
 	var planTitle;
 	var startDate;
-	var planTotalDay;
+	var planTotalDay=0;
 	
 	//startTime select에 사용될 변수 선언
 	for(var i = 1; i<=24; i++){
@@ -27,12 +27,24 @@ $(function(){
     	planTotalDay = $(this).attr('value');
    });
    // method="post" action="/plan/write/planAdd"
+   // Plan 설정 유효성 검사 및 제출
 	$('#planFrmSubmit').on('click', function(){
 		//사용자 ID
 		userId = $('#userId').val();
-		//계획타이틀 값
-		planTitle = $('#planTitle').val();
-		//시작일 값
+		//계획타이틀 값 검사 및 초기화
+		if($('#planTitle').val()==""){
+			alert('일정 타이틀을 입력해주세요!');
+			$('#planTitle').focus();
+			return false;
+		}else{
+			planTitle = $('#planTitle').val();
+		}
+		//여행 일수 값 검사 초기화는 위 드롭다운 함수에!
+		if(planTotalDay==0){
+			alert('여행 일수를 선택해주세요!');
+			return false;
+		}
+		//시작일 값 (디폴트 값 09:00)
 		startDate = $('#startDate').val();
 		$.ajax({
 		   url: "/plan/write/planSet",
