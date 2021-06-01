@@ -7,17 +7,23 @@ $(function(){
 	var startDate;
 	var planTotalDay=0;
 	
-	//startTime select에 사용될 변수 선언
-	for(var i = 1; i<=24; i++){
-		if(i<10){
-		$(".startTime").append("<option value="+i+">0"+ i + ":00</option>"); //10시 이전에는 0 붙게 조건문 걸음 ex) 9:00 -> 09:00
-	}
-		else{
-			$(".startTime").append("<option value="+i+">"+ i + ":00</option>");			
-		}
-		//기본값 09:00로 함
-		$('select option[value="9"]').attr("selected",true);
-	}
+	//collapse 생성 함수
+	function createCollapse(i) {
+		var createStringCollap;
+		createStringCollap = '<div>hello bitches!'+i+'</div>';
+		createStringCollap += '<div class="card card-body">';
+		createStringCollap += '<form id="schFrm">';
+		createStringCollap += '<input type="hidden" id="userId" name="userId" value="${member.userId}">';
+		createStringCollap += '<label>Day</label>';
+		createStringCollap += '<input type="text" id="schDay'+i+'" name="schDay" value="" readonly	style="width: 20px; text-align: center"/><br/>';
+		createStringCollap += '내용 : <input	type="text" id="contentInit" name="descript"><br>';
+		createStringCollap += '장소 : <input	type="text" id="placeInit" name="addr"><br>';
+		createStringCollap += '시작시간 : <select class="startTime form-select" id="startTimeInit" name="startTime"></select><br></form>';
+		createStringCollap += '<input type="button" id="schFrmSubmit" class="btn btn-primary" data-bs-target="#collapseExample" data-bs-toggle="collapse'+i+'" value="추가">';
+		createStringCollap += '</div>';
+		
+		$("#collapse"+i).html(createStringCollap);
+	};
 	
 	//드롭다운 값변경 스크립트
     $(".dropdown-menu li a").click(function(){
@@ -56,9 +62,10 @@ $(function(){
 			   var planOutput = '';
 			   for(var i = 1; i<=planTotalDay; i++){
 				   var createDay = '<h4>'+ 'DAY'+ i + '</h4>';
-				   createDay += '<button class="btn btn-primary"id="schAddBtn"type="button"data-bs-toggle="collapse" data-bs-target="#collapseExample"aria-expanded="false"aria-controls="collapseExample">';
+				   createDay += '<button class="btn btn-primary"id="schAddBtn"type="button"data-bs-toggle="collapse" data-bs-target="#collapse'+i+'"aria-expanded="false"aria-controls="collapseExample">';
 				   createDay += '일정 생성';
 				   createDay += '</button>';
+				   createDay += '<div class="collapse" id="collapse'+i+'"></div>'
 				   /*createDay += '<div id=disp'+i+'></div>';*/
 				   createDay += '<table id="disp'+i+'" class="schTable table table-borderless">';
 				   createDay += '<thead class="thead">'
@@ -72,6 +79,10 @@ $(function(){
 				   planOutput = planOutput + createDay;
 			   }
 			   $("#schDiv").html(planOutput);
+			    for(var i = 1; i<=planTotalDay; i++){
+				   createCollapse(i);
+				   
+			   }
 		   },
 		   error: function(){
 		       alert("일정 추가 실패!");
@@ -83,8 +94,21 @@ $(function(){
 		//버튼 tag만! index 값 변수로 받기
         idx = $('button').index(this);
 		//modal schDay input에 값 추가
-        $("#schDay").attr({"value":idx});
-    });
+        $("#schDay"+idx).attr({"value":idx});
+    
+    //startTime select에 사용될 변수 선언
+	for(var i = 6; i<=24; i++){
+		if(i<10){
+		$(".startTime").append("<option value="+i+">0"+ i + ":00</option>"); //10시 이전에는 0 붙게 조건문 걸음 ex) 9:00 -> 09:00
+	}
+		else{
+			$(".startTime").append("<option value="+i+">"+ i + ":00</option>");			
+		}
+		
+		//기본값 09:00로 함
+		$('select option[value="9"]').attr("selected",true);
+	}
+});
 	
 	//method="post" action="/plan/write/schAdd"
 	$('#schFrmSubmit').on('click', function(){
@@ -144,13 +168,10 @@ $(function(){
 		setTimeout(function() { // 동시에 입력된 일정은 정렬 안되는 문제 있어서 delay를 0.1초 주었음
 			var table, rows, i, j, x, y;
 			var tableNum = 0;
-			console.log("planTotalDay : ");
 			
 			//table loop
 			while(tableNum<planTotalDay){
-				console.log("tableNum : " + table);
 				table = $(".schTable")[tableNum];
-				console.log(table);
 				rows = table.rows;
 				
 				//버블정렬, 컬럼명은 무시해야하기 때문에 1부터 시작
@@ -160,9 +181,11 @@ $(function(){
 						//switching ,(getElementsByTagName("td")[0]에서 [0]의 의미는 첫 번째 필드를 지목한다는 뜻) 
 						if(parseInt(rows[j].getElementsByTagName("td")[0].innerHTML) > parseInt(rows[j + 1].getElementsByTagName("td")[0].innerHTML)) {
 							
+							rows[j].parentNode.insertBefore(rows[j + 1], rows[j]);
+							
 							//구조 분해 할당 : [3, 5] = [5, 3]  --> [5, 3]
-							[rows[j].getElementsByTagName("td")[0].innerHTML,rows[j + 1].getElementsByTagName("td")[0].innerHTML]
-							=[rows[j+1].getElementsByTagName("td")[0].innerHTML,rows[j].getElementsByTagName("td")[0].innerHTML];
+							/*[rows[j].getElementsByTagName("td")[0].innerHTML, rows[j + 1].getElementsByTagName("td")[0].innerHTML]
+							=[rows[j+1].getElementsByTagName("td")[0].innerHTML,rows[j].getElementsByTagName("td")[0].innerHTML];*/
 						}
 					}
 				}
@@ -172,7 +195,10 @@ $(function(){
 	});
 });
 
-
+/* test버튼 
+$(document).on("click", "#test", function test() {
+)
+}*/
 
 
 
