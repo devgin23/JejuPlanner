@@ -168,12 +168,7 @@ $(function(){
 						
 						//switching ,(getElementsByTagName("td")[0]에서 [0]의 의미는 첫 번째 필드를 지목한다는 뜻) 
 						if(parseInt(rows[j].getElementsByTagName("td")[0].innerHTML) > parseInt(rows[j + 1].getElementsByTagName("td")[0].innerHTML)) {
-							
-							rows[j].parentNode.insertBefore(rows[j + 1], rows[j]);
-							
-							//구조 분해 할당 : [3, 5] = [5, 3]  --> [5, 3]
-							/*[rows[j].getElementsByTagName("td")[0].innerHTML, rows[j + 1].getElementsByTagName("td")[0].innerHTML]
-							=[rows[j+1].getElementsByTagName("td")[0].innerHTML,rows[j].getElementsByTagName("td")[0].innerHTML];*/
+							rows[j].parentNode.insertBefore(rows[j + 1], rows[j]); //insertBefore(앞의 노드를	 뒤 노드에 삽입)
 						}
 					}
 				}

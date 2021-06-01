@@ -53,29 +53,29 @@
 }
 #category li .category_bg {
 	background:
-		url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_category.png)
+		url(/resources/images/spriteicon.png)
 		no-repeat;
 }
 #category li .bank {
-	background-position: -10px 0px;
+	background-position: -7px 0px;
 }
 #category li .mart {
-	background-position: -10px -36px;
+	background-position: -7px -36px;
 }
 #category li .pharmacy {
-	background-position: -10px -72px;
+	background-position: -7px -72px;
 }
 #category li .oil {
-	background-position: -10px -108px;
+	background-position: -7px -108px;
 }
 #category li .cafe {
-	background-position: -10px -144px;
+	background-position: -7px -144px;
 }
 #category li .store {
-	background-position: -10px -180px;
+	background-position: -7px -180px;
 }
 #category li.on .category_bg {
-	background-position-x: -46px;
+	background-position-x: -43px;
 }
 .placeinfo_wrap {
 	position: absolute;
