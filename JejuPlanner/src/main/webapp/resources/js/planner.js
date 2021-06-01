@@ -1,6 +1,6 @@
 $(function(){
 	//Schedule planDay 필드 변수 선언
-	var idx;
+	var idx=0;
 	//PlanVO 필드 변수 선언
 	var userId;
 	var planTitle;
@@ -62,7 +62,7 @@ $(function(){
 		   success: function(data){
 			   var planOutput = '';
 			   for(var i = 1; i<=planTotalDay; i++){
-				   var createDay = '<h4>'+ 'DAY'+ i + '</h4>';
+				   var createDay = '<div>'+'<h4>'+ 'DAY'+ i + '</h4>';
 				   createDay += '<button class="btn btn-primary"id="schAddBtn'+i+'"type="button"data-bs-toggle="collapse" data-bs-target="#collapse'+i+'"aria-expanded="false"aria-controls="collapseExample">';
 				   createDay += '일정 생성';
 				   createDay += '</button>';
@@ -73,7 +73,7 @@ $(function(){
 				   createDay += '<th>여행시간(hidden)</th><th>설명</th><th>주소</th><th>시간</th>';
 				   createDay += '</thead>'
 				   createDay += '</table>'
-				   createDay += '<br/>';
+				   createDay += '<br/></div>';
 				   if(i == planTotalDay){
 					   createDay += '<button type="button" class="btn btn-primary submitBtn"  id="planAddBtn" onclick="location.href=\'/plan/write/planAdd\'" style="float:right;">일정 등록</button>';
 				   }
@@ -92,23 +92,38 @@ $(function(){
 	});
 	//일정 생성 버튼마다 day 순서 받아오기
 	$(document).on("click", 'button[id^=schAddBtn]', function(){
+		
 		//버튼 tag만! index 값 변수로 받기
         idx = $('button').index(this);
-		//modal schDay input에 값 추가
-        $("#schDay"+idx).attr({"value":idx});
+        //다른게 열려 있는지 확인하는 로그
+        console.log($('.collapse').hasClass('show'))
+        //다른게 열려 있을 때
+        if($('.collapse').hasClass('show')){
+        	//modal schDay input에 값 추가
+        	$("#schDay"+idx).attr({"value":idx});
+        	//collapse 닫기
+        	$('.collapse').removeClass('show');
+        }
+        //다른게 안 열려 있을 때
+        else {
+        	//modal schDay input에 값 추가
+        	$("#schDay"+idx).attr({"value":idx});
+        }
+        //idx 값 확인 로그
         console.log("idx : " + idx);
     //startTime select에 사용될 변수 선언
-	for(var i = 6; i<=24; i++){
-		if(i<10){
-		$(".startTime").append("<option value="+i+">0"+ i + ":00</option>"); //10시 이전에는 0 붙게 조건문 걸음 ex) 9:00 -> 09:00
-	}
-		else{
-			$(".startTime").append("<option value="+i+">"+ i + ":00</option>");			
+		for(var i = 6; i<=24; i++){
+			if(i<10){
+			$(".startTime").append("<option value="+i+">0"+ i + ":00</option>"); //10시 이전에는 0 붙게 조건문 걸음 ex) 9:00 -> 09:00
 		}
-		
-		//기본값 09:00로 함
-		$('select option[value="9"]').attr("selected",true);
-	}
+			else{
+				$(".startTime").append("<option value="+i+">"+ i + ":00</option>");			
+			}
+			
+			//기본값 09:00로 함
+			$('select option[value="9"]').attr("selected",true);
+		}
+
 });
 	
 	//method="post" action="/plan/write/schAdd"
@@ -167,7 +182,7 @@ $(function(){
 	});
 	
 	//일정정렬 스크립트
-	$(document).on("click", 'button[id^=schFrmSubmit]' , function sortTable() {
+	$(document).on("click", 'input[id^=schFrmSubmit]' , function sortTable() {
 		setTimeout(function() { // 동시에 입력된 일정은 정렬 안되는 문제 있어서 delay를 0.1초 주었음
 			var table, rows, i, j, x, y;
 			var tableNum = 0;
