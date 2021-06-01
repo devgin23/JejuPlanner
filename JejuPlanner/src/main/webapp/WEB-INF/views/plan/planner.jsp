@@ -33,6 +33,7 @@
 
 </head>
 <body>
+	<input type="hidden" id="userIdCheck" value="${member.userId}">
 	<div style="overflow:auto; width:100%; height:100%;">
 	<!-- 계획 입력 -->
 	<div class="col-md-12">
@@ -40,11 +41,11 @@
 		<div class="row">
 			<div class="form-group col-sm-12">
 				<label>일정 타이틀</label>
-				<input type="text" class="form-control" id="planTitle" name="planTitle" value="${view.planTitle}"/>
+				<input type="text" class="form-control" id="planTitle" name="planTitle" value="" placeholder="일정 타이틀"/>
 			</div>
 			<div class="form-group col-sm-6">
 				<label>여행 날짜</label>
-				<input type="date" class="form-control" id="startDate" name="startDate" value="<fmt:formatDate value="${view.startDate}" pattern="yyyy-MM-dd"/>"/>
+				<input type="date" class="form-control" id="startDate" name="startDate" value="<fmt:formatDate value="" pattern="yyyy-MM-dd"/>"/>
 			</div>
 			<div class="form-group col-sm-4">
 				<label>여행 일수</label>
@@ -93,5 +94,5 @@
 </body>
 
 <!-- Custom JavaScript -->
-<script type="text/javascript" src="/resources/js/planner.js?ver=4"></script>
+<script type="text/javascript" src="/resources/js/planner.js?ver=3"></script>
 </html>

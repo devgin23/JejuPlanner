@@ -1,25 +1,26 @@
 $(function(){
 	//Schedule planDay 필드 변수 선언
-	var idx;
+	var idx=0;
 	//PlanVO 필드 변수 선언
-	var userId;
+	var userId = $('#userIdCheck').val();
 	var planTitle;
 	var startDate;
-	var planTotalDay;
+	var planTotalDay=0;
 	
 	//collapse 생성 함수
+	//id 마다 i 부여
 	function createCollapse(i) {
 		var createStringCollap;
 		createStringCollap = '<div>hello bitches!'+i+'</div>';
 		createStringCollap += '<div class="card card-body">';
-		createStringCollap += '<form id="schFrm">';
-		createStringCollap += '<input type="hidden" id="userId" name="userId" value="${member.userId}">';
+		createStringCollap += '<form id="schFrm'+i+'">';
+		createStringCollap += '<input type="hidden" id="userId" name="userId" value="'+ userId +'">';
 		createStringCollap += '<label>Day</label>';
-		createStringCollap += '<input type="text" id="schDay'+i+'" name="schDay" value="" readonly	style="width: 20px; text-align: center"/><br/>';
-		createStringCollap += '내용 : <input	type="text" id="contentInit" name="descript"><br>';
-		createStringCollap += '장소 : <input	type="text" id="placeInit" name="addr"><br>';
+		createStringCollap += '<input type="text" id="schDay'+i+'" name="planDay" value="" readonly	style="width: 20px; text-align: center"/><br/>';
+		createStringCollap += '내용 : <input	type="text" id="contentInit'+i+'" name="descript"><br>';
+		createStringCollap += '장소 : <input	type="text" id="placeInit'+i+'" name="addr"><br>';
 		createStringCollap += '시작시간 : <select class="startTime form-select" id="startTimeInit" name="startTime"></select><br></form>';
-		createStringCollap += '<input type="button" id="schFrmSubmit" class="btn btn-primary" data-bs-target="#collapseExample" data-bs-toggle="collapse'+i+'" value="추가">';
+		createStringCollap += '<input type="button" id="schFrmSubmit'+i+'" class="btn btn-primary" data-bs-target="#collapseExample" data-bs-toggle="collapse'+i+'" value="추가">';
 		createStringCollap += '</div>';
 		
 		$("#collapse"+i).html(createStringCollap);
@@ -33,12 +34,25 @@ $(function(){
     	planTotalDay = $(this).attr('value');
    });
    // method="post" action="/plan/write/planAdd"
+   // Plan 설정 유효성 검사 및 제출
 	$('#planFrmSubmit').on('click', function(){
+		
 		//사용자 ID
-		userId = $('#userId').val();
-		//계획타이틀 값
-		planTitle = $('#planTitle').val();
-		//시작일 값
+//		userId = $('#userId').val();
+		//계획타이틀 값 검사 및 초기화
+		if($('#planTitle').val()==""){
+			alert('일정 타이틀을 입력해주세요!');
+			$('#planTitle').focus();
+			return false;
+		}else{
+			planTitle = $('#planTitle').val();
+		}
+		//여행 일수 값 검사 초기화는 위 드롭다운 함수에!
+		if(planTotalDay==0){
+			alert('여행 일수를 선택해주세요!');
+			return false;
+		}
+		//시작일 값 (디폴트 값 09:00)
 		startDate = $('#startDate').val();
 		$.ajax({
 		   url: "/plan/write/planSet",
@@ -49,18 +63,18 @@ $(function(){
 		   success: function(data){
 			   var planOutput = '';
 			   for(var i = 1; i<=planTotalDay; i++){
-				   var createDay = '<h4>'+ 'DAY'+ i + '</h4>';
-				   createDay += '<button class="btn btn-primary"id="schAddBtn"type="button"data-bs-toggle="collapse" data-bs-target="#collapse'+i+'"aria-expanded="false"aria-controls="collapseExample">';
+				   var createDay = '<div>'+'<h4>'+ 'DAY'+ i + '</h4>';
+				   createDay += '<button class="btn btn-primary"id="schAddBtn'+i+'"type="button"data-bs-toggle="collapse" data-bs-target="#collapse'+i+'"aria-expanded="false"aria-controls="collapseExample">';
 				   createDay += '일정 생성';
 				   createDay += '</button>';
 				   createDay += '<div class="collapse" id="collapse'+i+'"></div>'
 				   /*createDay += '<div id=disp'+i+'></div>';*/
 				   createDay += '<table id="disp'+i+'" class="schTable table table-borderless">';
 				   createDay += '<thead class="thead">'
-				   createDay += '<th>여행시간(hidden)</th><th>설명</th><th>주소</th><th>시간</th>';
+				   createDay += '<th>여행시간(hidden)</th><th>설명</th><th>주소</th><th>시간</th><th></th>';
 				   createDay += '</thead>'
 				   createDay += '</table>'
-				   createDay += '<br/>';
+				   createDay += '<br/></div>';
 				   if(i == planTotalDay){
 					   createDay += '<button type="button" class="btn btn-primary submitBtn"  id="planAddBtn" onclick="location.href=\'/plan/write/planAdd\'" style="float:right;">일정 등록</button>';
 				   }
@@ -78,35 +92,55 @@ $(function(){
 		});
 	});
 	//일정 생성 버튼마다 day 순서 받아오기
-	$(document).on("click", "#schAddBtn", function(){
+	$(document).on("click", 'button[id^=schAddBtn]', function(){
+		
+		//startTime select에 사용될 변수 선언
+		if(idx==0){
+	        for(var i = 6; i<=24; i++){
+				if(i<10){
+				$(".startTime").append("<option value="+i+">0"+ i + ":00</option>"); //10시 이전에는 0 붙게 조건문 걸음 ex) 9:00 -> 09:00
+			}
+				else{
+					$(".startTime").append("<option value="+i+">"+ i + ":00</option>");			
+				}
+				
+				//기본값 09:00로 함
+				$('select option[value="9"]').attr("selected",true);
+			}
+		}
 		//버튼 tag만! index 값 변수로 받기
         idx = $('button').index(this);
-		//modal schDay input에 값 추가
-        $("#schDay"+idx).attr({"value":idx});
+        //다른게 열려 있는지 확인하는 로그
+        console.log($('.collapse').hasClass('show'));
+        console.log($('#userIdCheck').val());
+        console.log(userId);
+        //다른게 열려 있을 때
+        if($('.collapse').hasClass('show')){
+        	//modal schDay input에 값 추가
+        	$("#schDay"+idx).attr({"value":idx});
+        	//collapse 닫기
+        	$('.collapse').removeClass('show');
+        }
+        //다른게 안 열려 있을 때
+        else {
+        	//modal schDay input에 값 추가
+        	$("#schDay"+idx).attr({"value":idx});
+        }
+        //idx 값 확인 로그
+        console.log("idx : " + idx);
     
-    //startTime select에 사용될 변수 선언
-	for(var i = 6; i<=24; i++){
-		if(i<10){
-		$(".startTime").append("<option value="+i+">0"+ i + ":00</option>"); //10시 이전에는 0 붙게 조건문 걸음 ex) 9:00 -> 09:00
-	}
-		else{
-			$(".startTime").append("<option value="+i+">"+ i + ":00</option>");			
-		}
-		
-		//기본값 09:00로 함
-		$('select option[value="9"]').attr("selected",true);
-	}
 });
 	
 	//method="post" action="/plan/write/schAdd"
-	$('#schFrmSubmit').on('click', function(){
+	$(document).on('click', 'input[id^=schFrmSubmit]', function(){
 		
 	    $.ajax({
 	        url: "/plan/write/schAdd",
-	        data: $('#schFrm').serialize(),
+	        data: $('#schFrm'+idx).serialize(),
 	        dataType:"json",
 	        type: "POST",
 	        success: function(data){
+	        	
         		for(var i=1; i<=planTotalDay; i++){
         			if(data.planDay == i){
         				var schOutput='';
@@ -130,13 +164,17 @@ $(function(){
         				schOutput+= '<td>' + data.startTime + '</td>';
         				schOutput+= '<td>' + data.descript + '</td>';
         				schOutput+= '<td>' + data.addr + '</td>';
+        				
         				var hour = data.startTime;
         				if(hour < 10) hour = "0" + hour; //1자리 수 일시 0 포맷 추가
         				var min = '00';
         				schOutput+= '<td>' + hour + ':' + min + '' + '</td>';
+        				schOutput+= '<td><input type="button" id="deletePlan'+i+'" value="-"/></td>';
         				schOutput+= '</tr>';
+        				
         				$("#disp"+i).append(schOutput);
         				schOutput+= '</tbody>';
+        				
         			}
         		}
 	        },
@@ -152,7 +190,7 @@ $(function(){
 	});
 	
 	//일정정렬 스크립트
-	$(document).on("click", "#schFrmSubmit", function sortTable() {
+	$(document).on("click", 'input[id^=schFrmSubmit]' , function sortTable() {
 		setTimeout(function() { // 동시에 입력된 일정은 정렬 안되는 문제 있어서 delay를 0.1초 주었음
 			var table, rows, i, j, x, y;
 			var tableNum = 0;

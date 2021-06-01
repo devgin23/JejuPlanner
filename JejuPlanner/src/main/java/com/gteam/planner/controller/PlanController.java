@@ -58,7 +58,7 @@ public class PlanController {
       return planService.schAdd(vo);
 	}
 	//계획 추가
-	@RequestMapping(value="plan/write/planAdd", method=RequestMethod.GET)
+	@RequestMapping(value="/plan/write/planAdd", method=RequestMethod.GET)
 	public String planAdd() throws Exception {
 		planService.planAdd(planSetList.get(0), schList);
 		planSetList.clear();
