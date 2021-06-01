@@ -51,28 +51,29 @@
 	width: 27px;
 	height: 28px;
 }
+
 #category li .category_bg {
 	background:
 		url(/resources/images/spriteicon.png)
 		no-repeat;
 }
-#category li .bank {
-	background-position: -7px 0px;
+#category li .hotel {
+	background-position: -7px 3px;
 }
-#category li .mart {
-	background-position: -7px -36px;
+#category li .tour {
+	background-position: -7px -33px;
 }
-#category li .pharmacy {
-	background-position: -7px -72px;
+#category li .restaurant {
+	background-position: -7px -69px;
 }
 #category li .oil {
-	background-position: -7px -108px;
+	background-position: -7px -105px;
 }
 #category li .cafe {
-	background-position: -7px -144px;
+	background-position: -7px -141px;
 }
-#category li .store {
-	background-position: -7px -180px;
+#category li .mart {
+	background-position: -7px -177px;
 }
 #category li.on .category_bg {
 	background-position-x: -43px;

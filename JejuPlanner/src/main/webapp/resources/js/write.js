@@ -78,7 +78,7 @@ function displayPlaces(places) {
 }
 // 마커를 생성하고 지도 위에 마커를 표시하는 함수입니다
 function addMarker(position, order) {
-    var imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_category.png', // 마커 이미지 url, 스프라이트 이미지를 씁니다
+    var imageSrc = '/resources/images/spriteicon.png', // 마커 이미지 url, 스프라이트 이미지를 씁니다
         imageSize = new kakao.maps.Size(27, 28),  // 마커 이미지의 크기
         imgOptions =  {
             spriteSize : new kakao.maps.Size(72, 208), // 스프라이트 이미지의 크기
@@ -104,8 +104,11 @@ function removeMarker() {
 // 클릭한 마커에 대한 장소 상세정보를 커스텀 오버레이로 표시하는 함수입니다
 function displayPlaceInfo (place) {
     var content = '<div class="placeinfo">' +
-                    '   <div id="btn" class="title" type="button" title="' + place.place_name + '">' + place.place_name + '</div>';   
-    if (place.road_address_name) {
+                    '   <div id="btn" class="title" type="button" title="' + place.place_name + '">' + place.place_name + '</div>';
+    				//이미지 삽입
+    	content += '<img src ="/resources/images/testpicture.jpg" alt="사진을 불러오는데 실패하였습니다." style="width:300px; height:150px;  object-fit:contain; border:3px solid black">'
+    				/*style="width:320px; height:214px; border:3px solid black">'
+*/    if (place.road_address_name) {
         content += '    <span title="' + place.road_address_name + '">' + place.road_address_name + '</span>' +
                     '  <span class="jibun" title="' + place.address_name + '">(지번 : ' + place.address_name + ')</span>';
     }  else {
