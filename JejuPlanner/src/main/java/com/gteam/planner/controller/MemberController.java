@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -28,6 +29,9 @@ public class MemberController {
 	@Autowired
 	private MemberService service;
 	
+	@Autowired
+	private BCryptPasswordEncoder pwdEncoder;
+	
 	
 	// localhost:9090/ GET 요청 시 login.jsp로 던져줌
 	@RequestMapping(value = "/", method = RequestMethod.GET)
@@ -40,8 +44,8 @@ public class MemberController {
 	public void getRegister() {
 		log.info("register.jsp");
 	}
-	// 회원가입
 	
+	// 회원가입
 	@RequestMapping(value="/member/register", method=RequestMethod.POST)
 	public String postRegister(MemberVO vo) {
 		log.info("post register");
@@ -49,9 +53,11 @@ public class MemberController {
 		try {
 			int idResult=service.idCheck(vo);
 			if(idResult==1) {
-				
 				return "redirect:/member/register";
 			}else if(idResult==0){
+				String userPw = vo.getUserPw();
+				String pwd = pwdEncoder.encode(userPw);
+				vo.setUserPw(pwd);
 				service.register(vo);
 			}
 		}catch(Exception e) {
@@ -78,16 +84,15 @@ public class MemberController {
 		log.info(vo.toStringLogin());
 		HttpSession session = req.getSession();
 		MemberVO login = service.login(vo);
+		boolean pwdMatch = pwdEncoder.matches(vo.getUserPw(), login.getUserPw());
 		
-		if(login == null) {
-			//DB에서 회원정보가 없을 시 view단에 null값 반환
+		if(login != null && pwdMatch == true) {
+			session.setAttribute("member", login);
+			return "redirect:/plan/write";
+		} else {
 			session.setAttribute("member", null);
 			rttr.addFlashAttribute("msg", false);
 			return "redirect:/";
-		}else {
-			//DB에서 회원정보 존재 시 view단에 회원정보(아이디, 패스워드 반환)
-			session.setAttribute("member", login);
-			return "redirect:/plan/write";
 		}
 		
 	}

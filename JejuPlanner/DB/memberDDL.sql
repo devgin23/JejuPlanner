@@ -2,7 +2,7 @@ DROP TABLE IF EXISTS `member`;
 
 CREATE TABLE `member` (
 	`userId` VARCHAR(30) NOT NULL,
-	`userPw` VARCHAR(30) NOT NULL,
+	`userPw` VARCHAR(60) NOT NULL,
 	`userNo` INT NOT NULL AUTO_INCREMENT,
 	`userNickname` VARCHAR(50) NOT NULL,
 	`userGender` VARCHAR(2) NOT NULL,
