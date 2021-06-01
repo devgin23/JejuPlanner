@@ -2,7 +2,7 @@ $(function(){
 	//Schedule planDay 필드 변수 선언
 	var idx=0;
 	//PlanVO 필드 변수 선언
-	var userId;
+	var userId = $('#userIdCheck').val();
 	var planTitle;
 	var startDate;
 	var planTotalDay=0;
@@ -14,7 +14,7 @@ $(function(){
 		createStringCollap = '<div>hello bitches!'+i+'</div>';
 		createStringCollap += '<div class="card card-body">';
 		createStringCollap += '<form id="schFrm'+i+'">';
-		createStringCollap += '<input type="hidden" id="userId" name="userId" value="${member.userId}">';
+		createStringCollap += '<input type="hidden" id="userId" name="userId" value="'+ userId +'">';
 		createStringCollap += '<label>Day</label>';
 		createStringCollap += '<input type="text" id="schDay'+i+'" name="planDay" value="" readonly	style="width: 20px; text-align: center"/><br/>';
 		createStringCollap += '내용 : <input	type="text" id="contentInit'+i+'" name="descript"><br>';
@@ -36,8 +36,9 @@ $(function(){
    // method="post" action="/plan/write/planAdd"
    // Plan 설정 유효성 검사 및 제출
 	$('#planFrmSubmit').on('click', function(){
+		
 		//사용자 ID
-		userId = $('#userId').val();
+//		userId = $('#userId').val();
 		//계획타이틀 값 검사 및 초기화
 		if($('#planTitle').val()==""){
 			alert('일정 타이틀을 입력해주세요!');
@@ -93,10 +94,26 @@ $(function(){
 	//일정 생성 버튼마다 day 순서 받아오기
 	$(document).on("click", 'button[id^=schAddBtn]', function(){
 		
+		//startTime select에 사용될 변수 선언
+		if(idx==0){
+	        for(var i = 6; i<=24; i++){
+				if(i<10){
+				$(".startTime").append("<option value="+i+">0"+ i + ":00</option>"); //10시 이전에는 0 붙게 조건문 걸음 ex) 9:00 -> 09:00
+			}
+				else{
+					$(".startTime").append("<option value="+i+">"+ i + ":00</option>");			
+				}
+				
+				//기본값 09:00로 함
+				$('select option[value="9"]').attr("selected",true);
+			}
+		}
 		//버튼 tag만! index 값 변수로 받기
         idx = $('button').index(this);
         //다른게 열려 있는지 확인하는 로그
-        console.log($('.collapse').hasClass('show'))
+        console.log($('.collapse').hasClass('show'));
+        console.log($('#userIdCheck').val());
+        console.log(userId);
         //다른게 열려 있을 때
         if($('.collapse').hasClass('show')){
         	//modal schDay input에 값 추가
@@ -111,19 +128,7 @@ $(function(){
         }
         //idx 값 확인 로그
         console.log("idx : " + idx);
-    //startTime select에 사용될 변수 선언
-		for(var i = 6; i<=24; i++){
-			if(i<10){
-			$(".startTime").append("<option value="+i+">0"+ i + ":00</option>"); //10시 이전에는 0 붙게 조건문 걸음 ex) 9:00 -> 09:00
-		}
-			else{
-				$(".startTime").append("<option value="+i+">"+ i + ":00</option>");			
-			}
-			
-			//기본값 09:00로 함
-			$('select option[value="9"]').attr("selected",true);
-		}
-
+    
 });
 	
 	//method="post" action="/plan/write/schAdd"

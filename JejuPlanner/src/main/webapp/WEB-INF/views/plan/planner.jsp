@@ -33,6 +33,7 @@
 
 </head>
 <body>
+	<input type="hidden" id="userIdCheck" value="${member.userId}">
 	<div style="overflow:auto; width:100%; height:100%;">
 	<!-- 계획 입력 -->
 	<div class="col-md-12">
