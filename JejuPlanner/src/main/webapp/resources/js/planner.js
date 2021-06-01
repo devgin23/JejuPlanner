@@ -8,18 +8,19 @@ $(function(){
 	var planTotalDay=0;
 	
 	//collapse 생성 함수
+	//id 마다 i 부여
 	function createCollapse(i) {
 		var createStringCollap;
 		createStringCollap = '<div>hello bitches!'+i+'</div>';
 		createStringCollap += '<div class="card card-body">';
-		createStringCollap += '<form id="schFrm">';
+		createStringCollap += '<form id="schFrm'+i+'">';
 		createStringCollap += '<input type="hidden" id="userId" name="userId" value="${member.userId}">';
 		createStringCollap += '<label>Day</label>';
-		createStringCollap += '<input type="text" id="schDay'+i+'" name="schDay" value="" readonly	style="width: 20px; text-align: center"/><br/>';
-		createStringCollap += '내용 : <input	type="text" id="contentInit" name="descript"><br>';
-		createStringCollap += '장소 : <input	type="text" id="placeInit" name="addr"><br>';
+		createStringCollap += '<input type="text" id="schDay'+i+'" name="planDay" value="" readonly	style="width: 20px; text-align: center"/><br/>';
+		createStringCollap += '내용 : <input	type="text" id="contentInit'+i+'" name="descript"><br>';
+		createStringCollap += '장소 : <input	type="text" id="placeInit'+i+'" name="addr"><br>';
 		createStringCollap += '시작시간 : <select class="startTime form-select" id="startTimeInit" name="startTime"></select><br></form>';
-		createStringCollap += '<input type="button" id="schFrmSubmit" class="btn btn-primary" data-bs-target="#collapseExample" data-bs-toggle="collapse'+i+'" value="추가">';
+		createStringCollap += '<input type="button" id="schFrmSubmit'+i+'" class="btn btn-primary" data-bs-target="#collapseExample" data-bs-toggle="collapse'+i+'" value="추가">';
 		createStringCollap += '</div>';
 		
 		$("#collapse"+i).html(createStringCollap);
@@ -62,7 +63,7 @@ $(function(){
 			   var planOutput = '';
 			   for(var i = 1; i<=planTotalDay; i++){
 				   var createDay = '<h4>'+ 'DAY'+ i + '</h4>';
-				   createDay += '<button class="btn btn-primary"id="schAddBtn"type="button"data-bs-toggle="collapse" data-bs-target="#collapse'+i+'"aria-expanded="false"aria-controls="collapseExample">';
+				   createDay += '<button class="btn btn-primary"id="schAddBtn'+i+'"type="button"data-bs-toggle="collapse" data-bs-target="#collapse'+i+'"aria-expanded="false"aria-controls="collapseExample">';
 				   createDay += '일정 생성';
 				   createDay += '</button>';
 				   createDay += '<div class="collapse" id="collapse'+i+'"></div>'
@@ -90,12 +91,12 @@ $(function(){
 		});
 	});
 	//일정 생성 버튼마다 day 순서 받아오기
-	$(document).on("click", "#schAddBtn", function(){
+	$(document).on("click", 'button[id^=schAddBtn]', function(){
 		//버튼 tag만! index 값 변수로 받기
         idx = $('button').index(this);
 		//modal schDay input에 값 추가
         $("#schDay"+idx).attr({"value":idx});
-    
+        console.log("idx : " + idx);
     //startTime select에 사용될 변수 선언
 	for(var i = 6; i<=24; i++){
 		if(i<10){
@@ -111,14 +112,15 @@ $(function(){
 });
 	
 	//method="post" action="/plan/write/schAdd"
-	$('#schFrmSubmit').on('click', function(){
+	$(document).on('click', 'input[id^=schFrmSubmit]', function(){
 		
 	    $.ajax({
 	        url: "/plan/write/schAdd",
-	        data: $('#schFrm').serialize(),
+	        data: $('#schFrm'+idx).serialize(),
 	        dataType:"json",
 	        type: "POST",
 	        success: function(data){
+	        	
         		for(var i=1; i<=planTotalDay; i++){
         			if(data.planDay == i){
         				var schOutput='';
@@ -149,6 +151,7 @@ $(function(){
         				schOutput+= '</tr>';
         				$("#disp"+i).append(schOutput);
         				schOutput+= '</tbody>';
+        				
         			}
         		}
 	        },
@@ -164,7 +167,7 @@ $(function(){
 	});
 	
 	//일정정렬 스크립트
-	$(document).on("click", "#schFrmSubmit", function sortTable() {
+	$(document).on("click", 'button[id^=schFrmSubmit]' , function sortTable() {
 		setTimeout(function() { // 동시에 입력된 일정은 정렬 안되는 문제 있어서 delay를 0.1초 주었음
 			var table, rows, i, j, x, y;
 			var tableNum = 0;
