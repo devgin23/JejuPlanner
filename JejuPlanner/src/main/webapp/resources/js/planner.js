@@ -71,7 +71,7 @@ $(function(){
 				   /*createDay += '<div id=disp'+i+'></div>';*/
 				   createDay += '<table id="disp'+i+'" class="schTable table table-borderless">';
 				   createDay += '<thead class="thead">'
-				   createDay += '<th>여행시간(hidden)</th><th>설명</th><th>주소</th><th>시간</th>';
+				   createDay += '<th>여행시간(hidden)</th><th>설명</th><th>주소</th><th>시간</th><th></th>';
 				   createDay += '</thead>'
 				   createDay += '</table>'
 				   createDay += '<br/></div>';
@@ -164,11 +164,14 @@ $(function(){
         				schOutput+= '<td>' + data.startTime + '</td>';
         				schOutput+= '<td>' + data.descript + '</td>';
         				schOutput+= '<td>' + data.addr + '</td>';
+        				
         				var hour = data.startTime;
         				if(hour < 10) hour = "0" + hour; //1자리 수 일시 0 포맷 추가
         				var min = '00';
         				schOutput+= '<td>' + hour + ':' + min + '' + '</td>';
+        				schOutput+= '<td><input type="button" id="deletePlan'+i+'" value="-"/></td>';
         				schOutput+= '</tr>';
+        				
         				$("#disp"+i).append(schOutput);
         				schOutput+= '</tbody>';
         				
