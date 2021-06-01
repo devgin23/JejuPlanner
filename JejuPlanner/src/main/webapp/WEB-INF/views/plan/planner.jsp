@@ -71,24 +71,20 @@
 	</div>
 	<!-- 계획 입력 끝 -->
 	
-	<!-- 일정 추가 collapse -->
+	<%-- <!-- 일정 추가 collapse -->
 	<div class="collapse" id="collapseExample">
 		<div class="card card-body">
 			<form id="schFrm">
-				<input type="hidden" id="userId" name="userId"
-					value="${member.userId}"> <label>Day</label> <input
-					type="text" id="schDay" name="planDay" value="" readonly
-					style="width: 20px; text-align: center" /><br /> 
-					내용 : <input	type="text" id="contentInit" name="descript"><br> 
-					장소 : <input	type="text" id="placeInit" name="addr"><br> 
-					시작시간 : <select class="startTime form-select" id="startTimeInit" name="startTime">
-							</select>
-					<br>
+				<input type="hidden" id="userId" name="userId" value="${member.userId}"> 
+				<label>Day</label> 
+				<input type="text" id="schDay" name="planDay" value="" readonly	style="width: 20px; text-align: center" /><br /> 
+				내용 : <input	type="text" id="contentInit" name="descript"><br> 
+				장소 : <input	type="text" id="placeInit" name="addr"><br> 
+				시작시간 : <select class="startTime form-select" id="startTimeInit" name="startTime"></select><br>
 			</form>
-			<input type="button" id="schFrmSubmit" class="btn btn-primary" data-bs-target="#collapseExample"
-						data-bs-toggle="collapse" value="추가">
+			<input type="button" id="schFrmSubmit" class="btn btn-primary" data-bs-target="#collapseExample" data-bs-toggle="collapse" value="추가">
 		</div>
-	</div>
+	</div> --%>
 	
 	<!-- 계획 짜는 DIV -->
 	<div id="schDiv"></div>
