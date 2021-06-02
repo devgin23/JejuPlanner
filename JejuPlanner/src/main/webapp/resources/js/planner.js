@@ -5,8 +5,8 @@ $(function(){
 	var userId = $('#userIdCheck').val();
 	var planTitle;
 	var startDate;
-	var planTotalDay=0;
-	
+	var planTotalDay = 0;
+	var deleteCount = 0;
 	//collapse 생성 함수
 	//id 마다 i 부여
 	function createCollapse(i) {
@@ -69,10 +69,12 @@ $(function(){
 				   createDay += '</button>';
 				   createDay += '<div class="collapse" id="collapse'+i+'"></div>'
 				   /*createDay += '<div id=disp'+i+'></div>';*/
-				   createDay += '<table id="disp'+i+'" class="schTable table table-borderless">';
+				   createDay += '<table class="schTable table table-borderless">';
 				   createDay += '<thead class="thead">'
 				   createDay += '<th>여행시간(hidden)</th><th>설명</th><th>주소</th><th>시간</th><th></th>';
 				   createDay += '</thead>'
+				   createDay += '<tbody id="disp'+i+'">'
+				   createDay += '</tbody>'
 				   createDay += '</table>'
 				   createDay += '<br/></div>';
 				   if(i == planTotalDay){
@@ -141,42 +143,29 @@ $(function(){
 	        type: "POST",
 	        success: function(data){
 	        	
-        		for(var i=1; i<=planTotalDay; i++){
-        			if(data.planDay == i){
-        				var schOutput='';
+				
+				deleteCount += 1;
+				var schOutput='';
+			
+				//table방식으로 출력 수정
+				
+				schOutput+= '<tr>';
+				schOutput+= '<td>' + data.startTime + '</td>';
+				schOutput+= '<td>' + data.descript + '</td>';
+				schOutput+= '<td>' + data.addr + '</td>';
+				
+				var hour = data.startTime;
+				if(hour < 10) hour = "0" + hour; //1자리 수 일시 0 포맷 추가
+				var min = '00';
+				schOutput+= '<td>' + hour + ':' + min + '' + '</td>';
+				schOutput+= '<td><input type="button" id="deletePlan'+deleteCount+'" value="-"/></td>';
+				schOutput+= '</tr>';
+				
+				$("#disp"+data.planDay).append(schOutput);
+				
         				
-        				/* 
-    	        		schOutput+= '<div>';
-    	        		schOutput+= '<h5>'+ data.descript + '</h5>';
-    	        		schOutput+= '<p>' + data.addr +'</p>';
-    	        		//var hour = data.startTime/100;
-    	        		//var min = data.startTime-(hour*100);
-    	        		var hour = data.startTime;
-    	        		var min = '00';
-    	        		schOutput+= '<p>' + hour +'시 '+ min+'분' +'</p>';
-    	        		schOutput+= '</div>';
-    	        		$("#disp"+i).append(schOutput);
-    	        		*/
-        				
-        				//table방식으로 출력 수정
-        				schOutput+= '<tbody>';
-        				schOutput+= '<tr>';
-        				schOutput+= '<td>' + data.startTime + '</td>';
-        				schOutput+= '<td>' + data.descript + '</td>';
-        				schOutput+= '<td>' + data.addr + '</td>';
-        				
-        				var hour = data.startTime;
-        				if(hour < 10) hour = "0" + hour; //1자리 수 일시 0 포맷 추가
-        				var min = '00';
-        				schOutput+= '<td>' + hour + ':' + min + '' + '</td>';
-        				schOutput+= '<td><input type="button" id="deletePlan'+i+'" value="-"/></td>';
-        				schOutput+= '</tr>';
-        				
-        				$("#disp"+i).append(schOutput);
-        				schOutput+= '</tbody>';
-        				
-        			}
-        		}
+        			
+        		
 	        },
 	        error: function(){
 	            alert("일정 추가 실패!");
@@ -187,6 +176,14 @@ $(function(){
         		/*$('#startTimeInit').val('9');*/
 	        }
 	    });
+	});
+	
+	//장바구니에서 일정 빼기 버튼 (-)
+	$(document).on("click", 'input[id^=deletePlan]', function(){
+		var thisId = '#' + $(this).attr('id');
+		console.log(thisId);
+		console.log($(thisId).parent().parent());
+		$(thisId).parent().parent().remove();
 	});
 	
 	//일정정렬 스크립트
