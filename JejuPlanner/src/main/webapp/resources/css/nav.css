@@ -1,0 +1,35 @@
+	.navbar-dark .navbar-brand, .title-first{
+	color: #F6BB43 	;/* 선명한 주황 */
+	}
+	.title-first, .title-second{
+	font-weight: bold;
+	}
+	.container-fluid{
+		background-color: #eee;
+		padding-right: 0;
+		padding-left: 30px;
+	}
+	.nav-item {
+	padding: 15px;
+	text-align: center;
+	cursor: pointer;
+	}
+	.nav-item a {
+		text-align: center;
+		text-decoration: none;
+		color: white;
+	}
+	
+	.nav-item:hover, .logout {
+		background-color: grey;
+	}
+	.navbar {
+		padding: 0;
+	}
+	.navbar-dark .navbar-brand{
+		color: #888;
+	}
+	.navbar-dark .navbar-nav .nav-link{
+		color: #000;
+	}
+	

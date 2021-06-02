@@ -1,9 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-  <!-- 네비게이션 바-->
+<!-- custom css -->
+<link href="/resources/css/nav.css" rel="stylesheet" type="text/css">
+
+<!-- 네비게이션 바-->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark navbar-fixed-top">
   <div class="container-fluid">
-    <a class="navbar-brand" href="/plan/write">GDJ32 G조</a>
+    <a class="navbar-brand" href="/plan/write"><span class="title-first">Jeju</span><span class="title-second"> Planner</span></a>
     
       <ul class="nav navbar-nav ">
         <li class="nav-item">

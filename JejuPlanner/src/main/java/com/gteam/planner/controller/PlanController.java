@@ -1,6 +1,7 @@
 package com.gteam.planner.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -9,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -67,6 +69,14 @@ public class PlanController {
 		return "redirect:/plan/write";
 	}
 	
+	//장바구니 일정 삭제 (데이터 받아와서 List에서 삭제)
+	@RequestMapping(value="/plan/write/planDel", method=RequestMethod.POST)
+	@ResponseBody
+	public void planDel(@RequestBody ScheduleVO vo) throws Exception {
+		schList.remove(planService.planDel(vo));
+		log.info("schList : " + schList.toString());
+	}
+	
 	//게시판에 계획 리스트 출력
 	@RequestMapping(value="/plan/list", method=RequestMethod.GET)
 	public String planList(Model model) throws Exception {
@@ -112,5 +122,7 @@ public class PlanController {
 		planService.planDelete(planNo, userId);
 		return "/plan/write";
 	}
+	
+	
 	
 }

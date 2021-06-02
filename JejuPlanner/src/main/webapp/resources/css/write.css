@@ -78,6 +78,7 @@
 #category li.on .category_bg {
 	background-position-x: -43px;
 }
+
 .placeinfo_wrap {
 	position: absolute;
 	bottom: 28px;
@@ -144,6 +145,7 @@
 }
 <!--KAKAO MAP CSS 끝 -->
 html, body {
+	font-family:'Malgun Gothic';
 	background-color: powderblue;
 	height: 100%;
 }
@@ -158,35 +160,17 @@ p {
 	text-align: center;
 	line-height:;
 }
-.plan-area {
-	background-color: #ddd;
-}
-.nav-item {
-	padding: 15px;
-	text-align: center;
-	cursor: pointer;
-}
-.nav-item a {
-	text-align: center;
-	text-decoration: none;
-	color: white;
-}
-.nav-item:hover, .logout {
-	background-color: grey;
-}
-.navbar {
-	padding: 0;
-}
-.container-fluid {
-	padding-right: 0;
-	padding-left: 30px;
-}
+
 .row {
 	width: 100%;
+	margin: 0px;
 }
 .col-8, .map-area{
-	padding-right:0px;
+	padding:0px;
 }
 .col-4, .plan-area{
 	padding-right:0px;
+}
+.form-group, .col-sm-12{
+	margin-top: 10px;
 }
