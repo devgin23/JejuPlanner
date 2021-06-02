@@ -180,10 +180,28 @@ $(function(){
 	
 	//장바구니에서 일정 빼기 버튼 (-)
 	$(document).on("click", 'input[id^=deletePlan]', function(){
-		var thisId = '#' + $(this).attr('id');
-		console.log(thisId);
-		console.log($(thisId).parent().parent());
-		$(thisId).parent().parent().remove();
+	
+		//버튼이 있는 행의 td들의 객체를 변수 선언
+		var tableData = $(this).parents('tr').children();
+		var deleteMap = {startTime : tableData.eq(0).html(), planDay : idx, descript : tableData.eq(1).html(), addr : tableData.eq(2).html() }
+		$.ajax({
+			url : "/plan/write/planDel",
+			type : "POST",
+			data : JSON.stringify(deleteMap),
+			contentType : "application/json; charset=utf-8;",
+			dataType : "text",
+			success : function(data){
+				
+			},
+			error : function() {
+				alert("simpleWithObject err");
+			},
+			complete : function() {
+				console.log(deleteMap);
+			}
+		});
+		$(this).parent().parent().remove();
+		
 	});
 	
 	//일정정렬 스크립트
@@ -196,7 +214,7 @@ $(function(){
 			while(tableNum<planTotalDay){
 				table = $(".schTable")[tableNum];
 				rows = table.rows;
-				
+				console.log(rows);
 				//버블정렬, 컬럼명은 무시해야하기 때문에 1부터 시작
 				for (i = 1; i<(rows.length - 1); i++) {
 					for(j = 1; j<(rows.length - i); j++) {
