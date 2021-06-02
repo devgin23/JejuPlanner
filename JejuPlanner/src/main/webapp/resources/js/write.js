@@ -133,9 +133,10 @@ function displayPlaceInfo (place) {
 			contentType : "application/json; charset=utf-8;",
 			dataType : "json",
 			success : function(data1) {
-				alert(JSON.stringify(frm));
-				$('#placeInit').val(data1.placeName + ' ' + data1.placeAddress);
+				
+				$('#placeInit'+idx).val(data1.placeName + ' ' + data1.placeAddress);
 				console.log(data1);
+				console.log(idx);
 			},
 			error : function() {
 				alert("simpleWithObject err");

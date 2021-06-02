@@ -79,5 +79,5 @@
 </body>
 
 <!-- Custom JavaScript -->
-<script type="text/javascript" src="/resources/js/planner.js"></script>
+<!-- <script type="text/javascript" src="/resources/js/planner.js"></script> -->
 </html>

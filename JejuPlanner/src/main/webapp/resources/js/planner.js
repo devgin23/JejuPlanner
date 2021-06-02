@@ -1,6 +1,8 @@
+var idx=0;
+
 $(function(){
 	//Schedule planDay 필드 변수 선언
-	var idx=0;
+	
 	//PlanVO 필드 변수 선언
 	var userId = $('#userIdCheck').val();
 	var planTitle;
@@ -215,6 +217,7 @@ $(function(){
 				table = $(".schTable")[tableNum];
 				rows = table.rows;
 				console.log(rows);
+				
 				//버블정렬, 컬럼명은 무시해야하기 때문에 1부터 시작
 				for (i = 1; i<(rows.length - 1); i++) {
 					for(j = 1; j<(rows.length - i); j++) {
