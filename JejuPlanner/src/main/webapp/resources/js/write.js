@@ -103,11 +103,14 @@ function removeMarker() {
 }
 // 클릭한 마커에 대한 장소 상세정보를 커스텀 오버레이로 표시하는 함수입니다
 function displayPlaceInfo (place) {
+	
+	//클릭한 장소의 이름 한국관광공사 API의 검색어 변수로 대입
+	console.log(visitKoreaAPI(place.place_name));
+	
     var content = '<div class="placeinfo">' +
                     '   <div id="btn" class="title" type="button" title="' + place.place_name + '">' + place.place_name + '</div>';
     				//이미지 삽입
-    	/*content += '<img src ="/resources/images/testpicture.jpg" alt="사진을 불러오는데 실패하였습니다." style="width:300px; height:150px;  object-fit:contain; border:3px solid black">'
-    				style="width:320px; height:214px; border:3px solid black">'*/    
+    	content += '<img src ="' + visitKoreaAPI(place.place_name) + '" alt="사진을 불러오는데 실패하였습니다." style="width:300px; height:150px; object-fit:contain; border:3px solid black">'
     if (place.road_address_name) {
         content += '    <span title="' + place.road_address_name + '">' + place.road_address_name + '</span>' +
                     '  <span class="jibun" title="' + place.address_name + '">(지번 : ' + place.address_name + ')</span>';
@@ -126,6 +129,7 @@ function displayPlaceInfo (place) {
     		placeAddress : place.road_address_name
     }
     $('#btn').on('click', function() {
+    	
 		$.ajax({
 			url : "/plan/fromMap",
 			type : "POST",
@@ -180,3 +184,36 @@ function changeCategoryClass(el) {
     } 
 } 
 
+//한국관광공사 API 세팅
+//$(document).ready(function() {
+function visitKoreaAPI(place_name) {
+	console.log("함수 내부 인자 확인 :" + place_name);
+	var serviceKey = "O04vU1%2FBaFzYfPxBOYalRBg4ol8tZGeSgRc1SDG6HnIBdhw0XE6GHIcpyCrLSFpb8x%2BRe3mVF8SWqz0nIFj7RA%3D%3D";
+	var xhr = new XMLHttpRequest();
+	var url = 'http://api.visitkorea.or.kr/openapi/service/rest/PhotoGalleryService/gallerySearchList'; //URL
+	var queryParams = '?' + encodeURIComponent('ServiceKey') + '='+ serviceKey; //Service Key
+	queryParams += '&' + encodeURIComponent('pageNo') + '=' + encodeURIComponent('1'); //페이지번호
+	queryParams += '&' + encodeURIComponent('numOfRows') + '=' + encodeURIComponent('1'); //한 페이지 결과 수
+	queryParams += '&' + encodeURIComponent('MobileOS') + '=' + encodeURIComponent('ETC'); //IOS(아이폰), AND(안드로이드), WIN(윈도우폰),ETC(WEB이나 기타 등등)
+	queryParams += '&' + encodeURIComponent('MobileApp') + '=' + encodeURIComponent('AppTest'); //서비스 명
+	queryParams += '&' + encodeURIComponent('arrange') + '=' + encodeURIComponent('B'); //정렬 기준 A=촬영일, B=제목, C=수정일, D=조회수
+	queryParams += '&' + encodeURIComponent('keyword') + '=' + encodeURIComponent(place_name); //검색어
+	queryParams += '&' + encodeURIComponent('_type') + '=' + encodeURIComponent('json'); //수신 데이터 타입
+	xhr.open('GET', url + queryParams);
+	xhr.onreadystatechange = function () {
+	    if (this.readyState == 4) {
+	        /*console.log('Status: '+this.status+'nHeaders: '+JSON.stringify(this.getAllResponseHeaders())+'nBody: '+ this.responseText);*/
+	    }
+	    
+		//출력된 JSON객체 JavaScript객체로 변환
+	    var apiJson = JSON.parse(this.responseText);
+	    
+	    //사진 데이터
+	    var mapImage = apiJson.response.body.items.item.galWebImageUrl;
+	    console.log("이미지 : " + mapImage);
+	    $("#apidiv").html('<input type="text" id="apiparam" value="'+mapImage+'"/>');
+	};
+	console.log($("#apiparam").val());
+	xhr.send('');
+	
+};

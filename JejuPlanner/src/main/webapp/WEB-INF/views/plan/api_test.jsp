@@ -10,10 +10,11 @@
 <body>
 <img id="img" alt="" src="">
 
-
 <script>
-var json = ${apiTest}.items[0].repPhoto.photoid.thumbnailpath;
+/* var json = ${visitKoreaAPI}.response.body.items.item.galWebImageUrl;
 document.getElementById("img").src = json;
+
+console.log(json); */
 </script>
 </body>
 </html>
