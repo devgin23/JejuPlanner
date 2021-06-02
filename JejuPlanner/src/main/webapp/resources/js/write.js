@@ -106,9 +106,9 @@ function displayPlaceInfo (place) {
     var content = '<div class="placeinfo">' +
                     '   <div id="btn" class="title" type="button" title="' + place.place_name + '">' + place.place_name + '</div>';
     				//이미지 삽입
-    	content += '<img src ="/resources/images/testpicture.jpg" alt="사진을 불러오는데 실패하였습니다." style="width:300px; height:150px;  object-fit:contain; border:3px solid black">'
-    				/*style="width:320px; height:214px; border:3px solid black">'
-*/    if (place.road_address_name) {
+    	/*content += '<img src ="/resources/images/testpicture.jpg" alt="사진을 불러오는데 실패하였습니다." style="width:300px; height:150px;  object-fit:contain; border:3px solid black">'
+    				style="width:320px; height:214px; border:3px solid black">'*/    
+    if (place.road_address_name) {
         content += '    <span title="' + place.road_address_name + '">' + place.road_address_name + '</span>' +
                     '  <span class="jibun" title="' + place.address_name + '">(지번 : ' + place.address_name + ')</span>';
     }  else {
