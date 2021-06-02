@@ -53,6 +53,18 @@ public class PlanServiceImpl implements PlanService{
 		return schMap;
 	}
 	
+	//장바구니 일정 삭제 (데이터 받아와서 List에서 삭제)
+	@Override
+	public HashMap<String, Object> planDel(ScheduleVO vo) throws Exception {
+		HashMap<String, Object> delMap = new HashMap<String, Object>();
+		delMap.put("startTime",vo.getStartTime());
+		delMap.put("planDay",vo.getPlanDay());
+		delMap.put("descript",vo.getDescript());
+		delMap.put("addr",vo.getAddr());
+		log.info("delMap : " + delMap.toString());
+		return delMap;
+	}
+	
 	//게시판용 계획 목록
 	@Override
 	public List<PlanVO> planList() throws Exception {
@@ -83,5 +95,7 @@ public class PlanServiceImpl implements PlanService{
 		log.info("Service인자출력 : " + planNo + userId);
 		dao.planDelete(planNo, userId);
 	}
+
+	
 
 }
