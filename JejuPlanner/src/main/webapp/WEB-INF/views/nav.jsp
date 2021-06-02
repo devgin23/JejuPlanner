@@ -6,7 +6,10 @@
 <!-- 네비게이션 바-->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark navbar-fixed-top">
   <div class="container-fluid">
-    <a class="navbar-brand" href="/plan/write"><span class="title-first">Jeju</span><span class="title-second"> Planner</span></a>
+    <span>
+    	<a class="navbar-brand title-first" href="/plan/write" style="color: #F6BB43; font-size:30px; margin: 0px;">Jeju</a>
+    	<a class="navbar-brand title-second" href="/plan/write"> Planner</a>
+    </span>
     
       <ul class="nav navbar-nav ">
         <li class="nav-item">
