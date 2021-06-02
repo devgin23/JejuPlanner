@@ -89,7 +89,7 @@
 	
 	<!-- 계획 짜는 DIV -->
 	<div id="schDiv"></div>
-	<button id="test">test</button>
+	<a href="/plan/api_test">apitest</a>
 	</div>
 </body>
 
