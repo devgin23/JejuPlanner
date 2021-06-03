@@ -115,7 +115,7 @@
 				<td>${scheduleList.userId}</td>
 				<td>${scheduleList.addr}</td>
 				<td>${scheduleList.descript}</td>
-				<td>${scheduleList.planDay + 1} 일</td>
+				<td>${scheduleList.planDay} 일</td>
 			</tr>
 			</c:forEach>
 		</tbody>
