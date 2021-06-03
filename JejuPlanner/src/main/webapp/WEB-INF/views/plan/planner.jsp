@@ -74,7 +74,6 @@
 	
 	<!-- 계획 출력 DIV -->
 	<div id="schDiv"></div>
-	<a href="/plan/api_test">apitest</a>
 	</div>
 </body>
 

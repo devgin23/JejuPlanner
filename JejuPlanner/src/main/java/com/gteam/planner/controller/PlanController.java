@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.gteam.planner.api.VisitKoreaAPI;
 import com.gteam.planner.domain.PlanVO;
 import com.gteam.planner.domain.ScheduleVO;
 import com.gteam.planner.service.PlanService;
@@ -39,6 +40,9 @@ public class PlanController {
 	//로그인 후 일정 만들기 화면으로 이동
 	@RequestMapping(value="/plan/write", method = RequestMethod.GET)
 	public void schedulePlanning() throws Exception{
+		
+		//한국관광공사API 데이터 전달
+		/*model.addAttribute("visitKoreaAPI", api.JejuAPI());*/
 	}
 	
 	//계획 초기 설정
@@ -122,7 +126,5 @@ public class PlanController {
 		planService.planDelete(planNo, userId);
 		return "/plan/write";
 	}
-	
-	
 	
 }

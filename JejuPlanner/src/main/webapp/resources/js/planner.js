@@ -249,13 +249,5 @@ $(function(){
 	
 });
 
-/* test버튼 
-$(document).on("click", "#test", function test() {
-)
-}*/
-
-
-
-
 /* 여행날짜 기본 값 삽입 스크립트 */
 document.getElementById('startDate').value = new Date().toISOString().substring(0, 10);

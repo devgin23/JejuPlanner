@@ -14,12 +14,14 @@
 	</head>
 
 	<body>
+
 		<header>
 			<%@include file="../nav.jsp" %>
 		</header>
 			<section id="container">
 				<!-- 로그인 유무 확인/로그인 시 -->
 				<c:if test="${member.userId != null}">
+				<div id="apidiv"></div>
 					<div class="row h-100">
 				        	<!-- KAKAO MAP VIEW 영역 시작-->
 						<div class="col-8 map-area">
@@ -57,10 +59,9 @@
 			    			document.location.href="/";
 			    		</script>
 					</c:if>
-			
 			</section>
-	
-	</body>
+		</body>
+		
 		<!-- KAKAO MAP JavaScript -->
 		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=bfe80ccda6d4728072437d233285847b&libraries=services"></script>
 		<!-- custom, kakaoMap JavaScript -->

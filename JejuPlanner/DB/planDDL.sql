@@ -13,6 +13,7 @@ CREATE TABLE `plan` (
 	CONSTRAINT `PLAN_FK_SET` FOREIGN KEY (`userId`) REFERENCES `project`.`member` (`userId`) ON UPDATE NO ACTION ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+
 /* INSERT DUMMY DATA */
 INSERT INTO `plan` (userId, planTitle, planTotalDay) 
 VALUES ('member2', '제주플래너', '5');
