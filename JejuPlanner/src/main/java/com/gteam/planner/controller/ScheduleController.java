@@ -22,6 +22,7 @@ public class ScheduleController {
 	@RequestMapping(value="/plan/fromMap", method = RequestMethod.POST)
 	@ResponseBody
 	public Object fromMap(@RequestBody PlaceVO vo) throws Exception {
+		System.out.println("-------------------------");
 		System.out.println("vo 출력 : " + vo.toString());
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("placeName", vo.getPlaceName());
