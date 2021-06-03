@@ -104,13 +104,14 @@ function removeMarker() {
 // 클릭한 마커에 대한 장소 상세정보를 커스텀 오버레이로 표시하는 함수입니다
 function displayPlaceInfo (place) {
 	
-	//클릭한 장소의 이름 한국관광공사 API의 검색어 변수로 대입
-	console.log(visitKoreaAPI(place.place_name));
+	//콜백 변수 대입
+	visitKoreaAPI(place.place_name, result);
 	
     var content = '<div class="placeinfo">' +
                     '   <div id="btn" class="title" type="button" title="' + place.place_name + '">' + place.place_name + '</div>';
+    				
     				//이미지 삽입
-    	content += '<img src ="' + visitKoreaAPI(place.place_name) + '" alt="사진을 불러오는데 실패하였습니다." style="width:300px; height:150px; object-fit:contain; border:3px solid black">'
+    	content += '<img src ="' + result(place.place_name) + '" alt="사진을 불러오는데 실패하였습니다." style="width:300px; height:150px; object-fit:contain; border:3px solid black">'
     if (place.road_address_name) {
         content += '    <span title="' + place.road_address_name + '">' + place.road_address_name + '</span>' +
                     '  <span class="jibun" title="' + place.address_name + '">(지번 : ' + place.address_name + ')</span>';
@@ -186,8 +187,8 @@ function changeCategoryClass(el) {
 
 //한국관광공사 API 세팅
 //$(document).ready(function() {
-function visitKoreaAPI(place_name) {
-	console.log("함수 내부 인자 확인 :" + place_name);
+function visitKoreaAPI(place_name, callback) {
+//	console.log("함수 내부 인자 확인 :" + place_name);
 	var serviceKey = "O04vU1%2FBaFzYfPxBOYalRBg4ol8tZGeSgRc1SDG6HnIBdhw0XE6GHIcpyCrLSFpb8x%2BRe3mVF8SWqz0nIFj7RA%3D%3D";
 	var xhr = new XMLHttpRequest();
 	var url = 'http://api.visitkorea.or.kr/openapi/service/rest/PhotoGalleryService/gallerySearchList'; //URL
@@ -210,10 +211,19 @@ function visitKoreaAPI(place_name) {
 	    
 	    //사진 데이터
 	    var mapImage = apiJson.response.body.items.item.galWebImageUrl;
-	    console.log("이미지 : " + mapImage);
+
 	    $("#apidiv").html('<input type="text" id="apiparam" value="'+mapImage+'"/>');
+	    
+	    //apiparam.val은 이미지의 url을 저장함
+	    callback($("#apiparam").val());
+	    
 	};
-	console.log($("#apiparam").val());
 	xhr.send('');
 	
 };
+
+//콜백 호출
+function result(result){
+	console.log("콜백 인자 테스트 : " + result);
+	return result;
+}

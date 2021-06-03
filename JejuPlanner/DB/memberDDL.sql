@@ -13,6 +13,7 @@ CREATE TABLE `member` (
 	UNIQUE INDEX `userId` (`userId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+
 /* INSERT DUMMY DATA */
 INSERT INTO member (userId, userPw, userNickname, userGender, userAge, userMail) 
 VALUES ('member1', '1234', '멤버1', '남', 20, 'member1@abcd.com');
