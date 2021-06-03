@@ -32,9 +32,6 @@ public class PlanController {
 	@Autowired
 	private ScheduleService scheduleService;
 	
-	//api 객체
-	private VisitKoreaAPI api = new VisitKoreaAPI();
-	
 	//계획 초기 설정 저장 객체
 	List<PlanVO> planSetList = new ArrayList<>();
 	//일정 추가 리스트

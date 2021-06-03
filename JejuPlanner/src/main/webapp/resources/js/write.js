@@ -1,4 +1,4 @@
-var mapImage = "";
+var mapImage="";
 
 // 마커를 클릭했을 때 해당 장소의 상세정보를 보여줄 커스텀오버레이입니다
 var placeOverlay = new kakao.maps.CustomOverlay({zIndex:1}), 
@@ -73,9 +73,7 @@ function displayPlaces(places) {
             // 장소정보를 표출하도록 클릭 이벤트를 등록합니다
             (function(marker, place) {
                 kakao.maps.event.addListener(marker, 'click', function() {
-                	console.log("마커클릭");                	
                     displayPlaceInfo(place);
-                    //mapImage="";//초기화 
                 });
             })(marker, places[i]);
     }
@@ -109,29 +107,25 @@ function removeMarker() {
 function displayPlaceInfo (place) {
 	
 	//콜백 변수 대입
-	visitKoreaAPI(place.place_name, displayPlaceInfo);
-	console.log("장소 : " + place.place_name);
+	visitKoreaAPI(place.place_name);
+	
     var content = '<div class="placeinfo">' +
                     '   <div id="btn" class="title" type="button" title="' + place.place_name + '">' + place.place_name + '</div>';
-    				
-    //이미지 삽입
-    if(mapImage!=""){
-    	console.log("맵이미지 확인용!!~!!!!!!!"+mapImage);
-    	content += '<img src ='+ map
-    	Image +' alt="사진을 불러오는데 실패하였습니다." style="width:300px; height:150px; object-fit:contain; border:3px solid black">'
+    	//이미지 삽입
+    	content += '<img src ='+ mapImage +' alt="사진을 불러오는데 실패하였습니다." style="width:300px; height:150px; object-fit:contain; border:3px solid black">'
     	 if (place.road_address_name) {
     	        content += '    <span title="' + place.road_address_name + '">' + place.road_address_name + '</span>' +
     	                    '  <span class="jibun" title="' + place.address_name + '">(지번 : ' + place.address_name + ')</span>';
-    	    }  else {
+    	 	} else {
     	        content += '    <span title="' + place.address_name + '">' + place.address_name + '</span>';
     	    }                
-    	   
-    	    content += '    <span class="tel">' + place.phone + '</span>' + 
+    			content += '    <span class="tel">' + place.phone + '</span>' + 
     	                '</div>' + 
     	                '<div class="after"></div>';
     	    contentNode.innerHTML = content;
     	    placeOverlay.setPosition(new kakao.maps.LatLng(place.y, place.x));
     	    placeOverlay.setMap(map);  
+    	    mapImage = "";
     	    var frm = {
     	    		placeName : place.place_name,
     	    		placeAddress : place.road_address_name
@@ -145,7 +139,6 @@ function displayPlaceInfo (place) {
     				contentType : "application/json; charset=utf-8;",
     				dataType : "json",
     				success : function(data1) {
-    					
     					$('#placeInit'+idx).val(data1.placeName + ' ' + data1.placeAddress);
     					console.log(data1);
     					console.log(idx);
@@ -156,12 +149,7 @@ function displayPlaceInfo (place) {
     			});
     		});
     }
-    else {
-    	console.log("mapImage 공백!!");
-    	//
-    //
-    }//if(mapImage!=""){
-}
+
 // 각 카테고리에 클릭 이벤트를 등록합니다
 function addCategoryClickEvent() {
     var category = document.getElementById('category'),
@@ -200,7 +188,9 @@ function changeCategoryClass(el) {
 
 //한국관광공사 API 세팅
 //$(document).ready(function() {
-function visitKoreaAPI(place_name, callback) {
+//function visitKoreaAPI(place_name, callback) {
+  function visitKoreaAPI(place_name) {
+	
 //	console.log("함수 내부 인자 확인 :" + place_name);
 	var serviceKey = "O04vU1%2FBaFzYfPxBOYalRBg4ol8tZGeSgRc1SDG6HnIBdhw0XE6GHIcpyCrLSFpb8x%2BRe3mVF8SWqz0nIFj7RA%3D%3D";
 	var xhr = new XMLHttpRequest();
@@ -213,38 +203,33 @@ function visitKoreaAPI(place_name, callback) {
 	queryParams += '&' + encodeURIComponent('arrange') + '=' + encodeURIComponent('B'); //정렬 기준 A=촬영일, B=제목, C=수정일, D=조회수
 	queryParams += '&' + encodeURIComponent('keyword') + '=' + encodeURIComponent(place_name); //검색어
 	queryParams += '&' + encodeURIComponent('_type') + '=' + encodeURIComponent('json'); //수신 데이터 타입
-	xhr.open('GET', url + queryParams);
+	xhr.open('GET', url + queryParams, false);
 	xhr.onreadystatechange = function () {
-		if (this.readyState == 4) {
-	        //alert('Status: '+this.status+'nHeaders: '+JSON.stringify(this.getAllResponseHeaders())+'nBody: '+this.responseText);
-			
-			//출력된 JSON객체 JavaScript객체로 변환
-		    var apiJson = JSON.parse(this.responseText);
-		    
-		    //사진 데이터
-		    console.log("body : " + apiJson.response.body);
-		    console.log("items : " + apiJson.response.body.items.length);
-		    if(apiJson.response.body.items.length!=0){
-		    	mapImage = apiJson.response.body.items.item.galWebImageUrl;
-		    	callback(mapImage);	
-		    } else{
-		    	console.log("length=0");
-		    }
-		    
-		    
-		    //console.log("000."+mapImage);
-		    
-		    console.log(this.responseText);
-		    console.log("000."+mapImage);
-		    
-		    //callback(mapImage);	
-		    
-		}
-			
-	};
-	
-	xhr.send('');
-	console.log("222."+mapImage);
-	
-};
 
+		if (this.readyState == 4 && this.status == 200) {
+//			console.log('Status: '+this.status+' nHeaders: '+JSON.stringify(this.getAllResponseHeaders())+'nBody: '+this.responseText);
+					//출력된 JSON객체 JavaScript객체로 변환
+					var apiJson = JSON.parse(this.responseText);
+
+					//없는 사진 불러올 경우 예외처리
+					try{
+						//사진 데이터
+				    	mapImage = apiJson.response.body.items.item.galWebImageUrl;
+				    	console.log("이미지 뽑기 : "+apiJson.response.body.items.item.galWebImageUrl);
+					} catch {
+							//api에 없는 데이터 수동으로 사진 넣어주기 includes 메소드 ES6이상 사용 가능
+							if(place_name.includes('올레길')){
+								mapImage = '/resources/images/mappicture/olleroad.jpg';
+							} else if(place_name.includes('한라수목원')){
+								mapImage = '/resources/images/mappicture/hanrasumok.jpg';
+							} else if(place_name.includes('해수욕장') || place_name.includes('해변')){
+								mapImage = '/resources/images/mappicture/jejubeaches.jpg';
+							} else{
+								mapImage = null;
+							}
+					}
+		 	} 
+		}
+	xhr.send('');
+
+};
