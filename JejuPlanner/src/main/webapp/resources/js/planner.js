@@ -1,4 +1,4 @@
-var idx=0;
+var idx;
 
 $(function(){
 	//Schedule planDay 필드 변수 선언
@@ -38,7 +38,8 @@ $(function(){
    // method="post" action="/plan/write/planAdd"
    // Plan 설정 유효성 검사 및 제출
 	$('#planFrmSubmit').on('click', function(){
-		
+		//버튼 인덱스 값 초기화
+		idx=0;
 		//사용자 ID
 //		userId = $('#userId').val();
 		//계획타이틀 값 검사 및 초기화
@@ -80,7 +81,7 @@ $(function(){
 				   createDay += '</table>'
 				   createDay += '<br/></div>';
 				   if(i == planTotalDay){
-					   createDay += '<button type="button" class="btn btn-primary submitBtn"  id="planAddBtn" onclick="location.href=\'/plan/write/planAdd\'" style="float:right;">일정 등록</button>';
+					   createDay += '<button type="button" class="btn btn-primary submitBtn" id="planAddBtn" style="float:right;">일정 등록</button>';
 				   }
 				   planOutput = planOutput + createDay;
 			   }
@@ -95,6 +96,18 @@ $(function(){
 		    }
 		});
 	});
+	// planAdd 유효성 검사
+	$(document).on('click', 'button[id=planAddBtn]', function(){
+		for(var i=1; i<=planTotalDay; i++){
+			//tr의 요소 길이 측정, 값이 없을 시 0
+			if ($('table #disp'+i+' tr').length == 0) {
+				alert('DAY에 일정을 추가해 주세요!');
+				return false;
+			}
+		}
+		location.href='/plan/write/planAdd';
+	});
+	
 	//일정 생성 버튼마다 day 순서 받아오기
 	$(document).on("click", 'button[id^=schAddBtn]', function(){
 		
@@ -133,7 +146,7 @@ $(function(){
         //idx 값 확인 로그
         console.log("idx : " + idx);
     
-});
+	});
 	
 	//method="post" action="/plan/write/schAdd"
 	$(document).on('click', 'input[id^=schFrmSubmit]', function(){
@@ -173,8 +186,8 @@ $(function(){
 	            alert("일정 추가 실패!");
 	        },
 	        complete: function(){
-	        	$('#contentInit').val('');
-        		$('#placeInit').val('');
+	        	$('#contentInit'+idx).val('');
+        		$('#placeInit'+idx).val('');
         		/*$('#startTimeInit').val('9');*/
 	        }
 	    });
@@ -232,6 +245,8 @@ $(function(){
 			}
 		}, 100);
 	});
+	
+	
 });
 
 /* 여행날짜 기본 값 삽입 스크립트 */
