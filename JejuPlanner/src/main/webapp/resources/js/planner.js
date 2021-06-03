@@ -173,8 +173,8 @@ $(function(){
 	            alert("일정 추가 실패!");
 	        },
 	        complete: function(){
-	        	$('#contentInit').val('');
-        		$('#placeInit').val('');
+	        	$('#contentInit'+idx).val('');
+        		$('#placeInit'+idx).val('');
         		/*$('#startTimeInit').val('9');*/
 	        }
 	    });
