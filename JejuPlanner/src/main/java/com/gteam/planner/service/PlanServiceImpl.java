@@ -36,6 +36,7 @@ public class PlanServiceImpl implements PlanService{
 			schVo.setAddr(schList.get(i).get("addr").toString());
 			schVo.setPlanDay(Integer.parseInt(schList.get(i).get("planDay").toString()));
 			schVo.setStartTime(Integer.parseInt(schList.get(i).get("startTime").toString()));
+			schVo.setPlaceAddress(schList.get(i).get("placeAddress").toString());
 			log.info(schVo.toString());
 			dao.planSchAdd(schVo);
 		}
@@ -50,6 +51,7 @@ public class PlanServiceImpl implements PlanService{
 		schMap.put("descript", vo.getDescript());
 		schMap.put("addr", vo.getAddr());
 		schMap.put("startTime", vo.getStartTime());
+		schMap.put("placeAddress", vo.getPlaceAddress());
 		return schMap;
 	}
 	
@@ -74,7 +76,6 @@ public class PlanServiceImpl implements PlanService{
 	//일정 목록 출력
 	@Override
 	public List<ScheduleVO> planSchList(int planNo) throws Exception {
-		System.out.println("스케줄 서비스 인자 확인 : " + planNo);
 		return dao.planSchList(planNo);
 	}
 	
@@ -99,7 +100,6 @@ public class PlanServiceImpl implements PlanService{
 	//계획 삭제
 	@Override
 	public void planDelete(int planNo, String userId) throws Exception {
-		log.info("Service인자출력 : " + planNo + userId);
 		dao.planDelete(planNo, userId);
 	}
 

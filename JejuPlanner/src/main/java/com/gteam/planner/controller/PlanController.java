@@ -35,8 +35,6 @@ public class PlanController {
 	@RequestMapping(value="/plan/write", method = RequestMethod.GET)
 	public void schedulePlanning() throws Exception{
 		
-		//한국관광공사API 데이터 전달
-		/*model.addAttribute("visitKoreaAPI", api.JejuAPI());*/
 	}
 	
 	//계획 초기 설정
@@ -52,7 +50,6 @@ public class PlanController {
 	@RequestMapping(value="/plan/write/schAdd", method=RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> schAdd(ScheduleVO vo) throws Exception{
-		log.info("Modal Schedule Add");
 		schList.add(planService.schAdd(vo));
 		log.info("schList: " + schList.toString());
       return planService.schAdd(vo);
@@ -61,6 +58,7 @@ public class PlanController {
 	@RequestMapping(value="/plan/write/planAdd", method=RequestMethod.GET)
 	public String planAdd() throws Exception {
 		planService.planAdd(planSetList.get(0), schList);
+		log.info("일정 정보 조회"+schList.toString());
 		planSetList.clear();
 		schList.clear();
 		log.info("계획 추가 완료");
