@@ -1,5 +1,11 @@
 var idx;
-
+$(document).ready(function() {
+    var createForeach = "";
+    var totalDayCount = $('#planTotalDayCount').val();
+    console.log(totalDayCount);
+    console.log($('#planTotalDayCount'));
+    console.log($('#planTotalDayCount').val());
+});
 $(function(){
 	//Schedule planDay 필드 변수 선언
 	
