@@ -119,5 +119,4 @@ public class Paging {
 			return "&searchType="+searchType+"&keyword="+keyword;
 		}
 	}
-
 }
