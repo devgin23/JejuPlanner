@@ -106,7 +106,7 @@ $(function(){
 	$(document).on('click', 'button[id=planAddBtn]', function(){
 		for(var i=1; i<=planTotalDay; i++){
 			//tr의 요소 길이 측정, 값이 없을 시 0
-			if ($('table #disp'+i+' tr').length == 0) {
+			if ($('table #disp'+i+' .card').length == 0) {
 				alert('DAY에 일정을 추가해 주세요!');
 				return false;
 			}
@@ -201,11 +201,12 @@ $(function(){
 	});
 	
 	//장바구니에서 일정 빼기 버튼 (-)
-	$(document).on("click", 'input[id^=deletePlan]', function(){
+	$(document).on("click", 'button[id^=deletePlan]', function(){
 	
 		//버튼이 있는 행의 td들의 객체를 변수 선언
-		var tableData = $(this).parents('tr').children();
-		var deleteMap = {startTime : tableData.eq(0).html(), planDay : idx, descript : tableData.eq(1).html(), addr : tableData.eq(2).html() }
+		
+		var deleteMap = {startTime :$(this).siblings('h3').html() , planDay : idx, descript :$(this).siblings('p').html(), addr :  $(this).siblings('h5').html()}
+		
 		$.ajax({
 			url : "/plan/write/planDel",
 			type : "POST",
