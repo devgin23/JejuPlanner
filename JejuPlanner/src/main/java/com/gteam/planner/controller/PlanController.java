@@ -98,13 +98,13 @@ public class PlanController {
 	}
 	
 	//계획 조회하기
-	@RequestMapping(value="/plan/view", method = RequestMethod.POST)
+	@RequestMapping(value="/plan/view", method = RequestMethod.GET)
 	public String planView(Model model,@RequestParam("planNo") int planNo, @RequestParam("userId") String userId) throws Exception {
 		
 		//계획 호출
 		PlanVO planView = planService.planView(planNo, userId);
 		model.addAttribute("planView", planView);
-		
+		// scheduleList.get(i).getPlanDay()==planView.planTotalDay
 		//일정 호출
 		List<ScheduleVO> scheduleList = scheduleService.scheduleList(planNo);
 		model.addAttribute("scheduleList", scheduleList);
