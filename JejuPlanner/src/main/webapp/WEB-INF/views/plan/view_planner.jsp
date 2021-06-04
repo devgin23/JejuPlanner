@@ -66,7 +66,10 @@
 			
 			<div class="form-group col-sm-4">
 				<label>여행 일수</label>
-				<div class="dropdown">
+				<select id="planTotalDayCount" class="form-select">
+				  <option value="${planView.planTotalDay}" selected disabled>${planView.planTotalDay}일</option>
+				</select>
+				<%-- <div class="dropdown">
 					<button class="btn btn-day btn-primary dropdown-toggle" id="method_status" type="button" id="dropdownMenuButton" data-toggle="dropdown">
 					 ${planView.planTotalDay}일
 					</button>
@@ -79,7 +82,7 @@
 						<li class="dropdown-item"><a href="#" id="planTotalDay" value="6"><div>6일</div></a></li>
 						<li class="dropdown-item"><a href="#" id="planTotalDay" value="7"><div>7일</div></a></li>
 					</ul> -->
-				</div>
+				</div> --%>
 			</div>
 			<div class="form-group col-sm-2">
 				<input type="button" class="btn btn-primary mb-3" id="planFrmSubmit" name="planFrmSubmit" value="작성" style="float:right; margin-top: 25px;">
@@ -91,17 +94,22 @@
 	
 	<!-- 계획 출력 DIV -->
 		<div id="schDiv">
-			<c:forEach items="${scheduleList}" var="scheduleList">
-				<div class="card" style="width: 18rem;">
-					<div class="card-body cardTable">
-					<h5 class="card-title">${scheduleList.addr}</h5>
-					<h3 class="card-title" style="display:none;">${scheduleList.startTime}</h3>
-					<h6 class="card-subtitle mb-2 text-muted">${scheduleList.startTime} : 00</h6>
-					<p class="card-text">${scheduleList.descript}</p>
-					<button type="button" class="btn btn-primary btn-sm" id="deletePlan'+deleteCount+'">delete</button>
-					</div>
-				</div>
-			</c:forEach>
+			<div>
+				<h3>Day1</h3>
+				<c:forEach items="${scheduleList}" var="scheduleList">
+					<c:if test="${scheduleList.planDay == 1}">
+						<div class="card" style="width: 18rem;">
+							<div class="card-body cardTable">
+							<h5 class="card-title">${scheduleList.addr}</h5>
+							<h3 class="card-title" style="display:none;">${scheduleList.startTime}</h3>
+							<h6 class="card-subtitle mb-2 text-muted">${scheduleList.startTime} : 00</h6>
+							<p class="card-text">${scheduleList.descript}</p>
+							<button type="button" class="btn btn-primary btn-sm" id="deletePlan'+deleteCount+'">delete</button>
+							</div>
+						</div>
+					</c:if>
+				</c:forEach>
+			</div>
 		</div>
 	</div>
 </body>
