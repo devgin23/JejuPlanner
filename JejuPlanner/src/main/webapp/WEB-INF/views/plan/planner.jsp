@@ -28,7 +28,23 @@
   .schDiv{
   	margin-right: 10px;
   }
-  
+  /* btn-primary 색깔 바꾸기 css */
+  /* .btn-primary {
+    background-color: #7bc143;
+    border-color: #7bc143;
+    color: #FFF; }
+	.btn-primary:hover,
+	.btn-primary:focus {
+    border-color: #6fb03a;
+    background-color: #6fb03a;
+    color: #FFF; }
+	.btn-primary:active,
+	.btn-primary:visited,
+	.btn-primary:active:focus,
+	.btn-primary:active:hover {
+    border-color: #639d34;
+    background-color: #639d34;
+    color: #FFF; } */
 </style>
 
 </head>
@@ -47,10 +63,11 @@
 				<label>여행 날짜</label>
 				<input type="date" class="form-control" id="startDate" name="startDate" value="<fmt:formatDate value="" pattern="yyyy-MM-dd"/>"/>
 			</div>
+			
 			<div class="form-group col-sm-4">
 				<label>여행 일수</label>
 				<div class="dropdown">
-					<button class="btn btn-day btn-secondary dropdown-toggle" id="method_status" type="button" id="dropdownMenuButton" data-toggle="dropdown">
+					<button class="btn btn-day btn-primary dropdown-toggle" id="method_status" type="button" id="dropdownMenuButton" data-toggle="dropdown">
 					 일수
 					</button>
 					<ul id="method_type" class="dropdown-menu"  style="text-align:center;">	
