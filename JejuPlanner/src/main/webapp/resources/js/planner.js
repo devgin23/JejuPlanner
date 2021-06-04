@@ -243,13 +243,13 @@ $(function(){
 				console.log("timeTag.eq().html() : ",timeTag.eq(0).html())
 				console.log("timeTag.eq(0).parents('div.card') : ",timeTag.eq(0).parents('div.card'))
 				console.log("timeTag[0].parentNode : ",timeTag[0].parentNode)
-				//버블정렬, 컬럼명은 무시해야하기 때문에 1부터 시작
+				//버블정렬
 				for (i = 0; i<(timeTag.length - 1); i++) {
 					for(j = 0; j<(timeTag.length - i); j++) {
-						//switching ,(getElementsByTagName("td")[0]에서 [0]의 의미는 첫 번째 필드를 지목한다는 뜻) 
+						//$()는 객체를 리턴, Node를 출력하고 싶으면 $()[0] 으로 해야한다
 						if(parseInt(timeTag.eq(j).html()) > parseInt(timeTag.eq(j+1).html())) {
+							//A.insertBefore(B,C) A,B,C 모두 Node여야 한다. A안에서 B를 C의 앞으로 보낸다.
 							$('#disp'+dispNum)[0].insertBefore(timeTag.eq(j+1)[0].parentNode.parentNode, timeTag.eq(j)[0].parentNode.parentNode);
-							//timeTag[j].parentNode.insertBefore(timeTag[j + 1], timeTag[j]); //insertBefore(앞의 노드를	 뒤 노드에 삽입)
 						}
 					}
 				}
