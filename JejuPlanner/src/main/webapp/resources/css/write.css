@@ -149,18 +149,11 @@ html, body {
 	background-color: powderblue;
 	height: 100%;
 }
-h1 {
-	color: blue;
-}
-p {
-	color: red;
-}
 .map-area {
 	background-color: coral;
 	text-align: center;
 	line-height:;
 }
-
 .row {
 	width: 100%;
 	margin: 0px;
@@ -173,4 +166,10 @@ p {
 }
 .form-group, .col-sm-12{
 	margin-top: 10px;
+}
+.startTime{
+	display : inline;
+}
+.card{
+	margin-top: 5px;
 }

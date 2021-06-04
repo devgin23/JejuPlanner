@@ -44,6 +44,13 @@ public class PlanDAOImpl implements PlanDAO {
 		return sql.selectList(namespace + ".planList");
 	}
 	
+	//계획일정 목록
+	@Override
+	public List<ScheduleVO> planSchList(int planNo) throws Exception {
+		log.info("스케줄DAO 인자 확인 " + planNo);
+		return sql.selectList(namespace + ".planSchList", planNo);
+	}
+	
 	//유저별 계획 목록
 	@Override
 	public List<PlanVO> planListForUser(String userId) throws Exception{
@@ -61,6 +68,8 @@ public class PlanDAOImpl implements PlanDAO {
 		
 		return sql.selectOne(namespace + ".planView", data);
 	}
+	
+	
 	
 	//계획 수정
 	@Override
