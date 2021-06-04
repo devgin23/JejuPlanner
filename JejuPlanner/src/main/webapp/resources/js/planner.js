@@ -237,13 +237,6 @@ $(function(){
 			while(dispNum<=planTotalDay){
 				var card = $('#disp'+dispNum+' .cardTable');
 				var timeTag = card.children('h3');
-				console.log("document : ",document.getElementById('disp1'));
-				console.log("card : ", card);
-				console.log("timeTag : ", timeTag);
-				console.log("timeTag.eq() : ",timeTag.eq(0))
-				console.log("timeTag.eq().html() : ",timeTag.eq(0).html())
-				console.log("timeTag.eq(0).parents('div.card') : ",timeTag.eq(0).parents('div.card'))
-				console.log("timeTag[0].parentNode : ",timeTag[0].parentNode)
 				//버블정렬
 				for (i = 0; i<(timeTag.length - 1); i++) {
 					for(j = 0; j<(timeTag.length - i); j++) {
