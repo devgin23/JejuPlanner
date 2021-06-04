@@ -126,12 +126,20 @@ function displayPlaceInfo (place) {
     	    placeOverlay.setPosition(new kakao.maps.LatLng(place.y, place.x));
     	    placeOverlay.setMap(map);  
     	    mapImage = "";
-    	    var frm = {
-    	    		placeName : place.place_name,
-    	    		placeAddress : place.road_address_name
-    	    }
-    	    $('#btn').on('click', function() {
+    	    	var frm = {
+				    	placeName : place.place_name,
+				    	placeAddress : place.road_address_name
+    	    		}
+
+    	    	//도로명 주소 없을 경우 지번 주소 대입
+    	    	if(frm.placeAddress==""){
+    	    		frm.placeAddress = place.address_name;
+    	    		console.log(frm);
+    	    	}
     	    	
+    	    $('#btn').on('click', function() {
+                
+    	    	console.log(place);
     			$.ajax({
     				url : "/plan/fromMap",
     				type : "POST",
