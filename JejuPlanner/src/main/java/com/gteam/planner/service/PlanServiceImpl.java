@@ -71,6 +71,13 @@ public class PlanServiceImpl implements PlanService{
 		return dao.planList();
 	}
 	
+	//일정 목록 출력
+	@Override
+	public List<ScheduleVO> planSchList(int planNo) throws Exception {
+		System.out.println("스케줄 서비스 인자 확인 : " + planNo);
+		return dao.planSchList(planNo);
+	}
+	
 	//유저별 계획 목록
 	@Override
 	public List<PlanVO> planListForUser(String userId) throws Exception {

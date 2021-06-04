@@ -18,6 +18,9 @@ public interface PlanDAO {
 	
 	//게시판용 계획 목록
 	List<PlanVO> planList() throws Exception;
+	
+	//계획일정 목록
+	public List<ScheduleVO> planSchList(int planNo) throws Exception;
 
 	//유저별 계획 목록
 	List<PlanVO> planListForUser(String userId) throws Exception;

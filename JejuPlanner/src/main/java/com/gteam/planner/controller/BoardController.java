@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.gteam.planner.domain.PlaceVO;
 
 @Controller
-public class ScheduleController {
+public class BoardController {
 	
-	private static final Logger log = LoggerFactory.getLogger(ScheduleController.class);
+	private static final Logger log = LoggerFactory.getLogger(BoardController.class);
 	
 	
 	//일정 목록 출력

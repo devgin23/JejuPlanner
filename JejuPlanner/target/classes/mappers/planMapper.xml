@@ -42,6 +42,13 @@
 			WHERE userId = #{userId} AND planNo = #{planNo}
 		</select>
 		
+		<!-- 일정 조회 -->
+		<select id="planSchList" parameterType="int" resultType="com.gteam.planner.domain.ScheduleVO">
+			SELECT planNo, userId, descript, addr, startTime, planDay
+			FROM schedule
+			WHERE planNo = #{planNo}
+		</select>
+		
 		<!-- 계획 + 일정 조회 -->
 		<!-- <select id="planView" parameterType="int" resultType="com.gteam.planner.domain.PlanVO">
 			SELECT p.planNo, p.userId, p.planTitle, p.planTotalDay,

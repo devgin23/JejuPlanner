@@ -1,7 +1,6 @@
 package com.gteam.planner.controller;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -16,11 +15,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.gteam.planner.api.VisitKoreaAPI;
 import com.gteam.planner.domain.PlanVO;
 import com.gteam.planner.domain.ScheduleVO;
 import com.gteam.planner.service.PlanService;
-import com.gteam.planner.service.ScheduleService;
 
 @Controller
 public class PlanController {
@@ -28,9 +25,6 @@ public class PlanController {
 	
 	@Autowired
 	private PlanService planService;
-	
-	@Autowired
-	private ScheduleService scheduleService;
 	
 	//계획 초기 설정 저장 객체
 	List<PlanVO> planSetList = new ArrayList<>();
@@ -98,7 +92,7 @@ public class PlanController {
 	}
 	
 	//계획 조회하기
-	@RequestMapping(value="/plan/view", method = RequestMethod.POST)
+	@RequestMapping(value="/plan/view", method = RequestMethod.GET)
 	public String planView(Model model,@RequestParam("planNo") int planNo, @RequestParam("userId") String userId) throws Exception {
 		
 		//계획 호출
@@ -106,7 +100,7 @@ public class PlanController {
 		model.addAttribute("planView", planView);
 		
 		//일정 호출
-		List<ScheduleVO> scheduleList = scheduleService.scheduleList(planNo);
+		List<ScheduleVO> scheduleList = planService.planSchList(planNo);
 		model.addAttribute("scheduleList", scheduleList);
 		System.out.println("planDay : "+scheduleList.get(1).getPlanDay());
 		return "/plan/view";
