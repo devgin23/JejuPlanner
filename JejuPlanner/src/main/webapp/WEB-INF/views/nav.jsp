@@ -19,7 +19,7 @@
           <a class="nav-link" href="#" onclick="javascript:document.planListForUser.submit();">내 일정 보관</a>
         </li>
         <li class="nav-item  ">
-          <a class="nav-link" href="/plan/list">공유 일정</a>
+          <a class="nav-link" href="/plan/list?num=1">공유 일정</a>
         </li>
         <li class="nav-item ">
           <a class="nav-link" href="#">이용 안내</a>

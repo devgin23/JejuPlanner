@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.gteam.planner.domain.Paging;
 import com.gteam.planner.domain.PlanVO;
 import com.gteam.planner.domain.ScheduleVO;
+import com.gteam.planner.service.BoardService;
 import com.gteam.planner.service.PlanService;
 
 @Controller
@@ -25,6 +27,8 @@ public class PlanController {
 	
 	@Autowired
 	private PlanService planService;
+	@Autowired
+	private BoardService boardService;
 	
 	//계획 초기 설정 저장 객체
 	List<PlanVO> planSetList = new ArrayList<>();
@@ -75,11 +79,23 @@ public class PlanController {
 		log.info("schList : " + schList.toString());
 	}
 	
-	//게시판에 계획 리스트 출력
+	//게시판에 계획 리스트 출력 및 페이징
 	@RequestMapping(value="/plan/list", method=RequestMethod.GET)
-	public String planList(Model model) throws Exception {
-		List<PlanVO> planList = planService.planList();
+	public String planList(Model model, @RequestParam("num") int num
+			, @RequestParam(value="searchType", required=false, defaultValue="planTitle") String searchType	
+			, @RequestParam(value="keyword", required=false, defaultValue="") String keyword
+			) throws Exception {
+		log.info("searchType:"+searchType+" keyword:"+keyword);
+		//페이징 필드 값 생성자 통해서 초기화
+		Paging page = new Paging(num, searchType, keyword);
+		//전체 계획 갯수 구하기 (검색어 입력시 해당 검색 계획 갯수)
+		page.setCount(boardService.boardPlanCount(searchType, keyword));
+		//계획 리스트 (검색어 입력시 해당 검색 리스트 출력)
+		List<PlanVO> planList = planService.planList(page.getDisplayPost(), page.getPostNum(), searchType, keyword);
+		
+		//Model에 필요 값들 담아 list page로 리턴
 		model.addAttribute("planList", planList);
+		model.addAttribute("page", page);
 		return "/plan/list";
 	}
 	

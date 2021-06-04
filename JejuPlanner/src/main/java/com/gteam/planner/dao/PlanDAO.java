@@ -16,8 +16,8 @@ public interface PlanDAO {
 	//일정 개별 추가
 	public void planSchAdd(ScheduleVO vo) throws Exception;
 	
-	//게시판용 계획 목록
-	List<PlanVO> planList() throws Exception;
+	//게시판용 계획 목록 및 페이징
+	List<PlanVO> planList(int displayPost, int postNum, String searchType, String keyword) throws Exception;
 	
 	//계획일정 목록
 	public List<ScheduleVO> planSchList(int planNo) throws Exception;
