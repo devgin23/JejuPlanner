@@ -124,7 +124,7 @@
 		<button type="button" onclick="location.href='/plan/write'">돌아가기</button>
 		</div>		
 	</div>
-		<!-- 일정 출력 끝 -->
+	<!-- 일정 출력 끝 -->
 	
 	<!-- 부트스트랩 스크립트 -->	
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

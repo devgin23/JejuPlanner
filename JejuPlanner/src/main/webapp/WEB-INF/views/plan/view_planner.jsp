@@ -56,21 +56,21 @@
 	<form id="planFrm" name="planFrm" >
 		<div class="row">
 			<div class="form-group col-sm-12">
-				<label>일정 타이틀</label>
-				<input type="text" class="form-control" id="planTitle" name="planTitle" value="" placeholder="일정 타이틀"/>
+				<label>여행 제목</label>
+				<input type="text" class="form-control" id="planTitle" name="planTitle" value="${planView.planTitle}" placeholder="일정 타이틀"/>
 			</div>
 			<div class="form-group col-sm-6">
 				<label>여행 날짜</label>
-				<input type="date" class="form-control" id="startDate" name="startDate" value="<fmt:formatDate value="" pattern="yyyy-MM-dd"/>"/>
+				<input type="date" class="form-control" id="startDate" name="startDate" value="<fmt:formatDate value="${planView.startDate}" pattern="yyyy-MM-dd"/>"/>
 			</div>
 			
 			<div class="form-group col-sm-4">
 				<label>여행 일수</label>
 				<div class="dropdown">
 					<button class="btn btn-day btn-primary dropdown-toggle" id="method_status" type="button" id="dropdownMenuButton" data-toggle="dropdown">
-					 일수
+					 ${planView.planTotalDay}일
 					</button>
-					<ul id="method_type" class="dropdown-menu"  style="text-align:center;">	
+					<!-- <ul id="method_type" class="dropdown-menu"  style="text-align:center;">	
 						<li class="dropdown-item"><a href="#" id="planTotalDay" value="1"><div>1일</div></a></li>
 						<li class="dropdown-item"><a href="#" id="planTotalDay" value="2"><div>2일</div></a></li>
 						<li class="dropdown-item"><a href="#" id="planTotalDay" value="3"><div>3일</div></a></li>
@@ -78,7 +78,7 @@
 						<li class="dropdown-item"><a href="#" id="planTotalDay" value="5"><div>5일</div></a></li>
 						<li class="dropdown-item"><a href="#" id="planTotalDay" value="6"><div>6일</div></a></li>
 						<li class="dropdown-item"><a href="#" id="planTotalDay" value="7"><div>7일</div></a></li>
-					</ul>
+					</ul> -->
 				</div>
 			</div>
 			<div class="form-group col-sm-2">
@@ -90,7 +90,19 @@
 	<!-- 계획 입력 끝 -->
 	
 	<!-- 계획 출력 DIV -->
-	<div id="schDiv"></div>
+		<div id="schDiv">
+			<c:forEach items="${scheduleList}" var="scheduleList">
+				<div class="card" style="width: 18rem;">
+					<div class="card-body cardTable">
+					<h5 class="card-title">${scheduleList.addr}</h5>
+					<h3 class="card-title" style="display:none;">${scheduleList.startTime}</h3>
+					<h6 class="card-subtitle mb-2 text-muted">${scheduleList.startTime} : 00</h6>
+					<p class="card-text">${scheduleList.descript}</p>
+					<button type="button" class="btn btn-primary btn-sm" id="deletePlan'+deleteCount+'">delete</button>
+					</div>
+				</div>
+			</c:forEach>
+		</div>
 	</div>
 </body>
 
