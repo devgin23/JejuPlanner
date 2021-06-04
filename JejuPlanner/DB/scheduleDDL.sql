@@ -5,6 +5,7 @@ CREATE TABLE `schedule` (
 	`userId` VARCHAR(50) NOT NULL,
 	`descript` VARCHAR(200) NULL DEFAULT NULL,
 	`addr` VARCHAR(50) NOT NULL,
+	`placeAddress` VARCHAR(50) NOT NULL, 
 	`planDay` INT NOT NULL DEFAULT '0',
 	`startTime` INT NULL DEFAULT '900',
 	`rowNo` INT DEFAULT '0',

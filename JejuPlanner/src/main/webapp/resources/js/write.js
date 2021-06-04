@@ -126,12 +126,19 @@ function displayPlaceInfo (place) {
     	    placeOverlay.setPosition(new kakao.maps.LatLng(place.y, place.x));
     	    placeOverlay.setMap(map);  
     	    mapImage = "";
-    	    var frm = {
-    	    		placeName : place.place_name,
-    	    		placeAddress : place.road_address_name
-    	    }
-    	    $('#btn').on('click', function() {
+    	    
+    	    	var frm = {
+				    	placeName : place.place_name,
+				    	placeAddress : place.road_address_name
+    	    	}
+
+    	    	//도로명 주소 없을 경우 지번 주소 대입
+    	    	if(frm.placeAddress==""){
+    	    		frm.placeAddress = place.address_name;
+    	    	}
     	    	
+    	    $('#btn').on('click', function() {
+                
     			$.ajax({
     				url : "/plan/fromMap",
     				type : "POST",
@@ -140,6 +147,7 @@ function displayPlaceInfo (place) {
     				dataType : "json",
     				success : function(data1) {
     					$('#placeInit'+idx).val(data1.placeName + ' ' + data1.placeAddress);
+    					$('#placeAddress'+idx).val(data1.placeAddress);
     					console.log(data1);
     					console.log(idx);
     				},
