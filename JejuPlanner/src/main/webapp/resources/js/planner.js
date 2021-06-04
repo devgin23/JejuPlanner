@@ -106,7 +106,7 @@ $(function(){
 	$(document).on('click', 'button[id=planAddBtn]', function(){
 		for(var i=1; i<=planTotalDay; i++){
 			//tr의 요소 길이 측정, 값이 없을 시 0
-			if ($('table #disp'+i+' .card').length == 0) {
+			if ($('#disp'+i+' .card').length == 0) {
 				alert('DAY에 일정을 추가해 주세요!');
 				return false;
 			}
