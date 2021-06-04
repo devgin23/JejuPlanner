@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -47,7 +49,7 @@
 						<!-- KAKAO MAP VIEW 영역 끝-->
 						
 			        	<div class="col-4 plan-area">
-				        	<%@ include file="planner.jsp" %>
+				        	<%@ include file="view_planner.jsp" %>
 			    		</div>
 		    		</div>
 			    	</c:if>
