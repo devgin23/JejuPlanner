@@ -18,7 +18,6 @@ import com.gteam.planner.domain.ScheduleVO;
 public class PlanServiceImpl implements PlanService{
 	
 	private static final Logger log = LoggerFactory.getLogger(PlanController.class);
-	
 	@Autowired
 	private PlanDAO dao;
 	
@@ -65,11 +64,13 @@ public class PlanServiceImpl implements PlanService{
 		return delMap;
 	}
 	
-	//게시판용 계획 목록
+	//게시판용 계획 목록 및 페이징 및 페이징 처리
 	@Override
-	public List<PlanVO> planList() throws Exception {
-		return dao.planList();
+	public List<PlanVO> planList(int displayPost, int postNum, String searchType, String keyword) throws Exception {
+		return dao.planList(displayPost, postNum, searchType, keyword);
 	}
+
+	
 	
 	//일정 목록 출력
 	@Override
