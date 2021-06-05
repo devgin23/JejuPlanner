@@ -17,10 +17,10 @@ $(function(){
 		createStringCollap += '<form id="schFrm'+i+'">';
 		createStringCollap += '<input type="hidden" id="userId" name="userId" value="'+ userId +'">';
 		createStringCollap += '<input type="hidden" id="schDay'+i+'" name="planDay" value="" readonly	style="width: 20px; text-align: center"/>';
-		createStringCollap += '<input type="hidden" id="placeAddress' + i +'" name="placeAddress" value="" readonly/>';
+		createStringCollap += '<input type="hidden" id="addr' + i +'" name="addr" value="" readonly/>';
 		createStringCollap += '<div class="input-group input-group-sm mb-3">'
 		createStringCollap += '<span class="input-group-text" id="inputGroup-sizing-sm">장소</span>'
-		createStringCollap += '<input type="text" class="form-control" id="placeInit'+i+'" name="addr"></div>'
+		createStringCollap += '<input type="text" class="form-control" id="placeInit'+i+'" name="place" readonly style="background-color:#FFFFF0"></div>'
 		createStringCollap += '<div class="input-group mb-3">'
 		createStringCollap += '<label class="input-group-text" for="startTimeInit">시작시간</label>'
 		createStringCollap += '<select class="form-select startTime" id="startTimeInit" name="startTime"></select></div>'
@@ -164,21 +164,23 @@ $(function(){
 				var min = '00';
 								
 				//card형식으로 바꿈.
-				schOutput+= '<div class="card" style="width: 18rem;">';
+				schOutput+= '<div class="card card-count" style="width: 18rem;">';
 				schOutput+= '<div class="card-body cardTable">';
-				schOutput+= '<h5 class="card-title">' + data.addr + '</h5>';
-				schOutput+= '<h5 class="card-title">' + data.placeAddress + '</h5>';
+				schOutput+= '<h5 class="card-title">' + data.place + '</h5>';
+				schOutput+= '<h6 class="card-title">' + data.addr + '</h6>';
 				schOutput+= '<h3 class="card-title" style="display:none;">' + data.startTime + '</h3>';
 				schOutput+= '<h6 id="vall" class="card-subtitle mb-2 text-muted" value='+data.startTime+'>' + hour + ':' + min + '' + '</h6>';
 				schOutput+= '<p class="card-text">' + data.descript + '</p>';
 				schOutput+= '<button type="button" class="btn btn-primary btn-sm" id="deletePlan'+deleteCount+'">delete</button>';
 				schOutput+= '</div></div>';
 								
-				
-				
 				$("#disp"+data.planDay).append(schOutput);
 				
 				console.log($('#vall').val());
+				
+				//지도에 마커 찍기 '제주특별자치도 제주시 첨단로 242'
+				scheduleMarker(data.addr);
+//				scheduleMarker('제주특별자치도 제주시 조천읍 조천리 1142');
         			
         		
 	        },

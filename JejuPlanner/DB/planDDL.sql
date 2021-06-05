@@ -20,18 +20,4 @@ VALUES ('member2', '제주플래너', '5');
 
 INSERT INTO `plan` (userId, planTitle, planTotalDay) 
 VALUES ('member2', '제주여행2', '3');
-
-DELETE 
-			FROM plan 
-			WHERE planNo = '1' AND userId = 'member1';
-			
-			
-			
-			SELECT p.planNo, p.userId, p.planTitle, p.planTotalDay,
-				   s.descript, s.addr 
-			FROM plan as p JOIN schedule as s 
-			ON p.planNo = s.planNo 
-			WHERE p.planNo = 1
-			
-			COMMIT;
 			

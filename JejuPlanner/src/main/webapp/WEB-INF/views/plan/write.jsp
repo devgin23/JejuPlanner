@@ -9,7 +9,7 @@
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet"
 	integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
 	<!-- custom, kakaoMap css -->
-	<link href="/resources/css/write.css?ver=1" rel="stylesheet" type="text/css">
+	<link href="/resources/css/write.css" rel="stylesheet" type="text/css">
 	 	<title>일정 만들기</title>
 	</head>
 
@@ -25,6 +25,7 @@
 					<div class="row h-100">
 				        	<!-- KAKAO MAP VIEW 영역 시작-->
 						<div class="col-8 map-area">
+						<button id="test">인자확인</button>
 							<div class="map_wrap">
 								<div id="map"
 									style="width: 100%; height: 100%; position: relative; overflow: hidden;"></div>
@@ -65,8 +66,8 @@
 		<!-- KAKAO MAP JavaScript -->
 		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=bfe80ccda6d4728072437d233285847b&libraries=services"></script>
 		<!-- custom, kakaoMap JavaScript -->
-		<script type="text/javascript" src="/resources/js/planner.js?ver=1"></script>
-		<script type="text/javascript" src="/resources/js/write.js"></script>
+		<script type="text/javascript" src="/resources/js/planner.js?ver=2"></script>
+		<script type="text/javascript" src="/resources/js/write.js?ver=2"></script>
 		<!-- bootstrap -->	
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"
 			integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8"

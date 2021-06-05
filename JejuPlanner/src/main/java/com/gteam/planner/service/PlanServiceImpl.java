@@ -35,7 +35,7 @@ public class PlanServiceImpl implements PlanService{
 			schVo.setAddr(schList.get(i).get("addr").toString());
 			schVo.setPlanDay(Integer.parseInt(schList.get(i).get("planDay").toString()));
 			schVo.setStartTime(Integer.parseInt(schList.get(i).get("startTime").toString()));
-			schVo.setPlaceAddress(schList.get(i).get("placeAddress").toString());
+			schVo.setPlace(schList.get(i).get("place").toString());
 			log.info(schVo.toString());
 			dao.planSchAdd(schVo);
 		}
@@ -50,7 +50,7 @@ public class PlanServiceImpl implements PlanService{
 		schMap.put("descript", vo.getDescript());
 		schMap.put("addr", vo.getAddr());
 		schMap.put("startTime", vo.getStartTime());
-		schMap.put("placeAddress", vo.getPlaceAddress());
+		schMap.put("place", vo.getPlace());
 		return schMap;
 	}
 	

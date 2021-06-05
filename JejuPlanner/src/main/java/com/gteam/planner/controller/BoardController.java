@@ -17,14 +17,13 @@ public class BoardController {
 	
 	private static final Logger log = LoggerFactory.getLogger(BoardController.class);
 	
-	
 	//일정 목록 출력
 	@RequestMapping(value="/plan/fromMap", method = RequestMethod.POST)
 	@ResponseBody
 	public Object fromMap(@RequestBody PlaceVO vo) throws Exception {
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("placeName", vo.getPlaceName());
-	    map.put("placeAddress", vo.getPlaceAddress());
+		map.put("place", vo.getPlace());
+	    map.put("addr", vo.getAddr());
 	    
 		return map;
 	}

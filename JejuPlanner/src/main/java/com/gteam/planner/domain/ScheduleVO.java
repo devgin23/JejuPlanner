@@ -3,28 +3,29 @@ package com.gteam.planner.domain;
 public class ScheduleVO {
 	
 /*
- CREATE TABLE `schedule` (
+CREATE TABLE `schedule` (
 	`planNo` INT NOT NULL,
 	`userId` VARCHAR(50) NOT NULL,
 	`descript` VARCHAR(200) NULL DEFAULT NULL,
+	`place` VARCHAR(50) NOT NULL, 
 	`addr` VARCHAR(50) NOT NULL,
-	`planDay` VARCHAR(5) NOT NULL,
+	`planDay` INT NOT NULL DEFAULT '0',
 	`startTime` INT NULL DEFAULT '900',
-	`rowNo` INT,
+	`rowNo` INT DEFAULT '0',
 	INDEX `SCHEDULE_FK_SET` (`planNo`, `userId`) USING BTREE,
 	CONSTRAINT `SCHEDULE_FK_SET` FOREIGN KEY (`planNo`, `userId`) REFERENCES `project`.`plan` (`planNo`, `userId`) ON UPDATE NO ACTION ON DELETE CASCADE
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
  */
 	
 	private int planNo;
 	private String userId;
 	private String descript;
+	private String place;
 	private String addr;
-	private String placeAddress;
 	private int planDay;
 	private int startTime;
 	private int rowNo;
-	
 	
 	public int getPlanNo() {
 		return planNo;
@@ -43,6 +44,12 @@ public class ScheduleVO {
 	}
 	public void setDescript(String descript) {
 		this.descript = descript;
+	}
+	public String getPlace() {
+		return place;
+	}
+	public void setPlace(String place) {
+		this.place = place;
 	}
 	public String getAddr() {
 		return addr;
@@ -68,16 +75,11 @@ public class ScheduleVO {
 	public void setRowNo(int rowNo) {
 		this.rowNo = rowNo;
 	}
-	public String getPlaceAddress() {
-		return placeAddress;
-	}
-	public void setPlaceAddress(String placeAddress) {
-		this.placeAddress = placeAddress;
-	}
+	
 	@Override
 	public String toString() {
 		return "ScheduleVO [planNo=" + planNo + ", userId=" + userId + ", descript=" + descript + ", addr=" + addr
-				+ ", placeAddress=" + placeAddress + ", planDay=" + planDay + ", startTime=" + startTime + ", rowNo="
+				+ ", place=" + place + ", planDay=" + planDay + ", startTime=" + startTime + ", rowNo="
 				+ rowNo + "]";
 	}
 	

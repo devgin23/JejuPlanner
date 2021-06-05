@@ -1,5 +1,8 @@
 var mapImage="";
 
+//주소-좌표 변환 객체를 생성합니다
+var geocoder = new kakao.maps.services.Geocoder();
+
 // 마커를 클릭했을 때 해당 장소의 상세정보를 보여줄 커스텀오버레이입니다
 var placeOverlay = new kakao.maps.CustomOverlay({zIndex:1}), 
     contentNode = document.createElement('div'), // 커스텀 오버레이의 컨텐츠 엘리먼트 입니다 
@@ -106,7 +109,7 @@ function removeMarker() {
 // 클릭한 마커에 대한 장소 상세정보를 커스텀 오버레이로 표시하는 함수입니다
 function displayPlaceInfo (place) {
 	
-	//콜백 변수 대입
+	// API 호출 (관광지 사진)
 	visitKoreaAPI(place.place_name);
 	
     var content = '<div class="placeinfo">' +
@@ -128,17 +131,15 @@ function displayPlaceInfo (place) {
     	    mapImage = "";
     	    
     	    	var frm = {
-				    	placeName : place.place_name,
-				    	placeAddress : place.road_address_name
+				    	place : place.place_name,
+				    	addr : place.road_address_name
     	    	}
-
     	    	//도로명 주소 없을 경우 지번 주소 대입
-    	    	if(frm.placeAddress==""){
-    	    		frm.placeAddress = place.address_name;
+    	    	if(frm.addr==""){
+    	    		frm.addr = place.address_name;
     	    	}
     	    	
     	    $('#btn').on('click', function() {
-                
     			$.ajax({
     				url : "/plan/fromMap",
     				type : "POST",
@@ -146,10 +147,9 @@ function displayPlaceInfo (place) {
     				contentType : "application/json; charset=utf-8;",
     				dataType : "json",
     				success : function(data1) {
-    					$('#placeInit'+idx).val(data1.placeName + ' ' + data1.placeAddress);
-    					$('#placeAddress'+idx).val(data1.placeAddress);
-    					console.log(data1);
-    					console.log(idx);
+    					$('#placeInit'+idx).val(data1.place/* + ' ' +  data1.addr*/);
+    					$('#addr'+idx).val(data1.addr);
+    					
     				},
     				error : function() {
     					alert("simpleWithObject err");
@@ -192,14 +192,37 @@ function changeCategoryClass(el) {
     if (el) {
         el.className = 'on';
     } 
-} 
+}
+
+//주소로 좌표를 검색합니다
+function scheduleMarker(place) {
+	geocoder.addressSearch(place, function(result, status) {
+
+    // 정상적으로 검색이 완료됐으면 
+	     if (status === kakao.maps.services.Status.OK) {
+	        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+	
+	        // 결과값으로 받은 위치를 마커로 표시합니다
+	        var marker = new kakao.maps.Marker({
+	            map: map,
+	            position: coords
+	        });
+	
+	        // 인포윈도우로 장소에 대한 설명을 표시합니다
+	        var infowindow = new kakao.maps.InfoWindow({
+	            content: '<div style="width:150px;text-align:center;padding:6px 0;">우리회사</div>'
+	        });
+	        infowindow.open(map, marker);
+	
+	        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+	        map.setCenter(coords);
+	     } 
+	});
+}
 
 //한국관광공사 API 세팅
-//$(document).ready(function() {
-//function visitKoreaAPI(place_name, callback) {
   function visitKoreaAPI(place_name) {
 	
-//	console.log("함수 내부 인자 확인 :" + place_name);
 	var serviceKey = "O04vU1%2FBaFzYfPxBOYalRBg4ol8tZGeSgRc1SDG6HnIBdhw0XE6GHIcpyCrLSFpb8x%2BRe3mVF8SWqz0nIFj7RA%3D%3D";
 	var xhr = new XMLHttpRequest();
 	var url = 'http://api.visitkorea.or.kr/openapi/service/rest/PhotoGalleryService/gallerySearchList'; //URL
@@ -247,3 +270,10 @@ function changeCategoryClass(el) {
 	xhr.send('');
 
 };
+
+$('#test').on('click', function() {
+	console.log("카드개수 확인" + $('.card-count').length);
+	console.log("인자 확인"+ $('.card h6').html());
+	console.log("총 일수"+ $('div h4').length);
+	}
+);

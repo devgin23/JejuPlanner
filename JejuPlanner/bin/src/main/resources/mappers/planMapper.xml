@@ -19,9 +19,6 @@
 
 		<!-- 계획 삽입 -->
 		<insert id="write" parameterType="com.gteam.planner.domain.PlanVO">
-		<!-- 	<selectKey keyProperty="rowNo" resultType="int" order="BEFORE">
-			SELECT COUNT(*) FROM schedule WHERE userId = #{userId} AND planNo = #{planNo} 서브쿼리세팅
-			</selectKey> -->
 			INSERT into schedule(planNo, userId, addr, descript, planDay, rowNo) 
 			VALUES(${planNo}, #{userId}, #{addr}, #{descript}, ${planDay}, ${rowNo})
 		</insert>

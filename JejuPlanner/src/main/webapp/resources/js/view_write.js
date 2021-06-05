@@ -127,8 +127,8 @@ function displayPlaceInfo (place) {
     	    placeOverlay.setMap(map);  
     	    mapImage = "";
     	    var frm = {
-    	    		placeName : place.place_name,
-    	    		placeAddress : place.road_address_name
+    	    		place : place.place_name,
+    	    		addr : place.road_address_name
     	    }
     	    $('#btn').on('click', function() {
     	    	
@@ -139,7 +139,7 @@ function displayPlaceInfo (place) {
     				contentType : "application/json; charset=utf-8;",
     				dataType : "json",
     				success : function(data1) {
-    					$('#placeInit'+idx).val(data1.placeName + ' ' + data1.placeAddress);
+    					$('#placeInit'+idx).val(data1.place + ' ' + data1.addr);
     					console.log(data1);
     					console.log(idx);
     				},
