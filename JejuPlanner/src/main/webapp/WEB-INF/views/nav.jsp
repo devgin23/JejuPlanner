@@ -11,7 +11,7 @@
     	<a class="navbar-brand title-second" href="/plan/write"> Planner</a>
     </span>
     
-      <ul class="nav navbar-nav ">
+      <ul class="nav navbar-nav " style="flex-direction: row;">
         <li class="nav-item">
           <a class="nav-link" href="/plan/write">일정 만들기</a>
         </li>

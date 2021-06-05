@@ -9,25 +9,25 @@
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet"
 	integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
 	<!-- custom, kakaoMap css -->
-	<link href="/resources/css/write.css?ver=1" rel="stylesheet" type="text/css">
+	<link href="/resources/css/write.css?ver=5" rel="stylesheet" type="text/css">
 	 	<title>일정 만들기</title>
 	</head>
 
-	<body>
-
-		<header>
+	<body id="body">
+		<header id="header">
 			<%@include file="../nav.jsp" %>
 		</header>
+		<main id="main">
 			<section id="container">
 				<!-- 로그인 유무 확인/로그인 시 -->
 				<c:if test="${member.userId != null}">
-				<div id="apidiv"></div>
 					<div class="row h-100">
 				        	<!-- KAKAO MAP VIEW 영역 시작-->
 						<div class="col-8 map-area">
 							<div class="map_wrap">
 								<div id="map"
-									style="width: 100%; height: 100%; position: relative; overflow: hidden;"></div>
+									style="width: 100%; height: 100%; position: relative; overflow: hidden;">
+								</div>
 								<ul id="category">
 									<li id="AD5" data-order="0"><span class="category_bg hotel"></span>
 										숙소</li>
@@ -59,7 +59,8 @@
 			    			document.location.href="/";
 			    		</script>
 					</c:if>
-			</section>
+				</section>
+			</main>
 		</body>
 		
 		<!-- KAKAO MAP JavaScript -->
