@@ -1,12 +1,13 @@
 var mapImage="";
 
 //주소-좌표 변환 객체를 생성합니다
-var geocoder = new kakao.maps.services.Geocoder();
+var markerCount = 0;
 
 // 마커를 클릭했을 때 해당 장소의 상세정보를 보여줄 커스텀오버레이입니다
 var placeOverlay = new kakao.maps.CustomOverlay({zIndex:1}), 
     contentNode = document.createElement('div'), // 커스텀 오버레이의 컨텐츠 엘리먼트 입니다 
     markers = [], // 마커를 담을 배열입니다
+    scheduleMarkers = [], // 내 일정에 관한 마커를 담을 배열
     currCategory = ''; // 현재 선택된 카테고리를 가지고 있을 변수입니다
  
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
@@ -132,7 +133,9 @@ function displayPlaceInfo (place) {
     	    
     	    	var frm = {
 				    	place : place.place_name,
-				    	addr : place.road_address_name
+				    	addr : place.road_address_name,
+				    	longitude : place.x,
+				    	latitude : place.y
     	    	}
     	    	//도로명 주소 없을 경우 지번 주소 대입
     	    	if(frm.addr==""){
@@ -147,9 +150,10 @@ function displayPlaceInfo (place) {
     				contentType : "application/json; charset=utf-8;",
     				dataType : "json",
     				success : function(data1) {
-    					$('#placeInit'+idx).val(data1.place/* + ' ' +  data1.addr*/);
+    					$('#placeInit'+idx).val(data1.place);
     					$('#addr'+idx).val(data1.addr);
-    					
+    					$('#longitude' + idx).val(data1.longitude);
+    					$('#latitude' + idx).val(data1.latitude)
     				},
     				error : function() {
     					alert("simpleWithObject err");
@@ -194,30 +198,47 @@ function changeCategoryClass(el) {
     } 
 }
 
-//주소로 좌표를 검색합니다
-function scheduleMarker(place) {
-	geocoder.addressSearch(place, function(result, status) {
-
-    // 정상적으로 검색이 완료됐으면 
-	     if (status === kakao.maps.services.Status.OK) {
-	        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+// 내 일정의 장소 마커를 등록하는 함수
+function scheduleAddMarker(latitude, longitude) {
 	
-	        // 결과값으로 받은 위치를 마커로 표시합니다
-	        var marker = new kakao.maps.Marker({
-	            map: map,
-	            position: coords
-	        });
+	markerCount++;
 	
-	        // 인포윈도우로 장소에 대한 설명을 표시합니다
-	        var infowindow = new kakao.maps.InfoWindow({
-	            content: '<div style="width:150px;text-align:center;padding:6px 0;">우리회사</div>'
-	        });
-	        infowindow.open(map, marker);
+	var markerPosition  = new kakao.maps.LatLng(latitude, longitude);
 	
-	        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-	        map.setCenter(coords);
-	     } 
+	console.log(markerCount);
+	
+	// 마커를 생성합니다
+	var marker = new kakao.maps.Marker({
+	    position: markerPosition,
+//	    markerNum: i
 	});
+
+	// 마커가 지도 위에 표시되도록 설정합니다
+	marker.setMap(map);
+	
+	//마커 배열에 담기
+	scheduleMarkers.push(marker);
+	
+//	scheduleMarkers[0][markerNo] = 1;
+	
+	console.log(marker);
+	
+	console.log(scheduleMarkers[0]);
+	console.log(scheduleMarkers[1]);
+	
+	
+}
+
+// 내 일정의 장소 마커를 지우는 함수
+function scheduleRemoveMarker() {
+	
+	scheduleMarkers[q].setMap(null);
+//	scheduleMarkers[3].pop;
+
+//	for(var i = 0; i<scheduleMarkers.length; i++){
+//		console.log(scheduleMarkers.length);
+//		scheduleMarkers[i].setMap(null);
+//	}
 }
 
 //한국관광공사 API 세팅
@@ -271,9 +292,3 @@ function scheduleMarker(place) {
 
 };
 
-$('#test').on('click', function() {
-	console.log("카드개수 확인" + $('.card-count').length);
-	console.log("인자 확인"+ $('.card h6').html());
-	console.log("총 일수"+ $('div h4').length);
-	}
-);

@@ -24,6 +24,8 @@ public class BoardController {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("place", vo.getPlace());
 	    map.put("addr", vo.getAddr());
+	    map.put("longitude", vo.getLongitude());
+	    map.put("latitude", vo.getLatitude());
 	    
 		return map;
 	}

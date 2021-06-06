@@ -1,9 +1,13 @@
 package com.gteam.planner.domain;
 
+import java.awt.Point;
+
 public class PlaceVO {
 
 	private String place;
 	private String addr;
+	private double longitude;
+	private double latitude;
 	
 	public String getPlace() {
 		return place;
@@ -17,5 +21,17 @@ public class PlaceVO {
 	public void setAddr(String addr) {
 		this.addr = addr;
 	}
-	
+	public double getLongitude() {
+		return longitude;
+	}
+	public void setLongitude(double longitude) {
+		this.longitude = longitude;
+	}
+	public double getLatitude() {
+		return latitude;
+	}
+	public void setLatitude(double latitude) {
+		this.latitude = latitude;
+	}
+
 }

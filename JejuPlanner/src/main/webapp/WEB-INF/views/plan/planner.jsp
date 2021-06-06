@@ -49,6 +49,8 @@
 
 </head>
 <body>
+	<button onclick="addmarker()">마커생성</button>
+	<button onclick="removemarker()">마커제거</button>
 	<input type="hidden" id="userIdCheck" value="${member.userId}">
 	<div style="overflow:auto; width:100%; height:100%;">
 	<!-- 계획 입력 -->

@@ -23,6 +23,8 @@ CREATE TABLE `schedule` (
 	private String descript;
 	private String place;
 	private String addr;
+	private double longitude;
+	private double latitude;
 	private int planDay;
 	private int startTime;
 	private int rowNo;
@@ -56,6 +58,18 @@ CREATE TABLE `schedule` (
 	}
 	public void setAddr(String addr) {
 		this.addr = addr;
+	}
+	public double getLongitude() {
+		return longitude;
+	}
+	public void setLongitude(double longitude) {
+		this.longitude = longitude;
+	}
+	public double getLatitude() {
+		return latitude;
+	}
+	public void setLatitude(double latitude) {
+		this.latitude = latitude;
 	}
 	public int getPlanDay() {
 		return planDay;

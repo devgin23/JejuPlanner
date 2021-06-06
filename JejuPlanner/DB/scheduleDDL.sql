@@ -6,6 +6,7 @@ CREATE TABLE `schedule` (
 	`descript` VARCHAR(200) NULL DEFAULT NULL,
 	`place` VARCHAR(50) NOT NULL, 
 	`addr` VARCHAR(50) NOT NULL,
+	`location` POINT, /*좌표*/
 	`planDay` INT NOT NULL DEFAULT '0',
 	`startTime` INT NULL DEFAULT '900',
 	`rowNo` INT DEFAULT '0',

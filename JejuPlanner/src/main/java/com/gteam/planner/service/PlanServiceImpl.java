@@ -51,6 +51,8 @@ public class PlanServiceImpl implements PlanService{
 		schMap.put("addr", vo.getAddr());
 		schMap.put("startTime", vo.getStartTime());
 		schMap.put("place", vo.getPlace());
+		schMap.put("longitude", vo.getLongitude());
+		schMap.put("latitude", vo.getLatitude());
 		return schMap;
 	}
 	
@@ -62,6 +64,9 @@ public class PlanServiceImpl implements PlanService{
 		delMap.put("planDay",vo.getPlanDay());
 		delMap.put("descript",vo.getDescript());
 		delMap.put("addr",vo.getAddr());
+		delMap.put("place", vo.getPlace());
+		delMap.put("longitude", vo.getLongitude());
+		delMap.put("latitude", vo.getLatitude());
 		log.info("delMap : " + delMap.toString());
 		return delMap;
 	}
