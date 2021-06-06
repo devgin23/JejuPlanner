@@ -82,8 +82,8 @@ public class PlanServiceImpl implements PlanService{
 	
 	//유저별 계획 목록
 	@Override
-	public List<PlanVO> planListForUser(String userId) throws Exception {
-		return dao.planListForUser(userId);
+	public List<PlanVO> planListForUser(String userId, int displayPost, int postNum, String searchType, String keyword) throws Exception {
+		return dao.planListForUser(userId, displayPost, postNum, searchType, keyword);
 	}
 	
 	//계획 조회

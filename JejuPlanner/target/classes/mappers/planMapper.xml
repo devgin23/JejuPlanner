@@ -51,10 +51,14 @@
 		</select>
 		
 		<!-- 유저별 계획 목록 -->
-		<select id="planListForUser" parameterType="String" resultType="com.gteam.planner.domain.PlanVO">
+		<select id="planListForUser" parameterType="hashMap" resultType="com.gteam.planner.domain.PlanVO">
 			SELECT planNo, userId, planTitle, startDate, planTotalDay, planHit 
-			 FROM plan 
-			  WHERE userId = #{userId}
+			 FROM plan
+			 <if test='searchType.equals("planTitle")'>
+				WHERE userId = #{userId} AND planTitle LIKE concat('%', #{keyword}, '%')
+			</if>
+			 ORDER BY planNo DESC
+			   limit #{displayPost}, #{postNum}
 		</select>
 		
 		<!-- 계획 상세 조회 -->

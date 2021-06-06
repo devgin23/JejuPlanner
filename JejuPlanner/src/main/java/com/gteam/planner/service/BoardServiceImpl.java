@@ -15,9 +15,17 @@ public class BoardServiceImpl implements BoardService{
 	
 	//계획 총 갯수
 	@Override
-	public int boardPlanCount(String searchType, String keyword) throws Exception {
-		return dao.boardPlanCount(searchType, keyword);
+	public int boardPlanCnt(String searchType, String keyword) throws Exception {
+		return dao.boardPlanCnt(searchType, keyword);
 	}
+	//유저별 계획 총 갯수
+
+	@Override
+	public int boardUserPlanCnt(String userId, String searchType, String keyword) throws Exception {
+		searchType="userPlanTitle";
+		return dao.boardUserPlanCnt(userId, searchType, keyword);
+	}
+	
 
 	
 	//일정 객체 출력

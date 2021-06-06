@@ -3,6 +3,7 @@ package com.gteam.planner.dao;
 import java.util.HashMap;
 import java.util.List;
 
+
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -60,8 +61,17 @@ public class PlanDAOImpl implements PlanDAO {
 	
 	//유저별 계획 목록
 	@Override
-	public List<PlanVO> planListForUser(String userId) throws Exception{
-		return sql.selectList(namespace + ".planListForUser", userId);
+	public List<PlanVO> planListForUser(String userId, int displayPost, int postNum,  String searchType, String keyword) throws Exception{
+		HashMap<String, Object> data = new HashMap<String, Object>();
+		data.put("userId", userId);
+		
+		data.put("displayPost", displayPost);
+		data.put("postNum", postNum);
+		
+		data.put("searchType", searchType);
+		data.put("keyword", keyword);
+		log.info("keyword: "+data.toString());
+		return sql.selectList(namespace + ".planListForUser", data);
 	}
 	
 	//계획 조회

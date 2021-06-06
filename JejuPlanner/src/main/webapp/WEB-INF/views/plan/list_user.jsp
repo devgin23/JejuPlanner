@@ -69,12 +69,12 @@
 			<!-- 페이징 -->
 			<div>
 				<c:if test="${page.prev}">
-					<span>[ <a href="/plan/list?num=${page.startPageNum -1}${page.searchTypeAndKeyword}">이전</a> ]</span>
+					<span>[ <a href="/plan/list/user?userId=${member.userId}&num=${page.startPageNum -1}${page.searchTypeAndKeyword}">이전</a> ]</span>
 				</c:if>
 				<c:forEach begin="${page.startPageNum}" end="${page.endPageNum}" var="num">
 					<span>
 						<c:if test="${page.num != num}">
-							<a href="/plan/list?num=${num}${page.searchTypeAndKeyword}">${num}</a>
+							<a href="/plan/list/user?userId=${member.userId}&num=${num}${page.searchTypeAndKeyword}">${num}</a>
 						</c:if>
 						<c:if test="${page.num == num}">
 							<b>${num}</b>
@@ -82,14 +82,13 @@
 					</span>
 				</c:forEach>
 				<c:if test="${page.next}">
-					<span>[ <a href="/plan/list?num=${page.endPageNum +1}${page.searchTypeAndKeyword}">다음</a> ]</span>
+					<span>[ <a href="/plan/list/user?userId=${member.userId}&num=${page.endPageNum +1}${page.searchTypeAndKeyword}">다음</a> ]</span>
 				</c:if>
 			</div>
 			<!-- 페이징 끝 -->
 			<div>
 				<select name="searchType">
 					<option value="planTitle" <c:if test="${page.searchType eq 'planTitle'}">selected</c:if>>제목</option>
-					<option value="userId" <c:if test="${page.searchType eq 'userId'}">selected</c:if>>아이디</option>
 				</select>
 			 
 				<input type="text" name="keyword" value="${page.keyword}"/>
@@ -109,10 +108,7 @@
 		    
 		  var searchType = document.getElementsByName("searchType")[0].value;
 		  var keyword =  document.getElementsByName("keyword")[0].value;
-		  
-		  console.log(searchType)
-		  console.log(keyword)
-		  location.href="/plan/list?num=1"+"&searchType="+searchType+"&keyword="+keyword;
+		  location.href="/plan/list/user?userId=${member.userId}&num=1&searchType="+searchType+"&keyword="+keyword;
 		 };
 	</script>
 </body>

@@ -23,7 +23,7 @@ public interface PlanDAO {
 	public List<ScheduleVO> planSchList(int planNo) throws Exception;
 
 	//유저별 계획 목록
-	List<PlanVO> planListForUser(String userId) throws Exception;
+	List<PlanVO> planListForUser(String userId, int displayPost, int postNum, String searchType, String keyword) throws Exception;
 
 	//계획 조회
 	PlanVO planView(int planNo, String userId) throws Exception;

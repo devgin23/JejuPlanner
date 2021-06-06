@@ -16,7 +16,7 @@
           <a class="nav-link" href="/plan/write">일정 만들기</a>
         </li>
         <li class="nav-item  ">
-          <a class="nav-link" href="#" onclick="javascript:document.planListForUser.submit();">내 일정 보관</a>
+          <a class="nav-link" href="/plan/list/user?userId=${member.userId}&num=1">내 일정 보관</a>
         </li>
         <li class="nav-item  ">
           <a class="nav-link" href="/plan/list?num=1">공유 일정</a>
