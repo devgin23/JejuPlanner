@@ -25,7 +25,7 @@ public interface PlanService {
 	public List<ScheduleVO> planSchList(int planNo) throws Exception;
 
 	//유저별 계획 목록
-	public List<PlanVO> planListForUser(String userId) throws Exception;
+	public List<PlanVO> planListForUser(String userId, int displayPost, int postNum, String searchType, String keyword) throws Exception;
 
 	//계획 조회
 	public PlanVO planView(int planNo, String userId) throws Exception;
