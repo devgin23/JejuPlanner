@@ -1,7 +1,17 @@
 var idx;
-
+// 계획 수정 버튼 클릭 시 작동 함수
+$(document).on('click', '#planModifyStart', function(){
+	$(".form-control").removeAttr("readonly");
+	$("#planModifyStart").css('display','none');
+	$("#planModifyEnd").css('display','block');
+});
+// 계획 수정 완료 버튼 클릭 시 작동 함수
+$(document).on('click', '#planModifyEnd', function(){
+	$(".form-control").attr("readonly", 'true');
+	$("#planModifyStart").css('display','block');
+	$("#planModifyEnd").css('display','none');
+});
 $(function(){
-	
 	
 	//PlanVO 필드 변수 선언
 	var userId = $('#userIdCheck').val();
@@ -255,5 +265,3 @@ $(function(){
 	
 });
 
-/* 여행날짜 기본 값 삽입 스크립트 */
-document.getElementById('startDate').value = new Date().toISOString().substring(0, 10);

@@ -131,12 +131,21 @@ public class PlanController {
 		return "/plan/view";
 	}
 	
-	//계획 수정하기
+	//계획 수정하기(진짜)
+	@RequestMapping(value = "/plan/view/modify", method = RequestMethod.POST)
+	public String planModify(PlanVO vo) throws Exception {
+		log.info("PlanVO : " + vo.toString());
+		planService.planModify(vo);
+		
+		return "redirect:/plan/view?planNo=" + vo.getPlanNo() + "&userId=" +vo.getUserId();
+	}
+	
+	/*//계획 수정하기
 	@RequestMapping(value="/plan/view/modify", method = RequestMethod.POST)
 	public String planModify(PlanVO vo) throws Exception{
 		planService.planModify(vo);
 		return "/plan/write";
-	}
+	}*/
 	
 	//계획 삭제하기
 	@RequestMapping(value="/plan/view/delete", method = RequestMethod.POST)

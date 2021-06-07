@@ -87,7 +87,7 @@
 		<!-- 계획 수정 -->
 		<update id="planModify" parameterType="com.gteam.planner.domain.PlanVO">
 			UPDATE plan 
-			 SET	planTitle = #{planTitle}, startDate = #{startDate}, planTotalDay = #{planTotalDay} 
+			 SET	planTitle = #{planTitle}, startDate = #{startDate} 
 			  WHERE userId = #{userId} AND planNo = #{planNo}
 		</update>
 		
