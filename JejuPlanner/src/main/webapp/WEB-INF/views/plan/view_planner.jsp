@@ -26,6 +26,7 @@
   	width:100%; 
   	height:90%;
   }
+
   /* btn-primary 색깔 바꾸기 css */
   /* .btn-primary {
     background-color: #7bc143;
@@ -51,25 +52,28 @@
 	<div id="plannerDiv">
 	<!-- 계획 입력 -->
 	<div class="col-md-12">
-	<form id="planFrm" name="planFrm" >
+	<form id="planFrm" name="planFrm" method="post" action="/plan/view/modify" >
 		<div class="row">
+			<input type="hidden" name="planNo" value="${planView.planNo}"/>
+			<input type="hidden" name="userId" value="${member.userId}"/>
 			<div class="form-group col-sm-12">
 				<label>여행 제목</label>
-				<input type="text" class="form-control" id="planTitle" name="planTitle" value="${planView.planTitle}" placeholder="일정 타이틀"/>
+				<input type="text" class="form-control" id="planTitle" name="planTitle" value="${planView.planTitle}" placeholder="일정 타이틀" readonly/>
 			</div>
-			<div class="form-group col-sm-6">
+			<div class="form-group col-sm-6"> 
 				<label>여행 날짜</label>
-				<input type="date" class="form-control" id="startDate" name="startDate" value="<fmt:formatDate value="${planView.startDate}" pattern="yyyy-MM-dd"/>"/>
+				<input type="date" class="form-control" id="startDate" name="startDate" value="<fmt:formatDate value="${planView.startDate}" pattern="yyyy-MM-dd"/>" readonly/>
 			</div>
 			
 			<div class="form-group col-sm-4">
 				<label>여행 일수</label>
 				<select id="planTotalDayCount" class="form-select">
-				  <option value="${planView.planTotalDay}" selected disabled>${planView.planTotalDay}일</option>
+				  <option value="${planView.planTotalDay}" selected>${planView.planTotalDay}일</option>
 				</select>
 			</div>
 			<div class="form-group col-sm-2">
-				<input type="button" class="btn btn-primary mb-3" id="planFrmSubmit" name="planFrmSubmit" value="작성" style="float:right; margin-top: 25px;">
+				<input type="button" class="btn btn-primary mb-3" id="planModifyStart" name="planModifyStart" value="수정" style="float:right; margin-top: 25px;">
+				<input type="submit" class="btn btn-primary mb-3" id="planModifyEnd" name="planModifyEnd" value="완료" style="float:right; margin-top: 25px; display: none;">
 			</div>
 		</div>
 	</form>
@@ -98,6 +102,7 @@
 			</div>
 		</div>
 	</div>
+	
 </body>
 
 </html>
