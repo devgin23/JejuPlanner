@@ -14,19 +14,17 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 <style>
 
-  .input-form {
-  	background-color: powderblue;
-  }
-  
-  .output-form {
-  	background-color: #D2FFD2;
-  }
   .dropdown-menu{
   	width:50px;
   	text-align:center;
   }
   .schDiv{
   	margin-right: 10px;
+  }
+  #plannerDiv{
+  	overflow:auto; 
+  	width:100%; 
+  	height:90%;
   }
   /* btn-primary 색깔 바꾸기 css */
   /* .btn-primary {
@@ -50,7 +48,7 @@
 </head>
 <body>
 	<input type="hidden" id="userIdCheck" value="${member.userId}">
-	<div style="overflow:auto; width:100%; height:100%;">
+	<div id="plannerDiv">
 	<!-- 계획 입력 -->
 	<div class="col-md-12">
 	<form id="planFrm" name="planFrm" >
@@ -69,20 +67,6 @@
 				<select id="planTotalDayCount" class="form-select">
 				  <option value="${planView.planTotalDay}" selected disabled>${planView.planTotalDay}일</option>
 				</select>
-				<%-- <div class="dropdown">
-					<button class="btn btn-day btn-primary dropdown-toggle" id="method_status" type="button" id="dropdownMenuButton" data-toggle="dropdown">
-					 ${planView.planTotalDay}일
-					</button>
-					<!-- <ul id="method_type" class="dropdown-menu"  style="text-align:center;">	
-						<li class="dropdown-item"><a href="#" id="planTotalDay" value="1"><div>1일</div></a></li>
-						<li class="dropdown-item"><a href="#" id="planTotalDay" value="2"><div>2일</div></a></li>
-						<li class="dropdown-item"><a href="#" id="planTotalDay" value="3"><div>3일</div></a></li>
-						<li class="dropdown-item"><a href="#" id="planTotalDay" value="4"><div>4일</div></a></li>
-						<li class="dropdown-item"><a href="#" id="planTotalDay" value="5"><div>5일</div></a></li>
-						<li class="dropdown-item"><a href="#" id="planTotalDay" value="6"><div>6일</div></a></li>
-						<li class="dropdown-item"><a href="#" id="planTotalDay" value="7"><div>7일</div></a></li>
-					</ul> -->
-				</div> --%>
 			</div>
 			<div class="form-group col-sm-2">
 				<input type="button" class="btn btn-primary mb-3" id="planFrmSubmit" name="planFrmSubmit" value="작성" style="float:right; margin-top: 25px;">
@@ -95,19 +79,21 @@
 	<!-- 계획 출력 DIV -->
 		<div id="schDiv">
 			<div>
-				<h3>Day1</h3>
-				<c:forEach items="${scheduleList}" var="scheduleList">
-					<c:if test="${scheduleList.planDay == 1}">
-						<div class="card" style="width: 18rem;">
-							<div class="card-body cardTable">
-							<h5 class="card-title">${scheduleList.addr}</h5>
-							<h3 class="card-title" style="display:none;">${scheduleList.startTime}</h3>
-							<h6 class="card-subtitle mb-2 text-muted">${scheduleList.startTime} : 00</h6>
-							<p class="card-text">${scheduleList.descript}</p>
-							<button type="button" class="btn btn-primary btn-sm" id="deletePlan'+deleteCount+'">delete</button>
+				<c:forEach var="dayCnt" begin="1" end="${planView.planTotalDay}" step="1">
+					<h3>Day${dayCnt}</h3>
+					<c:forEach items="${scheduleList}" var="scheduleList">
+						<c:if test="${scheduleList.planDay == 1}">
+							<div class="card" style="width: 18rem;">
+								<div class="card-body cardTable">
+								<h5 class="card-title">${scheduleList.addr}</h5>
+								<h3 class="card-title" style="display:none;">${scheduleList.startTime}</h3>
+								<h6 class="card-subtitle mb-2 text-muted">${scheduleList.startTime} : 00</h6>
+								<p class="card-text">${scheduleList.descript}</p>
+								<button type="button" class="btn btn-primary btn-sm" id="deletePlan'+deleteCount+'">delete</button>
+								</div>
 							</div>
-						</div>
-					</c:if>
+						</c:if>
+					</c:forEach>
 				</c:forEach>
 			</div>
 		</div>
