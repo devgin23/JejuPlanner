@@ -15,8 +15,17 @@ $(function(){
 		$("#planModifyEnd").css('display','none');
 	});
 	$(document).on('click', '.deleteSch', function(){
-		console.log("hello bitches");
 		
+		var deleteMap = {startTime :$(this).siblings('h3').html(), 
+				planDay : $(this).siblings('h4').html(), 
+				descript :$(this).siblings('#descript').html(), 
+				place :  $(this).siblings('h5').html(), 
+				addr :  $(this).siblings('h6').html(), 
+				longitude : $(this).siblings('#longitude').html(), 
+				latitude : $(this).siblings('#latitude').html(), 
+				markerNo : $(this).siblings('p[id^=markerNo]').html()
+				}
+		console.log(deleteMap);
 	});
 	//PlanVO 필드 변수 선언
 	var userId = $('#userIdCheck').val();

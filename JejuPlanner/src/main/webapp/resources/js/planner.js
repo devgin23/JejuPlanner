@@ -178,7 +178,7 @@ $(function(){
 				schOutput+= '<div class="card-body cardTable">';
 				schOutput+= '<h5 class="card-title">' + data.place + '</h5>';
 				schOutput+= '<h6 class="card-title">' + data.addr + '</h6>';
-				schOutput+= '<h4 class="card-title" style="display:none;">' + data.planDay + '</h6>';
+				schOutput+= '<h4 class="card-title" style="display:none;">' + data.planDay + '</h4>';
 				schOutput+= '<h3 class="card-title" style="display:none;">' + data.startTime + '</h3>';
 				schOutput+= '<p id="longitude" style="display:none;">' + data.longitude + '</p>';
 				schOutput+= '<p id="latitude" style="display:none;">' + data.latitude + '</p>';
