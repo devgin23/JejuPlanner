@@ -1,26 +1,37 @@
 package com.gteam.planner.domain;
 
+import java.awt.Point;
+
 public class PlaceVO {
 
-	private String placeName;
-	private String placeAddress;
+	private String place;
+	private String addr;
+	private double longitude;
+	private double latitude;
 	
-	public String getPlaceName() {
-		return placeName;
+	public String getPlace() {
+		return place;
 	}
-	public void setPlaceName(String placeName) {
-		this.placeName = placeName;
+	public void setPlace(String place) {
+		this.place = place;
 	}
-	public String getPlaceAddress() {
-		return placeAddress;
+	public String getAddr() {
+		return addr;
 	}
-	public void setPlaceAddress(String placeAddress) {
-		this.placeAddress = placeAddress;
+	public void setAddr(String addr) {
+		this.addr = addr;
 	}
-	@Override
-	public String toString() {
-		return "PlaceVO [placeName=" + placeName + ", placeAddress=" + placeAddress + "]";
+	public double getLongitude() {
+		return longitude;
 	}
-	
-	
+	public void setLongitude(double longitude) {
+		this.longitude = longitude;
+	}
+	public double getLatitude() {
+		return latitude;
+	}
+	public void setLatitude(double latitude) {
+		this.latitude = latitude;
+	}
+
 }

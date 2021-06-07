@@ -18,22 +18,9 @@
 		
 		<!-- 일정 DB 추가 -->
 		<insert id="planSchAdd" parameterType="com.gteam.planner.domain.PlanVO">
-			INSERT INTO schedule(planNo, userId, descript, addr, planDay, startTime)
-			 VALUES(#{planNo}, #{userId}, #{descript}, #{addr},  #{planDay}, #{startTime})
+			INSERT INTO schedule(planNo, userId, descript, place, addr,  planDay, startTime, latitude, longitude, markerNo)
+			 VALUES(#{planNo}, #{userId}, #{descript}, #{place}, #{addr}, #{planDay}, #{startTime}, #{latitude}, #{longitude}, #{markerNo})
 		</insert>
-		
-		<!-- 일정 + 계획 조인쿼리를 위한 선언 -->
-		<!-- <resultMap type="com.gteam.planner.domain.PlanVO" id="planResult">
-			<id property="planNo" column="planNo"></id>
-			<result column="userId" property="userId"></result>
-			<result column="planTitle" property="planTitle"></result>
-			<result column="planTotalDay" property="planTotalDay"></result>
-			<collection property="scheduleVOList" javaType="java.util.ArrayList" ofType="com.gteam.planner.domain.ScheduleVO">
-				<id property="planNo" column="planNo"></id>
-				<result property="addr" column="addr"></result>
-				<result property="descript" column="descript"></result>
-			</collection>
-		</resultMap>  -->
 		
 		<!-- 계획 목록 -->
 		<select id="planList" parameterType="hashMap" resultType="com.gteam.planner.domain.PlanVO">
@@ -70,24 +57,15 @@
 		
 		<!-- 일정 조회 -->
 		<select id="planSchList" parameterType="int" resultType="com.gteam.planner.domain.ScheduleVO">
-			SELECT planNo, userId, descript, addr, startTime, planDay
+			SELECT planNo, userId, descript, place, addr, startTime, planDay, latitude, longitude, markerNo
 			 FROM schedule
 			  WHERE planNo = #{planNo}
 		</select>
 		
-		<!-- 계획 + 일정 조회 -->
-		<!-- <select id="planView" parameterType="int" resultType="com.gteam.planner.domain.PlanVO">
-			SELECT p.planNo, p.userId, p.planTitle, p.planTotalDay,
-				   s.descript, s.addr 
-			FROM plan as p JOIN schedule as s 
-			ON p.planNo = s.planNo 
-			WHERE p.planNo = #{planNo}
-		</select> -->
-		
 		<!-- 계획 수정 -->
 		<update id="planModify" parameterType="com.gteam.planner.domain.PlanVO">
 			UPDATE plan 
-			 SET	planTitle = #{planTitle}, startDate = #{startDate} 
+			SET	planTitle = #{planTitle}, startDate = #{startDate} 
 			  WHERE userId = #{userId} AND planNo = #{planNo}
 		</update>
 		

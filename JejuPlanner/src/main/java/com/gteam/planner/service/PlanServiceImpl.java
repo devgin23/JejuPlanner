@@ -35,7 +35,10 @@ public class PlanServiceImpl implements PlanService{
 			schVo.setAddr(schList.get(i).get("addr").toString());
 			schVo.setPlanDay(Integer.parseInt(schList.get(i).get("planDay").toString()));
 			schVo.setStartTime(Integer.parseInt(schList.get(i).get("startTime").toString()));
-			schVo.setPlaceAddress(schList.get(i).get("placeAddress").toString());
+			schVo.setPlace(schList.get(i).get("place").toString());
+			schVo.setLongitude(Double.parseDouble(schList.get(i).get("longitude").toString()));
+			schVo.setLatitude(Double.parseDouble(schList.get(i).get("latitude").toString()));
+			schVo.setMarkerNo(Integer.parseInt(schList.get(i).get("markerNo").toString()));
 			log.info(schVo.toString());
 			dao.planSchAdd(schVo);
 		}
@@ -50,7 +53,10 @@ public class PlanServiceImpl implements PlanService{
 		schMap.put("descript", vo.getDescript());
 		schMap.put("addr", vo.getAddr());
 		schMap.put("startTime", vo.getStartTime());
-		schMap.put("placeAddress", vo.getPlaceAddress());
+		schMap.put("place", vo.getPlace());
+		schMap.put("longitude", vo.getLongitude());
+		schMap.put("latitude", vo.getLatitude());
+		schMap.put("markerNo", vo.getMarkerNo());
 		return schMap;
 	}
 	
@@ -62,6 +68,10 @@ public class PlanServiceImpl implements PlanService{
 		delMap.put("planDay",vo.getPlanDay());
 		delMap.put("descript",vo.getDescript());
 		delMap.put("addr",vo.getAddr());
+		delMap.put("place", vo.getPlace());
+		delMap.put("longitude", vo.getLongitude());
+		delMap.put("latitude", vo.getLatitude());
+		delMap.put("markerNo", vo.getMarkerNo());
 		log.info("delMap : " + delMap.toString());
 		return delMap;
 	}
@@ -72,8 +82,6 @@ public class PlanServiceImpl implements PlanService{
 		return dao.planList(displayPost, postNum, searchType, keyword);
 	}
 
-	
-	
 	//일정 목록 출력
 	@Override
 	public List<ScheduleVO> planSchList(int planNo) throws Exception {
