@@ -18,7 +18,6 @@ import com.gteam.planner.domain.ScheduleVO;
 public class PlanServiceImpl implements PlanService{
 	
 	private static final Logger log = LoggerFactory.getLogger(PlanController.class);
-	
 	@Autowired
 	private PlanDAO dao;
 	
@@ -36,6 +35,7 @@ public class PlanServiceImpl implements PlanService{
 			schVo.setAddr(schList.get(i).get("addr").toString());
 			schVo.setPlanDay(Integer.parseInt(schList.get(i).get("planDay").toString()));
 			schVo.setStartTime(Integer.parseInt(schList.get(i).get("startTime").toString()));
+			schVo.setPlaceAddress(schList.get(i).get("placeAddress").toString());
 			log.info(schVo.toString());
 			dao.planSchAdd(schVo);
 		}
@@ -50,6 +50,7 @@ public class PlanServiceImpl implements PlanService{
 		schMap.put("descript", vo.getDescript());
 		schMap.put("addr", vo.getAddr());
 		schMap.put("startTime", vo.getStartTime());
+		schMap.put("placeAddress", vo.getPlaceAddress());
 		return schMap;
 	}
 	
@@ -65,23 +66,24 @@ public class PlanServiceImpl implements PlanService{
 		return delMap;
 	}
 	
-	//게시판용 계획 목록
+	//게시판용 계획 목록 및 페이징 및 페이징 처리
 	@Override
-	public List<PlanVO> planList() throws Exception {
-		return dao.planList();
+	public List<PlanVO> planList(int displayPost, int postNum, String searchType, String keyword) throws Exception {
+		return dao.planList(displayPost, postNum, searchType, keyword);
 	}
+
+	
 	
 	//일정 목록 출력
 	@Override
 	public List<ScheduleVO> planSchList(int planNo) throws Exception {
-		System.out.println("스케줄 서비스 인자 확인 : " + planNo);
 		return dao.planSchList(planNo);
 	}
 	
 	//유저별 계획 목록
 	@Override
-	public List<PlanVO> planListForUser(String userId) throws Exception {
-		return dao.planListForUser(userId);
+	public List<PlanVO> planListForUser(String userId, int displayPost, int postNum, String searchType, String keyword) throws Exception {
+		return dao.planListForUser(userId, displayPost, postNum, searchType, keyword);
 	}
 	
 	//계획 조회
@@ -99,7 +101,6 @@ public class PlanServiceImpl implements PlanService{
 	//계획 삭제
 	@Override
 	public void planDelete(int planNo, String userId) throws Exception {
-		log.info("Service인자출력 : " + planNo + userId);
 		dao.planDelete(planNo, userId);
 	}
 

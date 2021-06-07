@@ -19,11 +19,11 @@
 		<!-- 일정 DB 추가 -->
 		<insert id="planSchAdd" parameterType="com.gteam.planner.domain.PlanVO">
 			INSERT INTO schedule(planNo, userId, descript, addr, planDay, startTime)
-			 VALUES(#{planNo}, #{userId}, #{descript}, #{addr}, #{planDay}, #{startTime})
+			 VALUES(#{planNo}, #{userId}, #{descript}, #{addr},  #{planDay}, #{startTime})
 		</insert>
 		
 		<!-- 일정 + 계획 조인쿼리를 위한 선언 -->
-		<resultMap type="com.gteam.planner.domain.PlanVO" id="planResult">
+		<!-- <resultMap type="com.gteam.planner.domain.PlanVO" id="planResult">
 			<id property="planNo" column="planNo"></id>
 			<result column="userId" property="userId"></result>
 			<result column="planTitle" property="planTitle"></result>
@@ -33,20 +33,46 @@
 				<result property="addr" column="addr"></result>
 				<result property="descript" column="descript"></result>
 			</collection>
-		</resultMap>
+		</resultMap>  -->
 		
-		<!-- 계획 조회 -->
+		<!-- 계획 목록 -->
+		<select id="planList" parameterType="hashMap" resultType="com.gteam.planner.domain.PlanVO">
+			SELECT planNo, userId, planTitle, startDate, planTotalDay, planHit 
+			 FROM plan
+			<if test='searchType.equals("planTitle")'>
+				WHERE planTitle LIKE concat('%', #{keyword}, '%')
+			</if>
+			 
+			<if test='searchType.equals("userId")'>
+				WHERE userId LIKE concat('%', #{keyword}, '%')
+			</if>
+			  ORDER BY planNo DESC
+			   limit #{displayPost}, #{postNum}
+		</select>
+		
+		<!-- 유저별 계획 목록 -->
+		<select id="planListForUser" parameterType="hashMap" resultType="com.gteam.planner.domain.PlanVO">
+			SELECT planNo, userId, planTitle, startDate, planTotalDay, planHit 
+			 FROM plan
+			 <if test='searchType.equals("planTitle")'>
+				WHERE userId = #{userId} AND planTitle LIKE concat('%', #{keyword}, '%')
+			</if>
+			 ORDER BY planNo DESC
+			   limit #{displayPost}, #{postNum}
+		</select>
+		
+		<!-- 계획 상세 조회 -->
 		<select id="planView" parameterType="hashMap" resultType="com.gteam.planner.domain.PlanVO">
 			SELECT planNo, userId, planTitle, startDate, planTotalDay, planHit 
-			FROM plan 
-			WHERE userId = #{userId} AND planNo = #{planNo}
+			 FROM plan 
+			  WHERE userId = #{userId} AND planNo = #{planNo}
 		</select>
 		
 		<!-- 일정 조회 -->
 		<select id="planSchList" parameterType="int" resultType="com.gteam.planner.domain.ScheduleVO">
 			SELECT planNo, userId, descript, addr, startTime, planDay
-			FROM schedule
-			WHERE planNo = #{planNo}
+			 FROM schedule
+			  WHERE planNo = #{planNo}
 		</select>
 		
 		<!-- 계획 + 일정 조회 -->
@@ -58,30 +84,17 @@
 			WHERE p.planNo = #{planNo}
 		</select> -->
 		
-		<!-- 계획 목록 -->
-		<select id="planList" resultType="com.gteam.planner.domain.PlanVO">
-			SELECT planNo, userId, planTitle, startDate, planTotalDay, planHit 
-			FROM plan
-		</select>
-		
-		<!-- 유저별 계획 목록 -->
-		<select id="planListForUser" parameterType="String" resultType="com.gteam.planner.domain.PlanVO">
-			SELECT planNo, userId, planTitle, startDate, planTotalDay, planHit 
-			FROM plan 
-			WHERE userId = #{userId}
-		</select>
-		
 		<!-- 계획 수정 -->
 		<update id="planModify" parameterType="com.gteam.planner.domain.PlanVO">
 			UPDATE plan 
-			SET	planTitle = #{planTitle}, startDate = #{startDate}, planTotalDay = #{planTotalDay} 
-			WHERE userId = #{userId} AND planNo = #{planNo}
+			 SET	planTitle = #{planTitle}, startDate = #{startDate}, planTotalDay = #{planTotalDay} 
+			  WHERE userId = #{userId} AND planNo = #{planNo}
 		</update>
 		
 		<!-- 계획 삭제 -->
 		<delete id="planDelete" parameterType="com.gteam.planner.domain.PlanVO">
 			DELETE 
-			FROM plan 
+			 FROM plan 
 			WHERE planNo = #{planNo} AND userId = #{userId};
 		</delete>
 

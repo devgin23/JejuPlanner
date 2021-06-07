@@ -20,9 +20,11 @@ public class ScheduleVO {
 	private String userId;
 	private String descript;
 	private String addr;
+	private String placeAddress;
 	private int planDay;
 	private int startTime;
 	private int rowNo;
+	
 	
 	public int getPlanNo() {
 		return planNo;
@@ -66,10 +68,18 @@ public class ScheduleVO {
 	public void setRowNo(int rowNo) {
 		this.rowNo = rowNo;
 	}
-	
+	public String getPlaceAddress() {
+		return placeAddress;
+	}
+	public void setPlaceAddress(String placeAddress) {
+		this.placeAddress = placeAddress;
+	}
 	@Override
 	public String toString() {
 		return "ScheduleVO [planNo=" + planNo + ", userId=" + userId + ", descript=" + descript + ", addr=" + addr
-				+ ", planDay=" + planDay + ", startTime=" + startTime + ", rowNo=" + rowNo + "]";
+				+ ", placeAddress=" + placeAddress + ", planDay=" + planDay + ", startTime=" + startTime + ", rowNo="
+				+ rowNo + "]";
 	}
+	
+	
 }

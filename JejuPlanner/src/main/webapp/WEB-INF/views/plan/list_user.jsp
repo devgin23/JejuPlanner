@@ -9,26 +9,8 @@
 
 <!-- Bootstrap CSS -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
-  
-<style>
-	
-	a:link {text-decoration: none; color: black;}
-	a:hover {text-decoration: underline; color: black;}
-	a:visited {text-decoration: none; color: black;}
-	a:active {text-decoration: none; color: black;}
-	
-	.input-form {
-  		background-color: powderblue;
-  	}
-  
-	.output-form {
-  		background-color: #D2FFD2;
-  	}
-  
-	.table, .table-striped{
-		text-align: center;
-	}
-</style>
+li<!-- custom css -->
+<link href="/resources/css/list.css" rel="stylesheet" type="text/css">
 
 <title>내 일정 목록</title>
 </head>
@@ -45,8 +27,8 @@
 				<thead>	
 					<tr>
 						<th class="col-md-1">번호</th>
-						<th class="col-md-2">여행시작날짜</th>
-						<th class="col-md-5">계획제목</th>
+						<th class="col-md-2">여행 시작날짜</th>
+						<th class="col-md-5">계획 제목</th>
 						<th class="col-md-2">아이디</th>
 						<th class="col-md-1">일수</th>
 						<th class="col-md-1">조회수</th>
@@ -65,14 +47,52 @@
 					</c:forEach>
 				</tbody>
 			</table>
-			<br/>
-			<button type="button" class="btn btn-secondary" onclick="location.href='/plan/write'">돌아가기</button>
+			<!-- 계획 출력 끝 -->
+			<!-- 페이징 -->
+			<div class="col-md-offset-3">
+				<ul class="pagination justify-content-center">
+				<c:if test="${page.prev}">
+					<li class="page-item"><a href="/plan/list/user?userId=${member.userId}&num=${page.startPageNum -1}${page.searchTypeAndKeyword}">이전</a></li>
+				</c:if>
+				<c:forEach begin="${page.startPageNum}" end="${page.endPageNum}" var="num">
+					<c:if test="${page.num != num}">
+						<li class="page-item"><a class="page-link" href="/plan/list/user?userId=${member.userId}&num=${num}${page.searchTypeAndKeyword}">${num}</a></li>
+					</c:if>
+					<c:if test="${page.num == num}">
+						<li class="page-item active"><a class="page-link" class="page-link"href="/plan/list/user?userId=${member.userId}&num=${num}${page.searchTypeAndKeyword}">${num}</a></li>
+					</c:if>
+				</c:forEach>
+				<c:if test="${page.next}">
+					<li class="page-item"><a class="page-link" href="/plan/list/user?userId=${member.userId}&num=${page.endPageNum +1}${page.searchTypeAndKeyword}">다음</a></li>
+				</c:if>
+				</ul>
+			</div>
+			<!-- 페이징 끝 -->
+			<div>
+				<span class="search-form">
+					<select name="searchType" class="form-select">
+						<option value="planTitle" <c:if test="${page.searchType eq 'planTitle'}">selected</c:if>>제목</option>
+					</select>
+				 
+					<input type="text" class="input-keyword" name="keyword" value="${page.keyword}"/>
+					<button class="btn btn-primary" type="submit" id="searchBtn">검색</button>
+				</span>
+				<button type="button" class="btn btn-secondary" onclick="location.href='/plan/write'">돌아가기</button>
+			</div>
 		</div>		
 	</div>
-		<!-- 계획 출력 끝 -->
 	<br/>
 	<!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js">
     </script>
+    <script>
+
+		 document.getElementById("searchBtn").onclick = function () {
+		    
+		  var searchType = document.getElementsByName("searchType")[0].value;
+		  var keyword =  document.getElementsByName("keyword")[0].value;
+		  location.href="/plan/list/user?userId=${member.userId}&num=1&searchType="+searchType+"&keyword="+keyword;
+		 };
+	</script>
 </body>
 </html>

@@ -17,24 +17,24 @@ public interface PlanService {
 	
 	//계획 설정 추가, PlanNo 확인, 계획 DB 추가
 	public void planAdd(PlanVO vo, List<Map<String,Object>> schList) throws Exception;
+	//게시판용 계획 목록 및 페이징 처리
+	public List<PlanVO> planList(int displayPost, int postNum, String searchType, String keyword) throws Exception;
 	
-	//게시판용 계획 목록
-	List<PlanVO> planList() throws Exception;
-	
+
 	//계획일정 목록
 	public List<ScheduleVO> planSchList(int planNo) throws Exception;
 
 	//유저별 계획 목록
-	List<PlanVO> planListForUser(String userId) throws Exception;
+	public List<PlanVO> planListForUser(String userId, int displayPost, int postNum, String searchType, String keyword) throws Exception;
 
 	//계획 조회
-	PlanVO planView(int planNo, String userId) throws Exception;
+	public PlanVO planView(int planNo, String userId) throws Exception;
 
 	//계획 수정
-	void planModify(PlanVO vo) throws Exception;
+	public void planModify(PlanVO vo) throws Exception;
 
 	//계회 삭제
-	void planDelete(int planNo, String userId) throws Exception;
+	public void planDelete(int planNo, String userId) throws Exception;
 
 
 }
