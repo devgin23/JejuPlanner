@@ -93,7 +93,7 @@
 								<h3 class="card-title" style="display:none;">${scheduleList.startTime}</h3>
 								<h6 class="card-subtitle mb-2 text-muted">${scheduleList.startTime} : 00</h6>
 								<p class="card-text">${scheduleList.descript}</p>
-								<button type="button" class="btn btn-primary btn-sm" id="deletePlan'+deleteCount+'">delete</button>
+								<button type="button" class="btn btn-primary btn-sm deleteSch">delete</button>								
 								</div>
 							</div>
 						</c:if>

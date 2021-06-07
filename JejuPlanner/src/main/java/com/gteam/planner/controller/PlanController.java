@@ -140,13 +140,6 @@ public class PlanController {
 		return "redirect:/plan/view?planNo=" + vo.getPlanNo() + "&userId=" +vo.getUserId();
 	}
 	
-	/*//계획 수정하기
-	@RequestMapping(value="/plan/view/modify", method = RequestMethod.POST)
-	public String planModify(PlanVO vo) throws Exception{
-		planService.planModify(vo);
-		return "/plan/write";
-	}*/
-	
 	//계획 삭제하기
 	@RequestMapping(value="/plan/view/delete", method = RequestMethod.POST)
 	public String planDelete(@RequestParam("planNo") int planNo, @RequestParam("userId") String userId) throws Exception{
