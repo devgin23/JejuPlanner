@@ -6,9 +6,11 @@ CREATE TABLE `schedule` (
 	`descript` VARCHAR(200) NULL DEFAULT NULL,
 	`place` VARCHAR(50) NOT NULL, 
 	`addr` VARCHAR(50) NOT NULL,
-	`location` POINT, /*좌표*/
 	`planDay` INT NOT NULL DEFAULT '0',
 	`startTime` INT NULL DEFAULT '900',
+	`longitude` DOUBLE NOT NULL, 
+	`latitude` DOUBLE NOT NULL, 
+	`markerNo` INT NOT NULL,
 	`rowNo` INT DEFAULT '0',
 	INDEX `SCHEDULE_FK_SET` (`planNo`, `userId`) USING BTREE,
 	CONSTRAINT `SCHEDULE_FK_SET` FOREIGN KEY (`planNo`, `userId`) REFERENCES `project`.`plan` (`planNo`, `userId`) ON UPDATE NO ACTION ON DELETE CASCADE

@@ -153,7 +153,7 @@ function displayPlaceInfo (place) {
     					$('#placeInit'+idx).val(data1.place);
     					$('#addr'+idx).val(data1.addr);
     					$('#longitude' + idx).val(data1.longitude);
-    					$('#latitude' + idx).val(data1.latitude)
+    					$('#latitude' + idx).val(data1.latitude);
     				},
     				error : function() {
     					alert("simpleWithObject err");
@@ -205,41 +205,28 @@ function scheduleAddMarker(latitude, longitude) {
 	
 	var markerPosition  = new kakao.maps.LatLng(latitude, longitude);
 	
-	console.log(markerCount);
-	
 	// 마커를 생성합니다
 	var marker = new kakao.maps.Marker({
-	    position: markerPosition,
-//	    markerNum: i
+	    position: markerPosition
 	});
 
 	// 마커가 지도 위에 표시되도록 설정합니다
 	marker.setMap(map);
 	
+	//마커에 일정과의 매핑을 위한 속성 추가
+	marker.markerNo = markerCount;
+	
 	//마커 배열에 담기
 	scheduleMarkers.push(marker);
-	
-//	scheduleMarkers[0][markerNo] = 1;
-	
-	console.log(marker);
-	
-	console.log(scheduleMarkers[0]);
-	console.log(scheduleMarkers[1]);
-	
-	
 }
 
 // 내 일정의 장소 마커를 지우는 함수
-function scheduleRemoveMarker() {
+$(document).on("click", 'button[id^=deletePlan]', function scheduleRemoveMarker() {
 	
-	scheduleMarkers[q].setMap(null);
-//	scheduleMarkers[3].pop;
-
-//	for(var i = 0; i<scheduleMarkers.length; i++){
-//		console.log(scheduleMarkers.length);
-//		scheduleMarkers[i].setMap(null);
-//	}
-}
+	console.log("markerNo : " + $(this).siblings('p[id^=markerNo]').html());
+	
+	scheduleMarkers[$(this).siblings('p[id^=markerNo]').html() - 1].setMap(null);
+});
 
 //한국관광공사 API 세팅
   function visitKoreaAPI(place_name) {

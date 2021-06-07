@@ -9,6 +9,7 @@ $(function(){
 	var startDate;
 	var planTotalDay = 0;
 	var deleteCount = 0;
+	var markerCount = 0;
 	//collapse 생성 함수
 	//id 마다 i 부여
 	function createCollapse(i) {
@@ -16,8 +17,11 @@ $(function(){
 		createStringCollap = '<div class="card card-body">';
 		createStringCollap += '<form id="schFrm'+i+'">';
 		createStringCollap += '<input type="hidden" id="userId" name="userId" value="'+ userId +'">';
-		createStringCollap += '<input type="hidden" id="schDay'+i+'" name="planDay" value="" readonly	style="width: 20px; text-align: center"/>';
+		createStringCollap += '<input type="hidden" id="schDay'+i+'" name="planDay" value="'+i+'" readonly	style="width: 20px; text-align: center"/>';
 		createStringCollap += '<input type="hidden" id="addr' + i +'" name="addr" value="" readonly/>';
+		createStringCollap += '<input type="hidden" id="longitude' + i +'" name="longitude" value="" readonly/>';
+		createStringCollap += '<input type="hidden" id="latitude' + i +'" name="latitude" value="" readonly/>';
+		createStringCollap += '<input type="hidden" class="markerNo" id="markerNo1" name="markerNo" value="1" readonly/>';
 		createStringCollap += '<div class="input-group input-group-sm mb-3">'
 		createStringCollap += '<span class="input-group-text" id="inputGroup-sizing-sm">장소</span>'
 		createStringCollap += '<input type="text" class="form-control" id="placeInit'+i+'" name="place" readonly style="background-color:#FFFFF0"></div>'
@@ -72,6 +76,7 @@ $(function(){
 			   var planOutput = '';
 			   for(var i = 1; i<=planTotalDay; i++){
 				   var createDay = '<div><h4>DAY'+ i + '</h4>';
+				   
 				   createDay += '<button class="btn btn-primary"id="schAddBtn'+i+'"type="button"data-bs-toggle="collapse" data-bs-target="#collapse'+i+'"aria-expanded="false"aria-controls="collapseExample">';
 				   createDay += '일정 생성';
 				   createDay += '</button>';
@@ -155,8 +160,13 @@ $(function(){
 	        dataType:"json",
 	        type: "POST",
 	        success: function(data){
+	        	markerCount += 1;
 				deleteCount += 1;
 				var schOutput='';
+				
+				//일정 생성폼에 markNo값 부여
+				$('.card .markerNo').val(markerCount + 1);
+				$('.card .markerNo').attr("id","markerNo" + (markerCount + 1));
 			
 				//startTime 형태 바꾸기.
 				var hour = data.startTime;
@@ -168,9 +178,13 @@ $(function(){
 				schOutput+= '<div class="card-body cardTable">';
 				schOutput+= '<h5 class="card-title">' + data.place + '</h5>';
 				schOutput+= '<h6 class="card-title">' + data.addr + '</h6>';
+				schOutput+= '<h4 class="card-title" style="display:none;">' + data.planDay + '</h6>';
 				schOutput+= '<h3 class="card-title" style="display:none;">' + data.startTime + '</h3>';
+				schOutput+= '<p id="longitude" style="display:none;">' + data.longitude + '</p>';
+				schOutput+= '<p id="latitude" style="display:none;">' + data.latitude + '</p>';
+				schOutput+= '<p id="markerNo' +markerCount+ '" style="display:none;">' +markerCount+ '</p>';
 				schOutput+= '<h6 id="vall" class="card-subtitle mb-2 text-muted" value='+data.startTime+'>' + hour + ':' + min + '' + '</h6>';
-				schOutput+= '<p class="card-text">' + data.descript + '</p>';
+				schOutput+= '<p id="descript" class="card-text">' + data.descript + '</p>';
 				schOutput+= '<button type="button" class="btn btn-primary btn-sm" id="deletePlan'+deleteCount+'">delete</button>';
 				schOutput+= '</div></div>';
 								
@@ -178,9 +192,8 @@ $(function(){
 				
 				console.log($('#vall').val());
 				
-				//지도에 마커 찍기 '제주특별자치도 제주시 첨단로 242'
-				scheduleMarker(data.addr);
-//				scheduleMarker('제주특별자치도 제주시 조천읍 조천리 1142');
+				//지도에 마커 찍기 LatLng/위,경 '33.450701, 126.570667'
+				scheduleAddMarker(data.latitude, data.longitude);
         			
         		
 	        },
@@ -197,10 +210,17 @@ $(function(){
 	
 	//장바구니에서 일정 빼기 버튼 (-)
 	$(document).on("click", 'button[id^=deletePlan]', function(){
-	
-		//버튼이 있는 행의 td들의 객체를 변수 선언
 		
-		var deleteMap = {startTime :$(this).siblings('h3').html() , planDay : idx, descript :$(this).siblings('p').html(), addr :  $(this).siblings('h5').html()}
+		//버튼이 있는 행의 td들의 객체를 변수 선언		
+		var deleteMap = {startTime :$(this).siblings('h3').html(), 
+						planDay : $(this).siblings('h4').html(), 
+						descript :$(this).siblings('#descript').html(), 
+						place :  $(this).siblings('h5').html(), 
+						addr :  $(this).siblings('h6').html(), 
+						longitude : $(this).siblings('#longitude').html(), 
+						latitude : $(this).siblings('#latitude').html(), 
+						markerNo : $(this).siblings('p[id^=markerNo]').html()
+						}
 		
 		$.ajax({
 			url : "/plan/write/planDel",
@@ -246,7 +266,6 @@ $(function(){
 			}
 		}, 100);
 	});
-	
 	
 });
 

@@ -18,8 +18,8 @@
 		
 		<!-- 일정 DB 추가 -->
 		<insert id="planSchAdd" parameterType="com.gteam.planner.domain.PlanVO">
-			INSERT INTO schedule(planNo, userId, descript, place, addr,  planDay, startTime)
-			 VALUES(#{planNo}, #{userId}, #{descript}, #{place}, #{addr}, #{planDay}, #{startTime})
+			INSERT INTO schedule(planNo, userId, descript, place, addr,  planDay, startTime, latitude, longitude, markerNo)
+			 VALUES(#{planNo}, #{userId}, #{descript}, #{place}, #{addr}, #{planDay}, #{startTime}, #{latitude}, #{longitude}, #{markerNo})
 		</insert>
 		
 		<!-- 계획 목록 -->
@@ -53,7 +53,7 @@
 		
 		<!-- 일정 조회 -->
 		<select id="planSchList" parameterType="int" resultType="com.gteam.planner.domain.ScheduleVO">
-			SELECT planNo, userId, descript, addr, startTime, planDay
+			SELECT planNo, userId, descript, place, addr, startTime, planDay, latitude, longitude, markerNo
 			 FROM schedule
 			  WHERE planNo = #{planNo}
 		</select>
