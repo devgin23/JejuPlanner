@@ -87,10 +87,9 @@ public class PlanController {
 		//페이징 필드 값 생성자 통해서 초기화
 		Paging page = new Paging(num, searchType, keyword);
 		//전체 계획 갯수 구하기 (검색어 입력시 해당 검색 계획 갯수)
-		page.setCount(boardService.boardPlanCount(searchType, keyword));
+		page.setCount(boardService.boardPlanCnt(searchType, keyword));
 		//계획 리스트 (검색어 입력시 해당 검색 리스트 출력)
 		List<PlanVO> planList = planService.planList(page.getDisplayPost(), page.getPostNum(), searchType, keyword);
-		
 		//Model에 필요 값들 담아 list page로 리턴
 		model.addAttribute("planList", planList);
 		model.addAttribute("page", page);
@@ -98,10 +97,22 @@ public class PlanController {
 	}
 	
 	//유저별 계획 리스트 출력
-	@RequestMapping(value="/plan/list/user", method=RequestMethod.POST)
-	public String planListForUser(Model model, @RequestParam("userId") String userId) throws Exception {
-		List<PlanVO> planListForUser = planService.planListForUser(userId);
+	@RequestMapping(value="/plan/list/user", method=RequestMethod.GET)
+	public String planListForUser(Model model, @RequestParam("userId") String userId
+			, @RequestParam("num") int num
+			, @RequestParam(value="searchType", required=false, defaultValue="planTitle") String searchType	
+			, @RequestParam(value="keyword", required=false, defaultValue="") String keyword
+			) throws Exception {
+		log.info("userId : "+userId);
+		//페이징 필드 값 생성자 통해서 초기화
+		Paging page = new Paging(num, searchType, keyword);
+		//전체 계획 갯수 구하기 (검색어 입력시 해당 검색 계획 갯수)
+		page.setCount(boardService.boardUserPlanCnt(userId, searchType, keyword));
+		//계획 리스트 (검색어 입력시 해당 검색 리스트 출력)
+		/*List<PlanVO> planList = planService.planList(page.getDisplayPost(), page.getPostNum(), searchType, keyword);*/
+		List<PlanVO> planListForUser = planService.planListForUser(userId, page.getDisplayPost(), page.getPostNum(), searchType, keyword);
 		model.addAttribute("planListForUser", planListForUser);
+		model.addAttribute("page", page);
 		return "/plan/list_user";
 	}
 	
@@ -120,12 +131,21 @@ public class PlanController {
 		return "/plan/view";
 	}
 	
-	//계획 수정하기
+	//계획 수정하기(진짜)
+	@RequestMapping(value = "/plan/view/modify", method = RequestMethod.POST)
+	public String planModify(PlanVO vo) throws Exception {
+		log.info("PlanVO : " + vo.toString());
+		planService.planModify(vo);
+		
+		return "redirect:/plan/view?planNo=" + vo.getPlanNo() + "&userId=" +vo.getUserId();
+	}
+	
+	/*//계획 수정하기
 	@RequestMapping(value="/plan/view/modify", method = RequestMethod.POST)
 	public String planModify(PlanVO vo) throws Exception{
 		planService.planModify(vo);
 		return "/plan/write";
-	}
+	}*/
 	
 	//계획 삭제하기
 	@RequestMapping(value="/plan/view/delete", method = RequestMethod.POST)

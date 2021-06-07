@@ -28,6 +28,11 @@
   .schDiv{
   	margin-right: 10px;
   }
+  #plannerDiv{
+  	overflow:auto; 
+  	width:100%; 
+  	height:90%;
+  }
   /* btn-primary 색깔 바꾸기 css */
   /* .btn-primary {
     background-color: #7bc143;
@@ -50,7 +55,7 @@
 </head>
 <body>
 	<input type="hidden" id="userIdCheck" value="${member.userId}">
-	<div style="overflow:auto; width:100%; height:100%;">
+	<div id="plannerDiv">
 	<!-- 계획 입력 -->
 	<div class="col-md-12">
 	<form id="planFrm" name="planFrm" >

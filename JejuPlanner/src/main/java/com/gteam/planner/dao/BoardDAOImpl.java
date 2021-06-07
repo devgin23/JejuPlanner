@@ -18,15 +18,25 @@ public class BoardDAOImpl implements BoardDAO{
 	
 	//계획 총 갯수
 	@Override
-	public int boardPlanCount(String searchType, String keyword) throws Exception {
-		Map<String, String> map = new HashMap<>();
+	public int boardPlanCnt(String searchType, String keyword) throws Exception {
+		Map<String, String> data = new HashMap<>();
 		
-		map.put("searchType", searchType);
-		map.put("keyword", keyword);
+		data.put("searchType", searchType);
+		data.put("keyword", keyword);
 		
-		return sql.selectOne(namespace+".boardPlanCount", map);
+		return sql.selectOne(namespace+".boardPlanCnt", data);
+	}
+
+	@Override
+	public int boardUserPlanCnt(String userId, String searchType, String keyword) throws Exception {
+		Map<String, String> data = new HashMap<>();
+		
+		data.put("userId", userId);
+		data.put("searchType", searchType);
+		data.put("keyword", keyword);
+		return sql.selectOne(namespace+".boardPlanCnt", data);
 	}
 	
-	
+	//유저별 계획 총 갯수
 	
 }

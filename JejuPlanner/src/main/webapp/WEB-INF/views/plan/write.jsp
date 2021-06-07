@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,11 +14,11 @@
 	 	<title>일정 만들기</title>
 	</head>
 
-	<body>
-
-		<header>
+	<body id="body">
+		<header id="header">
 			<%@include file="../nav.jsp" %>
 		</header>
+		<main id="main">
 			<section id="container">
 				<!-- 로그인 유무 확인/로그인 시 -->
 				<c:if test="${member.userId != null}">
@@ -27,7 +28,8 @@
 						<div class="col-8 map-area">
 							<div class="map_wrap">
 								<div id="map"
-									style="width: 100%; height: 100%; position: relative; overflow: hidden;"></div>
+									style="width: 100%; height: 100%; position: relative; overflow: hidden;">
+									</div>
 								<ul id="category">
 									<li id="AD5" data-order="0"><span class="category_bg hotel"></span>
 										숙소</li>
