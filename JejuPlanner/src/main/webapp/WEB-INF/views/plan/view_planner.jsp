@@ -93,25 +93,27 @@
 	<!-- 계획 입력 끝 -->
 	
 	<!-- 계획 출력 DIV -->
+	<c:set var="planTotalDay" value='${planView.planTotalDay}'/>
+	<c:set var="scheduleList" value="${scheduleList}"/>
+		<div id="test"></div>
 		<div id="schDiv">
-			<div>
-				<h3>Day1</h3>
-				<c:forEach items="${scheduleList}" var="scheduleList">
-					<c:if test="${scheduleList.planDay == 1}">
-						<div class="card" style="width: 18rem;">
-							<div class="card-body cardTable">
-							<h5 class="card-title">${scheduleList.addr}</h5>
-							<h3 class="card-title" style="display:none;">${scheduleList.startTime}</h3>
-							<h6 class="card-subtitle mb-2 text-muted">${scheduleList.startTime} : 00</h6>
-							<p class="card-text">${scheduleList.descript}</p>
-							<button type="button" class="btn btn-primary btn-sm" id="deletePlan'+deleteCount+'">delete</button>
-							</div>
+			
+			<c:forEach items="${scheduleList}" var="scheduleList">
+				<c:if test="${scheduleList.planDay == 1}">
+					<div class="card" style="width: 18rem;">
+						<div class="card-body cardTable">
+						<h5 class="card-title">${scheduleList.addr}</h5>
+						<h3 class="card-title" style="display:none;">${scheduleList.startTime}</h3>
+						<h6 class="card-subtitle mb-2 text-muted">${scheduleList.startTime} : 00</h6>
+						<p class="card-text">${scheduleList.descript}</p>
+						<button type="button" class="btn btn-primary btn-sm" id="deletePlan'+deleteCount+'">delete</button>
 						</div>
-					</c:if>
-				</c:forEach>
-			</div>
+					</div>
+				</c:if>
+			</c:forEach>
 		</div>
 	</div>
+	
 </body>
 
 </html>
