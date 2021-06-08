@@ -193,7 +193,7 @@ $(function(){
 				console.log($('#vall').val());
 				
 				//지도에 마커 찍기 LatLng/위,경 '33.450701, 126.570667'
-				scheduleAddMarker(data.latitude, data.longitude);
+				scheduleAddMarker(data.latitude, data.longitude, data);
         			
         		
 	        },
