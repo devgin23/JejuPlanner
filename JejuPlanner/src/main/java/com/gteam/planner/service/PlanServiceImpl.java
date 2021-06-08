@@ -112,20 +112,15 @@ public class PlanServiceImpl implements PlanService{
 		dao.planDelete(planNo, userId);
 	}
 	
-	//view 일정 삭제
+	//view 일정 삭제 Map만들기
 	@Override
-	public HashMap<String, Object> viewDeleteMap(ScheduleVO vo) throws Exception {
+	public HashMap<String, Object> viewDeleteSch(ScheduleVO vo) throws Exception {
 		//view_planner.jsp 일정 삭제 리스트
 		HashMap<String, Object> deleteMap = new HashMap<String, Object>();
-		deleteMap.put("descript", vo.getDescript());
-		deleteMap.put("place", vo.getPlace());
-		deleteMap.put("addr", vo.getAddr());
-		deleteMap.put("longitude", vo.getLongitude());
-		deleteMap.put("latitude", vo.getLatitude());
-		deleteMap.put("planDay", vo.getPlanDay());
-		deleteMap.put("startTime", vo.getStartTime());
+		deleteMap.put("planNo", vo.getPlanNo());
 		deleteMap.put("markerNo", vo.getMarkerNo());
 		log.info("deleteMap : " + deleteMap.toString());
+		
 		return deleteMap;
 	}
 
