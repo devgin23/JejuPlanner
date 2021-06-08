@@ -94,6 +94,7 @@
 							<h3 class="card-title" style="display:none;">${scheduleList.startTime}</h3>
 							<p class="longitude" style="display:none;">${scheduleList.longitude}</p>
 							<p class="latitude" style="display:none;">${scheduleList.latitude}</p>
+							<p class="planNo" style="display:none;">${scheduleList.planNo}</p>
 							<p class="markerNo" >${scheduleList.markerNo}</p>
 							<h6 class="card-subtitle mb-2 text-muted">${scheduleList.startTime} : 00</h6>
 							<p class="card-text descript">${scheduleList.descript}</p>

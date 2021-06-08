@@ -110,4 +110,15 @@ public class PlanDAOImpl implements PlanDAO {
 	public void planSchAdd(ScheduleVO vo) throws Exception {
 		sql.insert(namespace+".planSchAdd", vo);
 	}
+	
+	//view 삭제 추가 수정 완료버튼
+	@Override
+	public void viewDeleteSch(int planNo, int markerNo) throws Exception {
+		HashMap<String, Object> data = new HashMap<>();
+		data.put("planNo", planNo);
+		data.put("markerNo", markerNo);
+		sql.delete(namespace+".viewDeleteSch", data);
+	}
+	
+	
 }
