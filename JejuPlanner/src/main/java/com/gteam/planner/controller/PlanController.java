@@ -1,6 +1,7 @@
 package com.gteam.planner.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -8,14 +9,17 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.gteam.planner.domain.Paging;
 import com.gteam.planner.domain.PlanVO;
 import com.gteam.planner.domain.ScheduleVO;
+import com.gteam.planner.service.BoardService;
 import com.gteam.planner.service.PlanService;
 
 @Controller
@@ -24,17 +28,17 @@ public class PlanController {
 	
 	@Autowired
 	private PlanService planService;
-	
+		
 	//계획 초기 설정 저장 객체
 	static List<PlanVO> planSetList = new ArrayList<>();
 	//일정 추가 리스트
 	static List<Map<String,Object>> schList = new ArrayList<>();
-	
+	//view 일정 삭제 리스트
+	List<Map<String,Object>> delList = new ArrayList<>();
 	//로그인 후 일정 만들기 화면으로 이동
 	@RequestMapping(value="/plan/write", method = RequestMethod.GET)
 	public void schedulePlanning() throws Exception{
-		// 리스트 초기화
-		allPlanListClear();
+		
 	}
 	
 	//계획 초기 설정
@@ -48,6 +52,7 @@ public class PlanController {
 		}
 		log.info("planSetList :"+planSetList.toString());
 		log.info("schList :"+schList.toString());
+		
 		return vo;
 	}
 	
@@ -76,7 +81,6 @@ public class PlanController {
 		schList.remove(planService.planDel(vo));
 		log.info("schList : " + schList.toString());
 	}
-	
 	// 새로고침 시 리스트 초기화
 	@RequestMapping(value="/plan/write/clear", method=RequestMethod.GET)
 	public String planRefresh() throws Exception{
@@ -89,7 +93,7 @@ public class PlanController {
 		schList.clear();
 		log.info("All PlanList Clear");
 	}
-	
+		
 	//계획 수정하기(진짜)
 	@RequestMapping(value = "/plan/view/modify", method = RequestMethod.POST)
 	public String planModify(PlanVO vo) throws Exception {
@@ -106,9 +110,15 @@ public class PlanController {
 		planService.planDelete(planNo, userId);
 		return "/plan/write";
 	}*/
+	//view deleteSch
 	@RequestMapping(value = "/plan/view/deleteSch", method = RequestMethod.POST)
 	@ResponseBody
-	public void viewDeleteMap(@RequestBody ScheduleVO vo) {
+	public void viewDeleteMap(@RequestBody ScheduleVO vo) throws Exception {
+		planService.viewDeleteMap(vo);
+		
+		//delList에 만든 deleteMap 추가
+		delList.add(planService.viewDeleteMap(vo));
+		log.info("delList : " + delList.toString());
 		
 	}
 }
