@@ -34,7 +34,7 @@ public class PlanController {
 	//일정 추가 리스트
 	static List<Map<String,Object>> schList = new ArrayList<>();
 	//view 일정 삭제 리스트
-	List<Map<String,Object>> delList = new ArrayList<>();
+	static List<HashMap<String,Object>> delList = new ArrayList<>();
 	//로그인 후 일정 만들기 화면으로 이동
 	@RequestMapping(value="/plan/write", method = RequestMethod.GET)
 	public void schedulePlanning() throws Exception{
@@ -87,10 +87,18 @@ public class PlanController {
 		allPlanListClear();
 		return "/plan/write";
 	}
+	// 새로고침 시 리스트 초기화
+	@RequestMapping(value="/plan/write/clear/view", method=RequestMethod.GET)
+	public String planRefreshView(@RequestParam("planNo") int planNo, @RequestParam("userId") String userId) throws Exception{
+		
+		allPlanListClear();
+		return "/plan/view?planNo="+planNo+"&userId="+userId;
+	}
 	// 전체 리스트 초기화 메서드
 	public static void allPlanListClear() {
 		planSetList.clear();
 		schList.clear();
+		delList.clear();
 		log.info("All PlanList Clear");
 	}
 		
@@ -102,7 +110,7 @@ public class PlanController {
 		planService.planModify(vo);
 		
 		//일정 삭제 함수
-		//planService.
+		planService.delSch(delList);
 		return "redirect:/plan/view?planNo=" + vo.getPlanNo() + "&userId=" +vo.getUserId();
 	}
 	

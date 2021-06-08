@@ -113,12 +113,11 @@ public class PlanDAOImpl implements PlanDAO {
 	
 	//view 삭제 추가 수정 완료버튼
 	@Override
-	public void viewDeleteSch(int planNo, int markerNo) throws Exception {
-		HashMap<String, Object> data = new HashMap<>();
-		data.put("planNo", planNo);
-		data.put("markerNo", markerNo);
-		sql.delete(namespace+".viewDeleteSch", data);
+	public void delSch(HashMap map) throws Exception {
+		sql.delete(namespace+".delSch", map);
 	}
+	
+	
 	
 	
 }

@@ -124,6 +124,18 @@ public class PlanServiceImpl implements PlanService{
 		return deleteMap;
 	}
 
+	//view 수정완료 버튼 삭제 service
+	@Override
+	public void delSch(List<HashMap<String,Object>> delList) throws Exception {
+		for (HashMap<String,Object> s : delList) {
+			dao.delSch(s);
+		}
+		
+	}
+	
+	
+	
+
 	
 
 }
