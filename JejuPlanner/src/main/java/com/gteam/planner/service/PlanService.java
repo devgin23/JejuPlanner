@@ -39,5 +39,6 @@ public interface PlanService {
 	//view 일정 삭제 Map만들기
 	public HashMap<String, Object> viewDeleteSch(ScheduleVO vo) throws Exception;
 	
-	//view 일정
+	//view 수정완료 버튼 삭제 service
+	public void delSch(List<HashMap<String,Object>> delList) throws Exception;
 }

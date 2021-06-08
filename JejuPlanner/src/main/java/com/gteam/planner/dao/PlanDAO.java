@@ -1,5 +1,6 @@
 package com.gteam.planner.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.gteam.planner.domain.PlanVO;
@@ -35,5 +36,5 @@ public interface PlanDAO {
 	void planDelete(int planNo, String userId) throws Exception;
 	
 	//view 삭제 추가 수정 완료버튼
-	void viewDeleteSch(int planNo, int markerNo) throws Exception;
+	void delSch(HashMap map) throws Exception;
 }
