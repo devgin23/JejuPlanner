@@ -8,7 +8,6 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <!-- meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0"/ -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>회원가입</title>
         <!-- Bootstrap -->
@@ -18,22 +17,52 @@
         <!-- Respond.js 으로 IE8 에서 반응형 기능을 활성화 -->
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <!-- custom js -->
-        <script type="text/javascript" src="/resources/js/register.js?ver=2"/></script>
+        <script type="text/javascript" src="/resources/js/register.js"/></script>
         <style>
+        	a{
+        		color: #F6BB43;
+        	}
+        	a:hover{
+        		color: #ef8c14; 
+        	}
             .custom-align{
+            	color: #F6BB43;
                 text-align: center;
             }
-            .custom-align-content{
-                display: center;
-                vertical-align: middle;
-            }
+            
+            .mainTitle{
+		   		 margin: 20px;
+		   		 text-align: center;
+			}
+			.mainJeju{
+			    font-size: 100px;
+			    color: #F6BB43;
+			}
+			.mainPlanner{
+			    font-size: 75px;
+			    color: #888;
+			}
+			  /* btn-primary 색깔 바꾸기 css */
+		 	.btn-primary {
+		   		background-color: #F6BB43;
+		   		border-color: #F6BB43;
+		   		color: #FFF; }
+			.btn-primary:hover,
+			.btn-primary:focus {
+		   		border-color: #ef8c14;
+		   		background-color: #ef8c14;
+		   		color: #FFF; }
+			.btn-primary:active, .btn-primary:visited, .btn-primary:active:focus, .btn-primary:active:hover {
+			   border-color: #F6BB43;
+			   background-color: #F6BB43;
+			   color: #FFF; }
         </style>
     </head>
     <body>
         <div class="container"><!-- 좌우측 공간 확보 -->
             <!-- header -->
             <header>
-                <div class="m1 custom-align"><img src="/resources/images/Goodee_logo-remove.png"></div>
+                <div><h1 class="mainTitle"><span class="mainJeju">Jeju</span> <span class="mainPlanner">Planner</span></h1></div>
                 <div class="row">
                     <p></p>
                     <div class="col-md-12 custom-align">
