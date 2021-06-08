@@ -250,6 +250,8 @@ function scheduleAddMarker(latitude, longitude, data) {
 	kakao.maps.event.addListener(marker, 'click', function() {
 	      // 마커 위에 인포윈도우를 표시합니다
 	      infowindow.open(map, marker);
+	      
+	      //닫기 버튼 이미지 소스 삽입
 	      $("img[alt='close']").attr("src", "/resources/images/bt_close.png");
 	});
 	
@@ -269,6 +271,31 @@ $(document).on('click', 'button[id^=deletePlan]', function scheduleRemoveMarker(
 	scheduleInfowindows[$(this).siblings('p[id^=markerNo]').html() - 1].close();
 	
 });
+
+//$(document).on('click', 'li[id=mySchedule]', function() {
+//	infowindow
+//})
+
+// 배열에 추가된 마커들을 지도에 표시하거나 삭제하는 함수입니다
+//$(document).on('click', 'li[id=mySchedule]', 
+function setMarkers(map) {
+    for (var i = 0; i < scheduleMarkers.length; i++) {
+    	scheduleMarkers[i].setMap(map);
+    	scheduleInfowindows[i].close();
+    }
+}
+
+// "마커 보이기" 버튼을 클릭하면 호출되어 배열에 추가된 마커를 지도에 표시하는 함수입니다
+function showMarkers() {
+    setMarkers(map);
+    $('.scheduleMarker-toggle').attr('onclick', 'hideMarkers();');
+}
+
+// "마커 감추기" 버튼을 클릭하면 호출되어 배열에 추가된 마커를 지도에서 삭제하는 함수입니다
+function hideMarkers() {
+    setMarkers(null);   
+    $('.scheduleMarker-toggle').attr('onclick', 'showMarkers();');
+}
 
 //한국관광공사 API 세팅
   function visitKoreaAPI(place_name) {
