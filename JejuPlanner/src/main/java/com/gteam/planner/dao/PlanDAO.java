@@ -34,5 +34,6 @@ public interface PlanDAO {
 	//계획 삭제
 	void planDelete(int planNo, String userId) throws Exception;
 	
-
+	//view 삭제 추가 수정 완료버튼
+	void viewDeleteSch(int planNo, int markerNo) throws Exception;
 }

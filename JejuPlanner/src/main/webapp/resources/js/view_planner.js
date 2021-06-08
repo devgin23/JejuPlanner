@@ -18,7 +18,8 @@ $(function(){
 	});
 	$(document).on('click', '.deleteSch', function(){
 		// deleteMap 생성
-		var deleteMap = {startTime :$(this).siblings('h3').html(), 
+		var deleteMap = {startTime :$(this).siblings('h3').html(),
+				planNo : $(this).siblings('.planNo').html(),
 				planDay : $(this).siblings('h4').html(), 
 				descript :$(this).siblings('.descript').html(), 
 				place :  $(this).siblings('h5').html(), 
