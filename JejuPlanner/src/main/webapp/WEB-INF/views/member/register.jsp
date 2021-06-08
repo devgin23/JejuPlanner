@@ -18,7 +18,7 @@
         <!-- Respond.js 으로 IE8 에서 반응형 기능을 활성화 -->
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <!-- custom js -->
-        <script type="text/javascript" src="/resources/js/register.js"/></script>
+        <script type="text/javascript" src="/resources/js/register.js?ver=2"/></script>
         <style>
             .custom-align{
                 text-align: center;
@@ -85,13 +85,6 @@
                         <label for="inputPasswordCheck" class="col-lg-2 control-label">비밀번호 확인</label>
                         <div class="col-lg-10">
                             <input type="password" class="form-control" id="userPwCheck" data-rule-required="true" placeholder="비밀번호 확인" maxlength="30">
-                        </div>
-                    </div>
-                    <div class="form-group" id="divNickname">
-                        <label for="inputNickname" class="col-lg-2 control-label">닉네임</label>
-                        <div class="col-lg-10">
-                            <input type="text" class="form-control" id="userNickname" name="userNickname" data-rule-required="true" placeholder="닉네임" maxlength="15">
-
                         </div>
                     </div>
                     
