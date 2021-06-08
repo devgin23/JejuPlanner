@@ -143,6 +143,11 @@
 	font-size: 11px;
 	margin-top: 0;
 }
+img[alt="close"] {
+	width:28px;
+	height:28px;
+}
+
 <!--KAKAO MAP CSS 끝 -->
 html{
 	height: 100%;
