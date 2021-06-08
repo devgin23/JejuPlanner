@@ -27,22 +27,22 @@ $(function(){
 				latitude : $(this).siblings('.latitude').html(), 
 				markerNo : $(this).siblings('.markerNo').html()
 				}
+		console.log(deleteMap);
 		//card 안보이게 하기
 		$(this).parent().parent().css('display','none');
-		console.log(deleteMap);
-		/*$.ajax({
+		$.ajax({
 			url : "/plan/view/deleteSch",
 			type : "POST",
 			data : JSON.stringify(deleteMap),
 			contentType : "application/json; charset=utf-8;",
-			dataType : "json",
-			success : function(data) {
+			dataType : "text",
+			success : function() {
 				
 			},
 			error : function(){
 				alert("delete err");
 			}
-		});*/
+		});
 	});
 	//PlanVO 필드 변수 선언
 	var userId = $('#userIdCheck').val();

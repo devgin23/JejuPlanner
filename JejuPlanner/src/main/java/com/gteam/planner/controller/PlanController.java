@@ -1,6 +1,7 @@
 package com.gteam.planner.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -34,7 +35,8 @@ public class PlanController {
 	List<PlanVO> planSetList = new ArrayList<>();
 	//일정 추가 리스트
 	List<Map<String,Object>> schList = new ArrayList<>();
-	
+	//view 일정 삭제 리스트
+	List<Map<String,Object>> delList = new ArrayList<>();
 	//로그인 후 일정 만들기 화면으로 이동
 	@RequestMapping(value="/plan/write", method = RequestMethod.GET)
 	public void schedulePlanning() throws Exception{
@@ -149,7 +151,12 @@ public class PlanController {
 	}*/
 	@RequestMapping(value = "/plan/view/deleteSch", method = RequestMethod.POST)
 	@ResponseBody
-	public void viewDeleteMap(@RequestBody ScheduleVO vo) {
+	public void viewDeleteMap(@RequestBody ScheduleVO vo) throws Exception {
+		planService.viewDeleteMap(vo);
+		
+		//delList에 만든 deleteMap 추가
+		delList.add(planService.viewDeleteMap(vo));
+		log.info("delList : " + delList.toString());
 		
 	}
 }
