@@ -199,7 +199,7 @@ function changeCategoryClass(el) {
     } 
 }
 
-// 내 일정의 장소 마커를 등록하는 함수
+// 내 일정의 장소 마커 + 인포윈도우를 등록하는 함수
 function scheduleAddMarker(latitude, longitude, data) {
 	
 	markerCount++;
@@ -210,13 +210,16 @@ function scheduleAddMarker(latitude, longitude, data) {
 	var marker = new kakao.maps.Marker({
 	    position: markerPosition
 	});
-
 	
+	marker.setZIndex(10);
+
 	//이미지갖고올 api 함수 출력
 	visitKoreaAPI(data.place);
 	
 	// 마커가 지도 위에 표시되도록 설정합니다
 	marker.setMap(map);
+	
+	marker.isNull = false;
 	
 	//마커 배열에 담기
 	scheduleMarkers.push(marker);
@@ -262,20 +265,27 @@ $(document).on('click', 'button[id^=deletePlan]', function scheduleRemoveMarker(
 	//마커 지우기
 	scheduleMarkers[$(this).siblings('p[id^=markerNo]').html() - 1].setMap(null);
 	
+	//지운 마커에 isNull = true 속성을 주어 배열에서 지운 값인지 찾을 수 있게함
+	scheduleMarkers[$(this).siblings('p[id^=markerNo]').html() - 1].isNull = true;
+	
 	//인포윈도우 지우기
 	scheduleInfowindows[$(this).siblings('p[id^=markerNo]').html() - 1].close();
 	
 });
 
-//$(document).on('click', 'li[id=mySchedule]', function() {
-//	infowindow
-//})
-
 // 배열에 추가된 마커들을 지도에 표시하거나 삭제하는 함수입니다
 //$(document).on('click', 'li[id=mySchedule]', 
 function setMarkers(map) {
     for (var i = 0; i < scheduleMarkers.length; i++) {
-    	scheduleMarkers[i].setMap(map);
+    	console.log(scheduleMarkers[i]);
+
+    	//delete한 일정의 마커도 배열에 들어있기에 같이 출력되는 버그가 있음, 조건문 추가하여 유효성검사
+    	if(scheduleMarkers[i].isNull == true){
+    		scheduleMarkers[i].setMap(null);
+    	} else {
+    		scheduleMarkers[i].setMap(map);
+    	}
+    	
     	scheduleInfowindows[i].close();
     }
 }
@@ -283,13 +293,13 @@ function setMarkers(map) {
 // "마커 보이기" 버튼을 클릭하면 호출되어 배열에 추가된 마커를 지도에 표시하는 함수입니다
 function showMarkers() {
     setMarkers(map);
-    $('.scheduleMarker-toggle').attr('onclick', 'hideMarkers();');
+    $('#scheduleMarker-toggle').attr('onclick', 'hideMarkers();');
 }
 
 // "마커 감추기" 버튼을 클릭하면 호출되어 배열에 추가된 마커를 지도에서 삭제하는 함수입니다
 function hideMarkers() {
     setMarkers(null);   
-    $('.scheduleMarker-toggle').attr('onclick', 'showMarkers();');
+    $('#scheduleMarker-toggle').attr('onclick', 'showMarkers();');
 }
 
 //한국관광공사 API 세팅

@@ -43,8 +43,6 @@
 										카페</li>
 									<li id="MT1" data-order="5"><span class="category_bg mart"></span>
 										마트</li>
-									<li class="mySchedule"><button onclick="showMarkers()">마커 보이기</button></li>
-									<li class="mySchedule"><button onclick="hideMarkers()">마커 감추기</button></li>
 									<li><button id="scheduleMarker-toggle" onclick="hideMarkers()">일정</button></li>
 								</ul>
 							</div>
