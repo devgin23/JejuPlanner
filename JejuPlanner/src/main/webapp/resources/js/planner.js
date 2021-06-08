@@ -95,7 +95,8 @@ $(function(){
 			   }
 		   },
 		   error: function(){
-		       alert("일정 추가 실패!");
+		       alert("계획 초기 설정 실패!");
+		       return false;
 		    }
 		});
 	});
@@ -153,7 +154,11 @@ $(function(){
 	
 	//method="post" action="/plan/write/schAdd"
 	$(document).on('click', 'input[id^=schFrmSubmit]', function(){
-		
+		// 장소 값 없이 일정 추가 방지 (장소 유효성 검사)
+		if($('#placeInit'+idx).val()==''){
+			alert('장소를 추가해 주세요!');
+			return false;
+		}
 	    $.ajax({
 	        url: "/plan/write/schAdd",
 	        data: $('#schFrm'+idx).serialize(),
@@ -198,12 +203,17 @@ $(function(){
         		
 	        },
 	        error: function(){
-	            alert("일정 추가 실패!");
+	            alert("일정 추가 실패! 장소를 선택해 주세요!");
 	        },
+	        /*addr' + i +'" name="addr" value="" readonly/>';
+			createStringCollap += '<input type="hidden" id="longitude' + i +'" name="longitude" value="" readonly/>';
+			createStringCollap += '<input type="hidden" id="latitude*/	        
 	        complete: function(){
 	        	$('#contentInit'+idx).val('');
         		$('#placeInit'+idx).val('');
-        		/*$('#startTimeInit').val('9');*/
+        		$('#addr'+idx).val('');
+        		$('#longitude'+idx).val('');
+        		$('#latitude'+idx).val('');
 	        }
 	    });
 	});

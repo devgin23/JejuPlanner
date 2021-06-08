@@ -4,7 +4,6 @@ CREATE TABLE `member` (
 	`userId` VARCHAR(30) NOT NULL,
 	`userPw` VARCHAR(60) NOT NULL,
 	`userNo` INT NOT NULL AUTO_INCREMENT,
-	`userNickname` VARCHAR(50) NOT NULL,
 	`userGender` VARCHAR(2) NOT NULL,
 	`userAge` INT NOT NULL,
 	`userMail` VARCHAR(40) NOT NULL,
@@ -15,5 +14,5 @@ CREATE TABLE `member` (
 
 
 /* INSERT DUMMY DATA */
-INSERT INTO member (userId, userPw, userNickname, userGender, userAge, userMail) 
-VALUES ('member1', '1234', '멤버1', '남', 20, 'member1@abcd.com');
+INSERT INTO member (userId, userPw, userGender, userAge, userMail) 
+VALUES ('test1', '123', '남', 20, 'test1@abcd.com');
