@@ -140,12 +140,16 @@ public class PlanController {
 		return "redirect:/plan/view?planNo=" + vo.getPlanNo() + "&userId=" +vo.getUserId();
 	}
 	
-	//계획 삭제하기
+	/*//계획 삭제하기(일단 살려둘 것)
 	@RequestMapping(value="/plan/view/delete", method = RequestMethod.POST)
 	public String planDelete(@RequestParam("planNo") int planNo, @RequestParam("userId") String userId) throws Exception{
 		log.info("Controller인자출력 : " + planNo + userId);
 		planService.planDelete(planNo, userId);
 		return "/plan/write";
+	}*/
+	@RequestMapping(value = "/plan/view/deleteSch", method = RequestMethod.POST)
+	@ResponseBody
+	public void viewDeleteMap(@RequestBody ScheduleVO vo) {
+		
 	}
-	
 }

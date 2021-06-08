@@ -7,25 +7,42 @@ $(function(){
 		$(".form-control").removeAttr("readonly");
 		$("#planModifyStart").css('display','none');
 		$("#planModifyEnd").css('display','block');
+		$(".deleteSch").css('display','block');
 	});
 	// 계획 수정 완료 버튼 클릭 시 작동 함수
 	$(document).on('click', '#planModifyEnd', function(){
 		$(".form-control").attr("readonly", 'true');
 		$("#planModifyStart").css('display','block');
 		$("#planModifyEnd").css('display','none');
+		$(".deleteSch").css('display','none');
 	});
 	$(document).on('click', '.deleteSch', function(){
-		
+		// deleteMap 생성
 		var deleteMap = {startTime :$(this).siblings('h3').html(), 
 				planDay : $(this).siblings('h4').html(), 
-				descript :$(this).siblings('#descript').html(), 
+				descript :$(this).siblings('.descript').html(), 
 				place :  $(this).siblings('h5').html(), 
 				addr :  $(this).siblings('h6').html(), 
-				longitude : $(this).siblings('#longitude').html(), 
-				latitude : $(this).siblings('#latitude').html(), 
-				markerNo : $(this).siblings('p[id^=markerNo]').html()
+				longitude : $(this).siblings('.longitude').html(), 
+				latitude : $(this).siblings('.latitude').html(), 
+				markerNo : $(this).siblings('.markerNo').html()
 				}
+		//card 안보이게 하기
+		$(this).parent().parent().css('display','none');
 		console.log(deleteMap);
+		/*$.ajax({
+			url : "/plan/view/deleteSch",
+			type : "POST",
+			data : JSON.stringify(deleteMap),
+			contentType : "application/json; charset=utf-8;",
+			dataType : "json",
+			success : function(data) {
+				
+			},
+			error : function(){
+				alert("delete err");
+			}
+		});*/
 	});
 	//PlanVO 필드 변수 선언
 	var userId = $('#userIdCheck').val();
