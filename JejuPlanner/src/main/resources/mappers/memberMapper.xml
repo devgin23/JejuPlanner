@@ -4,8 +4,8 @@
 	
 	<!-- 회원가입 -->
 	<insert id="register" parameterType="com.gteam.planner.domain.MemberVO">
-		INSERT INTO member(userid, userpw, usernickname, usergender, userage, usermail)
-		 VALUES(#{userId}, #{userPw}, #{userNickname}, #{userGender}, #{userAge}, #{userMail})
+		INSERT INTO member(userid, userpw, usergender, userage, usermail)
+		 VALUES(#{userId}, #{userPw}, #{userGender}, #{userAge}, #{userMail})
 	</insert>
 	
 	<!-- 로그인 -->
