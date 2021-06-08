@@ -228,14 +228,12 @@ function scheduleAddMarker(latitude, longitude, data) {
 
 	//인포 윈도우 UI 세팅
 	var iwContent = '<div class="placeinfo placeInfowindow">';
-    	iwContent += ' <div class="title" type="button" title="' + data.place + '">' + data.place + '</div>';
+    	iwContent += ' <div class="title" id="infoBtn" type="button" title="' + data.place + '">' + data.place + '</div>';
 		//이미지 삽입
 		iwContent += '<img src ='+ mapImage + ' alt="사진이없습니다." style="width:300px; height:150px; object-fit:contain; border:3px solid black">'
 		iwContent += '    <span title="' + data.addr + '">' + data.addr + '</span>' +           
 	        '</div>' + '<div class="after"></div>';
 	
-	
-//	var iwContent = '<div style="padding:5px;">' + place + '<br><a href="https://map.kakao.com/link/map/Hello World!,33.450701,126.570667" style="color:blue" target="_blank">큰지도보기</a> <a href="https://map.kakao.com/link/to/Hello World!,33.450701,126.570667" style="color:blue" target="_blank">길찾기</a></div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
     iwPosition = new kakao.maps.LatLng(latitude, longitude); //인포윈도우 표시 위치입니다
     
     // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
@@ -251,7 +249,8 @@ function scheduleAddMarker(latitude, longitude, data) {
 	// 마커 위에 인포윈도우를 표시합니다. 두번째 파라미터인 marker를 넣어주지 않으면 지도 위에 표시됩니다.
 	kakao.maps.event.addListener(marker, 'click', function() {
 	      // 마커 위에 인포윈도우를 표시합니다
-	      infowindow.open(map, marker);  
+	      infowindow.open(map, marker);
+	      $("img[alt='close']").attr("src", "/resources/images/bt_close.png");
 	});
 	
 	mapImage = "";
@@ -261,7 +260,7 @@ function scheduleAddMarker(latitude, longitude, data) {
 }
 
 // 내 일정의 장소 마커를 지우는 함수
-$(document).on("click", 'button[id^=deletePlan]', function scheduleRemoveMarker() {
+$(document).on('click', 'button[id^=deletePlan]', function scheduleRemoveMarker() {
 	
 	//마커 지우기
 	scheduleMarkers[$(this).siblings('p[id^=markerNo]').html() - 1].setMap(null);
@@ -269,12 +268,6 @@ $(document).on("click", 'button[id^=deletePlan]', function scheduleRemoveMarker(
 	//인포윈도우 지우기
 	scheduleInfowindows[$(this).siblings('p[id^=markerNo]').html() - 1].close();
 	
-	//마커 한번더 클릭시 인포윈도우 지우기
-//	kakao.maps.event.addListener(marker, 'click', function() {
-//		console.log($(this).siblings('p[id^=markerNo]').html())
-//		scheduleInfowindows[$(this).siblings('p[id^=markerNo]').html() - 1].close();
-//	});
-
 });
 
 //한국관광공사 API 세팅
