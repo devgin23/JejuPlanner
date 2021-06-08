@@ -82,24 +82,27 @@
 	
 	<!-- 계획 출력 DIV -->
 		<div id="schDiv">
-			<div>
-				<c:forEach var="dayCnt" begin="1" end="${planView.planTotalDay}" step="1">
-					<h3>Day${dayCnt}</h3>
-					<c:forEach items="${scheduleList}" var="scheduleList">
-						<c:if test="${scheduleList.planDay == 1}">
-							<div class="card" style="width: 18rem;">
-								<div class="card-body cardTable">
-								<h5 class="card-title">${scheduleList.addr}</h5>
-								<h3 class="card-title" style="display:none;">${scheduleList.startTime}</h3>
-								<h6 class="card-subtitle mb-2 text-muted">${scheduleList.startTime} : 00</h6>
-								<p class="card-text">${scheduleList.descript}</p>
-								<button type="button" class="btn btn-primary btn-sm" id="deletePlan'+deleteCount+'">delete</button>
-								</div>
+			<c:forEach var="dayCnt" begin="1" end="${planView.planTotalDay}" step="1">
+				<h3>Day${dayCnt}</h3>
+				<c:forEach items="${scheduleList}" var="scheduleList">
+					<c:if test="${scheduleList.planDay == dayCnt}">
+						<div class="card card-count" style="width: 18rem;">
+							<div class="card-body cardTable">
+							<h5 class="card-title">${scheduleList.place}</h5>
+							<h6 class="card-title">${scheduleList.addr}</h6>
+							<h4 class="card-title" style="display:none;">${scheduleList.planDay}</h4>
+							<h3 class="card-title" style="display:none;">${scheduleList.startTime}</h3>
+							<p class="longitude" style="display:none;">${scheduleList.longitude}</p>
+							<p class="latitude" style="display:none;">${scheduleList.latitude}</p>
+							<p class="markerNo" >${scheduleList.markerNo}</p>
+							<h6 class="card-subtitle mb-2 text-muted">${scheduleList.startTime} : 00</h6>
+							<p class="card-text descript">${scheduleList.descript}</p>
+							<button type="button" class="btn btn-primary btn-sm deleteSch" style="display:none;">delete</button>								
 							</div>
-						</c:if>
-					</c:forEach>
+						</div>
+					</c:if>
 				</c:forEach>
-			</div>
+			</c:forEach>
 		</div>
 	</div>
 	

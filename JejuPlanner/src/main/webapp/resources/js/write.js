@@ -1,5 +1,10 @@
 var mapImage="";
 
+// 새로고침 감지 및 Controller 정적 계획 리스트 초기화
+if(performance.navigation.type == 1){
+	location.href="/plan/write/clear";
+}
+
 //주소-좌표 변환 객체를 생성합니다
 var markerCount = 0;
 

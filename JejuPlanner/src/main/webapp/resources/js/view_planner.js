@@ -1,18 +1,49 @@
 var idx;
-// 계획 수정 버튼 클릭 시 작동 함수
-$(document).on('click', '#planModifyStart', function(){
-	$(".form-control").removeAttr("readonly");
-	$("#planModifyStart").css('display','none');
-	$("#planModifyEnd").css('display','block');
-});
-// 계획 수정 완료 버튼 클릭 시 작동 함수
-$(document).on('click', '#planModifyEnd', function(){
-	$(".form-control").attr("readonly", 'true');
-	$("#planModifyStart").css('display','block');
-	$("#planModifyEnd").css('display','none');
-});
+
+
 $(function(){
-	
+	// 계획 수정 버튼 클릭 시 작동 함수
+	$(document).on('click', '#planModifyStart', function(){
+		$(".form-control").removeAttr("readonly");
+		$("#planModifyStart").css('display','none');
+		$("#planModifyEnd").css('display','block');
+		$(".deleteSch").css('display','block');
+	});
+	// 계획 수정 완료 버튼 클릭 시 작동 함수
+	$(document).on('click', '#planModifyEnd', function(){
+		$(".form-control").attr("readonly", 'true');
+		$("#planModifyStart").css('display','block');
+		$("#planModifyEnd").css('display','none');
+		$(".deleteSch").css('display','none');
+	});
+	$(document).on('click', '.deleteSch', function(){
+		// deleteMap 생성
+		var deleteMap = {startTime :$(this).siblings('h3').html(), 
+				planDay : $(this).siblings('h4').html(), 
+				descript :$(this).siblings('.descript').html(), 
+				place :  $(this).siblings('h5').html(), 
+				addr :  $(this).siblings('h6').html(), 
+				longitude : $(this).siblings('.longitude').html(), 
+				latitude : $(this).siblings('.latitude').html(), 
+				markerNo : $(this).siblings('.markerNo').html()
+				}
+		console.log(deleteMap);
+		//card 안보이게 하기
+		$(this).parent().parent().css('display','none');
+		$.ajax({
+			url : "/plan/view/deleteSch",
+			type : "POST",
+			data : JSON.stringify(deleteMap),
+			contentType : "application/json; charset=utf-8;",
+			dataType : "text",
+			success : function() {
+				
+			},
+			error : function(){
+				alert("delete err");
+			}
+		});
+	});
 	//PlanVO 필드 변수 선언
 	var userId = $('#userIdCheck').val();
 	var planTitle;
@@ -175,7 +206,6 @@ $(function(){
 	        success: function(data){
 				deleteCount += 1;
 				var schOutput='';
-			
 				//startTime 형태 바꾸기.
 				var hour = data.startTime;
 				if(hour < 10) hour = "0" + hour; //1자리 수 일시 0 포맷 추가
@@ -188,7 +218,7 @@ $(function(){
 				schOutput+= '<h3 class="card-title" style="display:none;">' + data.startTime + '</h3>';
 				schOutput+= '<h6 id="vall" class="card-subtitle mb-2 text-muted" value='+data.startTime+'>' + hour + ':' + min + '' + '</h6>';
 				schOutput+= '<p class="card-text">' + data.descript + '</p>';
-				schOutput+= '<button type="button" class="btn btn-primary btn-sm" id="deletePlan'+deleteCount+'">delete</button>';
+				schOutput+= '<button type="button" class="btn btn-primary btn-sm" id="deletePlan'+deleteCount+'" style=display: none;>delete</button>';
 				schOutput+= '</div></div>';
 								
 				

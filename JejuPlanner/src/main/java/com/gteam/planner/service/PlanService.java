@@ -36,5 +36,6 @@ public interface PlanService {
 	//계회 삭제
 	public void planDelete(int planNo, String userId) throws Exception;
 
-
+	//view 일정 삭제
+	public HashMap<String, Object> viewDeleteMap(ScheduleVO vo) throws Exception;
 }
