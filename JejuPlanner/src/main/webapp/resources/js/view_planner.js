@@ -158,8 +158,8 @@ $(function(){
 				//card형식으로 바꿈.
 				schOutput+= '<div class="card card-count" style="width: 18rem;">';
 				schOutput+= '<div class="card-body cardTable">';
-				schOutput+= '<h5 class="card-title">' + data.place + '</h5>';
-				schOutput+= '<h6 class="card-title">' + data.addr + '</h6>';
+				schOutput+= '<h5 class="card-title place">' + data.place + '</h5>';
+				schOutput+= '<h6 class="card-title addr">' + data.addr + '</h6>';
 				schOutput+= '<h4 class="card-title" style="display:none;">' + data.planDay + '</h4>';
 				schOutput+= '<h3 class="card-title" style="display:none;">' + data.startTime + '</h3>';
 				schOutput+= '<p id="longitude" style="display:none;">' + data.longitude + '</p>';

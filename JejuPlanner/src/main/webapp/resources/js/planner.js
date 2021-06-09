@@ -2,19 +2,7 @@ var idx;
 
 //새로고침 감지 및 Controller 정적 계획 리스트 초기화
 if(performance.navigation.type == 1){
-	var param = window.location.pathname+window.location.search;
-	$.ajax({
-		url : "/plan/write/clear",
-		type : "GET",
-		data : {param: param},
-		dataType : "text",
-		success : function(data) {
-			location.href=data;
-		},
-		error : function(){
-			alert("refresh clear err");
-		}
-	});
+	location.href="/plan/write/clear";
 }
 
 $(function(){
