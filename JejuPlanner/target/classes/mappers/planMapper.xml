@@ -60,6 +60,7 @@
 			SELECT planNo, userId, descript, place, addr, startTime, planDay, latitude, longitude, markerNo
 			 FROM schedule
 			  WHERE planNo = #{planNo}
+			   ORDER BY planDay, startTime
 		</select>
 		
 		<!-- 계획 수정 -->
