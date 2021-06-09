@@ -13,7 +13,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.gteam.planner.domain.MemberVO;
@@ -21,7 +20,6 @@ import com.gteam.planner.service.MemberService;
 
 @Controller
 @RequestMapping(value="/")
-@SessionAttributes({"cart"})
 public class MemberController {
 	
 	private static final Logger log = LoggerFactory.getLogger(MemberController.class);

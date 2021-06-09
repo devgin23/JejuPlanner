@@ -66,6 +66,9 @@ input[type=password] {
 }
 .mainTitle{
     margin: 30px;
+	text-align: center;
+	user-select: none;
+	font-weight: bold;
 }
 .mainJeju{
     font-size: 100px;
