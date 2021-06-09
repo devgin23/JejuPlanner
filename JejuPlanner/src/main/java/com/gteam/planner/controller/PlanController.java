@@ -82,7 +82,6 @@ public class PlanController {
 		schList.remove(planService.planDel(vo));
 		log.info("schList : " + schList.toString());
 	}
-	
 	// 새로고침 시 리스트 초기화
 	@ResponseBody
 	@RequestMapping(value="/plan/write/clear", method=RequestMethod.GET)
