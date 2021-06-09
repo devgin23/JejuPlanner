@@ -152,6 +152,12 @@ img[alt="close"] {
 html{
 	height: 100%;
 }
+a{
+	color:#F6BB43;
+}
+a:hover{
+	color:#ef8c14;	
+}
 #body {
 	overflow-y: hidden;
 }
@@ -189,4 +195,32 @@ html{
 }
 .card{
 	margin-top: 5px;
+}
+/* btn-primary 색깔 바꾸기 css */
+.btn-primary {
+	background-color: #F6BB43;
+	border-color: #F6BB43;
+	color: #FFF; 
+}
+.btn-primary:hover,
+.btn-primary:focus {
+	border-color: #ef8c14;
+	background-color: #ef8c14;
+	color: #FFF; 
+}
+.btn-primary:active, .btn-primary:visited, .btn-primary:active:focus, .btn-primary:active:hover {
+	border-color: #F6BB43;
+	background-color: #F6BB43;
+	color: #FFF; 
+}
+.btn-check:active+.btn-primary, .btn-check:checked+.btn-primary, .btn-primary.active, .btn-primary:active, .show>.btn-primary.dropdown-toggle {
+    border-color: #ef8c14;
+	background-color: #ef8c14;
+	color: #FFF; 
+}
+#method_type{
+	text-decoration-color: #F6BB43;
+}
+.dropdown-item{
+	padding: 2px 0px 2px 0px;
 }

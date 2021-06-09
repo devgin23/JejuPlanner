@@ -1,0 +1,49 @@
+@charset "UTF-8";
+label, input{
+	margin-top: 5px;
+}
+a{
+	color: #F6BB43;
+}
+a:hover{
+	color: #ef8c14; 
+}
+form{
+	margin: auto;
+	width: 60%;
+}
+.custom-align{
+	text-align: center;
+}
+    
+.mainTitle{
+	margin: 20px;
+	text-align: center;
+	user-select: none;
+	font-weight: bold;
+}
+.mainJeju{
+	font-size: 100px;
+    color: #F6BB43;
+}
+.mainPlanner{
+    font-size: 75px;
+    color: #888;
+}
+/* btn-primary 색깔 바꾸기 css */
+.btn-primary {
+	background-color: #F6BB43;
+	border-color: #F6BB43;
+	color: #FFF; 
+}
+.btn-primary:hover,
+.btn-primary:focus {
+	border-color: #ef8c14;
+	background-color: #ef8c14;
+	color: #FFF; 
+}
+.btn-primary:active, .btn-primary:visited, .btn-primary:active:focus, .btn-primary:active:hover {
+   border-color: #F6BB43;
+   background-color: #F6BB43;
+   color: #FFF; 
+}
