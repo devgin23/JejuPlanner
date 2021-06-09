@@ -71,16 +71,12 @@ $(function(){
 	var planTotalDay = 0;
 	var deleteCount = 0;
 			
-	//드롭다운 값변경 스크립트
-    $(".dropdown-menu li a").click(function(){
-    	$(".btn-day:first-child").text($(this).text());
-    	$(".btn-day:first-child").val($(this).text());
-    	//총 일수 변수 초기화
-    	planTotalDay = $(this).attr('value');
-   });
+	
+	//총 일수 변수 초기화
+	planTotalDay = $("#planTotalDayCount option").attr('value');
+	
    // method="post" action="/plan/write/planAdd"
    // Plan 설정 유효성 검사 및 제출
-    
    
 	// planAdd 유효성 검사
 	$(document).on('click', 'button[id=planAddBtn]', function(){
