@@ -41,4 +41,7 @@ public interface PlanService {
 	
 	//view 수정완료 버튼 삭제 service
 	public void delSch(List<HashMap<String,Object>> delList) throws Exception;
+	
+	//view 수정완료 일정 추가 service
+	public void viewPlanAdd(PlanVO vo, List<Map<String, Object>> schList) throws Exception;
 }

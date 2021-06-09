@@ -148,7 +148,6 @@ $(function(){
 	        type: "POST",
 	        success: function(data){
 	        	markerCount += 1;
-				deleteCount += 1;
 				var schOutput='';
 				
 				//일정 생성폼에 markNo값 부여
@@ -172,7 +171,7 @@ $(function(){
 				schOutput+= '<p id="markerNo' +markerCount+ '" style="display:none;">' +markerCount+ '</p>';
 				schOutput+= '<h6 id="vall" class="card-subtitle mb-2 text-muted" value='+data.startTime+'>' + hour + ':' + min + '' + '</h6>';
 				schOutput+= '<p id="descript" class="card-text">' + data.descript + '</p>';
-				schOutput+= '<button type="button" class="btn btn-primary btn-sm" id="deletePlan'+deleteCount+'">delete</button>';
+				schOutput+= '<button type="button" class="btn btn-primary btn-sm deleteSch">delete</button>';
 				schOutput+= '</div></div>';
 								
 				$("#disp"+data.planDay).append(schOutput);
