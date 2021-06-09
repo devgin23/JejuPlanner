@@ -47,6 +47,7 @@ public class PlanController {
 	public PlanVO planSet(PlanVO vo)throws Exception{
 		if(planSetList.size()!=0) {
 			allPlanListClear();
+			planSetList.add(vo);
 		}else {
 			planSetList.add(vo);
 		}
