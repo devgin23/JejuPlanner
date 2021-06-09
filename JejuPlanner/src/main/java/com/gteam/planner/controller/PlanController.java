@@ -82,18 +82,14 @@ public class PlanController {
 		log.info("schList : " + schList.toString());
 	}
 	// 새로고침 시 리스트 초기화
+	@ResponseBody
 	@RequestMapping(value="/plan/write/clear", method=RequestMethod.GET)
-	public String planRefresh() throws Exception{
+	public String planRefresh(String param) throws Exception{
+		log.info("refreshMapping: "+param);
 		allPlanListClear();
-		return "/plan/write";
+		return param;
 	}
-	// 새로고침 시 리스트 초기화
-	@RequestMapping(value="/plan/write/clear/view", method=RequestMethod.GET)
-	public String planRefreshView() throws Exception{
-		
-		allPlanListClear();
-		return "/plan/view?planNo=1&userId=1234";
-	}
+	
 	// 전체 리스트 초기화 메서드
 	public static void allPlanListClear() {
 		planSetList.clear();
