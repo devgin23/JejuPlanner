@@ -1,4 +1,4 @@
-var idx;
+var idx=0;
 
 //새로고침 감지 및 Controller 정적 계획 리스트 초기화
 if(performance.navigation.type == 1){
@@ -26,6 +26,7 @@ $(function(){
 		$("#planModifyStart").css('display','none');
 		$("#planModifyEnd").css('display','block');
 		$(".deleteSch").css('display','block');
+		$("button[id^=schAddBtn]").css('display','block');
 	});
 	// 계획 수정 완료 버튼 클릭 시 작동 함수
 	$(document).on('click', '#planModifyEnd', function(){
@@ -69,29 +70,7 @@ $(function(){
 	var startDate;
 	var planTotalDay = 0;
 	var deleteCount = 0;
-	//collapse 생성 함수
-	//id 마다 i 부여
-	function createCollapse(i) {
-		var createStringCollap;
-		createStringCollap = '<div class="card card-body">';
-		createStringCollap += '<form id="schFrm'+i+'">';
-		createStringCollap += '<input type="hidden" id="userId" name="userId" value="'+ userId +'">';
-		createStringCollap += '<input type="hidden" id="schDay'+i+'" name="planDay" value="" readonly	style="width: 20px; text-align: center"/>';
-		createStringCollap += '<div class="input-group input-group-sm mb-3">'
-		createStringCollap += '<span class="input-group-text" id="inputGroup-sizing-sm">장소</span>'
-		createStringCollap += '<input type="text" class="form-control" id="placeInit'+i+'" name="addr"></div>'
-		createStringCollap += '<div class="input-group mb-3">'
-		createStringCollap += '<label class="input-group-text" for="startTimeInit">시작시간</label>'
-		createStringCollap += '<select class="form-select startTime" id="startTimeInit" name="startTime"></select></div>'
-		createStringCollap += '<div class="input-group">'
-		createStringCollap += '<span class="input-group-text">설명</span>'
-		createStringCollap += '<textarea class="form-control" id="contentInit'+i+'" name="descript"></textarea></div>'	
-		createStringCollap += '<input type="button" id="schFrmSubmit'+i+'" class="btn btn-primary" data-bs-target="#collapseExample" data-bs-toggle="collapse'+i+'" value="추가">';
-		createStringCollap += '</div>';
-		
-		$("#collapse"+i).html(createStringCollap);
-	};
-	
+			
 	//드롭다운 값변경 스크립트
     $(".dropdown-menu li a").click(function(){
     	$(".btn-day:first-child").text($(this).text());
@@ -101,67 +80,8 @@ $(function(){
    });
    // method="post" action="/plan/write/planAdd"
    // Plan 설정 유효성 검사 및 제출
-	$('#planFrmSubmit').on('click', function(){
-		//버튼 인덱스 값 초기화
-		idx=0;
-		//사용자 ID
-//		userId = $('#userId').val();
-		//계획타이틀 값 검사 및 초기화
-		if($('#planTitle').val()==""){
-			alert('일정 타이틀을 입력해주세요!');
-			$('#planTitle').focus();
-			return false;
-		}else{
-			planTitle = $('#planTitle').val();
-		}
-		//여행 일수 값 검사 초기화는 위 드롭다운 함수에!
-		if(planTotalDay==0){
-			alert('여행 일수를 선택해주세요!');
-			return false;
-		}
-		//시작일 값 (디폴트 값 09:00)
-		startDate = $('#startDate').val();
-		$.ajax({
-		   url: "/plan/write/planSet",
-		   data: {userId: userId, planTitle: planTitle, startDate: startDate, planTotalDay: planTotalDay},
-		   dataType:"json",
-		   type: "POST",
-		   cache : false,
-		   success: function(data){
-			   var planOutput = '';
-			   for(var i = 1; i<=planTotalDay; i++){
-				   var createDay = '<div><h4>DAY'+ i + '</h4>';
-				   createDay += '<button class="btn btn-primary"id="schAddBtn'+i+'"type="button"data-bs-toggle="collapse" data-bs-target="#collapse'+i+'"aria-expanded="false"aria-controls="collapseExample">';
-				   createDay += '일정 생성';
-				   createDay += '</button>';
-				   createDay += '<div class="collapse" id="collapse'+i+'"></div>'
-				   
-				   /*createDay += '<table class="schTable table table-borderless">';
-				   createDay += '<thead class="thead">'
-				   createDay += '<th>여행시간(hidden)</th><th>설명</th><th>주소</th><th>시간</th><th></th>';
-				   createDay += '</thead>'
-				   createDay += '<tbody id="disp'+i+'">'
-				   createDay += '</tbody>'
-				   createDay += '</table>'*/
-				   
-				   createDay += '<div id="disp'+i+'"></div>'
-				   createDay += '</div>';
-				   if(i == planTotalDay){
-					   createDay += '<button type="button" class="btn btn-primary submitBtn" id="planAddBtn" style="float:right;">일정 등록</button>';
-				   }
-				   planOutput = planOutput + createDay;
-			   }
-			   $("#schDiv").html(planOutput);
-			    for(var i = 1; i<=planTotalDay; i++){
-				   createCollapse(i);
-				   
-			   }
-		   },
-		   error: function(){
-		       alert("일정 추가 실패!");
-		    }
-		});
-	});
+    
+   
 	// planAdd 유효성 검사
 	$(document).on('click', 'button[id=planAddBtn]', function(){
 		for(var i=1; i<=planTotalDay; i++){
@@ -216,45 +136,66 @@ $(function(){
 	
 	//method="post" action="/plan/write/schAdd"
 	$(document).on('click', 'input[id^=schFrmSubmit]', function(){
-		
+		// 장소 값 없이 일정 추가 방지 (장소 유효성 검사)
+		if($('#placeInit'+idx).val()==''){
+			alert('장소를 추가해 주세요!');
+			return false;
+		}
 	    $.ajax({
 	        url: "/plan/write/schAdd",
 	        data: $('#schFrm'+idx).serialize(),
 	        dataType:"json",
 	        type: "POST",
 	        success: function(data){
+	        	markerCount += 1;
 				deleteCount += 1;
 				var schOutput='';
+				
+				//일정 생성폼에 markNo값 부여
+				$('.card .markerNo').val(markerCount + 1);
+				$('.card .markerNo').attr("id","markerNo" + (markerCount + 1));
+			
 				//startTime 형태 바꾸기.
 				var hour = data.startTime;
 				if(hour < 10) hour = "0" + hour; //1자리 수 일시 0 포맷 추가
 				var min = '00';
 								
 				//card형식으로 바꿈.
-				schOutput+= '<div class="card" style="width: 18rem;">';
+				schOutput+= '<div class="card card-count" style="width: 18rem;">';
 				schOutput+= '<div class="card-body cardTable">';
-				schOutput+= '<h5 class="card-title">' + data.addr + '</h5>';
+				schOutput+= '<h5 class="card-title">' + data.place + '</h5>';
+				schOutput+= '<h6 class="card-title">' + data.addr + '</h6>';
+				schOutput+= '<h4 class="card-title" style="display:none;">' + data.planDay + '</h4>';
 				schOutput+= '<h3 class="card-title" style="display:none;">' + data.startTime + '</h3>';
+				schOutput+= '<p id="longitude" style="display:none;">' + data.longitude + '</p>';
+				schOutput+= '<p id="latitude" style="display:none;">' + data.latitude + '</p>';
+				schOutput+= '<p id="markerNo' +markerCount+ '" style="display:none;">' +markerCount+ '</p>';
 				schOutput+= '<h6 id="vall" class="card-subtitle mb-2 text-muted" value='+data.startTime+'>' + hour + ':' + min + '' + '</h6>';
-				schOutput+= '<p class="card-text">' + data.descript + '</p>';
-				schOutput+= '<button type="button" class="btn btn-primary btn-sm" id="deletePlan'+deleteCount+'" style=display: none;>delete</button>';
+				schOutput+= '<p id="descript" class="card-text">' + data.descript + '</p>';
+				schOutput+= '<button type="button" class="btn btn-primary btn-sm" id="deletePlan'+deleteCount+'">delete</button>';
 				schOutput+= '</div></div>';
 								
-				
-				
 				$("#disp"+data.planDay).append(schOutput);
 				
 				console.log($('#vall').val());
+				
+				//지도에 마커 찍기 LatLng/위,경 '33.450701, 126.570667'
+				scheduleAddMarker(data.latitude, data.longitude, data);
         			
         		
 	        },
 	        error: function(){
-	            alert("일정 추가 실패!");
+	            alert("일정 추가 실패! 장소를 선택해 주세요!");
 	        },
+	        /*addr' + i +'" name="addr" value="" readonly/>';
+			createStringCollap += '<input type="hidden" id="longitude' + i +'" name="longitude" value="" readonly/>';
+			createStringCollap += '<input type="hidden" id="latitude*/	        
 	        complete: function(){
 	        	$('#contentInit'+idx).val('');
         		$('#placeInit'+idx).val('');
-        		/*$('#startTimeInit').val('9');*/
+        		$('#addr'+idx).val('');
+        		$('#longitude'+idx).val('');
+        		$('#latitude'+idx).val('');
 	        }
 	    });
 	});

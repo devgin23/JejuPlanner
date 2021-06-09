@@ -86,17 +86,21 @@
 				<h3>Day${dayCnt}</h3>
 				
 				<!-- collapse 보이기 버튼 -->
-				<%-- <button class="btn btn-primary"id="schAddBtn${dayCnt}"type="button"data-bs-toggle="collapse" data-bs-target="#collapse${dayCnt}">
+				<button class="btn btn-primary"id="schAddBtn${dayCnt}"type="button"data-bs-toggle="collapse" data-bs-target="#collapse${dayCnt}"style="display:none;">
 				일정 생성</button>
 				<!-- 일정 추가 form collapse -->
 				<div class="collapse" id="collapse${dayCnt}">
-				<div class="card card-body">
+					<div class="card card-body">
 					<form id="schFrm${dayCnt}">
-						<input type="hidden" id="userId" name="userId" value="${member.userId}">
+						<input type="hidden" id="userId${dayCnt}" name="userId" value="${member.userId}">
 						<input type="hidden" id="schDay${dayCnt}" name="planDay" value="${dayCnt}" readonly	style="width: 20px; text-align: center"/>
+						<input type="hidden" id="addr${dayCnt}" name="addr" value="" readonly/>
+						<input type="hidden" id="longitude${dayCnt}" name="longitude" value="" readonly/>
+						<input type="hidden" id="latitude${dayCnt}" name="latitude" value="" readonly/>
+						<input type="hidden" class="markerNo" id="markerNo1" name="markerNo" value="1" readonly/>
 						<div class="input-group input-group-sm mb-3">
 							<span class="input-group-text" id="inputGroup-sizing-sm">장소</span>
-							<input type="text" class="form-control" id="placeInit${dayCnt}" name="addr">
+							<input type="text" class="form-control" id="placeInit${dayCnt}" name="place" readonly style="background-color:#FFFFF0">
 						</div>
 						<div class="input-group mb-3">
 							<label class="input-group-text" for="startTimeInit">시작시간</label>
@@ -108,11 +112,12 @@
 						</div>
 						<input type="button" id="schFrmSubmit${dayCnt}" class="btn btn-primary" data-bs-target="#collapseExample" data-bs-toggle="collapse${dayCnt}" value="추가">
 					</form>
+					</div>
 				</div>
-				</div> --%>
 				
 				
 				<!-- 일정 카드 html -->
+				<div id="disp${dayCnt}">
 				<c:forEach items="${scheduleList}" var="scheduleList">
 					<c:if test="${scheduleList.planDay == dayCnt}">
 						<div class="card card-count" style="width: 18rem;">
@@ -132,6 +137,7 @@
 						</div>
 					</c:if>
 				</c:forEach>
+				</div>
 			</c:forEach>
 		</div>
 	</div>
