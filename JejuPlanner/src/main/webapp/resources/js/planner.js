@@ -2,7 +2,19 @@ var idx;
 
 //새로고침 감지 및 Controller 정적 계획 리스트 초기화
 if(performance.navigation.type == 1){
-	location.href="/plan/write/clear";
+	var param = window.location.pathname+window.location.search;
+	$.ajax({
+		url : "/plan/write/clear",
+		type : "GET",
+		data : {param: param},
+		dataType : "text",
+		success : function(data) {
+			location.href=data;
+		},
+		error : function(){
+			alert("refresh clear err");
+		}
+	});
 }
 
 $(function(){
@@ -193,14 +205,12 @@ $(function(){
 				schOutput+= '<p id="longitude" style="display:none;">' + data.longitude + '</p>';
 				schOutput+= '<p id="latitude" style="display:none;">' + data.latitude + '</p>';
 				schOutput+= '<p id="markerNo' +markerCount+ '" style="display:none;">' +markerCount+ '</p>';
-				schOutput+= '<h6 id="vall" class="card-subtitle mb-2 text-muted" value='+data.startTime+'>' + hour + ':' + min + '' + '</h6>';
+				schOutput+= '<h6 class="card-subtitle mb-2 text-muted">' + hour + ':' + min + '' + '</h6>';
 				schOutput+= '<p id="descript" class="card-text">' + data.descript + '</p>';
 				schOutput+= '<button type="button" class="btn btn-primary btn-sm" id="deletePlan'+deleteCount+'">delete</button>';
 				schOutput+= '</div></div>';
 								
 				$("#disp"+data.planDay).append(schOutput);
-				
-				console.log($('#vall').val());
 				
 				//지도에 마커 찍기 LatLng/위,경 '33.450701, 126.570667'
 				scheduleAddMarker(data.latitude, data.longitude, data);
@@ -277,9 +287,9 @@ $(function(){
 						}
 					}
 				}
-				dispNum++;
-			}
-		}, 100);
+				dispNum++
+			} 	
+		}, 500);
 	});
 	
 });
