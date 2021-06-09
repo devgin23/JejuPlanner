@@ -204,60 +204,61 @@ function scheduleAddMarker(latitude, longitude, data) {
 	
 	markerCount++;
 	
-	var markerPosition  = new kakao.maps.LatLng(latitude, longitude);
+		var markerPosition  = new kakao.maps.LatLng(latitude, longitude);
+		
+		// 마커를 생성합니다
+		var marker = new kakao.maps.Marker({
+		    position: markerPosition
+		});
+		
+		marker.setZIndex(10);
 	
-	// 마커를 생성합니다
-	var marker = new kakao.maps.Marker({
-	    position: markerPosition
-	});
+		//이미지갖고올 api 함수 출력
+		visitKoreaAPI(data.place);
+		
+		// 마커가 지도 위에 표시되도록 설정합니다
+		marker.setMap(map);
+		
+		marker.isNull = false;
+		
+		//마커 배열에 담기
+		scheduleMarkers.push(marker);
 	
-	marker.setZIndex(10);
-
-	//이미지갖고올 api 함수 출력
-	visitKoreaAPI(data.place);
+		//인포 윈도우 UI 세팅
+		var iwContent = '<div class="placeinfo placeInfowindow">';
+	    	iwContent += ' <div class="title" id="infoBtn" type="button" title="' + data.place + '">' + data.place + '</div>';
+			//이미지 삽입
+			iwContent += '<img src ='+ mapImage + ' alt="사진이없습니다." style="width:300px; height:150px; object-fit:contain; border:3px solid black">'
+			iwContent += '    <span title="' + data.addr + '">' + data.addr + '</span>' +           
+		        '</div>' + '<div class="after"></div>';
+		
+	    iwPosition = new kakao.maps.LatLng(latitude, longitude); //인포윈도우 표시 위치입니다
+	    
+	    // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
+	    iwRemoveable = true;
 	
-	// 마커가 지도 위에 표시되도록 설정합니다
-	marker.setMap(map);
-	
-	marker.isNull = false;
-	
-	//마커 배열에 담기
-	scheduleMarkers.push(marker);
-
-	//인포 윈도우 UI 세팅
-	var iwContent = '<div class="placeinfo placeInfowindow">';
-    	iwContent += ' <div class="title" id="infoBtn" type="button" title="' + data.place + '">' + data.place + '</div>';
-		//이미지 삽입
-		iwContent += '<img src ='+ mapImage + ' alt="사진이없습니다." style="width:300px; height:150px; object-fit:contain; border:3px solid black">'
-		iwContent += '    <span title="' + data.addr + '">' + data.addr + '</span>' +           
-	        '</div>' + '<div class="after"></div>';
-	
-    iwPosition = new kakao.maps.LatLng(latitude, longitude); //인포윈도우 표시 위치입니다
-    
-    // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
-    iwRemoveable = true;
-
-	// 인포윈도우를 생성합니다
-	var infowindow = new kakao.maps.InfoWindow({
-	    position : iwPosition, 
-	    content : iwContent,
-	    removable : iwRemoveable
-	});
-	
-	// 마커 위에 인포윈도우를 표시합니다. 두번째 파라미터인 marker를 넣어주지 않으면 지도 위에 표시됩니다.
-	kakao.maps.event.addListener(marker, 'click', function() {
-	      // 마커 위에 인포윈도우를 표시합니다
-	      infowindow.open(map, marker);
-	      
-	      //닫기 버튼 이미지 소스 삽입
-	      $("img[alt='close']").attr("src", "/resources/images/bt_close.png");
-	});
-	
-	mapImage = "";
-	
-	//인포 윈도우 객체 관리를 위해 배열에 담기
-	scheduleInfowindows.push(infowindow);
+		// 인포윈도우를 생성합니다
+		var infowindow = new kakao.maps.InfoWindow({
+		    position : iwPosition, 
+		    content : iwContent,
+		    removable : iwRemoveable
+		});
+			
+			// 마커 위에 인포윈도우를 표시합니다. 두번째 파라미터인 marker를 넣어주지 않으면 지도 위에 표시됩니다.
+			kakao.maps.event.addListener(marker, 'click', function() {
+			      // 마커 위에 인포윈도우를 표시합니다
+			      infowindow.open(map, marker);
+			      
+			      //닫기 버튼 이미지 소스 삽입
+			      $("img[alt='close']").attr("src", "/resources/images/bt_close.png");
+			});
+			
+			mapImage = "";
+			
+			//인포 윈도우 객체 관리를 위해 배열에 담기
+			scheduleInfowindows.push(infowindow);
 }
+
 
 // 내 일정의 장소 마커를 지우는 함수
 $(document).on('click', 'button[id^=deletePlan]', function scheduleRemoveMarker() {
@@ -353,9 +354,19 @@ function hideMarkers() {
 
 };
 
-$('#test-btn').on('click', function() {
+//일정 열람 시 일정 마커 찍히게
+$(document).ready(function() {
 	for(var i=0; i< $('.card-count').length; i++){
-		console.log($('.longitude').eq(i).html());
+		
+		var latitude = $('.latitude').eq(i).html();
+		var longitude = $('.longitude').eq(i).html();
+		
+		var data = {};
+		data.place = $('.card .place').eq(i).html();
+		data.addr = $('.card .addr').eq(i).html();
+		
+		scheduleAddMarker(latitude, longitude, data);
+		
 	}
 });
 
