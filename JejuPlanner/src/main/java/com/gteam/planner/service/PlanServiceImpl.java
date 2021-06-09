@@ -132,8 +132,27 @@ public class PlanServiceImpl implements PlanService{
 		}
 		
 	}
-	
-	
+	//view 수정완료 일정 추가 service
+	@Override
+	public void viewPlanAdd(PlanVO vo, List<Map<String, Object>> schList) throws Exception {
+		for(int i = 0; i<schList.size(); i++) {
+		ScheduleVO schVo = new ScheduleVO();
+		//vo 값 세팅
+		schVo.setPlanNo(vo.getPlanNo());
+		schVo.setUserId(vo.getUserId());
+		schVo.setDescript(schList.get(i).get("descript").toString());
+		schVo.setAddr(schList.get(i).get("addr").toString());
+		schVo.setPlanDay(Integer.parseInt(schList.get(i).get("planDay").toString()));
+		schVo.setStartTime(Integer.parseInt(schList.get(i).get("startTime").toString()));
+		schVo.setPlace(schList.get(i).get("place").toString());
+		schVo.setLongitude(Double.parseDouble(schList.get(i).get("longitude").toString()));
+		schVo.setLatitude(Double.parseDouble(schList.get(i).get("latitude").toString()));
+		schVo.setMarkerNo(Integer.parseInt(schList.get(i).get("markerNo").toString()));
+		log.info(schVo.toString());
+		dao.planSchAdd(schVo);
+	}
+	log.info("Insert Plan END");
+}
 	
 
 	
