@@ -239,3 +239,5 @@ function changeCategoryClass(el) {
 	xhr.send('');
 
 };
+
+
