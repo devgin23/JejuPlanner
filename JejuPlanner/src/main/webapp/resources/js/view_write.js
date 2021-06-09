@@ -353,3 +353,9 @@ function hideMarkers() {
 
 };
 
+$('#test-btn').on('click', function() {
+	for(var i=0; i< $('.card-count').length; i++){
+		console.log($('.longitude').eq(i).html());
+	}
+});
+

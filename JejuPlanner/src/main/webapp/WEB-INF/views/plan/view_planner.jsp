@@ -48,6 +48,7 @@
 
 </head>
 <body>
+<button id="test-btn">확인용 버튼</button>
 	<input type="hidden" id="userIdCheck" value="${member.userId}">
 	<div id="plannerDiv">
 	<!-- 계획 입력 -->
@@ -143,5 +144,5 @@
 	</div>
 	
 </body>
-
+<script type="text/javascript" src="/resources/js/view_write.js"></script>
 </html>

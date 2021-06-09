@@ -98,5 +98,4 @@
 	<div id="schDiv"></div>
 	</div>
 </body>
-
 </html>
