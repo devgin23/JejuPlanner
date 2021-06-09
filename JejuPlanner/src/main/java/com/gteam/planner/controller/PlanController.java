@@ -89,10 +89,10 @@ public class PlanController {
 	}
 	// 새로고침 시 리스트 초기화
 	@RequestMapping(value="/plan/write/clear/view", method=RequestMethod.GET)
-	public String planRefreshView(@RequestParam("planNo") int planNo, @RequestParam("userId") String userId) throws Exception{
+	public String planRefreshView() throws Exception{
 		
 		allPlanListClear();
-		return "/plan/view?planNo="+planNo+"&userId="+userId;
+		return "/plan/view?planNo=1&userId=1234";
 	}
 	// 전체 리스트 초기화 메서드
 	public static void allPlanListClear() {

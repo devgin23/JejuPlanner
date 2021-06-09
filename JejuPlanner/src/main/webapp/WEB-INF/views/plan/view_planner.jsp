@@ -84,6 +84,35 @@
 		<div id="schDiv">
 			<c:forEach var="dayCnt" begin="1" end="${planView.planTotalDay}" step="1">
 				<h3>Day${dayCnt}</h3>
+				
+				<!-- collapse 보이기 버튼 -->
+				<%-- <button class="btn btn-primary"id="schAddBtn${dayCnt}"type="button"data-bs-toggle="collapse" data-bs-target="#collapse${dayCnt}">
+				일정 생성</button>
+				<!-- 일정 추가 form collapse -->
+				<div class="collapse" id="collapse${dayCnt}">
+				<div class="card card-body">
+					<form id="schFrm${dayCnt}">
+						<input type="hidden" id="userId" name="userId" value="${member.userId}">
+						<input type="hidden" id="schDay${dayCnt}" name="planDay" value="${dayCnt}" readonly	style="width: 20px; text-align: center"/>
+						<div class="input-group input-group-sm mb-3">
+							<span class="input-group-text" id="inputGroup-sizing-sm">장소</span>
+							<input type="text" class="form-control" id="placeInit${dayCnt}" name="addr">
+						</div>
+						<div class="input-group mb-3">
+							<label class="input-group-text" for="startTimeInit">시작시간</label>
+							<select class="form-select startTime" id="startTimeInit${dayCnt}" name="startTime"></select>
+						</div>
+						<div class="input-group">
+							<span class="input-group-text">설명</span>
+							<textarea class="form-control" id="contentInit${dayCnt}" name="descript"></textarea>
+						</div>
+						<input type="button" id="schFrmSubmit${dayCnt}" class="btn btn-primary" data-bs-target="#collapseExample" data-bs-toggle="collapse${dayCnt}" value="추가">
+					</form>
+				</div>
+				</div> --%>
+				
+				
+				<!-- 일정 카드 html -->
 				<c:forEach items="${scheduleList}" var="scheduleList">
 					<c:if test="${scheduleList.planDay == dayCnt}">
 						<div class="card card-count" style="width: 18rem;">

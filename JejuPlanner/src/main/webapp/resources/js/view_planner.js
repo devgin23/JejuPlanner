@@ -2,7 +2,6 @@ var idx;
 
 //새로고침 감지 및 Controller 정적 계획 리스트 초기화
 if(performance.navigation.type == 1){
-	
 	location.href="/plan/write/clear/view";
 	
 }
