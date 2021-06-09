@@ -1,9 +1,14 @@
 var mapImage="";
 
+//주소-좌표 변환 객체를 생성합니다
+var markerCount = 0;
+
 // 마커를 클릭했을 때 해당 장소의 상세정보를 보여줄 커스텀오버레이입니다
 var placeOverlay = new kakao.maps.CustomOverlay({zIndex:1}), 
     contentNode = document.createElement('div'), // 커스텀 오버레이의 컨텐츠 엘리먼트 입니다 
     markers = [], // 마커를 담을 배열입니다
+    scheduleMarkers = [], // 내 일정에 관한 마커를 담을 배열
+    scheduleInfowindows = [], // 내 일정 마커에 띄울 인포윈도우를 담을 배열
     currCategory = ''; // 현재 선택된 카테고리를 가지고 있을 변수입니다
  
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
@@ -106,7 +111,7 @@ function removeMarker() {
 // 클릭한 마커에 대한 장소 상세정보를 커스텀 오버레이로 표시하는 함수입니다
 function displayPlaceInfo (place) {
 	
-	//콜백 변수 대입
+	// API 호출 (관광지 사진)
 	visitKoreaAPI(place.place_name);
 	
     var content = '<div class="placeinfo">' +
@@ -126,12 +131,19 @@ function displayPlaceInfo (place) {
     	    placeOverlay.setPosition(new kakao.maps.LatLng(place.y, place.x));
     	    placeOverlay.setMap(map);  
     	    mapImage = "";
-    	    var frm = {
-    	    		place : place.place_name,
-    	    		addr : place.road_address_name
-    	    }
-    	    $('#btn').on('click', function() {
+    	    
+    	    	var frm = {
+				    	place : place.place_name,
+				    	addr : place.road_address_name,
+				    	longitude : place.x,
+				    	latitude : place.y
+    	    	}
+    	    	//도로명 주소 없을 경우 지번 주소 대입
+    	    	if(frm.addr==""){
+    	    		frm.addr = place.address_name;
+    	    	}
     	    	
+    	    $('#btn').on('click', function() {
     			$.ajax({
     				url : "/plan/fromMap",
     				type : "POST",
@@ -139,9 +151,10 @@ function displayPlaceInfo (place) {
     				contentType : "application/json; charset=utf-8;",
     				dataType : "json",
     				success : function(data1) {
-    					$('#placeInit'+idx).val(data1.place + ' ' + data1.addr);
-    					console.log(data1);
-    					console.log(idx);
+    					$('#placeInit'+idx).val(data1.place);
+    					$('#addr'+idx).val(data1.addr);
+    					$('#longitude' + idx).val(data1.longitude);
+    					$('#latitude' + idx).val(data1.latitude);
     				},
     				error : function() {
     					alert("simpleWithObject err");
@@ -184,14 +197,114 @@ function changeCategoryClass(el) {
     if (el) {
         el.className = 'on';
     } 
-} 
+}
+
+// 내 일정의 장소 마커 + 인포윈도우를 등록하는 함수
+function scheduleAddMarker(latitude, longitude, data) {
+	
+	markerCount++;
+	
+	var markerPosition  = new kakao.maps.LatLng(latitude, longitude);
+	
+	// 마커를 생성합니다
+	var marker = new kakao.maps.Marker({
+	    position: markerPosition
+	});
+	
+	marker.setZIndex(10);
+
+	//이미지갖고올 api 함수 출력
+	visitKoreaAPI(data.place);
+	
+	// 마커가 지도 위에 표시되도록 설정합니다
+	marker.setMap(map);
+	
+	marker.isNull = false;
+	
+	//마커 배열에 담기
+	scheduleMarkers.push(marker);
+
+	//인포 윈도우 UI 세팅
+	var iwContent = '<div class="placeinfo placeInfowindow">';
+    	iwContent += ' <div class="title" id="infoBtn" type="button" title="' + data.place + '">' + data.place + '</div>';
+		//이미지 삽입
+		iwContent += '<img src ='+ mapImage + ' alt="사진이없습니다." style="width:300px; height:150px; object-fit:contain; border:3px solid black">'
+		iwContent += '    <span title="' + data.addr + '">' + data.addr + '</span>' +           
+	        '</div>' + '<div class="after"></div>';
+	
+    iwPosition = new kakao.maps.LatLng(latitude, longitude); //인포윈도우 표시 위치입니다
+    
+    // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
+    iwRemoveable = true;
+
+	// 인포윈도우를 생성합니다
+	var infowindow = new kakao.maps.InfoWindow({
+	    position : iwPosition, 
+	    content : iwContent,
+	    removable : iwRemoveable
+	});
+	
+	// 마커 위에 인포윈도우를 표시합니다. 두번째 파라미터인 marker를 넣어주지 않으면 지도 위에 표시됩니다.
+	kakao.maps.event.addListener(marker, 'click', function() {
+	      // 마커 위에 인포윈도우를 표시합니다
+	      infowindow.open(map, marker);
+	      
+	      //닫기 버튼 이미지 소스 삽입
+	      $("img[alt='close']").attr("src", "/resources/images/bt_close.png");
+	});
+	
+	mapImage = "";
+	
+	//인포 윈도우 객체 관리를 위해 배열에 담기
+	scheduleInfowindows.push(infowindow);
+}
+
+// 내 일정의 장소 마커를 지우는 함수
+$(document).on('click', 'button[id^=deletePlan]', function scheduleRemoveMarker() {
+	
+	//마커 지우기
+	scheduleMarkers[$(this).siblings('p[id^=markerNo]').html() - 1].setMap(null);
+	
+	//지운 마커에 isNull = true 속성을 주어 배열에서 지운 값인지 찾을 수 있게함
+	scheduleMarkers[$(this).siblings('p[id^=markerNo]').html() - 1].isNull = true;
+	
+	//인포윈도우 지우기
+	scheduleInfowindows[$(this).siblings('p[id^=markerNo]').html() - 1].close();
+	
+});
+
+// 배열에 추가된 마커들을 지도에 표시하거나 삭제하는 함수입니다
+//$(document).on('click', 'li[id=mySchedule]', 
+function setMarkers(map) {
+    for (var i = 0; i < scheduleMarkers.length; i++) {
+    	console.log(scheduleMarkers[i]);
+
+    	//delete한 일정의 마커도 배열에 들어있기에 같이 출력되는 버그가 있음, 조건문 추가하여 유효성검사
+    	if(scheduleMarkers[i].isNull == true){
+    		scheduleMarkers[i].setMap(null);
+    	} else {
+    		scheduleMarkers[i].setMap(map);
+    	}
+    	
+    	scheduleInfowindows[i].close();
+    }
+}
+
+// "마커 보이기" 버튼을 클릭하면 호출되어 배열에 추가된 마커를 지도에 표시하는 함수입니다
+function showMarkers() {
+    setMarkers(map);
+    $('#scheduleMarker-toggle').attr('onclick', 'hideMarkers();');
+}
+
+// "마커 감추기" 버튼을 클릭하면 호출되어 배열에 추가된 마커를 지도에서 삭제하는 함수입니다
+function hideMarkers() {
+    setMarkers(null);   
+    $('#scheduleMarker-toggle').attr('onclick', 'showMarkers();');
+}
 
 //한국관광공사 API 세팅
-//$(document).ready(function() {
-//function visitKoreaAPI(place_name, callback) {
   function visitKoreaAPI(place_name) {
 	
-//	console.log("함수 내부 인자 확인 :" + place_name);
 	var serviceKey = "O04vU1%2FBaFzYfPxBOYalRBg4ol8tZGeSgRc1SDG6HnIBdhw0XE6GHIcpyCrLSFpb8x%2BRe3mVF8SWqz0nIFj7RA%3D%3D";
 	var xhr = new XMLHttpRequest();
 	var url = 'http://api.visitkorea.or.kr/openapi/service/rest/PhotoGalleryService/gallerySearchList'; //URL
@@ -240,4 +353,9 @@ function changeCategoryClass(el) {
 
 };
 
+$('#test-btn').on('click', function() {
+	for(var i=0; i< $('.card-count').length; i++){
+		console.log($('.longitude').eq(i).html());
+	}
+});
 
