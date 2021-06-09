@@ -124,6 +124,7 @@
 						<div class="card card-count" style="width: 18rem;">
 							<div class="card-body cardTable">
 							<h5 class="card-title">${scheduleList.place}</h5>
+							
 							<h6 class="card-title">${scheduleList.addr}</h6>
 							<h4 class="card-title" style="display:none;">${scheduleList.planDay}</h4>
 							<h3 class="card-title" style="display:none;">${scheduleList.startTime}</h3>
