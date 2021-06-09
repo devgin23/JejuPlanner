@@ -71,16 +71,12 @@ $(function(){
 	var planTotalDay = 0;
 	var deleteCount = 0;
 			
-	//드롭다운 값변경 스크립트
-    $(".dropdown-menu li a").click(function(){
-    	$(".btn-day:first-child").text($(this).text());
-    	$(".btn-day:first-child").val($(this).text());
-    	//총 일수 변수 초기화
-    	planTotalDay = $(this).attr('value');
-   });
+	
+	//총 일수 변수 초기화
+	planTotalDay = $("#planTotalDayCount option").attr('value');
+	
    // method="post" action="/plan/write/planAdd"
    // Plan 설정 유효성 검사 및 제출
-    
    
 	// planAdd 유효성 검사
 	$(document).on('click', 'button[id=planAddBtn]', function(){
@@ -148,7 +144,6 @@ $(function(){
 	        type: "POST",
 	        success: function(data){
 	        	markerCount += 1;
-				deleteCount += 1;
 				var schOutput='';
 				
 				//일정 생성폼에 markNo값 부여
@@ -172,7 +167,7 @@ $(function(){
 				schOutput+= '<p id="markerNo' +markerCount+ '" style="display:none;">' +markerCount+ '</p>';
 				schOutput+= '<h6 id="vall" class="card-subtitle mb-2 text-muted" value='+data.startTime+'>' + hour + ':' + min + '' + '</h6>';
 				schOutput+= '<p id="descript" class="card-text">' + data.descript + '</p>';
-				schOutput+= '<button type="button" class="btn btn-primary btn-sm" id="deletePlan'+deleteCount+'">delete</button>';
+				schOutput+= '<button type="button" class="btn btn-primary btn-sm deleteSch">delete</button>';
 				schOutput+= '</div></div>';
 								
 				$("#disp"+data.planDay).append(schOutput);

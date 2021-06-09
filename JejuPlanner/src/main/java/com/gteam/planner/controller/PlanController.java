@@ -95,15 +95,22 @@ public class PlanController {
 		log.info("All PlanList Clear");
 	}
 		
-	//계획 수정하기(진짜)
+	//계획 수정하기(완료버튼)
 	@RequestMapping(value = "/plan/view/modify", method = RequestMethod.POST)
 	public String planModify(PlanVO vo) throws Exception {
 		log.info("PlanVO : " + vo.toString());
+		
 		//계획 수정하기 함수
 		planService.planModify(vo);
 		
 		//일정 삭제 함수
 		planService.delSch(delList);
+		
+		//일정 추가 함수
+		planService.viewPlanAdd(vo, schList);
+		
+		//list초기화
+		allPlanListClear();
 		return "redirect:/plan/view?planNo=" + vo.getPlanNo() + "&userId=" +vo.getUserId();
 	}
 	
