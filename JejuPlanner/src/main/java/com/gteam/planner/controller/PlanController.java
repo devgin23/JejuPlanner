@@ -65,7 +65,6 @@ public class PlanController {
 	@RequestMapping(value="/plan/write/planAdd", method=RequestMethod.GET)
 	public String planAdd() throws Exception {
 		planService.planAdd(planSetList.get(0), schList);
-		log.info("일정 정보 조회"+schList.toString());
 		allPlanListClear();
 		log.info("계획 추가 완료");
 		return "redirect:/plan/write";
