@@ -55,7 +55,6 @@ public class PlanDAOImpl implements PlanDAO {
 	//계획일정 목록
 	@Override
 	public List<ScheduleVO> planSchList(int planNo) throws Exception {
-		log.info("스케줄DAO 인자 확인 " + planNo);
 		return sql.selectList(namespace + ".planSchList", planNo);
 	}
 	

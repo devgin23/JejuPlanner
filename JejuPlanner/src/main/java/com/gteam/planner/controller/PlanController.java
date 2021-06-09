@@ -9,17 +9,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.gteam.planner.domain.Paging;
 import com.gteam.planner.domain.PlanVO;
 import com.gteam.planner.domain.ScheduleVO;
-import com.gteam.planner.service.BoardService;
 import com.gteam.planner.service.PlanService;
 
 @Controller
@@ -69,7 +65,6 @@ public class PlanController {
 	@RequestMapping(value="/plan/write/planAdd", method=RequestMethod.GET)
 	public String planAdd() throws Exception {
 		planService.planAdd(planSetList.get(0), schList);
-		log.info("일정 정보 조회"+schList.toString());
 		allPlanListClear();
 		log.info("계획 추가 완료");
 		return "redirect:/plan/write";

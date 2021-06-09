@@ -98,7 +98,6 @@ public class BoardController {
 		//일정 호출
 		List<ScheduleVO> scheduleList = planService.planSchList(planNo);
 		model.addAttribute("scheduleList", scheduleList);
-		log.info("planDay : "+scheduleList.get(1).getPlanDay());
 		return "/plan/view";
 	}
 	
