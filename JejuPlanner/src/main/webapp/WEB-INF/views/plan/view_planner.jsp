@@ -48,7 +48,6 @@
 
 </head>
 <body>
-<button id="test-btn">확인용 버튼</button>
 	<input type="hidden" id="userIdCheck" value="${member.userId}">
 	<div id="plannerDiv">
 	<!-- 계획 입력 -->
