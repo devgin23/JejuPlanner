@@ -92,9 +92,9 @@ $(function(){
 		   success: function(data){
 			   var planOutput = '';
 			   for(var i = 1; i<=planTotalDay; i++){
-				   var createDay = '<div><h4>DAY'+ i + '</h4>';
+				   var createDay = '<div><h4 class="day">DAY'+ i + '</h4>';
 				   
-				   createDay += '<button class="btn btn-primary"id="schAddBtn'+i+'"type="button"data-bs-toggle="collapse" data-bs-target="#collapse'+i+'"aria-expanded="false"aria-controls="collapseExample">';
+				   createDay += '<button class="btn btn-primary schCreateBtn"id="schAddBtn'+i+'"type="button"data-bs-toggle="collapse" data-bs-target="#collapse'+i+'"aria-expanded="false"aria-controls="collapseExample">';
 				   createDay += '일정 생성';
 				   createDay += '</button>';
 				   createDay += '<div class="collapse" id="collapse'+i+'"></div>'
@@ -196,7 +196,7 @@ $(function(){
 				var min = '00';
 								
 				//card형식으로 바꿈.
-				schOutput+= '<div class="card card-count" style="width: 18rem;">';
+				schOutput+= '<div class="card card-count" style="width: 28rem;">';
 				schOutput+= '<div class="card-body cardTable">';
 				schOutput+= '<h5 class="card-title">' + data.place + '</h5>';
 				schOutput+= '<h6 class="card-title">' + data.addr + '</h6>';
