@@ -41,7 +41,11 @@
   	text-align:center;
   }
   .schCreateBtn{
+  	display : block;
   	margin : 1px auto;
+  }
+  .schFrmSubmit{
+  	margin-top : 3px;
   }
   /* btn-primary 색깔 바꾸기 css */
   /* .btn-primary {
