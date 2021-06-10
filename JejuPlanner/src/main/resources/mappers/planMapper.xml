@@ -18,8 +18,8 @@
 		
 		<!-- 일정 DB 추가 -->
 		<insert id="planSchAdd" parameterType="com.gteam.planner.domain.PlanVO">
-			INSERT INTO schedule(planNo, userId, descript, place, addr,  planDay, startTime, latitude, longitude, markerNo)
-			 VALUES(#{planNo}, #{userId}, #{descript}, #{place}, #{addr}, #{planDay}, #{startTime}, #{latitude}, #{longitude}, #{markerNo})
+			INSERT INTO schedule(planNo, userId, descript, place, addr,  planDay, startTime, latitude, longitude)
+			 VALUES(#{planNo}, #{userId}, #{descript}, #{place}, #{addr}, #{planDay}, #{startTime}, #{latitude}, #{longitude})
 		</insert>
 		
 		<!-- 계획 목록 -->
@@ -57,7 +57,7 @@
 		
 		<!-- 일정 조회 -->
 		<select id="planSchList" parameterType="int" resultType="com.gteam.planner.domain.ScheduleVO">
-			SELECT planNo, userId, descript, place, addr, startTime, planDay, latitude, longitude, markerNo
+			SELECT planNo, userId, descript, place, addr, startTime, planDay, latitude, longitude
 			 FROM schedule
 			  WHERE planNo = #{planNo}
 			   ORDER BY planDay, startTime
@@ -81,7 +81,7 @@
 		<delete id="viewSchDelete" parameterType="hashMap">
 			DELETE 
 			 FROM schedule
-			  WHERE planNo = #{planNo} AND markerNo = #{markerNo};
+			  WHERE planNo = #{planNo};
 		</delete>
 
 </mapper>
