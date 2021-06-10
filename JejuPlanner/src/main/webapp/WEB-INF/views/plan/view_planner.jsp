@@ -139,7 +139,7 @@
 				
 				<!-- 일정 카드 html -->
 				<div id="disp${dayCnt}" class="disp">
-				<c:forEach items="${scheduleList}" var="scheduleList">
+				<c:forEach items="${scheduleList}" var="scheduleList" varStatus="status">
 					<c:if test="${scheduleList.planDay == dayCnt}">
 					<div class="card-container">
 						<div class="card card-count" style="width: 28rem;">
@@ -151,7 +151,7 @@
 							<p class="longitude" style="display:none;">${scheduleList.longitude}</p>
 							<p class="latitude" style="display:none;">${scheduleList.latitude}</p>
 							<p class="planNo" style="display:none;">${scheduleList.planNo}</p>
-							<p class="markerNo" id="markerNo${scheduleList.markerNo}" style="display:none;">${scheduleList.markerNo}</p>
+							<p class="markerNo" id="markerNo${status.count}" >${status.count}</p>
 							<h6 class="card-subtitle mb-2 text-muted">${scheduleList.startTime} : 00</h6>
 							<p class="card-text descript">${scheduleList.descript}</p>
 							<button type="button" class="btn btn-primary btn-sm deleteSch" id="deletePlan${scheduleList.markerNo}" style="display:none;">delete</button>								
