@@ -155,8 +155,11 @@ img[alt="close"] {
 	right:25px;
 	border-radius:75px;
 	width:65px;
+	height:50px;
 	white-space : pre;
-	color:red;
+	border:2px solid white;
+	color:black;
+	box-shadow: 1px 1px 2px black;
 }
 
 <!--KAKAO MAP CSS 끝 -->
