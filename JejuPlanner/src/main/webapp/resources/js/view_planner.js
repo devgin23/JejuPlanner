@@ -1,5 +1,5 @@
 var idx=0;
-
+var markerViewCount = $('.card-count').length;
 //새로고침 감지 및 Controller 정적 계획 리스트 초기화
 if(performance.navigation.type == 1){
 	var param = window.location.pathname+window.location.search;
@@ -92,7 +92,8 @@ $(function(){
 	
 	//일정 생성 버튼마다 day 순서 받아오기
 	$(document).on("click", 'button[id^=schAddBtn]', function(){
-		
+		$('.markerNo').val(markerViewCount  +1);
+		$('.markerNo').attr('id', "markerNo" +(markerViewCount  +1));
 		//startTime select에 사용될 변수 선언
 		if(idx==0){
 	        for(var i = 6; i<=24; i++){
@@ -143,14 +144,9 @@ $(function(){
 	        dataType:"json",
 	        type: "POST",
 	        success: function(data){
-	        	console.log(${card-count});
-	        	markerCount += 1;
 				var schOutput='';
-				
+				markerViewCount++;
 				//일정 생성폼에 markNo값 부여
-				$('.card .markerNo').val(markerCount + 1);
-				$('.card .markerNo').attr("id","markerNo" + (markerCount + 1));
-			
 				//startTime 형태 바꾸기.
 				var hour = data.startTime;
 				if(hour < 10) hour = "0" + hour; //1자리 수 일시 0 포맷 추가
@@ -165,10 +161,10 @@ $(function(){
 				schOutput+= '<h3 class="card-title" style="display:none;">' + data.startTime + '</h3>';
 				schOutput+= '<p id="longitude" style="display:none;">' + data.longitude + '</p>';
 				schOutput+= '<p id="latitude" style="display:none;">' + data.latitude + '</p>';
-				schOutput+= '<p id="markerNo' +markerCount+ '" style="display:none;">' +markerCount+ '</p>';
+				schOutput+= '<p id="markerNo' +markerViewCount + '" style="display:none;">' + markerViewCount + '</p>';
 				schOutput+= '<h6 id="vall" class="card-subtitle mb-2 text-muted" value='+data.startTime+'>' + hour + ':' + min + '' + '</h6>';
 				schOutput+= '<p id="descript" class="card-text">' + data.descript + '</p>';
-				schOutput+= '<button type="button" class="btn btn-primary btn-sm deleteSch">delete</button>';
+				schOutput+= '<button type="button" class="btn btn-primary btn-sm deleteSch" id="deletePlan'+markerViewCount+'">delete</button>';
 				schOutput+= '</div></div>';
 								
 				$("#disp"+data.planDay).append(schOutput);

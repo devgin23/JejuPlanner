@@ -16,7 +16,6 @@
 
   .dropdown-menu{
   	width:50px;
-  	text-align:center;
   }
   .schDiv{
   	margin-right: 10px;
@@ -26,7 +25,16 @@
   	width:100%; 
   	height:90%;
   }
-
+ .card-count{
+  	margin : 5px auto;
+  	border-color : orange;
+  }
+  .day{
+  	text-align:center;
+  }
+  .schCreateBtn{
+  	margin : 1px auto;
+  }
   /* btn-primary 색깔 바꾸기 css */
   /* .btn-primary {
     background-color: #7bc143;
@@ -83,10 +91,10 @@
 	<!-- 계획 출력 DIV -->
 		<div id="schDiv">
 			<c:forEach var="dayCnt" begin="1" end="${planView.planTotalDay}" step="1">
-				<h3>Day${dayCnt}</h3>
+				<h3 class="day">Day${dayCnt}</h3>
 				
 				<!-- collapse 보이기 버튼 -->
-				<button class="btn btn-primary"id="schAddBtn${dayCnt}"type="button"data-bs-toggle="collapse" data-bs-target="#collapse${dayCnt}"style="display:none;">
+<button class="btn btn-primary schCreateBtn"id="schAddBtn${dayCnt}"type="button"data-bs-toggle="collapse" data-bs-target="#collapse${dayCnt}"style="display:none;">
 				일정 생성</button>
 				<!-- 일정 추가 form collapse -->
 				<div class="collapse" id="collapse${dayCnt}">
@@ -97,7 +105,7 @@
 						<input type="hidden" id="addr${dayCnt}" name="addr" value="" readonly/>
 						<input type="hidden" id="longitude${dayCnt}" name="longitude" value="" readonly/>
 						<input type="hidden" id="latitude${dayCnt}" name="latitude" value="" readonly/>
-						<input type="hidden" class="markerNo" id="markerNo1" name="markerNo" value="1" readonly/>
+						<input type="hidden" class="markerNo" id="markerNo" name="markerNo" value="0" readonly/>
 						<div class="input-group input-group-sm mb-3">
 							<span class="input-group-text" id="inputGroup-sizing-sm">장소</span>
 							<input type="text" class="form-control" id="placeInit${dayCnt}" name="place" readonly style="background-color:#FFFFF0">
@@ -117,24 +125,26 @@
 				
 				
 				<!-- 일정 카드 html -->
-				<div id="disp${dayCnt}">
+				<div id="disp${dayCnt}" class="disp">
 				<c:forEach items="${scheduleList}" var="scheduleList" varStatus="status">
 					<c:if test="${scheduleList.planDay == dayCnt}">
-						<div class="card card-count" style="width: 18rem;">
+					<div class="card-container">
+						<div class="card card-count" style="width: 28rem;">
 							<div class="card-body cardTable">
 							<h5 class="card-title place">${scheduleList.place}</h5>
 							<h6 class="card-title addr">${scheduleList.addr}</h6>
 							<h4 class="card-title" style="display:none;">${scheduleList.planDay}</h4>
-							<h3 class="card-title" style="display:none;">${scheduleList.startTime}</h3>
+							<h3 class="card-title card-startTime" style="display:none;">${scheduleList.startTime}</h3>
 							<p class="longitude" style="display:none;">${scheduleList.longitude}</p>
 							<p class="latitude" style="display:none;">${scheduleList.latitude}</p>
 							<p class="planNo" style="display:none;">${scheduleList.planNo}</p>
-							<p class="markerNo" id="markerNo${status.count}">${status.count}</p>
+							<p class="markerNo" id="markerNo${status.count}" style="display:none;">${status.count}</p>
 							<h6 class="card-subtitle mb-2 text-muted">${scheduleList.startTime} : 00</h6>
 							<p class="card-text descript">${scheduleList.descript}</p>
 							<button type="button" class="btn btn-primary btn-sm deleteSch" id="deletePlan${status.count}" style="display:none;">delete</button>								
 							</div>
 						</div>
+					</div>
 					</c:if>
 				</c:forEach>
 				</div>
