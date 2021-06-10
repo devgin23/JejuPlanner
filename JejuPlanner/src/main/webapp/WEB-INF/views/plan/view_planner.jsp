@@ -93,7 +93,7 @@
 				<div class="form-group col-mb-6" style="text-align: right;">
 					<input type="button" class="btn btn-primary mb-3" id="planModifyStart" name="planModifyStart" value="수정">
 					<input type="submit" class="btn btn-primary mb-3" id="planModifyEnd" name="planModifyEnd" value="완료">
-					<input type="button" class="btn btn-primary mb-3" id="planDelBtn" name="planDelBtn" value="계획삭제">
+					<input type="button" class="btn btn-primary mb-3" id="planDelBtn" name="planDelBtn" value="전체삭제">
 				</div>
 			</c:if>
 		</div>
@@ -118,7 +118,7 @@
 						<input type="hidden" id="addr${dayCnt}" name="addr" value="" readonly/>
 						<input type="hidden" id="longitude${dayCnt}" name="longitude" value="" readonly/>
 						<input type="hidden" id="latitude${dayCnt}" name="latitude" value="" readonly/>
-						<input type="hidden" class="markerNo" id="markerNo1" name="markerNo" value="1" readonly/>
+						<input type="hidden" class="markerNo" id="markerNo1" name="markerNo" value="0" readonly/>
 						<div class="input-group input-group-sm mb-3">
 							<span class="input-group-text" id="inputGroup-sizing-sm">장소</span>
 							<input type="text" class="form-control" id="placeInit${dayCnt}" name="place" readonly style="background-color:#FFFFF0">
@@ -151,10 +151,10 @@
 							<p class="longitude" style="display:none;">${scheduleList.longitude}</p>
 							<p class="latitude" style="display:none;">${scheduleList.latitude}</p>
 							<p class="planNo" style="display:none;">${scheduleList.planNo}</p>
-							<p class="markerNo" id="markerNo${status.count}" >${status.count}</p>
+							<p class="markerNo" id="markerNo${status.count}" style="display:none;">${status.count}</p>
 							<h6 class="card-subtitle mb-2 text-muted">${scheduleList.startTime} : 00</h6>
 							<p class="card-text descript">${scheduleList.descript}</p>
-							<button type="button" class="btn btn-primary btn-sm deleteSch" id="deletePlan${scheduleList.markerNo}" style="display:none;">delete</button>								
+							<button type="button" class="btn btn-primary btn-sm deleteSch" id="deletePlan${status.count}" style="display:none;">delete</button>								
 							</div>
 						</div>
 					</div>
