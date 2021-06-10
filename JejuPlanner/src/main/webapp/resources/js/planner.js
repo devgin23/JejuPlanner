@@ -298,7 +298,7 @@ $(function(){
 		$(this).parent().parent().remove();
 		
 	});
-
+});
 
 /* 여행날짜 기본 값 삽입 스크립트 */
 document.getElementById('startDate').value = new Date().toISOString().substring(0, 10);
