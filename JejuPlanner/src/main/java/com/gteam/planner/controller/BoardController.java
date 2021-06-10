@@ -52,7 +52,6 @@ public class BoardController {
 			) throws Exception {
 		// 정적 계획 리스트 초기화
 		PlanController.allPlanListClear();
-		log.info("searchType:"+searchType+" keyword:"+keyword);
 		//페이징 필드 값 생성자 통해서 초기화
 		Paging page = new Paging(num, searchType, keyword);
 		//전체 계획 갯수 구하기 (검색어 입력시 해당 검색 계획 갯수)
@@ -94,7 +93,7 @@ public class BoardController {
 		//계획 호출
 		PlanVO planView = planService.planView(planNo, userId);
 		model.addAttribute("planView", planView);
-		
+		log.info("planView: "+planView.toString());
 		//일정 호출
 		List<ScheduleVO> scheduleList = planService.planSchList(planNo);
 		model.addAttribute("scheduleList", scheduleList);

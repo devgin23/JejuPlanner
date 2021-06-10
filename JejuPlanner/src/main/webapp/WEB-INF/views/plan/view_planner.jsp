@@ -26,6 +26,13 @@
   	width:100%; 
   	height:90%;
   }
+  .markerNo{
+  	display: none;
+  }
+  #planModifyEnd{
+  	display: none;
+  	margin: 0px 0px 16px 0px;
+  }
 
   /* btn-primary 색깔 바꾸기 css */
   /* .btn-primary {
@@ -54,13 +61,13 @@
 	<div class="col-md-12">
 	<form id="planFrm" name="planFrm" method="post" action="/plan/view/modify" >
 		<div class="row">
-			<input type="hidden" name="planNo" value="${planView.planNo}"/>
-			<input type="hidden" name="userId" value="${member.userId}"/>
+			<input type="hidden" id="viewPlanNo" name="planNo" value="${planView.planNo}"/>
+			<input type="hidden" id="viewUserId" name="userId" value="${member.userId}"/>
 			<div class="form-group col-sm-12">
-				<label>여행 제목</label>
+				<label>계획 제목</label>
 				<input type="text" class="form-control" id="planTitle" name="planTitle" value="${planView.planTitle}" placeholder="일정 타이틀" readonly/>
 			</div>
-			<div class="form-group col-sm-6"> 
+			<div class="form-group col-sm-8"> 
 				<label>여행 날짜</label>
 				<input type="date" class="form-control" id="startDate" name="startDate" value="<fmt:formatDate value="${planView.startDate}" pattern="yyyy-MM-dd"/>" readonly/>
 			</div>
@@ -71,10 +78,13 @@
 				  <option value="${planView.planTotalDay}" selected>${planView.planTotalDay}일</option>
 				</select>
 			</div>
-			<div class="form-group col-sm-2">
-				<input type="button" class="btn btn-primary mb-3" id="planModifyStart" name="planModifyStart" value="수정" style="float:right; margin-top: 25px;">
-				<input type="submit" class="btn btn-primary mb-3" id="planModifyEnd" name="planModifyEnd" value="완료" style="float:right; margin-top: 25px; display: none;">
-			</div>
+			<c:if test="${member.userId == planView.userId}">
+				<div class="form-group col-mb-6" style="text-align: right;">
+					<input type="button" class="btn btn-primary mb-3" id="planModifyStart" name="planModifyStart" value="수정">
+					<input type="submit" class="btn btn-primary mb-3" id="planModifyEnd" name="planModifyEnd" value="완료">
+					<input type="button" class="btn btn-primary mb-3" id="planDelBtn" name="planDelBtn" value="계획삭제">
+				</div>
+			</c:if>
 		</div>
 	</form>
 	</div>
@@ -118,7 +128,7 @@
 				
 				<!-- 일정 카드 html -->
 				<div id="disp${dayCnt}">
-				<c:forEach items="${scheduleList}" var="scheduleList">
+				<c:forEach items="${scheduleList}" var="scheduleList" varStatus="status">
 					<c:if test="${scheduleList.planDay == dayCnt}">
 						<div class="card card-count" style="width: 18rem;">
 							<div class="card-body cardTable">
@@ -129,7 +139,7 @@
 							<p class="longitude" style="display:none;">${scheduleList.longitude}</p>
 							<p class="latitude" style="display:none;">${scheduleList.latitude}</p>
 							<p class="planNo" style="display:none;">${scheduleList.planNo}</p>
-							<p class="markerNo" id="markerNo${scheduleList.markerNo}" >${scheduleList.markerNo}</p>
+							<p class="markerNo" id="markerNo${status.count}" >${status.count}</p>
 							<h6 class="card-subtitle mb-2 text-muted">${scheduleList.startTime} : 00</h6>
 							<p class="card-text descript">${scheduleList.descript}</p>
 							<button type="button" class="btn btn-primary btn-sm deleteSch" id="deletePlan${scheduleList.markerNo}" style="display:none;">delete</button>								

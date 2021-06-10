@@ -33,8 +33,13 @@ public class PlanDAOImpl implements PlanDAO {
 	@Override
 	public int planNoCheck(PlanVO vo) throws Exception {
 		int result = sql.selectOne(namespace+".planNoGet", vo);
-		log.info("planNo: " + String.valueOf(result));
 		return result;
+	}
+
+	//계획 일정 개별 추가
+	@Override
+	public void planSchAdd(ScheduleVO vo) throws Exception {
+		sql.insert(namespace+".planSchAdd", vo);
 	}
 	
 	//게시판용 계획 목록 및 페이징
@@ -47,8 +52,6 @@ public class PlanDAOImpl implements PlanDAO {
 		
 		data.put("searchType", searchType);
 		data.put("keyword", keyword);
-		log.info("searchType: "+(String)data.get("searchType"));
-		log.info("keyword: "+(String)data.get("keyword"));
 		return sql.selectList(namespace + ".planList", data);
 	}
 	
@@ -69,7 +72,6 @@ public class PlanDAOImpl implements PlanDAO {
 		
 		data.put("searchType", searchType);
 		data.put("keyword", keyword);
-		log.info("keyword: "+data.toString());
 		return sql.selectList(namespace + ".planListForUser", data);
 	}
 	
@@ -87,33 +89,22 @@ public class PlanDAOImpl implements PlanDAO {
 	
 	//계획 수정
 	@Override
-	public void planModify(PlanVO vo) {
-		sql.update(namespace + ".planModify", vo);
+	public void viewPlanModify(PlanVO vo) {
+		sql.update(namespace + ".viewPlanModify", vo);
 	}
 	
 	//계획 삭제
 	@Override
-	public void planDelete(int planNo, String userId) throws Exception {
-		log.info("Dao인자출력 : " + planNo + userId);
-		HashMap<String, Object> data = new HashMap<>();
-		
-		data.put("planNo", planNo);
-		data.put("userId", userId);
-		
-		sql.delete(namespace + ".planDelete", data);
-		
+	public void viewPlanDelete(PlanVO vo) throws Exception {
+		log.info("view Plan Delete"+vo.toString());
+		sql.delete(namespace + ".viewPlanDelete", vo);
 	}
-
-	//계획 일정 개별 추가
-	@Override
-	public void planSchAdd(ScheduleVO vo) throws Exception {
-		sql.insert(namespace+".planSchAdd", vo);
-	}
+	
 	
 	//view 삭제 추가 수정 완료버튼
 	@Override
-	public void delSch(HashMap map) throws Exception {
-		sql.delete(namespace+".delSch", map);
+	public void viewSchDelete(HashMap<String,Object> map) throws Exception {
+		sql.delete(namespace+".viewSchDelete", map);
 	}
 	
 	

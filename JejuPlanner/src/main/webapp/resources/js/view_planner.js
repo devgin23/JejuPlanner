@@ -24,17 +24,38 @@ $(function(){
 	$(document).on('click', '#planModifyStart', function(){
 		$(".form-control").removeAttr("readonly");
 		$("#planModifyStart").css('display','none');
-		$("#planModifyEnd").css('display','block');
+		$("#planModifyEnd").css('display','inline-block');
 		$(".deleteSch").css('display','block');
 		$("button[id^=schAddBtn]").css('display','block');
 	});
 	// 계획 수정 완료 버튼 클릭 시 작동 함수
 	$(document).on('click', '#planModifyEnd', function(){
 		$(".form-control").attr("readonly", 'true');
-		$("#planModifyStart").css('display','block');
+		$("#planModifyStart").css('display','inline-block');
 		$("#planModifyEnd").css('display','none');
 		$(".deleteSch").css('display','none');
 	});
+	// 계획 삭제 버튼 클릭 시 작동 함수
+	$('#planDelBtn').on('click', function(){
+		if(window.confirm("일정을 삭제하시겠습니까?")){
+			//이전페이지의 url 가져오기
+			var parentLocation = document.referrer;
+			var userId = $('#viewUserId').val();
+			var planNo = $('#viewPlanNo').val();
+			$.ajax({
+				url : "/plan/view/planDel",
+				type : "POST",
+				data: {userId: userId, planNo: planNo},
+				dataType:"text",
+				success : function() {
+					location.href=parentLocation;
+				},
+				error : function(){
+					alert("delete err");
+				}
+			});
+		}
+	})
 	$(document).on('click', '.deleteSch', function(){
 		// deleteMap 생성
 		var deleteMap = {startTime :$(this).siblings('h3').html(),
@@ -51,7 +72,7 @@ $(function(){
 		//card 안보이게 하기
 		$(this).parent().parent().css('display','none');
 		$.ajax({
-			url : "/plan/view/deleteSch",
+			url : "/plan/view/schDel",
 			type : "POST",
 			data : JSON.stringify(deleteMap),
 			contentType : "application/json; charset=utf-8;",
@@ -61,6 +82,9 @@ $(function(){
 			},
 			error : function(){
 				alert("delete err");
+			},
+			complete: function(){
+				location.href="redirect:/plan/list";
 			}
 		});
 	});

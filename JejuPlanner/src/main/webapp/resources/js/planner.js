@@ -279,17 +279,21 @@ $(function(){
 				var timeTag = card.children('h3');
 				//버블정렬
 				for (i = 0; i<(timeTag.length - 1); i++) {
-					for(j = 0; j<(timeTag.length - i); j++) {
+					console.log('i: '+ i);
+					for(j = 0; j<(timeTag.length - 1); j++) {
+						console.log('j: '+ j);
 						//$()는 객체를 리턴, Node를 출력하고 싶으면 $()[0] 으로 해야한다
 						if(parseInt(timeTag.eq(j).html()) > parseInt(timeTag.eq(j+1).html())) {
 							//A.insertBefore(B,C) A,B,C 모두 Node여야 한다. A안에서 B를 C의 앞으로 보낸다.
+							console.log('switch: '+parseInt(timeTag.eq(j).html()));
 							$('#disp'+dispNum)[0].insertBefore(timeTag.eq(j+1)[0].parentNode.parentNode, timeTag.eq(j)[0].parentNode.parentNode);
+							timeTag = card.children('h3');
 						}
 					}
 				}
 				dispNum++
 			} 	
-		}, 500);
+		}, 100);
 	});
 	
 });

@@ -64,24 +64,24 @@
 		</select>
 		
 		<!-- 계획 수정 -->
-		<update id="planModify" parameterType="com.gteam.planner.domain.PlanVO">
-			UPDATE plan 
-			SET	planTitle = #{planTitle}, startDate = #{startDate} 
+		<update id="viewPlanModify" parameterType="com.gteam.planner.domain.PlanVO">
+			UPDATE plan
+			 SET	planTitle = #{planTitle}, startDate = #{startDate} 
 			  WHERE userId = #{userId} AND planNo = #{planNo}
 		</update>
 		
 		<!-- 계획 삭제 -->
-		<delete id="planDelete" parameterType="com.gteam.planner.domain.PlanVO">
-			DELETE 
-			 FROM plan 
-			WHERE planNo = #{planNo} AND userId = #{userId};
+		<delete id="viewPlanDelete" parameterType="com.gteam.planner.domain.PlanVO">
+			DELETE
+			 FROM plan
+			  WHERE planNo = #{planNo} AND userId = #{userId};
 		</delete>
 		
 		<!-- viewDeleteSch 뷰페이지 일정 삭제 -->
-		<delete id="delSch" parameterType="hashMap">
+		<delete id="viewSchDelete" parameterType="hashMap">
 			DELETE 
-			 FROM schedule 
-			 WHERE planNo = #{planNo} AND markerNo = #{markerNo};
+			 FROM schedule
+			  WHERE planNo = #{planNo} AND markerNo = #{markerNo};
 		</delete>
 
 </mapper>
