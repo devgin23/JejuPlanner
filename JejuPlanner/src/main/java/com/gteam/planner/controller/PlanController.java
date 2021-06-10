@@ -130,6 +130,7 @@ public class PlanController {
 	
 	//view schDelete
 	@RequestMapping(value="/plan/view/schDel", method=RequestMethod.POST)
+	@ResponseBody
 	public void viewSchDelete(@RequestBody ScheduleVO vo) throws Exception {
 		
 		log.info("schDelete : " + vo.toString());
