@@ -45,6 +45,7 @@
 								</div>
 							</div>
 						</div>
+						<!-- <button id="scheduleMarker-toggle" onclick="hideMarkers()">일정</button> -->
 						<!-- KAKAO MAP VIEW 영역 끝-->
 			        	<div class="col-4 plan-area">
 				        	<%@ include file="planner.jsp" %>
