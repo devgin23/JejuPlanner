@@ -145,7 +145,7 @@ $(function(){
 	        success: function(data){
 	        	markerCount += 1;
 				var schOutput='';
-				
+				console.log("success");
 				//일정 생성폼에 markNo값 부여
 				$('.card .markerNo').val(markerCount + 1);
 				$('.card .markerNo').attr("id","markerNo" + (markerCount + 1));
@@ -156,12 +156,12 @@ $(function(){
 				var min = '00';
 								
 				//card형식으로 바꿈.
-				schOutput+= '<div class="card card-count" style="width: 18rem;">';
+				schOutput+= '<div class="card card-count" style="width: 28rem;">';
 				schOutput+= '<div class="card-body cardTable">';
 				schOutput+= '<h5 class="card-title place">' + data.place + '</h5>';
 				schOutput+= '<h6 class="card-title addr">' + data.addr + '</h6>';
 				schOutput+= '<h4 class="card-title" style="display:none;">' + data.planDay + '</h4>';
-				schOutput+= '<h3 class="card-title" style="display:none;">' + data.startTime + '</h3>';
+				schOutput+= '<h3 class="card-title card-startTime" style="display:none;">' + data.startTime + '</h3>';
 				schOutput+= '<p id="longitude" style="display:none;">' + data.longitude + '</p>';
 				schOutput+= '<p id="latitude" style="display:none;">' + data.latitude + '</p>';
 				schOutput+= '<p id="markerNo' +markerCount+ '" style="display:none;">' +markerCount+ '</p>';
@@ -172,7 +172,6 @@ $(function(){
 								
 				$("#disp"+data.planDay).append(schOutput);
 				
-				
 				//지도에 마커 찍기 LatLng/위,경 '33.450701, 126.570667'
 				scheduleAddMarker(data.latitude, data.longitude, data);
         			
@@ -181,9 +180,6 @@ $(function(){
 	        error: function(){
 	            alert("일정 추가 실패! 장소를 선택해 주세요!");
 	        },
-	        /*addr' + i +'" name="addr" value="" readonly/>';
-			createStringCollap += '<input type="hidden" id="longitude' + i +'" name="longitude" value="" readonly/>';
-			createStringCollap += '<input type="hidden" id="latitude*/	        
 	        complete: function(){
 	        	$('#contentInit'+idx).val('');
         		$('#placeInit'+idx).val('');
@@ -197,14 +193,14 @@ $(function(){
         			//table loop
         			while(dispNum<=planTotalDay){
         				
-        				console.log(document.getElementsByClassName("card-count")[0].innerHTML);
-        				console.log(document.getElementsByClassName("card-count").length);
-        				console.log(document.getElementsByClassName("card-startTime")[0].innerHTML);
+        				//console.log(document.getElementsByClassName("card-count")[0].innerHTML);
+        				//console.log(document.getElementsByClassName("card-count").length);
+        				//console.log(document.getElementsByClassName("card-startTime")[0].innerHTML);
         				//버블정렬
         				for (i = 0; i<(document.getElementsByClassName("card-count").length - 1); i++) {
         					
         					for(j = 0; j<(document.getElementsByClassName("card-count").length -1 - i); j++) {
-        						console.log("돌아간다 : "+j);
+        						//console.log("돌아간다 : "+j);
         						
         						if(parseInt(document.getElementsByClassName("card-startTime")[j].innerHTML) > parseInt(document.getElementsByClassName("card-startTime")[j+1].innerHTML)) {
         							
@@ -221,7 +217,7 @@ $(function(){
         				
         				dispNum++;
         			}
-        		}, 300);
+        		}, 300);//setTime End
 	        }
 	    });
 	});

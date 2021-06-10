@@ -128,7 +128,7 @@
 				
 				
 				<!-- 일정 카드 html -->
-				<div id="disp${dayCnt} class="disp">
+				<div id="disp${dayCnt}" class="disp">
 				<c:forEach items="${scheduleList}" var="scheduleList">
 					<c:if test="${scheduleList.planDay == dayCnt}">
 					<div class="card-container">
@@ -137,7 +137,7 @@
 							<h5 class="card-title place">${scheduleList.place}</h5>
 							<h6 class="card-title addr">${scheduleList.addr}</h6>
 							<h4 class="card-title" style="display:none;">${scheduleList.planDay}</h4>
-							<h3 class="card-title" style="display:none;">${scheduleList.startTime}</h3>
+							<h3 class="card-title card-startTime" style="display:none;">${scheduleList.startTime}</h3>
 							<p class="longitude" style="display:none;">${scheduleList.longitude}</p>
 							<p class="latitude" style="display:none;">${scheduleList.latitude}</p>
 							<p class="planNo" style="display:none;">${scheduleList.planNo}</p>
@@ -156,5 +156,4 @@
 	</div>
 	
 </body>
-<script type="text/javascript" src="/resources/js/view_write.js"></script>
 </html>
