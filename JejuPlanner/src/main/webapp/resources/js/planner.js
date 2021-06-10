@@ -2,7 +2,19 @@ var idx;
 
 //새로고침 감지 및 Controller 정적 계획 리스트 초기화
 if(performance.navigation.type == 1){
-	location.href="/plan/write/clear";
+	var param = window.location.pathname+window.location.search;
+	$.ajax({
+		url : "/plan/write/clear",
+		type : "GET",
+		data : {param: param},
+		dataType : "text",
+		success : function(data) {
+			location.href=data;
+		},
+		error : function(){
+			alert("refresh clear err");
+		}
+	});
 }
 
 $(function(){
@@ -219,6 +231,45 @@ $(function(){
         		$('#addr'+idx).val('');
         		$('#longitude'+idx).val('');
         		$('#latitude'+idx).val('');
+        		setTimeout(function() { // 동시에 입력된 일정은 정렬 안되는 문제 있어서 delay를 0.1초 주었음
+        			var i, j;
+        			var dispNum = 1;
+        			
+        			//table loop
+        			while(dispNum<=planTotalDay){
+        				var card = $('#disp'+dispNum+' .cardTable');
+        				var timeTag = card.children('h3');
+        				console.log("바꾸기전 : ",timeTag);
+        				//버블정렬
+        				for (i = 0; i<(timeTag.length - 1); i++) {
+        					
+        					for(j = 0; j<(timeTag.length -1 - i); j++) {
+        						console.log("돌아간다 : "+j);
+        						//$()는 객체를 리턴, Node를 출력하고 싶으면 $()[0] 으로 해야한다
+        						if(parseInt(timeTag.eq(j).html()) > parseInt(timeTag.eq(j+1).html())) {
+        							
+        							console.log("현재 j : "+j);
+        							console.log("j번째꺼 : "+timeTag.eq(j).html());
+        							console.log("j+1번째꺼 : "+timeTag.eq(j+1).html());
+        							
+        							//A.insertBefore(B,C) A,B,C 모두 Node여야 한다. A안에서 B를 C의 앞으로 보낸다.
+        							//$('#disp'+dispNum)[0].insertBefore(timeTag.eq(j+1)[0].parentNode.parentNode, timeTag.eq(j)[0].parentNode.parentNode);
+        							console.log(timeTag.eq(j+1).parent().parent().html())
+        							[timeTag.eq(j+1).parent().parent().html(), timeTag.eq(j).parent().parent().html()] = [timeTag.eq(j).parent().parent().html(), timeTag.eq(j+1).parent().parent().html()];
+        							console.log("바뀐다 : "+j);
+        							console.log("-----------insertBefore후-----------");
+        							console.log("j번째꺼 : "+timeTag.eq(j).html());
+        							console.log("j+1번째꺼 : "+timeTag.eq(j+1).html());
+        							
+        							
+        							
+        						}
+        					}
+        				}
+        				console.log("바꾼후 : ",timeTag);
+        				dispNum++;
+        			}
+        		}, 300);
 	        }
 	    });
 	});
@@ -258,29 +309,9 @@ $(function(){
 	});
 	
 	//일정정렬 스크립트
-	$(document).on("click", 'input[id^=schFrmSubmit]' , function sortTable() {
-		setTimeout(function() { // 동시에 입력된 일정은 정렬 안되는 문제 있어서 delay를 0.1초 주었음
-			var i, j;
-			var dispNum = 1;
-			
-			//table loop
-			while(dispNum<=planTotalDay){
-				var card = $('#disp'+dispNum+' .cardTable');
-				var timeTag = card.children('h3');
-				//버블정렬
-				for (i = 0; i<(timeTag.length - 1); i++) {
-					for(j = 0; j<(timeTag.length - i); j++) {
-						//$()는 객체를 리턴, Node를 출력하고 싶으면 $()[0] 으로 해야한다
-						if(parseInt(timeTag.eq(j).html()) > parseInt(timeTag.eq(j+1).html())) {
-							//A.insertBefore(B,C) A,B,C 모두 Node여야 한다. A안에서 B를 C의 앞으로 보낸다.
-							$('#disp'+dispNum)[0].insertBefore(timeTag.eq(j+1)[0].parentNode.parentNode, timeTag.eq(j)[0].parentNode.parentNode);
-						}
-					}
-				}
-				dispNum++;
-			}
-		}, 100);
-	});
+	/*$(document).on("click", 'input[id^=schFrmSubmit]' , function sortTable() {
+		
+	});*/
 	
 });
 

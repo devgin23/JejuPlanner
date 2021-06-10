@@ -65,7 +65,7 @@
 	<!-- KAKAO MAP JavaScript -->
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=bfe80ccda6d4728072437d233285847b&libraries=services"></script>
 	<!-- custom, kakaoMap JavaScript -->
-	<script type="text/javascript" src="/resources/js/planner.js"></script>
+	<script type="text/javascript" src="/resources/js/planner.js?ver=2"></script>
 	<script type="text/javascript" src="/resources/js/write.js"></script>
 	<!-- bootstrap -->	
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"
