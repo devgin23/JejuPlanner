@@ -48,7 +48,7 @@ $(function(){
 		createStringCollap += '<div class="input-group">'
 		createStringCollap += '<span class="input-group-text">설명</span>'
 		createStringCollap += '<textarea class="form-control" id="contentInit'+i+'" name="descript"></textarea></div>'	
-		createStringCollap += '<input type="button" id="schFrmSubmit'+i+'" class="btn btn-primary" data-bs-target="#collapseExample" data-bs-toggle="collapse'+i+'" value="추가">';
+		createStringCollap += '<input type="button" id="schFrmSubmit'+i+'" class="btn btn-primary schFrmSubmit" data-bs-target="#collapseExample" data-bs-toggle="collapse'+i+'" value="추가">';
 		createStringCollap += '</div>';
 		
 		$("#collapse"+i).html(createStringCollap);

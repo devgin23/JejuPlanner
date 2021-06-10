@@ -35,6 +35,9 @@
   .schCreateBtn{
   	margin : 1px auto;
   }
+  .schFrmSubmit{
+  	margin-top : 3px;
+  }
   /* btn-primary 색깔 바꾸기 css */
   /* .btn-primary {
     background-color: #7bc143;
@@ -118,14 +121,14 @@
 							<span class="input-group-text">설명</span>
 							<textarea class="form-control" id="contentInit${dayCnt}" name="descript"></textarea>
 						</div>
-						<input type="button" id="schFrmSubmit${dayCnt}" class="btn btn-primary" data-bs-target="#collapseExample" data-bs-toggle="collapse${dayCnt}" value="추가">
+						<input type="button" id="schFrmSubmit${dayCnt}" class="btn btn-primary schFrmSubmit" data-bs-target="#collapseExample" data-bs-toggle="collapse${dayCnt}" value="추가">
 					</form>
 					</div>
 				</div>
 				
 				
 				<!-- 일정 카드 html -->
-				<div id="disp${dayCnt} class="disp">
+				<div id="disp${dayCnt}" class="disp">
 				<c:forEach items="${scheduleList}" var="scheduleList">
 					<c:if test="${scheduleList.planDay == dayCnt}">
 					<div class="card-container">
@@ -134,7 +137,7 @@
 							<h5 class="card-title place">${scheduleList.place}</h5>
 							<h6 class="card-title addr">${scheduleList.addr}</h6>
 							<h4 class="card-title" style="display:none;">${scheduleList.planDay}</h4>
-							<h3 class="card-title" style="display:none;">${scheduleList.startTime}</h3>
+							<h3 class="card-title card-startTime" style="display:none;">${scheduleList.startTime}</h3>
 							<p class="longitude" style="display:none;">${scheduleList.longitude}</p>
 							<p class="latitude" style="display:none;">${scheduleList.latitude}</p>
 							<p class="planNo" style="display:none;">${scheduleList.planNo}</p>
@@ -153,5 +156,4 @@
 	</div>
 	
 </body>
-<script type="text/javascript" src="/resources/js/view_write.js"></script>
 </html>
