@@ -35,6 +35,9 @@
   .schCreateBtn{
   	margin : 1px auto;
   }
+  .schFrmSubmit{
+  	margin-top : 3px;
+  }
   /* btn-primary 색깔 바꾸기 css */
   /* .btn-primary {
     background-color: #7bc143;
@@ -94,7 +97,7 @@
 				<h3 class="day">Day${dayCnt}</h3>
 				
 				<!-- collapse 보이기 버튼 -->
-<button class="btn btn-primary schCreateBtn"id="schAddBtn${dayCnt}"type="button"data-bs-toggle="collapse" data-bs-target="#collapse${dayCnt}"style="display:none;">
+				<button class="btn btn-primary schCreateBtn"id="schAddBtn${dayCnt}"type="button"data-bs-toggle="collapse" data-bs-target="#collapse${dayCnt}"style="display:none;">
 				일정 생성</button>
 				<!-- 일정 추가 form collapse -->
 				<div class="collapse" id="collapse${dayCnt}">
@@ -118,7 +121,7 @@
 							<span class="input-group-text">설명</span>
 							<textarea class="form-control" id="contentInit${dayCnt}" name="descript"></textarea>
 						</div>
-						<input type="button" id="schFrmSubmit${dayCnt}" class="btn btn-primary" data-bs-target="#collapseExample" data-bs-toggle="collapse${dayCnt}" value="추가">
+						<input type="button" id="schFrmSubmit${dayCnt}" class="btn btn-primary schFrmSubmit" data-bs-target="#collapseExample" data-bs-toggle="collapse${dayCnt}" value="추가">
 					</form>
 					</div>
 				</div>
