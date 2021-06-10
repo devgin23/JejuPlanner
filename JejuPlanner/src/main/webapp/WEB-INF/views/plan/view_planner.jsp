@@ -129,7 +129,7 @@
 							<p class="longitude" style="display:none;">${scheduleList.longitude}</p>
 							<p class="latitude" style="display:none;">${scheduleList.latitude}</p>
 							<p class="planNo" style="display:none;">${scheduleList.planNo}</p>
-							<p class="markerNo" id="markerNo${scheduleList.markerNo}" >${scheduleList.markerNo}</p>
+							<p class="markerNo" id="markerNo${scheduleList.markerNo}">${scheduleList.markerNo}</p>
 							<h6 class="card-subtitle mb-2 text-muted">${scheduleList.startTime} : 00</h6>
 							<p class="card-text descript">${scheduleList.descript}</p>
 							<button type="button" class="btn btn-primary btn-sm deleteSch" id="deletePlan${scheduleList.markerNo}" style="display:none;">delete</button>								
