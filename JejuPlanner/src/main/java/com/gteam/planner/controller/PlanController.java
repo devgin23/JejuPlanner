@@ -33,8 +33,7 @@ public class PlanController {
 	static List<HashMap<String,Object>> delList = new ArrayList<>();
 	//로그인 후 일정 만들기 화면으로 이동
 	@RequestMapping(value="/plan/write", method = RequestMethod.GET)
-	public void schedulePlanning() throws Exception{
-		
+	public void plannerMain() throws Exception{
 	}
 	
 	//계획 초기 설정
@@ -49,7 +48,6 @@ public class PlanController {
 		}
 		log.info("planSetList :"+planSetList.toString());
 		log.info("schList :"+schList.toString());
-		
 		return vo;
 	}
 	
@@ -98,28 +96,17 @@ public class PlanController {
 	@RequestMapping(value = "/plan/view/modify", method = RequestMethod.POST)
 	public String viewPlanModify(PlanVO vo) throws Exception {
 		log.info("PlanVO : " + vo.toString());
-		
 		//계획 수정하기 함수
 		planService.planModify(vo);
-		
 		//일정 삭제 함수
 		planService.delSch(delList);
-		
 		//일정 추가 함수
 		planService.viewPlanAdd(vo, schList);
-		
 		//list초기화
 		allPlanListClear();
 		return "redirect:/plan/view?planNo=" + vo.getPlanNo() + "&userId=" +vo.getUserId();
 	}
 	
-	/*//계획 삭제하기(일단 살려둘 것)
-	@RequestMapping(value="/plan/view/delete", method = RequestMethod.POST)
-	public String planDelete(@RequestParam("planNo") int planNo, @RequestParam("userId") String userId) throws Exception{
-		log.info("Controller인자출력 : " + planNo + userId);
-		planService.planDelete(planNo, userId);
-		return "/plan/write";
-	}*/
 	//view planDelete
 	@RequestMapping(value="/plan/view/planDel", method=RequestMethod.POST)
 	@ResponseBody
@@ -130,8 +117,8 @@ public class PlanController {
 	
 	//view schDelete
 	@RequestMapping(value="/plan/view/schDel", method=RequestMethod.POST)
+	@ResponseBody
 	public void viewSchDelete(@RequestBody ScheduleVO vo) throws Exception {
-		
 		log.info("schDelete : " + vo.toString());
 		planService.viewDeleteSch(vo);
 		//delList에 만든 deleteMap 추가

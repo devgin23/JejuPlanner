@@ -132,21 +132,15 @@ $(function(){
    //일정 생성 버튼마다 day 순서 받아오기
    $(document).on("click", 'button[id^=schAddBtn]', function(){
       
-      //startTime select에 사용될 변수 선언
-      if(idx==0){
-           for(var i = 6; i<=24; i++){
-            if(i<10){
-            $(".startTime").append("<option value="+i+">0"+ i + ":00</option>"); //10시 이전에는 0 붙게 조건문 걸음 ex) 9:00 -> 09:00
-         }
-            else{
-               $(".startTime").append("<option value="+i+">"+ i + ":00</option>");         
-            }
-            
-            //기본값 09:00로 함
-            $('select option[value="9"]').attr("selected",true);
-         }
-      }
-      //버튼 tag만! index 값 변수로 받기
+	   //startTime select에 사용될 변수 선언
+	   if(idx==0){
+	        for(var i = 6; i<=24; i++){
+				$(".startTime").append("<option value="+i+">"+ i + ":00</option>");			
+				//기본값 09:00로 함
+				$('select option[value="9"]').attr("selected",true);
+			}
+	   }
+	   //버튼 tag만! index 값 변수로 받기
         idx = $('button[id^=schAddBtn]').index(this)+1;
         //다른게 열려 있는지 확인하는 로그
         console.log($('.collapse').hasClass('show'));
@@ -192,7 +186,6 @@ $(function(){
          
             //startTime 형태 바꾸기.
             var hour = data.startTime;
-            if(hour < 10) hour = "0" + hour; //1자리 수 일시 0 포맷 추가
             var min = '00';
                         
             //card형식으로 바꿈.
@@ -201,7 +194,7 @@ $(function(){
             schOutput+= '<h5 class="card-title">' + data.place + '</h5>';
             schOutput+= '<h6 class="card-title">' + data.addr + '</h6>';
             schOutput+= '<h4 class="card-title" style="display:none;">' + data.planDay + '</h4>';
-            schOutput+= '<h3 class="card-title" card-startTime" style="display:none;">' + data.startTime + '</h3>';
+            schOutput+= '<h3 class="card-title card-startTime" style="display:none;">' + data.startTime + '</h3>';
             schOutput+= '<p id="longitude" style="display:none;">' + data.longitude + '</p>';
             schOutput+= '<p id="latitude" style="display:none;">' + data.latitude + '</p>';
             schOutput+= '<p id="markerNo' +markerCount+ '" style="display:none;">' +markerCount+ '</p>';
