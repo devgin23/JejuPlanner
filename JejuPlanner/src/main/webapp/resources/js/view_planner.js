@@ -172,7 +172,6 @@ $(function(){
 								
 				$("#disp"+data.planDay).append(schOutput);
 				
-				console.log($('#vall').val());
 				
 				//지도에 마커 찍기 LatLng/위,경 '33.450701, 126.570667'
 				scheduleAddMarker(data.latitude, data.longitude, data);
@@ -191,6 +190,38 @@ $(function(){
         		$('#addr'+idx).val('');
         		$('#longitude'+idx).val('');
         		$('#latitude'+idx).val('');
+        		setTimeout(function() { // 동시에 입력된 일정은 정렬 안되는 문제 있어서 delay를 0.1초 주었음
+        			var i, j;
+        			var dispNum = 1;
+        			
+        			//table loop
+        			while(dispNum<=planTotalDay){
+        				
+        				console.log(document.getElementsByClassName("card-count")[0].innerHTML);
+        				console.log(document.getElementsByClassName("card-count").length);
+        				console.log(document.getElementsByClassName("card-startTime")[0].innerHTML);
+        				//버블정렬
+        				for (i = 0; i<(document.getElementsByClassName("card-count").length - 1); i++) {
+        					
+        					for(j = 0; j<(document.getElementsByClassName("card-count").length -1 - i); j++) {
+        						console.log("돌아간다 : "+j);
+        						
+        						if(parseInt(document.getElementsByClassName("card-startTime")[j].innerHTML) > parseInt(document.getElementsByClassName("card-startTime")[j+1].innerHTML)) {
+        							
+        							//구조 분해 할당 : [3, 5] = [5, 3] --> [5, 3]
+        							/*[rows[j].getElementsByTagName("td")[0].innerHTML, rows[j + 1].getElementsByTagName("td")[0].innerHTML]
+        							=[rows[j+1].getElementsByTagName("td")[0].innerHTML,rows[j].getElementsByTagName("td")[0].innerHTML];*/
+        							
+        							[document.getElementsByClassName("card-count")[j].innerHTML, document.getElementsByClassName("card-count")[j+1].innerHTML] 
+        							= [document.getElementsByClassName("card-count")[j+1].innerHTML, document.getElementsByClassName("card-count")[j].innerHTML];
+        							
+        						}
+        					}
+        				}
+        				
+        				dispNum++;
+        			}
+        		}, 300);
 	        }
 	    });
 	});
@@ -222,30 +253,7 @@ $(function(){
 		
 	});
 	
-	//일정정렬 스크립트
-	$(document).on("click", 'input[id^=schFrmSubmit]' , function sortTable() {
-		setTimeout(function() { // 동시에 입력된 일정은 정렬 안되는 문제 있어서 delay를 0.1초 주었음
-			var i, j;
-			var dispNum = 1;
-			
-			//table loop
-			while(dispNum<=planTotalDay){
-				var card = $('#disp'+dispNum+' .cardTable');
-				var timeTag = card.children('h3');
-				//버블정렬
-				for (i = 0; i<(timeTag.length - 1); i++) {
-					for(j = 0; j<(timeTag.length - i); j++) {
-						//$()는 객체를 리턴, Node를 출력하고 싶으면 $()[0] 으로 해야한다
-						if(parseInt(timeTag.eq(j).html()) > parseInt(timeTag.eq(j+1).html())) {
-							//A.insertBefore(B,C) A,B,C 모두 Node여야 한다. A안에서 B를 C의 앞으로 보낸다.
-							$('#disp'+dispNum)[0].insertBefore(timeTag.eq(j+1)[0].parentNode.parentNode, timeTag.eq(j)[0].parentNode.parentNode);
-						}
-					}
-				}
-				dispNum++;
-			}
-		}, 100);
-	});
+	
 	
 	
 });

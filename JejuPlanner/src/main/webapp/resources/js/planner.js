@@ -201,7 +201,7 @@ $(function(){
 				schOutput+= '<h5 class="card-title">' + data.place + '</h5>';
 				schOutput+= '<h6 class="card-title">' + data.addr + '</h6>';
 				schOutput+= '<h4 class="card-title" style="display:none;">' + data.planDay + '</h4>';
-				schOutput+= '<h3 class="card-title" style="display:none;">' + data.startTime + '</h3>';
+				schOutput+= '<h3 class="card-title card-startTime" style="display:none;">' + data.startTime + '</h3>';
 				schOutput+= '<p id="longitude" style="display:none;">' + data.longitude + '</p>';
 				schOutput+= '<p id="latitude" style="display:none;">' + data.latitude + '</p>';
 				schOutput+= '<p id="markerNo' +markerCount+ '" style="display:none;">' +markerCount+ '</p>';
@@ -237,36 +237,29 @@ $(function(){
         			
         			//table loop
         			while(dispNum<=planTotalDay){
-        				var card = $('#disp'+dispNum+' .cardTable');
-        				var timeTag = card.children('h3');
-        				console.log("바꾸기전 : ",timeTag);
+        				
+        				console.log(document.getElementsByClassName("card-count")[0].innerHTML);
+        				console.log(document.getElementsByClassName("card-count").length);
+        				console.log(document.getElementsByClassName("card-startTime")[0].innerHTML);
         				//버블정렬
-        				for (i = 0; i<(timeTag.length - 1); i++) {
+        				for (i = 0; i<(document.getElementsByClassName("card-count").length - 1); i++) {
         					
-        					for(j = 0; j<(timeTag.length -1 - i); j++) {
+        					for(j = 0; j<(document.getElementsByClassName("card-count").length -1 - i); j++) {
         						console.log("돌아간다 : "+j);
-        						//$()는 객체를 리턴, Node를 출력하고 싶으면 $()[0] 으로 해야한다
-        						if(parseInt(timeTag.eq(j).html()) > parseInt(timeTag.eq(j+1).html())) {
+        						
+        						if(parseInt(document.getElementsByClassName("card-startTime")[j].innerHTML) > parseInt(document.getElementsByClassName("card-startTime")[j+1].innerHTML)) {
         							
-        							console.log("현재 j : "+j);
-        							console.log("j번째꺼 : "+timeTag.eq(j).html());
-        							console.log("j+1번째꺼 : "+timeTag.eq(j+1).html());
+        							//구조 분해 할당 : [3, 5] = [5, 3] --> [5, 3]
+        							/*[rows[j].getElementsByTagName("td")[0].innerHTML, rows[j + 1].getElementsByTagName("td")[0].innerHTML]
+        							=[rows[j+1].getElementsByTagName("td")[0].innerHTML,rows[j].getElementsByTagName("td")[0].innerHTML];*/
         							
-        							//A.insertBefore(B,C) A,B,C 모두 Node여야 한다. A안에서 B를 C의 앞으로 보낸다.
-        							//$('#disp'+dispNum)[0].insertBefore(timeTag.eq(j+1)[0].parentNode.parentNode, timeTag.eq(j)[0].parentNode.parentNode);
-        							console.log(timeTag.eq(j+1).parent().parent().html())
-        							[timeTag.eq(j+1).parent().parent().html(), timeTag.eq(j).parent().parent().html()] = [timeTag.eq(j).parent().parent().html(), timeTag.eq(j+1).parent().parent().html()];
-        							console.log("바뀐다 : "+j);
-        							console.log("-----------insertBefore후-----------");
-        							console.log("j번째꺼 : "+timeTag.eq(j).html());
-        							console.log("j+1번째꺼 : "+timeTag.eq(j+1).html());
-        							
-        							
+        							[document.getElementsByClassName("card-count")[j].innerHTML, document.getElementsByClassName("card-count")[j+1].innerHTML] 
+        							= [document.getElementsByClassName("card-count")[j+1].innerHTML, document.getElementsByClassName("card-count")[j].innerHTML];
         							
         						}
         					}
         				}
-        				console.log("바꾼후 : ",timeTag);
+        				
         				dispNum++;
         			}
         		}, 300);
@@ -307,12 +300,7 @@ $(function(){
 		$(this).parent().parent().remove();
 		
 	});
-	
-	//일정정렬 스크립트
-	/*$(document).on("click", 'input[id^=schFrmSubmit]' , function sortTable() {
 		
-	});*/
-	
 });
 
 /* 여행날짜 기본 값 삽입 스크립트 */
