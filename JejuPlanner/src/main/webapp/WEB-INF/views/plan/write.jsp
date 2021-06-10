@@ -40,12 +40,11 @@
 											카페</li>
 										<li id="MT1" data-order="5"><span class="category_bg mart"></span>
 											마트</li>
-										<li><button id="scheduleMarker-toggle" onclick="hideMarkers()">일정</button></li>
 									</ul>
+						<button class="btn btn-primary col-sm-1" id="scheduleMarker-toggle" onclick="hideMarkers()">갈 곳</button>
 								</div>
 							</div>
 						</div>
-						<!-- <button id="scheduleMarker-toggle" onclick="hideMarkers()">일정</button> -->
 						<!-- KAKAO MAP VIEW 영역 끝-->
 			        	<div class="col-4 plan-area">
 				        	<%@ include file="planner.jsp" %>
