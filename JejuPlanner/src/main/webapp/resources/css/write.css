@@ -150,6 +150,13 @@ img[alt="close"] {
 
 #scheduleMarker-toggle{
 	z-index: 5;
+	position:absolute;
+	top:25px;
+	right:25px;
+	border-radius:75px;
+	width:65px;
+	white-space : pre;
+	color:red;
 }
 
 <!--KAKAO MAP CSS 끝 -->
