@@ -77,7 +77,7 @@ $(function(){
 			contentType : "application/json; charset=utf-8;",
 			dataType : "text",
 			success : function() {
-				
+
 			},
 			error : function(){
 				alert("");
@@ -118,13 +118,7 @@ $(function(){
 		//startTime select에 사용될 변수 선언
 		if(idx==0){
 	        for(var i = 6; i<=24; i++){
-				if(i<10){
-				$(".startTime").append("<option value="+i+">0"+ i + ":00</option>"); //10시 이전에는 0 붙게 조건문 걸음 ex) 9:00 -> 09:00
-			}
-				else{
-					$(".startTime").append("<option value="+i+">"+ i + ":00</option>");			
-				}
-				
+				$(".startTime").append("<option value="+i+">"+ i + ":00</option>");			
 				//기본값 09:00로 함
 				$('select option[value="9"]').attr("selected",true);
 			}
@@ -185,7 +179,7 @@ $(function(){
 				schOutput+= '<p id="markerNo' +markerViewCount + '" style="display:none;">' + markerViewCount + '</p>';
 				schOutput+= '<h6 id="vall" class="card-subtitle mb-2 text-muted" value='+data.startTime+'>' + hour + ':' + min + '' + '</h6>';
 				schOutput+= '<p id="descript" class="card-text">' + data.descript + '</p>';
-				schOutput+= '<button type="button" class="btn btn-primary btn-sm deleteSch" id="deletePlan'+markerViewCount+'">delete</button>';
+				schOutput+= '<button type="button" class="btn btn-primary btn-sm newDeleteSch" id="deletePlan'+markerViewCount+'">delete</button>';
 				schOutput+= '</div></div>';
 								
 				$("#disp"+data.planDay).append(schOutput);
@@ -240,12 +234,19 @@ $(function(){
 	});
 	
 	//장바구니에서 일정 빼기 버튼 (-)
-	$(document).on("click", 'button[id^=deletePlan]', function(){
+	$(document).on("click", '.newDeleteSch', function(){
 	
 		//버튼이 있는 행의 td들의 객체를 변수 선언
 		
-		var deleteMap = {startTime :$(this).siblings('h3').html() , planDay : idx, descript :$(this).siblings('p').html(), addr :  $(this).siblings('h5').html()}
-		
+		var deleteMap = {startTime :$(this).siblings('h3').html(), 
+                planDay : $(this).siblings('h4').html(), 
+                descript :$(this).siblings('#descript').html(), 
+                place :  $(this).siblings('h5').html(), 
+                addr :  $(this).siblings('h6').html(), 
+                longitude : $(this).siblings('#longitude').html(), 
+                latitude : $(this).siblings('#latitude').html(), 
+                markerNo : $(this).siblings('p[id^=markerNo]').html()
+                }
 		$.ajax({
 			url : "/plan/write/planDel",
 			type : "POST",

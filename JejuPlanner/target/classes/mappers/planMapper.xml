@@ -49,7 +49,7 @@
 		</select>
 		
 		<!-- 계획 상세 조회 -->
-		<select id="planView" parameterType="hashMap" resultType="com.gteam.planner.domain.PlanVO">
+		<select id="planView" parameterType="com.gteam.planner.domain.PlanVO" resultType="com.gteam.planner.domain.PlanVO">
 			SELECT planNo, userId, planTitle, startDate, planTotalDay, planHit 
 			 FROM plan 
 			  WHERE userId = #{userId} AND planNo = #{planNo}

@@ -79,12 +79,11 @@ public class PlanDAOImpl implements PlanDAO {
 	@Override
 	public PlanVO planView(int planNo, String userId) throws Exception {
 		
-		HashMap<String, Object> data = new HashMap<>();
+		PlanVO vo = new PlanVO();
+		vo.setPlanNo(planNo);
+		vo.setUserId(userId);
 		
-		data.put("planNo", planNo);
-		data.put("userId", userId);
-		
-		return sql.selectOne(namespace + ".planView", data);
+		return sql.selectOne(namespace + ".planView", vo);
 	}
 	
 	//계획 수정
