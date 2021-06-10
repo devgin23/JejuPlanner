@@ -48,7 +48,7 @@ $(function(){
 		createStringCollap += '<div class="input-group">'
 		createStringCollap += '<span class="input-group-text">설명</span>'
 		createStringCollap += '<textarea class="form-control" id="contentInit'+i+'" name="descript"></textarea></div>'	
-		createStringCollap += '<input type="button" id="schFrmSubmit'+i+'" class="btn btn-primary" data-bs-target="#collapseExample" data-bs-toggle="collapse'+i+'" value="추가">';
+		createStringCollap += '<input type="button" id="schFrmSubmit'+i+'" class="btn btn-primary schFrmSubmit" data-bs-target="#collapseExample" data-bs-toggle="collapse'+i+'" value="추가">';
 		createStringCollap += '</div>';
 		
 		$("#collapse"+i).html(createStringCollap);
@@ -92,9 +92,9 @@ $(function(){
 		   success: function(data){
 			   var planOutput = '';
 			   for(var i = 1; i<=planTotalDay; i++){
-				   var createDay = '<div><h4>DAY'+ i + '</h4>';
-				   
-				   createDay += '<button class="btn btn-primary"id="schAddBtn'+i+'"type="button"data-bs-toggle="collapse" data-bs-target="#collapse'+i+'"aria-expanded="false"aria-controls="collapseExample">';
+			   var createDay = '<div><h4 class="day">DAY'+ i + '</h4>';
+			   				   
+			   createDay += '<button class="btn btn-primary schCreateBtn"id="schAddBtn'+i+'"type="button"data-bs-toggle="collapse" data-bs-target="#collapse'+i+'"aria-expanded="false"aria-controls="collapseExample">';
 				   createDay += '일정 생성';
 				   createDay += '</button>';
 				   createDay += '<div class="collapse" id="collapse'+i+'"></div>'
@@ -196,7 +196,7 @@ $(function(){
 				var min = '00';
 								
 				//card형식으로 바꿈.
-				schOutput+= '<div class="card card-count" style="width: 18rem;">';
+				schOutput+= '<div class="card card-count" style="width: 28rem;">';
 				schOutput+= '<div class="card-body cardTable">';
 				schOutput+= '<h5 class="card-title">' + data.place + '</h5>';
 				schOutput+= '<h6 class="card-title">' + data.addr + '</h6>';
@@ -229,6 +229,38 @@ $(function(){
         		$('#addr'+idx).val('');
         		$('#longitude'+idx).val('');
         		$('#latitude'+idx).val('');
+	        	setTimeout(function() { // 동시에 입력된 일정은 정렬 안되는 문제 있어서 delay를 0.1초 주었음
+        			var i, j;
+        			var dispNum = 1;
+        			
+        			//table loop
+        			while(dispNum<=planTotalDay){
+        				
+        				console.log(document.getElementsByClassName("card-count")[0].innerHTML);
+        				console.log(document.getElementsByClassName("card-count").length);
+        				console.log(document.getElementsByClassName("card-startTime")[0].innerHTML);
+        				//버블정렬
+        				for (i = 0; i<(document.getElementsByClassName("card-count").length - 1); i++) {
+        					
+        					for(j = 0; j<(document.getElementsByClassName("card-count").length -1 - i); j++) {
+        						console.log("돌아간다 : "+j);
+        						
+        						if(parseInt(document.getElementsByClassName("card-startTime")[j].innerHTML) > parseInt(document.getElementsByClassName("card-startTime")[j+1].innerHTML)) {
+        							
+        							//구조 분해 할당 : [3, 5] = [5, 3] --> [5, 3]
+        							/*[rows[j].getElementsByTagName("td")[0].innerHTML, rows[j + 1].getElementsByTagName("td")[0].innerHTML]
+        							=[rows[j+1].getElementsByTagName("td")[0].innerHTML,rows[j].getElementsByTagName("td")[0].innerHTML];*/
+        							
+        							[document.getElementsByClassName("card-count")[j].innerHTML, document.getElementsByClassName("card-count")[j+1].innerHTML] 
+        							= [document.getElementsByClassName("card-count")[j+1].innerHTML, document.getElementsByClassName("card-count")[j].innerHTML];
+        							
+        						}
+        					}
+        				}
+        				
+        				dispNum++;
+        			}
+        		}, 300);
 	        }
 	    });
 	});
@@ -266,37 +298,7 @@ $(function(){
 		$(this).parent().parent().remove();
 		
 	});
-	
-	//일정정렬 스크립트
-	$(document).on("click", 'input[id^=schFrmSubmit]' , function sortTable() {
-		setTimeout(function() { // 동시에 입력된 일정은 정렬 안되는 문제 있어서 delay를 0.1초 주었음
-			var i, j;
-			var dispNum = 1;
-			
-			//table loop
-			while(dispNum<=planTotalDay){
-				var card = $('#disp'+dispNum+' .cardTable');
-				var timeTag = card.children('h3');
-				//버블정렬
-				for (i = 0; i<(timeTag.length - 1); i++) {
-					console.log('i: '+ i);
-					for(j = 0; j<(timeTag.length - 1); j++) {
-						console.log('j: '+ j);
-						//$()는 객체를 리턴, Node를 출력하고 싶으면 $()[0] 으로 해야한다
-						if(parseInt(timeTag.eq(j).html()) > parseInt(timeTag.eq(j+1).html())) {
-							//A.insertBefore(B,C) A,B,C 모두 Node여야 한다. A안에서 B를 C의 앞으로 보낸다.
-							console.log('switch: '+parseInt(timeTag.eq(j).html()));
-							$('#disp'+dispNum)[0].insertBefore(timeTag.eq(j+1)[0].parentNode.parentNode, timeTag.eq(j)[0].parentNode.parentNode);
-							timeTag = card.children('h3');
-						}
-					}
-				}
-				dispNum++
-			} 	
-		}, 100);
-	});
-	
-});
+
 
 /* 여행날짜 기본 값 삽입 스크립트 */
 document.getElementById('startDate').value = new Date().toISOString().substring(0, 10);

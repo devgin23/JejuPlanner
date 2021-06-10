@@ -16,7 +16,6 @@
 
   .dropdown-menu{
   	width:50px;
-  	text-align:center;
   }
   .schDiv{
   	margin-right: 10px;
@@ -26,6 +25,19 @@
   	width:100%; 
   	height:90%;
   }
+  .card-count{
+  	margin : 5px auto;
+  	border-color : orange;
+  }
+  .day{
+  	text-align:center;
+  }
+  .schCreateBtn{
+  	margin : 1px auto;
+  }
+  .schFrmSubmit{
+  	margin-top : 3px;
+  }
   .markerNo{
   	display: none;
   }
@@ -33,7 +45,6 @@
   	display: none;
   	margin: 0px 0px 16px 0px;
   }
-
   /* btn-primary 색깔 바꾸기 css */
   /* .btn-primary {
     background-color: #7bc143;
@@ -93,10 +104,10 @@
 	<!-- 계획 출력 DIV -->
 		<div id="schDiv">
 			<c:forEach var="dayCnt" begin="1" end="${planView.planTotalDay}" step="1">
-				<h3>Day${dayCnt}</h3>
+				<h3 class="day">Day${dayCnt}</h3>
 				
 				<!-- collapse 보이기 버튼 -->
-				<button class="btn btn-primary"id="schAddBtn${dayCnt}"type="button"data-bs-toggle="collapse" data-bs-target="#collapse${dayCnt}"style="display:none;">
+				<button class="btn btn-primary schCreateBtn"id="schAddBtn${dayCnt}"type="button"data-bs-toggle="collapse" data-bs-target="#collapse${dayCnt}"style="display:none;">
 				일정 생성</button>
 				<!-- 일정 추가 form collapse -->
 				<div class="collapse" id="collapse${dayCnt}">
@@ -120,31 +131,33 @@
 							<span class="input-group-text">설명</span>
 							<textarea class="form-control" id="contentInit${dayCnt}" name="descript"></textarea>
 						</div>
-						<input type="button" id="schFrmSubmit${dayCnt}" class="btn btn-primary" data-bs-target="#collapseExample" data-bs-toggle="collapse${dayCnt}" value="추가">
+						<input type="button" id="schFrmSubmit${dayCnt}" class="btn btn-primary schFrmSubmit" data-bs-target="#collapseExample" data-bs-toggle="collapse${dayCnt}" value="추가">
 					</form>
 					</div>
 				</div>
 				
 				
 				<!-- 일정 카드 html -->
-				<div id="disp${dayCnt}">
-				<c:forEach items="${scheduleList}" var="scheduleList" varStatus="status">
+				<div id="disp${dayCnt}" class="disp">
+				<c:forEach items="${scheduleList}" var="scheduleList">
 					<c:if test="${scheduleList.planDay == dayCnt}">
-						<div class="card card-count" style="width: 18rem;">
+					<div class="card-container">
+						<div class="card card-count" style="width: 28rem;">
 							<div class="card-body cardTable">
 							<h5 class="card-title place">${scheduleList.place}</h5>
 							<h6 class="card-title addr">${scheduleList.addr}</h6>
 							<h4 class="card-title" style="display:none;">${scheduleList.planDay}</h4>
-							<h3 class="card-title" style="display:none;">${scheduleList.startTime}</h3>
+							<h3 class="card-title card-startTime" style="display:none;">${scheduleList.startTime}</h3>
 							<p class="longitude" style="display:none;">${scheduleList.longitude}</p>
 							<p class="latitude" style="display:none;">${scheduleList.latitude}</p>
 							<p class="planNo" style="display:none;">${scheduleList.planNo}</p>
-							<p class="markerNo" id="markerNo${status.count}" >${status.count}</p>
+							<p class="markerNo" id="markerNo${scheduleList.markerNo}" style="display:none;">${scheduleList.markerNo}</p>
 							<h6 class="card-subtitle mb-2 text-muted">${scheduleList.startTime} : 00</h6>
 							<p class="card-text descript">${scheduleList.descript}</p>
 							<button type="button" class="btn btn-primary btn-sm deleteSch" id="deletePlan${scheduleList.markerNo}" style="display:none;">delete</button>								
 							</div>
 						</div>
+					</div>
 					</c:if>
 				</c:forEach>
 				</div>
@@ -153,5 +166,4 @@
 	</div>
 	
 </body>
-<script type="text/javascript" src="/resources/js/view_write.js"></script>
 </html>

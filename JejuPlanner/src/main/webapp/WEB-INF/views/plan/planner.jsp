@@ -33,6 +33,20 @@
   	width:100%; 
   	height:90%;
   }
+  .card-count{
+  	margin : 5px auto;
+  	border-color : orange;
+  }
+  .day{
+  	text-align:center;
+  }
+  .schCreateBtn{
+  	display : block;
+  	margin : 1px auto;
+  }
+  .schFrmSubmit{
+  	margin-top : 3px;
+  }
   /* btn-primary 색깔 바꾸기 css */
   /* .btn-primary {
     background-color: #7bc143;
