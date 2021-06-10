@@ -143,6 +143,7 @@ $(function(){
 	        dataType:"json",
 	        type: "POST",
 	        success: function(data){
+	        	console.log(${card-count});
 	        	markerCount += 1;
 				var schOutput='';
 				
