@@ -30,11 +30,11 @@ public interface PlanDAO {
 	PlanVO planView(int planNo, String userId) throws Exception;
 
 	//계획 수정
-	void planModify(PlanVO vo);
+	void viewPlanModify(PlanVO vo);
 
 	//계획 삭제
-	void planDelete(int planNo, String userId) throws Exception;
+	void viewPlanDelete(PlanVO vo) throws Exception;
 	
 	//view 삭제 추가 수정 완료버튼
-	void delSch(HashMap map) throws Exception;
+	void viewSchDelete(HashMap<String, Object> map) throws Exception;
 }

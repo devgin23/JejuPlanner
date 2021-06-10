@@ -96,7 +96,7 @@ public class PlanController {
 		
 	//계획 수정하기(완료버튼)
 	@RequestMapping(value = "/plan/view/modify", method = RequestMethod.POST)
-	public String planModify(PlanVO vo) throws Exception {
+	public String viewPlanModify(PlanVO vo) throws Exception {
 		log.info("PlanVO : " + vo.toString());
 		
 		//계획 수정하기 함수
@@ -120,12 +120,19 @@ public class PlanController {
 		planService.planDelete(planNo, userId);
 		return "/plan/write";
 	}*/
-	//view deleteSch
-	@RequestMapping(value="/plan/view/deleteSch", method=RequestMethod.POST)
+	//view planDelete
+	@RequestMapping(value="/plan/view/planDel", method=RequestMethod.POST)
 	@ResponseBody
-	public void viewDeleteSch(@RequestBody ScheduleVO vo) throws Exception {
+	public void viewPlanDelete(PlanVO vo) throws Exception {
+		log.info("planDel: "+vo.toString());
+		planService.viewPlanDelete(vo);
+	}
+	
+	//view schDelete
+	@RequestMapping(value="/plan/view/schDel", method=RequestMethod.POST)
+	public void viewSchDelete(@RequestBody ScheduleVO vo) throws Exception {
 		
-		log.info("deleteSch : " + vo.toString());
+		log.info("schDelete : " + vo.toString());
 		planService.viewDeleteSch(vo);
 		//delList에 만든 deleteMap 추가
 		delList.add(planService.viewDeleteSch(vo));

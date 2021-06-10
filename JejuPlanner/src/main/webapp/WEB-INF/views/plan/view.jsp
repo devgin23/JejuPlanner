@@ -70,10 +70,5 @@
 	<!-- custom, kakaoMap JavaScript -->
 	<script type="text/javascript" src="/resources/js/view_write.js"></script>
 	<script type="text/javascript" src="/resources/js/view_planner.js"></script>
-	
-	<!-- bootstrap -->	
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"
-		integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8"
-		crossorigin="anonymous"></script>
 
 </html>

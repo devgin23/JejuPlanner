@@ -103,13 +103,13 @@ public class PlanServiceImpl implements PlanService{
 	//계획 수정
 	@Override
 	public void planModify(PlanVO vo) throws Exception {
-		dao.planModify(vo);
+		dao.viewPlanModify(vo);
 	}
 	
 	//계획 삭제
 	@Override
-	public void planDelete(int planNo, String userId) throws Exception {
-		dao.planDelete(planNo, userId);
+	public void viewPlanDelete(PlanVO vo) throws Exception {
+		dao.viewPlanDelete(vo);
 	}
 	
 	//view 일정 삭제 Map만들기
@@ -128,9 +128,8 @@ public class PlanServiceImpl implements PlanService{
 	@Override
 	public void delSch(List<HashMap<String,Object>> delList) throws Exception {
 		for (HashMap<String,Object> s : delList) {
-			dao.delSch(s);
+			dao.viewSchDelete(s);
 		}
-		
 	}
 	//view 수정완료 일정 추가 service
 	@Override
