@@ -226,7 +226,7 @@ $(function(){
         			
         			//table loop
         			while(dispNum<=planTotalDay){
-        				console.log($(".card-count").eq(0).html());
+        				console.log($(".card-count").eq(0).innerHTML);
         				console.log(document.getElementsByClassName("card-count")[0].innerHTML);
         				console.log($(".card-count").length);
         				console.log(document.getElementsByClassName("card-count").length);
