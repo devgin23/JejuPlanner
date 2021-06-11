@@ -65,8 +65,13 @@
 	<!-- KAKAO MAP JavaScript -->
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=bfe80ccda6d4728072437d233285847b&libraries=services"></script>
 	<!-- custom, kakaoMap JavaScript -->
+<<<<<<< HEAD
 	<script type="text/javascript" src="/resources/js/planner.js?ver=3"></script>
 	<script type="text/javascript" src="/resources/js/write.js"></script>
+=======
+	<script type="text/javascript" src="/resources/js/planner.js"></script>
+	<script type="text/javascript" src="/resources/js/write.js?ver=2"></script>
+>>>>>>> branch 'master' of https://github.com/devgin23/JejuPlanner.git
 	<!-- bootstrap -->	
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8"

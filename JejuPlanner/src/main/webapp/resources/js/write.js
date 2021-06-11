@@ -131,35 +131,17 @@ function displayPlaceInfo (place) {
     	    placeOverlay.setPosition(new kakao.maps.LatLng(place.y, place.x));
     	    placeOverlay.setMap(map);  
     	    mapImage = "";
-    	    
-    	    	var frm = {
-				    	place : place.place_name,
-				    	addr : place.road_address_name,
-				    	longitude : place.x,
-				    	latitude : place.y
-    	    	}
-    	    	//도로명 주소 없을 경우 지번 주소 대입
-    	    	if(frm.addr==""){
-    	    		frm.addr = place.address_name;
-    	    	}
+    	    	
+    	    var addr = place.road_address_name;
+    	    if(addr==""){
+    	    	addr = place.address_name;
+    	    }
     	    	
     	    $('#btn').on('click', function() {
-    			$.ajax({
-    				url : "/plan/fromMap",
-    				type : "POST",
-    				data : JSON.stringify(frm),
-    				contentType : "application/json; charset=utf-8;",
-    				dataType : "json",
-    				success : function(data1) {
-    					$('#placeInit'+idx).val(data1.place);
-    					$('#addr'+idx).val(data1.addr);
-    					$('#longitude' + idx).val(data1.longitude);
-    					$('#latitude' + idx).val(data1.latitude);
-    				},
-    				error : function() {
-    					alert("simpleWithObject err");
-    				}
-    			});
+    	    	$('#placeInit'+idx).val(place.place_name);
+				$('#addr'+idx).val(addr);
+				$('#longitude' + idx).val(place.x);
+				$('#latitude' + idx).val(place.y);
     		});
     }
 

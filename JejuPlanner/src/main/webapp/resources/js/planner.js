@@ -64,6 +64,11 @@ $(function(){
    // method="post" action="/plan/write/planAdd"
    // Plan 설정 유효성 검사 및 제출
    $('#planFrmSubmit').on('click', function(){
+	   
+	   for(var i=0; i<scheduleMarkers.length; i++){
+	   scheduleMarkers[i].setMap(null);
+	   }
+	   
       //버튼 인덱스 값 초기화
       idx=0;
       //사용자 ID
@@ -180,10 +185,6 @@ $(function(){
             deleteCount += 1;
             var schOutput='';
             
-            //일정 생성폼에 markNo값 부여
-            $('.card .markerNo').val(markerCount + 1);
-            $('.card .markerNo').attr("id","markerNo" + (markerCount + 1));
-         
             //startTime 형태 바꾸기.
             var hour = data.startTime;
             var min = '00';

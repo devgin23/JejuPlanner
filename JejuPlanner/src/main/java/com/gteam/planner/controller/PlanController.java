@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.gteam.planner.domain.PlanVO;
 import com.gteam.planner.domain.ScheduleVO;
@@ -39,7 +40,7 @@ public class PlanController {
 	//계획 초기 설정
 	@RequestMapping(value="/plan/write/planSet", method=RequestMethod.POST)
 	@ResponseBody
-	public PlanVO planSet(PlanVO vo)throws Exception{
+	public PlanVO planSet(PlanVO vo,RedirectAttributes rttr)throws Exception{
 		if(planSetList.size()!=0) {
 			allPlanListClear();
 			planSetList.add(vo);
