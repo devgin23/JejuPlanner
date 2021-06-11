@@ -29,10 +29,10 @@
 						<tr>
 							<th class="col-md-1">번호</th>
 							<th class="col-md-2">여행 시작날짜</th>
-							<th class="col-md-5">계획 제목</th>
-							<th class="col-md-2">아이디</th>
 							<th class="col-md-1">일수</th>
-							<th class="col-md-1">조회수</th>
+							<th class="col-md-4">계획 제목</th>
+							<th class="col-md-2">아이디</th>
+							<th class="col-md-2">작성일</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -40,10 +40,11 @@
 							<tr>
 								<td>${planListForUser.planNo}</td>
 								<td><fmt:formatDate value="${planListForUser.startDate}" pattern="yyyy-MM-dd"/></td>
+								<td>${planListForUser.planTotalDay} 일</td>
 								<td><a href="<c:url value="/plan/view?planNo=${planListForUser.planNo}&userId=${planListForUser.userId}"/>">${planListForUser.planTitle}</a></td>
 								<td>${planListForUser.userId}</td>
-								<td>${planListForUser.planTotalDay} 일</td>
-								<td>${planListForUser.planHit}</td>
+								<td><fmt:formatDate value="${planListForUser.regDate}" pattern="yyyy-MM-dd"/></td>
+								
 							</tr>
 						</c:forEach>
 					</tbody>

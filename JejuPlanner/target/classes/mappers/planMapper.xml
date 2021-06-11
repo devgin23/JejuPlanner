@@ -24,7 +24,7 @@
 		
 		<!-- 계획 목록 -->
 		<select id="planList" parameterType="hashMap" resultType="com.gteam.planner.domain.PlanVO">
-			SELECT planNo, userId, planTitle, startDate, planTotalDay, planHit 
+			SELECT planNo, userId, planTitle, startDate, planTotalDay, regDate 
 			 FROM plan
 			<if test='searchType.equals("planTitle")'>
 				WHERE planTitle LIKE concat('%', #{keyword}, '%')
@@ -39,7 +39,7 @@
 		
 		<!-- 유저별 계획 목록 -->
 		<select id="planListForUser" parameterType="hashMap" resultType="com.gteam.planner.domain.PlanVO">
-			SELECT planNo, userId, planTitle, startDate, planTotalDay, planHit 
+			SELECT planNo, userId, planTitle, startDate, planTotalDay, regDate
 			 FROM plan
 			 <if test='searchType.equals("planTitle")'>
 				WHERE userId = #{userId} AND planTitle LIKE concat('%', #{keyword}, '%')
@@ -50,7 +50,7 @@
 		
 		<!-- 계획 상세 조회 -->
 		<select id="planView" parameterType="com.gteam.planner.domain.PlanVO" resultType="com.gteam.planner.domain.PlanVO">
-			SELECT planNo, userId, planTitle, startDate, planTotalDay, planHit 
+			SELECT planNo, userId, planTitle, startDate, planTotalDay, regDate 
 			 FROM plan 
 			  WHERE userId = #{userId} AND planNo = #{planNo}
 		</select>
