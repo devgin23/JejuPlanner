@@ -166,12 +166,12 @@ $(function(){
 				var min = '00';
 								
 				//card형식으로 바꿈.
-				schOutput+= '<div class="card card-count" style="width: 28rem;">';
+				schOutput+= '<div class="card card-count'+data.planDay+'" style="width: 28rem;">';
 				schOutput+= '<div class="card-body cardTable">';
 				schOutput+= '<h5 class="card-title place">' + data.place + '</h5>';
 				schOutput+= '<h6 class="card-title addr">' + data.addr + '</h6>';
 				schOutput+= '<h4 class="card-title" style="display:none;">' + data.planDay + '</h4>';
-				schOutput+= '<h3 class="card-title card-startTime" style="display:none;">' + data.startTime + '</h3>';
+				schOutput+= '<h3 class="card-title card-startTime card-time'+data.planDay+'" style="display:none;">' + data.startTime + '</h3>';
 				schOutput+= '<p id="longitude" style="display:none;">' + data.longitude + '</p>';
 				schOutput+= '<p id="latitude" style="display:none;">' + data.latitude + '</p>';
 				schOutput+= '<p id="markerNo' +markerViewCount + '" style="display:none;">' + markerViewCount + '</p>';
@@ -206,19 +206,19 @@ $(function(){
         			while(dispNum<=planTotalDay){
         				
         				//버블정렬
-        				for (i = 0; i<(document.getElementsByClassName("card-count").length - 1); i++) {
+        				for (i = 0; i<($(".card-count"+dispNum).length - 1); i++) {
         					
-        					for(j = 0; j<(document.getElementsByClassName("card-count").length -1 - i); j++) {
-        						//console.log("돌아간다 : "+j);
+        					for(j = 0; j<($(".card-count"+dispNum).length -1 - i); j++) {
+        						console.log("돌아간다 : "+j);
         						
-        						if(parseInt(document.getElementsByClassName("card-startTime")[j].innerHTML) > parseInt(document.getElementsByClassName("card-startTime")[j+1].innerHTML)) {
+        						if(parseInt($(".card-time"+dispNum).eq(j).html()) > parseInt($(".card-time"+dispNum).eq(j+1).html())) {
         							
         							//구조 분해 할당 : [3, 5] = [5, 3] --> [5, 3]
         							/*[rows[j].getElementsByTagName("td")[0].innerHTML, rows[j + 1].getElementsByTagName("td")[0].innerHTML]
         							=[rows[j+1].getElementsByTagName("td")[0].innerHTML,rows[j].getElementsByTagName("td")[0].innerHTML];*/
         							
-        							[document.getElementsByClassName("card-count")[j].innerHTML, document.getElementsByClassName("card-count")[j+1].innerHTML] 
-        							= [document.getElementsByClassName("card-count")[j+1].innerHTML, document.getElementsByClassName("card-count")[j].innerHTML];
+        							[document.getElementsByClassName("card-count"+dispNum)[j].innerHTML, document.getElementsByClassName("card-count"+dispNum)[j+1].innerHTML] 
+        							= [document.getElementsByClassName("card-count"+dispNum)[j+1].innerHTML, document.getElementsByClassName("card-count"+dispNum)[j].innerHTML];
         							
         						}
         					}
