@@ -38,7 +38,6 @@ public class PlanServiceImpl implements PlanService{
 			schVo.setPlace(schList.get(i).get("place").toString());
 			schVo.setLongitude(Double.parseDouble(schList.get(i).get("longitude").toString()));
 			schVo.setLatitude(Double.parseDouble(schList.get(i).get("latitude").toString()));
-			schVo.setMarkerNo(Integer.parseInt(schList.get(i).get("markerNo").toString()));
 			log.info(schVo.toString());
 			dao.planSchAdd(schVo);
 		}
@@ -56,7 +55,6 @@ public class PlanServiceImpl implements PlanService{
 		schMap.put("place", vo.getPlace());
 		schMap.put("longitude", vo.getLongitude());
 		schMap.put("latitude", vo.getLatitude());
-		schMap.put("markerNo", vo.getMarkerNo());
 		return schMap;
 	}
 	
@@ -71,7 +69,6 @@ public class PlanServiceImpl implements PlanService{
 		delMap.put("place", vo.getPlace());
 		delMap.put("longitude", vo.getLongitude());
 		delMap.put("latitude", vo.getLatitude());
-		delMap.put("markerNo", vo.getMarkerNo());
 		log.info("delMap : " + delMap.toString());
 		return delMap;
 	}
@@ -118,7 +115,6 @@ public class PlanServiceImpl implements PlanService{
 		//view_planner.jsp 일정 삭제 리스트
 		HashMap<String, Object> deleteMap = new HashMap<String, Object>();
 		deleteMap.put("planNo", vo.getPlanNo());
-		deleteMap.put("markerNo", vo.getMarkerNo());
 		log.info("deleteMap : " + deleteMap.toString());
 		
 		return deleteMap;
@@ -146,7 +142,6 @@ public class PlanServiceImpl implements PlanService{
 		schVo.setPlace(schList.get(i).get("place").toString());
 		schVo.setLongitude(Double.parseDouble(schList.get(i).get("longitude").toString()));
 		schVo.setLatitude(Double.parseDouble(schList.get(i).get("latitude").toString()));
-		schVo.setMarkerNo(Integer.parseInt(schList.get(i).get("markerNo").toString()));
 		log.info(schVo.toString());
 		dao.planSchAdd(schVo);
 	}

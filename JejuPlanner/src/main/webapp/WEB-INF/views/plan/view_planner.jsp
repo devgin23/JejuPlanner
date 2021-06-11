@@ -118,7 +118,6 @@
 						<input type="hidden" id="addr${dayCnt}" name="addr" value="" readonly/>
 						<input type="hidden" id="longitude${dayCnt}" name="longitude" value="" readonly/>
 						<input type="hidden" id="latitude${dayCnt}" name="latitude" value="" readonly/>
-						<input type="hidden" class="markerNo" id="markerNo1" name="markerNo" value="0" readonly/>
 						<div class="input-group input-group-sm mb-3">
 							<span class="input-group-text" id="inputGroup-sizing-sm">장소</span>
 							<input type="text" class="form-control" id="placeInit${dayCnt}" name="place" readonly style="background-color:#FFFFF0">
