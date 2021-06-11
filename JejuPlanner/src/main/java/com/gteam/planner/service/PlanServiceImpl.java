@@ -76,7 +76,14 @@ public class PlanServiceImpl implements PlanService{
 	//게시판용 계획 목록 및 페이징 및 페이징 처리
 	@Override
 	public List<PlanVO> planList(int displayPost, int postNum, String searchType, String keyword) throws Exception {
-		return dao.planList(displayPost, postNum, searchType, keyword);
+		HashMap<String, Object> data = new HashMap<String, Object>();
+		
+		data.put("displayPost", displayPost);
+		data.put("postNum", postNum);
+		
+		data.put("searchType", searchType);
+		data.put("keyword", keyword);
+		return dao.planList(data);
 	}
 
 	//일정 목록 출력
@@ -88,13 +95,24 @@ public class PlanServiceImpl implements PlanService{
 	//유저별 계획 목록
 	@Override
 	public List<PlanVO> planListForUser(String userId, int displayPost, int postNum, String searchType, String keyword) throws Exception {
-		return dao.planListForUser(userId, displayPost, postNum, searchType, keyword);
+		HashMap<String, Object> data = new HashMap<String, Object>();
+		data.put("userId", userId);
+		
+		data.put("displayPost", displayPost);
+		data.put("postNum", postNum);
+		
+		data.put("searchType", searchType);
+		data.put("keyword", keyword);
+		return dao.planListForUser(data);
 	}
 	
 	//계획 조회
 	@Override
 	public PlanVO planView(int planNo, String userId) throws Exception {
-		return dao.planView(planNo, userId);
+		PlanVO vo = new PlanVO();
+		vo.setPlanNo(planNo);
+		vo.setUserId(userId);
+		return dao.planView(vo);
 	}
 	
 	//계획 수정

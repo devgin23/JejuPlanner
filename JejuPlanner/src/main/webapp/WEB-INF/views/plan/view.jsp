@@ -43,7 +43,7 @@
 									<li id="MT1" data-order="5"><span class="category_bg mart"></span>
 										마트</li>
 								</ul>
-								<button class="btn btn-primary col-sm-1" id="scheduleMarker-toggle" onclick="hideMarkers()">일정</button>
+								<button class="btn btn-primary col-sm-1" id="scheduleMarker-toggle" onclick="hideMarkers()">갈 곳</button>
 							</div>
 						</div>
 						<!-- KAKAO MAP VIEW 영역 끝-->
@@ -68,8 +68,8 @@
 	<!-- KAKAO MAP JavaScript -->
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=bfe80ccda6d4728072437d233285847b&libraries=services"></script>
 	<!-- custom, kakaoMap JavaScript -->
-	<script type="text/javascript" src="/resources/js/view_write.js?ver=3"></script>
-	<script type="text/javascript" src="/resources/js/view_planner.js?ver=3"></script>
+	<script type="text/javascript" src="/resources/js/view_write.js?ver=6"></script>
+	<script type="text/javascript" src="/resources/js/view_planner.js?ver=6"></script>
 	<!-- bootstrap -->	
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8"
