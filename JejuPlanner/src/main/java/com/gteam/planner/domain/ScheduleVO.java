@@ -27,7 +27,6 @@ CREATE TABLE `schedule` (
 	private double latitude;
 	private int planDay;
 	private int startTime;
-	private int markerNo;
 	
 	public int getPlanNo() {
 		return planNo;
@@ -83,18 +82,11 @@ CREATE TABLE `schedule` (
 	public void setStartTime(int startTime) {
 		this.startTime = startTime;
 	}
-	public int getMarkerNo() {
-		return markerNo;
-	}
-	public void setMarkerNo(int markerNo) {
-		this.markerNo = markerNo;
-	}
 	
 	@Override
 	public String toString() {
 		return "ScheduleVO [planNo=" + planNo + ", userId=" + userId + ", descript=" + descript + ", addr=" + addr
-				+ ", place=" + place + ", planDay=" + planDay + ", startTime=" + startTime + ", markerNo="
-				+ markerNo + "]";
+				+ ", place=" + place + ", planDay=" + planDay + ", startTime=" + startTime + "]";
 	}
 	
 	

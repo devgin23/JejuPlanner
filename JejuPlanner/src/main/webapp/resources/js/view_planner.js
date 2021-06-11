@@ -66,7 +66,6 @@ $(function(){
 				addr :  $(this).siblings('h6').html(), 
 				longitude : $(this).siblings('.longitude').html(), 
 				latitude : $(this).siblings('.latitude').html(), 
-				markerNo : $(this).siblings('.markerNo').html()
 				}
 		console.log(deleteMap);
 		//card 안보이게 하기
@@ -81,7 +80,7 @@ $(function(){
 
 			},
 			error : function(){
-				alert("delete err");
+				alert("");
 			},
 			complete: function(){
 				location.href="redirect:/plan/list";
@@ -116,8 +115,6 @@ $(function(){
 	
 	//일정 생성 버튼마다 day 순서 받아오기
 	$(document).on("click", 'button[id^=schAddBtn]', function(){
-		$('.markerNo').val(markerViewCount  +1);
-		$('.markerNo').attr('id', "markerNo" +(markerViewCount  +1));
 		//startTime select에 사용될 변수 선언
 		if(idx==0){
 	        for(var i = 6; i<=24; i++){

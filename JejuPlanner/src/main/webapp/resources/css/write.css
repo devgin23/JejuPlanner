@@ -148,6 +148,20 @@ img[alt="close"] {
 	height:28px;
 }
 
+#scheduleMarker-toggle{
+	z-index: 5;
+	position:absolute;
+	top:25px;
+	right:25px;
+	border-radius:75px;
+	width:65px;
+	height:50px;
+	white-space : pre;
+	border:2px solid white;
+	color:black;
+	box-shadow: 1px 1px 2px black;
+}
+
 <!--KAKAO MAP CSS 끝 -->
 html{
 	height: 100%;
