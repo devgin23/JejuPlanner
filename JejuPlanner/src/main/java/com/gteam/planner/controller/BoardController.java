@@ -1,6 +1,5 @@
 package com.gteam.planner.controller;
 
-import java.util.HashMap;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.gteam.planner.domain.Paging;
-import com.gteam.planner.domain.PlaceVO;
 import com.gteam.planner.domain.PlanVO;
 import com.gteam.planner.domain.ScheduleVO;
 import com.gteam.planner.service.BoardService;
@@ -34,14 +32,9 @@ public class BoardController {
 	//일정 목록 출력
 	@RequestMapping(value="/plan/fromMap", method = RequestMethod.POST)
 	@ResponseBody
-	public Object fromMap(@RequestBody PlaceVO vo) throws Exception {
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("place", vo.getPlace());
-	    map.put("addr", vo.getAddr());
-	    map.put("longitude", vo.getLongitude());
-	    map.put("latitude", vo.getLatitude());
-	    
-		return map;
+	public Object fromMap(@RequestBody ScheduleVO vo) throws Exception {
+		log.info("fromMap : "+ vo.toString());
+		return vo;
 	}
 	
 	//게시판에 계획 리스트 출력 및 페이징
