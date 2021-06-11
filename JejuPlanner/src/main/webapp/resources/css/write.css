@@ -214,7 +214,8 @@ a:hover{
 .btn-primary {
 	background-color: #F6BB43;
 	border-color: #F6BB43;
-	color: #FFF; 
+	color: #FFF;
+	font-weight: bold;
 }
 .btn-primary:hover,
 .btn-primary:focus {
@@ -237,4 +238,15 @@ a:hover{
 }
 .dropdown-item{
 	padding: 2px 0px 2px 0px;
+}
+#planFrmSubmit{
+    margin-top: 24px;
+    width: 100px;
+}
+#planAddBtn{
+	float: right;
+    margin-right: 12px;
+    width: 100px;
+    position: relative;
+    top: 50px	
 }
