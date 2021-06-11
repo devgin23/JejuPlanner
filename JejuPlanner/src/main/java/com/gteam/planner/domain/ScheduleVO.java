@@ -92,9 +92,11 @@ CREATE TABLE `schedule` (
 	}
 	@Override
 	public String toString() {
-		return "ScheduleVO [planNo=" + planNo + ", userId=" + userId + ", descript=" + descript + ", addr=" + addr
-				+ ", place=" + place + ", planDay=" + planDay + ", startTime=" + startTime + "]";
+		return "ScheduleVO [planNo=" + planNo + ", userId=" + userId + ", descript=" + descript + ", place=" + place
+				+ ", addr=" + addr + ", longitude=" + longitude + ", latitude=" + latitude + ", planDay=" + planDay
+				+ ", startTime=" + startTime + ", rowNo=" + rowNo + "]";
 	}
+	
 	
 	
 }

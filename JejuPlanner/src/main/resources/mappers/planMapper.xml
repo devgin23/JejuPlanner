@@ -57,7 +57,7 @@
 		
 		<!-- 일정 조회 -->
 		<select id="planSchList" parameterType="int" resultType="com.gteam.planner.domain.ScheduleVO">
-			SELECT planNo, userId, descript, place, addr, startTime, planDay, latitude, longitude
+			SELECT planNo, userId, descript, place, addr, startTime, planDay, latitude, longitude, rowNo
 			 FROM schedule
 			  WHERE planNo = #{planNo}
 			   ORDER BY planDay, startTime
@@ -81,7 +81,7 @@
 		<delete id="viewSchDelete" parameterType="hashMap">
 			DELETE 
 			 FROM schedule
-			  WHERE planNo = #{planNo};
+			  WHERE planNo = #{planNo} AND rowNo = #{rowNo};
 		</delete>
 
 </mapper>
