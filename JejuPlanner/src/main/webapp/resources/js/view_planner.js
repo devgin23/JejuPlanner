@@ -83,9 +83,6 @@ $(function(){
 			error : function(){
 				alert("delete err");
 			},
-			complete: function(){
-				location.href="redirect:/plan/list";
-			}
 		});
 	});
 	//PlanVO 필드 변수 선언
