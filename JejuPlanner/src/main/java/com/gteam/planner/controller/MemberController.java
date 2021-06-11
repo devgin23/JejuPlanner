@@ -86,7 +86,6 @@ public class MemberController {
 		
 		try {
 			pwdMatch = pwdEncoder.matches(vo.getUserPw(), login.getUserPw());
-		
 			if(login != null && pwdMatch == true ) {
 				session.setAttribute("member", login);
 				return "redirect:/plan/write";

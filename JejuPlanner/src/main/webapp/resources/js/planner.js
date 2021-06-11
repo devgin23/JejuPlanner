@@ -180,10 +180,6 @@ $(function(){
             deleteCount += 1;
             var schOutput='';
             
-            //일정 생성폼에 markNo값 부여
-            $('.card .markerNo').val(markerCount + 1);
-            $('.card .markerNo').attr("id","markerNo" + (markerCount + 1));
-         
             //startTime 형태 바꾸기.
             var hour = data.startTime;
             var min = '00';
