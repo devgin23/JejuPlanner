@@ -338,7 +338,7 @@ function hideMarkers() {
 
 //일정 열람 시 일정 마커 찍히게
 $(document).ready(function() {
-	for(var i=0; i< $('.card-count').length; i++){
+	for(var i=0; i< $('.card-marker').length; i++){
 		
 		var latitude = $('.latitude').eq(i).html();
 		var longitude = $('.longitude').eq(i).html();

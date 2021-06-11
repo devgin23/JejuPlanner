@@ -141,7 +141,7 @@
 				<c:forEach items="${scheduleList}" var="scheduleList" varStatus="status">
 					<c:if test="${scheduleList.planDay == dayCnt}">
 					<div class="card-container">
-						<div class="card card-count${dayCnt}" style="width: 28rem;">
+						<div class="card card-marker card-count${dayCnt}" style="width: 28rem;">
 							<div class="card-body cardTable">
 							<h5 class="card-title place">${scheduleList.place}</h5>
 							<h6 class="card-title addr">${scheduleList.addr}</h6>
