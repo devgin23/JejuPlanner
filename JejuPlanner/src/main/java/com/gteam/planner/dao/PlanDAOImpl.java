@@ -44,14 +44,7 @@ public class PlanDAOImpl implements PlanDAO {
 	
 	//게시판용 계획 목록 및 페이징
 	@Override
-	public List<PlanVO> planList(int displayPost, int postNum, String searchType, String keyword) throws Exception {
-		HashMap<String, Object> data = new HashMap<String, Object>();
-		
-		data.put("displayPost", displayPost);
-		data.put("postNum", postNum);
-		
-		data.put("searchType", searchType);
-		data.put("keyword", keyword);
+	public List<PlanVO> planList(HashMap<String, Object> data) throws Exception {
 		return sql.selectList(namespace + ".planList", data);
 	}
 	
@@ -63,26 +56,13 @@ public class PlanDAOImpl implements PlanDAO {
 	
 	//유저별 계획 목록
 	@Override
-	public List<PlanVO> planListForUser(String userId, int displayPost, int postNum,  String searchType, String keyword) throws Exception{
-		HashMap<String, Object> data = new HashMap<String, Object>();
-		data.put("userId", userId);
-		
-		data.put("displayPost", displayPost);
-		data.put("postNum", postNum);
-		
-		data.put("searchType", searchType);
-		data.put("keyword", keyword);
+	public List<PlanVO> planListForUser(HashMap<String, Object> data) throws Exception{
 		return sql.selectList(namespace + ".planListForUser", data);
 	}
 	
 	//계획 조회
 	@Override
-	public PlanVO planView(int planNo, String userId) throws Exception {
-		
-		PlanVO vo = new PlanVO();
-		vo.setPlanNo(planNo);
-		vo.setUserId(userId);
-		
+	public PlanVO planView(PlanVO vo) throws Exception {
 		return sql.selectOne(namespace + ".planView", vo);
 	}
 	

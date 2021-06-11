@@ -43,7 +43,7 @@
 									<li id="MT1" data-order="5"><span class="category_bg mart"></span>
 										마트</li>
 								</ul>
-								<button class="btn btn-primary col-sm-1" id="scheduleMarker-toggle" onclick="hideMarkers()">일정</button>
+								<button class="btn btn-primary col-sm-1" id="scheduleMarker-toggle" onclick="hideMarkers()">갈 곳</button>
 							</div>
 						</div>
 						<!-- KAKAO MAP VIEW 영역 끝-->
