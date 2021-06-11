@@ -29,14 +29,6 @@ public class BoardController {
 	
 	private static final Logger log = LoggerFactory.getLogger(BoardController.class);
 	
-	//일정 목록 출력
-	@RequestMapping(value="/plan/fromMap", method = RequestMethod.POST)
-	@ResponseBody
-	public Object fromMap(@RequestBody ScheduleVO vo) throws Exception {
-		log.info("fromMap : "+ vo.toString());
-		return vo;
-	}
-	
 	//게시판에 계획 리스트 출력 및 페이징
 	@RequestMapping(value="/plan/list", method=RequestMethod.GET)
 	public String planList(Model model, @RequestParam("num") int num
