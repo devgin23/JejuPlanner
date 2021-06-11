@@ -226,17 +226,19 @@ $(function(){
         			
         			//table loop
         			while(dispNum<=planTotalDay){
-        				
+        				console.log($(".card-count").eq(0).html());
         				console.log(document.getElementsByClassName("card-count")[0].innerHTML);
+        				console.log($(".card-count").length);
         				console.log(document.getElementsByClassName("card-count").length);
+        				console.log($(".card-startTime").eq(0).html());
         				console.log(document.getElementsByClassName("card-startTime")[0].innerHTML);
         				//버블정렬
-        				for (i = 0; i<(document.getElementsByClassName("card-count").length - 1); i++) {
+        				for (i = 0; i<($(".card-count").length - 1); i++) {
         					
-        					for(j = 0; j<(document.getElementsByClassName("card-count").length -1 - i); j++) {
+        					for(j = 0; j<($(".card-count").length -1 - i); j++) {
         						console.log("돌아간다 : "+j);
         						
-        						if(parseInt(document.getElementsByClassName("card-startTime")[j].innerHTML) > parseInt(document.getElementsByClassName("card-startTime")[j+1].innerHTML)) {
+        						if(parseInt($(".card-startTime").eq(j).html()) > parseInt($(".card-startTime").eq(j+1).html())) {
         							
         							//구조 분해 할당 : [3, 5] = [5, 3] --> [5, 3]
         							/*[rows[j].getElementsByTagName("td")[0].innerHTML, rows[j + 1].getElementsByTagName("td")[0].innerHTML]
