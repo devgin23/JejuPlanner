@@ -27,6 +27,7 @@ CREATE TABLE `schedule` (
 	private double latitude;
 	private int planDay;
 	private int startTime;
+	private int rowNo;
 	
 	public int getPlanNo() {
 		return planNo;
@@ -83,11 +84,19 @@ CREATE TABLE `schedule` (
 		this.startTime = startTime;
 	}
 	
+	public int getRowNo() {
+		return rowNo;
+	}
+	public void setRowNo(int rowNo) {
+		this.rowNo = rowNo;
+	}
 	@Override
 	public String toString() {
-		return "ScheduleVO [planNo=" + planNo + ", userId=" + userId + ", descript=" + descript + ", addr=" + addr
-				+ ", place=" + place + ", planDay=" + planDay + ", startTime=" + startTime + "]";
+		return "ScheduleVO [planNo=" + planNo + ", userId=" + userId + ", descript=" + descript + ", place=" + place
+				+ ", addr=" + addr + ", longitude=" + longitude + ", latitude=" + latitude + ", planDay=" + planDay
+				+ ", startTime=" + startTime + ", rowNo=" + rowNo + "]";
 	}
+	
 	
 	
 }

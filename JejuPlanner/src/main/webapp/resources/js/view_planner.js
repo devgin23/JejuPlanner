@@ -65,7 +65,8 @@ $(function(){
 				place :  $(this).siblings('h5').html(), 
 				addr :  $(this).siblings('h6').html(), 
 				longitude : $(this).siblings('.longitude').html(), 
-				latitude : $(this).siblings('.latitude').html(), 
+				latitude : $(this).siblings('.latitude').html(),
+				rowNo : $(this).siblings('.rowNo').html(), 
 				}
 		console.log(deleteMap);
 		//card 안보이게 하기
