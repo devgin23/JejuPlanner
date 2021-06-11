@@ -38,8 +38,13 @@
  			</c:if>
 			  <c:if test="${msg == false}">
 			  	<script>
-			  		alert("로그인 실패! 아이디와 비밀번호를 확인해주세요.");
+			  		alert("로그인 실패! 아이디 혹은 비밀번호가 틀렸습니다.");
 			  	</script>
+			  </c:if>
+			  <c:if test="${nullMember == false}">
+			  <script>
+			  		alert("로그인 실패! 아이디 혹은 비밀번호가 틀렸습니다.");
+			  </script>
 			  </c:if>
 	  </form>
   </div>
