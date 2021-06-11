@@ -82,18 +82,25 @@ public class MemberController {
 		log.info(vo.toStringLogin());
 		HttpSession session = req.getSession();
 		MemberVO login = service.login(vo);
-		boolean pwdMatch = pwdEncoder.matches(vo.getUserPw(), login.getUserPw());
+		boolean pwdMatch = false;
 		
-		if(login != null && pwdMatch == true) {
-			session.setAttribute("member", login);
-			return "redirect:/plan/write";
-		} else {
-			session.setAttribute("member", null);
-			rttr.addFlashAttribute("msg", false);
+		try {
+			pwdMatch = pwdEncoder.matches(vo.getUserPw(), login.getUserPw());
+		
+			if(login != null && pwdMatch == true ) {
+				session.setAttribute("member", login);
+				return "redirect:/plan/write";
+			} else {
+				session.setAttribute("member", null);
+				rttr.addFlashAttribute("msg", false);
+				return "redirect:/";
+			}	
+		} catch(NullPointerException e){
+			rttr.addFlashAttribute("nullMember", false);
 			return "redirect:/";
-		}
-		
-	}
+	}		
+}
+	
 	//로그아웃
 	@RequestMapping(value = "/member/logout", method = RequestMethod.GET)
 	public String logout(HttpSession session) throws Exception{
