@@ -59,10 +59,14 @@
 6. '공유 일정' 게시판에서 다른 사용자의 여행 계획을 열람할 수 있습니다.  
 
 
-## 🔗 Planner 깃허브 주소 & 네이버 카페
+## 🔗 JejuPlanner 깃허브 주소 & 네이버 카페
 
-1. [https://github.com/devgin23/JejuPlanner](https://github.com/devgin23/JejuPlanner)
-2. [https://cafe.naver.com/gteamproject](https://cafe.naver.com/gteamproject)
+1. [깃허브 주소 링크](https://github.com/devgin23/JejuPlanner)
+2. [네이버 카페 링크](https://cafe.naver.com/gteamproject)
+
+## 📽️ JejuPlanner 시연 영상
+
+- [시연 영상 링크](https://youtu.be/r88bvVyirKw)
 
 ## 💡 Reference
 
