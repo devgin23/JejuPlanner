@@ -62,7 +62,6 @@ function placesSearchCB(data, status, pagination) {
         // 검색결과가 없는경우 해야할 처리가 있다면 이곳에 작성해 주세요
     } else if (status === kakao.maps.services.Status.ERROR) {
         // 에러로 인해 검색결과가 나오지 않은 경우 해야할 처리가 있다면 이곳에 작성해 주세요
-        
     }
 }
 // 지도에 마커를 표출하는 함수입니다
@@ -185,90 +184,80 @@ function changeCategoryClass(el) {
 function scheduleAddMarker(latitude, longitude, data) {
 	
 	markerCount++;
-	
-		var markerPosition  = new kakao.maps.LatLng(latitude, longitude);
-		
-		// 마커를 생성합니다
-		var marker = new kakao.maps.Marker({
-		    position: markerPosition
-		});
-		
-		marker.setZIndex(10);
-	
-		//이미지갖고올 api 함수 출력
-		visitKoreaAPI(data.place);
-		
-		// 마커가 지도 위에 표시되도록 설정합니다
-		marker.setMap(map);
-		
-		marker.isNull = false;
-		
-		//마커 배열에 담기
-		scheduleMarkers.push(marker);
-	
-		//인포 윈도우 UI 세팅
-		var iwContent = '<div class="placeinfo placeInfowindow">';
-	    	iwContent += ' <div class="title" id="infoBtn" type="button" title="' + data.place + '">' + data.place + '</div>';
-			//이미지 삽입
-			iwContent += '<img src ='+ mapImage + ' alt="사진이없습니다." style="width:300px; height:150px; object-fit:contain; border:3px solid black">'
-			iwContent += '    <span title="' + data.addr + '">' + data.addr + '</span>' +           
-		        '</div>' + '<div class="after"></div>';
-		
-	    iwPosition = new kakao.maps.LatLng(latitude, longitude); //인포윈도우 표시 위치입니다
-	    
-	    // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
-	    iwRemoveable = true;
-	
-		// 인포윈도우를 생성합니다
-		var infowindow = new kakao.maps.InfoWindow({
-		    position : iwPosition, 
-		    content : iwContent,
-		    removable : iwRemoveable
-		});
-			
-			// 마커 위에 인포윈도우를 표시합니다. 두번째 파라미터인 marker를 넣어주지 않으면 지도 위에 표시됩니다.
-			kakao.maps.event.addListener(marker, 'click', function() {
-			      // 마커 위에 인포윈도우를 표시합니다
-			      infowindow.open(map, marker);
-			      
-			      //닫기 버튼 이미지 소스 삽입
-			      $("img[alt='close']").attr("src", "/resources/images/bt_close.png");
-			});
-			
-			mapImage = "";
-			
-			//인포 윈도우 객체 관리를 위해 배열에 담기
-			scheduleInfowindows.push(infowindow);
-}
 
+	var markerPosition  = new kakao.maps.LatLng(latitude, longitude);
+	
+	// 마커를 생성합니다
+	var marker = new kakao.maps.Marker({
+	    position: markerPosition
+	});
+	
+	marker.setZIndex(10);
+
+	//이미지갖고올 api 함수 출력
+	visitKoreaAPI(data.place);
+	
+	// 마커가 지도 위에 표시되도록 설정합니다
+	marker.setMap(map);
+	marker.isNull = false;
+	
+	//마커 배열에 담기
+	scheduleMarkers.push(marker);
+
+	//인포 윈도우 UI 세팅
+	var iwContent = '<div class="placeinfo placeInfowindow">';
+    	iwContent += ' <div class="title" id="infoBtn" type="button" title="' + data.place + '">' + data.place + '</div>';
+		//이미지 삽입
+		iwContent += '<img src ='+ mapImage + ' alt="사진이없습니다." style="width:300px; height:150px; object-fit:contain; border:3px solid black">'
+		iwContent += '    <span title="' + data.addr + '">' + data.addr + '</span>' +           
+	        '</div>' + '<div class="after"></div>';
+	
+    iwPosition = new kakao.maps.LatLng(latitude, longitude); //인포윈도우 표시 위치입니다
+    
+    // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
+    iwRemoveable = true;
+
+	// 인포윈도우를 생성합니다
+	var infowindow = new kakao.maps.InfoWindow({
+	    position : iwPosition, 
+	    content : iwContent,
+	    removable : iwRemoveable
+	});
+		
+	// 마커 위에 인포윈도우를 표시합니다. 두번째 파라미터인 marker를 넣어주지 않으면 지도 위에 표시됩니다.
+	kakao.maps.event.addListener(marker, 'click', function() {
+	      // 마커 위에 인포윈도우를 표시합니다
+	      infowindow.open(map, marker);
+	      //닫기 버튼 이미지 소스 삽입
+	      $("img[alt='close']").attr("src", "/resources/images/bt_close.png");
+	});
+	
+	mapImage = "";
+
+	//인포 윈도우 객체 관리를 위해 배열에 담기
+	scheduleInfowindows.push(infowindow);
+}
 
 // 내 일정의 장소 마커를 지우는 함수
 $(document).on('click', 'button[id^=deletePlan]', function scheduleRemoveMarker() {
-	
 	//마커 지우기
 	scheduleMarkers[$(this).siblings('p[id^=markerNo]').html() - 1].setMap(null);
-	
 	//지운 마커에 isNull = true 속성을 주어 배열에서 지운 값인지 찾을 수 있게함
 	scheduleMarkers[$(this).siblings('p[id^=markerNo]').html() - 1].isNull = true;
-	
 	//인포윈도우 지우기
 	scheduleInfowindows[$(this).siblings('p[id^=markerNo]').html() - 1].close();
-	
 });
 
 // 배열에 추가된 마커들을 지도에 표시하거나 삭제하는 함수입니다
 //$(document).on('click', 'li[id=mySchedule]', 
 function setMarkers(map) {
     for (var i = 0; i < scheduleMarkers.length; i++) {
-    	console.log(scheduleMarkers[i]);
-
     	//delete한 일정의 마커도 배열에 들어있기에 같이 출력되는 버그가 있음, 조건문 추가하여 유효성검사
     	if(scheduleMarkers[i].isNull == true){
     		scheduleMarkers[i].setMap(null);
     	} else {
     		scheduleMarkers[i].setMap(map);
     	}
-    	
     	scheduleInfowindows[i].close();
     }
 }
@@ -301,16 +290,13 @@ function hideMarkers() {
 	queryParams += '&' + encodeURIComponent('_type') + '=' + encodeURIComponent('json'); //수신 데이터 타입
 	xhr.open('GET', url + queryParams, false);
 	xhr.onreadystatechange = function () {
-
 		if (this.readyState == 4 && this.status == 200) {
-//			console.log('Status: '+this.status+' nHeaders: '+JSON.stringify(this.getAllResponseHeaders())+'nBody: '+this.responseText);
-					
 					//출력된 JSON객체 JavaScript객체로 변환
 					var apiJson = JSON.parse(this.responseText);
 					
 					//없는 사진 불러올 경우 예외처리
 					try{
-						//사진 데이터
+					//사진 데이터
 				    	mapImage = apiJson.response.body.items.item.galWebImageUrl;
 					} catch {
 						//api에 없는 데이터 수동으로 사진 넣어주기 includes 메소드 ES6이상 사용 가능
@@ -333,7 +319,6 @@ function hideMarkers() {
 		 	}
 		}
 	xhr.send('');
-
 };
 
 //일정 열람 시 일정 마커 찍히게
@@ -351,4 +336,3 @@ $(document).ready(function() {
 		
 	}
 });
-

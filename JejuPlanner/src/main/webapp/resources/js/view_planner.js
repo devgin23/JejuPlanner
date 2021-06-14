@@ -1,5 +1,6 @@
 var idx=0;
 var markerViewCount = $('.card-count').length;
+
 //새로고침 감지 및 Controller 정적 계획 리스트 초기화
 if(performance.navigation.type == 1){
 	var param = window.location.pathname+window.location.search;
@@ -15,10 +16,7 @@ if(performance.navigation.type == 1){
 			alert("refresh clear err");
 		}
 	});
-	
 }
-
-
 $(function(){
 	// 계획 수정 버튼 클릭 시 작동 함수
 	$(document).on('click', '#planModifyStart', function(){
@@ -68,7 +66,6 @@ $(function(){
 				latitude : $(this).siblings('.latitude').html(),
 				rowNo : $(this).siblings('.rowNo').html(), 
 				}
-		console.log(deleteMap);
 		//card 안보이게 하기
 		$(this).parent().parent().css('display','none');
 		$.ajax({
@@ -78,7 +75,6 @@ $(function(){
 			contentType : "application/json; charset=utf-8;",
 			dataType : "text",
 			success : function() {
-
 			},
 			error : function(){
 				alert("");
@@ -92,13 +88,10 @@ $(function(){
 	var planTotalDay = 0;
 	var deleteCount = 0;
 			
-	
 	//총 일수 변수 초기화
 	planTotalDay = $("#planTotalDayCount option").attr('value');
 	
-   // method="post" action="/plan/write/planAdd"
-   // Plan 설정 유효성 검사 및 제출
-   
+	// method="post" action="/plan/write/planAdd"
 	// planAdd 유효성 검사
 	$(document).on('click', 'button[id=planAddBtn]', function(){
 		for(var i=1; i<=planTotalDay; i++){
@@ -123,10 +116,6 @@ $(function(){
 		}
 		//버튼 tag만! index 값 변수로 받기
         idx = $('button[id^=schAddBtn]').index(this)+1;
-        //다른게 열려 있는지 확인하는 로그
-        console.log($('.collapse').hasClass('show'));
-        console.log($('#userIdCheck').val());
-        console.log(userId);
         //다른게 열려 있을 때
         if($('.collapse').hasClass('show')){
         	//modal schDay input에 값 추가
@@ -139,9 +128,6 @@ $(function(){
         	//modal schDay input에 값 추가
         	$("#schDay"+idx).attr({"value":idx});
         }
-        //idx 값 확인 로그
-        console.log("idx : " + idx);
-    
 	});
 	
 	//method="post" action="/plan/write/schAdd"
@@ -182,11 +168,8 @@ $(function(){
 								
 				$("#disp"+data.planDay).append(schOutput);
 				
-				
 				//지도에 마커 찍기 LatLng/위,경 '33.450701, 126.570667'
 				scheduleAddMarker(data.latitude, data.longitude, data);
-        			
-        		
 	        },
 	        error: function(){
 	            alert("일정 추가 실패! 장소를 선택해 주세요!");
@@ -204,29 +187,19 @@ $(function(){
         			
         			//table loop
         			while(dispNum<=planTotalDay){
-        				
         				//버블정렬
         				for (i = 0; i<($(".card-count"+dispNum).length - 1); i++) {
-        					
         					for(j = 0; j<($(".card-count"+dispNum).length -1 - i); j++) {
-        						console.log("돌아간다 : "+j);
-        						
         						if(parseInt($(".card-time"+dispNum).eq(j).html()) > parseInt($(".card-time"+dispNum).eq(j+1).html())) {
-        							
         							//구조 분해 할당 : [3, 5] = [5, 3] --> [5, 3]
-        							/*[rows[j].getElementsByTagName("td")[0].innerHTML, rows[j + 1].getElementsByTagName("td")[0].innerHTML]
-        							=[rows[j+1].getElementsByTagName("td")[0].innerHTML,rows[j].getElementsByTagName("td")[0].innerHTML];*/
-        							
         							[document.getElementsByClassName("card-count"+dispNum)[j].innerHTML, document.getElementsByClassName("card-count"+dispNum)[j+1].innerHTML] 
         							= [document.getElementsByClassName("card-count"+dispNum)[j+1].innerHTML, document.getElementsByClassName("card-count"+dispNum)[j].innerHTML];
-        							
         						}
         					}
         				}
-        				
         				dispNum++;
         			}
-        		}, 300);//setTime End
+        		}, 100);//setTime End
 	        }
 	    });
 	});
@@ -235,7 +208,6 @@ $(function(){
 	$(document).on("click", '.newDeleteSch', function(){
 	
 		//버튼이 있는 행의 td들의 객체를 변수 선언
-		
 		var deleteMap = {startTime :$(this).siblings('h3').html(), 
                 planDay : $(this).siblings('h4').html(), 
                 descript :$(this).siblings('#descript').html(), 
@@ -258,15 +230,9 @@ $(function(){
 				alert("simpleWithObject err");
 			},
 			complete : function() {
-				console.log(deleteMap);
 			}
 		});
 		$(this).parent().parent().remove();
-		
 	});
-	
-	
-	
-	
 });
 
