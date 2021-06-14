@@ -78,6 +78,6 @@ public class MemberVO {
 	}
 	
 	public String toStringLogin() {
-		return "MemberVO [userId=" + userId + ", userPw=" + userPw + "]";
+		return "MemberVO [userId=" + userId + "]";
 	}
 }

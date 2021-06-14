@@ -5,18 +5,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-
 <!-- Bootstrap CSS -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet"
 	integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
 <!-- custom css -->
 <link href="/resources/css/list.css" rel="stylesheet" type="text/css">
-
 <title>공유 일정 목록</title>
 </head>
-
 <body>
-	
 <header>
 	<%@include file="../nav.jsp" %>
 </header>
@@ -82,17 +78,6 @@
 					<button type="button" class="btn btn-secondary" onclick="location.href='/plan/write'">돌아가기</button>
 				</div>
 			</div>
-			   	<script>
-					 document.getElementById("searchBtn").onclick = function () {
-					    
-					  var searchType = document.getElementsByName("searchType")[0].value;
-					  var keyword =  document.getElementsByName("keyword")[0].value;
-					  
-					  console.log(searchType)
-					  console.log(keyword)
-					  location.href="/plan/list?num=1"+"&searchType="+searchType+"&keyword="+keyword;
-					 };
-				</script>
 		</div>
 	</c:if>
 	<c:if test="${member.userId == null}">
@@ -101,10 +86,19 @@
   			document.location.href="/";
   		</script>
 	</c:if>
+	<script>
+		document.getElementById("searchBtn").onclick = function () {
+		 var searchType = document.getElementsByName("searchType")[0].value;
+		 var keyword =  document.getElementsByName("keyword")[0].value;
+		 console.log(searchType)
+		 console.log(keyword)
+		 location.href="/plan/list?num=1"+"&searchType="+searchType+"&keyword="+keyword;
+		};
+	</script>
 	<!-- Option 1: Bootstrap Bundle with Popper -->
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"
 			integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8"
-			crossorigin="anonymous"></script> 
+			crossorigin="anonymous">d</script> 
 
 </body>
 </html>

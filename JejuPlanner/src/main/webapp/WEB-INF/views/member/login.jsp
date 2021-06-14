@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <!-- custom css -->
-    <link href="/resources/css/login.css?ver=2" rel="stylesheet" type="text/css"> 
+    <link href="/resources/css/login.css" rel="stylesheet" type="text/css"> 
     <title>로그인</title>
 </head>
 <body id="body">

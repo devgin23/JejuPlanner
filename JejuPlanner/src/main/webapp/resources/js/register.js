@@ -1,10 +1,3 @@
-function emulAcceptCharset(form) {
-    if (form.canHaveHTML) { // detect IE
-        document.charset = form.acceptCharset;
-    }
-    return true;
-}
-
 //아이디 중복검증
 function fn_idCheck(){
 	var userId = $("#userId").val();
@@ -15,7 +8,7 @@ function fn_idCheck(){
 		$.ajax({
 			url : "/member/register/idCheck",	//클라이언트가 요청보내는 주소
 			type : "post",						//HTTP 요청방식 (GET, POST)
-			data : {userId}, //HTTP 요청과 함께 보내는 데이터
+			data : {userId}, 					//HTTP 요청과 함께 보내는 데이터
 			success : function(data){			//서버단으로 요청 전송이 성공하면 success 실행	
 				if(data==1){
 					//id Overlap
@@ -34,8 +27,6 @@ $(function(){
     //모달을 전역변수로 선언
     var modalContents = $(".modal-contents");
     var modal = $("#defaultModal");
-    
-    
     
     $('.onlyAlphabetAndNumber').keyup(function(event){
         if (!(event.keyCode >=37 && event.keyCode<=40)) {
@@ -100,7 +91,6 @@ $(function(){
         if($('#userPw').val()==""){
             modalContents.text("패스워드를 입력하여 주시기 바랍니다.");
             modal.modal('show');
-            
             $('#userPw').focus();
             return false;
         }
@@ -109,7 +99,6 @@ $(function(){
         if($('#userPwCheck').val()==""){
             modalContents.text("패스워드 확인을 입력하여 주시기 바랍니다.");
             modal.modal('show');
-            
             $('#userPwCheck').focus();
             return false;
         }
@@ -118,7 +107,6 @@ $(function(){
         if($('#userPw').val()!=$('#userPwCheck').val() || $('#userPwCheck').val()==""){
             modalContents.text("패스워드가 일치하지 않습니다.");
             modal.modal('show');
-            
             $('#userPwCheck').focus();
             return false;
         }
@@ -127,7 +115,6 @@ $(function(){
         if($('#userMail').val()==""){
             modalContents.text("이메일을 입력하여 주시기 바랍니다.");
             modal.modal('show');
-            
             $('#userMail').focus();
             return false;
         }
