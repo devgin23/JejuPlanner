@@ -61,7 +61,7 @@ API
 
 ![ReadMe%20b4c4c01d63a5444fa73ad606b0d0a150/5.jpg](ReadMe%20b4c4c01d63a5444fa73ad606b0d0a150/5.jpg)
 
-![ReadMe%20b4c4c01d63a5444fa73ad606b0d0a150/5-1.jpg](ReadMe%20b4c4c01d63a5444fa73ad606b0d0a150/5-1.jpg)
+![https://s3.us-west-2.amazonaws.com/secure.notion-static.com/704879c0-aa01-41dc-b470-4059f1685015/.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAT73L2G45O3KS52Y5%2F20210614%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20210614T064936Z&X-Amz-Expires=86400&X-Amz-Signature=c45d7f3b109b3a5bbb8e4d17dd156b40664a18e8a80f453caf90f0972f3ed4b3&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22.jpg%22](ReadMe%20b4c4c01d63a5444fa73ad606b0d0a150/5-1.jpg)
 
 5. 작성한 계획을 저장하고 '내 일정 보관' 에서 조회, 수정할 수 있습니다.
 
