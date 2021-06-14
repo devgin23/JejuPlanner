@@ -137,10 +137,15 @@ function displayPlaceInfo (place) {
     	    }
     	    	
     	    $('#btn').on('click', function() {
-    	    	$('#placeInit'+idx).val(place.place_name);
-				$('#addr'+idx).val(addr);
-				$('#longitude' + idx).val(place.x);
-				$('#latitude' + idx).val(place.y);
+    	    	if(idx==0){
+    	    		alert('일정 생성 버튼을 먼저 눌러주세요!');
+    	    		return false;
+    	    	}else{
+    	    		$('#placeInit'+idx).val(place.place_name);
+    				$('#addr'+idx).val(addr);
+    				$('#longitude' + idx).val(place.x);
+    				$('#latitude' + idx).val(place.y);
+    	    	}
     		});
     }
 
