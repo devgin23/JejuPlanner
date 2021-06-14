@@ -47,25 +47,7 @@
   .schFrmSubmit{
   	margin-top : 3px;
   }
-  /* btn-primary 색깔 바꾸기 css */
-  /* .btn-primary {
-    background-color: #7bc143;
-    border-color: #7bc143;
-    color: #FFF; }
-	.btn-primary:hover,
-	.btn-primary:focus {
-    border-color: #6fb03a;
-    background-color: #6fb03a;
-    color: #FFF; }
-	.btn-primary:active,
-	.btn-primary:visited,
-	.btn-primary:active:focus,
-	.btn-primary:active:hover {
-    border-color: #639d34;
-    background-color: #639d34;
-    color: #FFF; } */
 </style>
-
 </head>
 <body>
 	<input type="hidden" id="userIdCheck" value="${member.userId}">

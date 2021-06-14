@@ -78,7 +78,6 @@
 #category li.on .category_bg {
 	background-position-x: -43px;
 }
-
 .placeinfo_wrap {
 	position: absolute;
 	bottom: 28px;
@@ -147,7 +146,6 @@ img[alt="close"] {
 	width:28px;
 	height:28px;
 }
-
 #scheduleMarker-toggle{
 	z-index: 5;
 	position:absolute;
@@ -189,7 +187,6 @@ a:hover{
 .map-area {
 	background-color: coral;
 	text-align: center;
-	line-height:;
 }
 .row {
 	width: 100%;
