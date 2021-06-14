@@ -57,8 +57,8 @@
 	<form id="planFrm" name="planFrm" >
 		<div class="row">
 			<div class="form-group col-sm-12">
-				<label>일정 타이틀</label>
-				<input type="text" class="form-control" id="planTitle" name="planTitle" value="" placeholder="일정 타이틀"/>
+				<label>계획 제목</label>
+				<input type="text" class="form-control" id="planTitle" name="planTitle" value="" placeholder="계획 제목 입력"/>
 			</div>
 			<div class="form-group col-sm-6">
 				<label>여행 날짜</label>

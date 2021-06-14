@@ -1,4 +1,4 @@
-var idx;
+var idx = 0;
 
 //새로고침 감지 및 Controller 정적 계획 리스트 초기화
 if(performance.navigation.type == 1){
@@ -40,7 +40,7 @@ $(function(){
       createStringCollap += '<input type="hidden" class="markerNo" id="markerNo1" name="markerNo" value="1" readonly/>';
       createStringCollap += '<div class="input-group input-group-sm mb-3">'
       createStringCollap += '<span class="input-group-text" id="inputGroup-sizing-sm">장소</span>'
-      createStringCollap += '<input type="text" class="form-control" id="placeInit'+i+'" name="place" readonly style="background-color:#FFFFF0"></div>'
+      createStringCollap += '<input type="text" class="form-control" id="placeInit'+i+'" name="place" readonly style="background-color:#FFFFF0" placeholder="지도에서 장소를 선택해주세요."></div>'
       createStringCollap += '<div class="input-group mb-3">'
       createStringCollap += '<label class="input-group-text" for="startTimeInit">시작시간</label>'
       createStringCollap += '<select class="form-select startTime" id="startTimeInit" name="startTime"></select></div>'
