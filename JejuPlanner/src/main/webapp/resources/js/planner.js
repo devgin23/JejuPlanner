@@ -18,8 +18,6 @@ if(performance.navigation.type == 1){
 }
 
 $(function(){
-   //Schedule planDay 필드 변수 선언
-   
    //PlanVO 필드 변수 선언
    var userId = $('#userIdCheck').val();
    var planTitle;
@@ -27,6 +25,7 @@ $(function(){
    var planTotalDay = 0;
    var deleteCount = 0;
    var markerCount = 0;
+   
    //collapse 생성 함수
    //id 마다 i 부여
    function createCollapse(i) {
@@ -61,18 +60,16 @@ $(function(){
        //총 일수 변수 초기화
        planTotalDay = $(this).attr('value');
    });
-   // method="post" action="/plan/write/planAdd"
+    
    // Plan 설정 유효성 검사 및 제출
    $('#planFrmSubmit').on('click', function(){
-	   
 	   for(var i=0; i<scheduleMarkers.length; i++){
 	   scheduleMarkers[i].setMap(null);
 	   }
 	   
       //버튼 인덱스 값 초기화
       idx=0;
-      //사용자 ID
-//      userId = $('#userId').val();
+      
       //계획타이틀 값 검사 및 초기화
       if($('#planTitle').val()==""){
          alert('일정 타이틀을 입력해주세요!');
@@ -86,7 +83,8 @@ $(function(){
          alert('여행 일수를 선택해주세요!');
          return false;
       }
-      //시작일 값 (디폴트 값 09:00)
+      
+    //method="post" action="/plan/write/planSet"
       startDate = $('#startDate').val();
       $.ajax({
          url: "/plan/write/planSet",
@@ -122,10 +120,11 @@ $(function(){
           }
       });
    });
+   
    // planAdd 유효성 검사
    $(document).on('click', 'button[id=planAddBtn]', function(){
       for(var i=1; i<=planTotalDay; i++){
-         //tr의 요소 길이 측정, 값이 없을 시 0
+         //한 DAY안의 일정 개수 측정, 값이 없을 시 0
          if ($('#disp'+i+' .card').length == 0) {
             alert('DAY에 일정을 추가해 주세요!');
             return false;
@@ -133,10 +132,9 @@ $(function(){
       }
       location.href='/plan/write/planAdd';
    });
-   
+
    //일정 생성 버튼마다 day 순서 받아오기
    $(document).on("click", 'button[id^=schAddBtn]', function(){
-      
 	   //startTime select에 사용될 변수 선언
 	   if(idx==0){
 	        for(var i = 6; i<=24; i++){
@@ -145,27 +143,22 @@ $(function(){
 				$('select option[value="9"]').attr("selected",true);
 			}
 	   }
+	   
 	   //버튼 tag만! index 값 변수로 받기
         idx = $('button[id^=schAddBtn]').index(this)+1;
-        //다른게 열려 있는지 확인하는 로그
-        console.log($('.collapse').hasClass('show'));
-        console.log($('#userIdCheck').val());
-        console.log(userId);
-        //다른게 열려 있을 때
+        
+        //다른 일정 작성폼이 열려 있을 때
         if($('.collapse').hasClass('show')){
            //modal schDay input에 값 추가
            $("#schDay"+idx).attr({"value":idx});
            //collapse 닫기
            $('.collapse').removeClass('show');
         }
-        //다른게 안 열려 있을 때
+        //다른 일정 작성폼이 안 열려 있을 때
         else {
            //modal schDay input에 값 추가
            $("#schDay"+idx).attr({"value":idx});
         }
-        //idx 값 확인 로그
-        console.log("idx : " + idx);
-    
    });
    
    //method="post" action="/plan/write/schAdd"
@@ -208,7 +201,6 @@ $(function(){
             
             //지도에 마커 찍기 LatLng/위,경 '33.450701, 126.570667'
             scheduleAddMarker(data.latitude, data.longitude, data);
-                 
               
            },
            error: function(){
@@ -225,37 +217,22 @@ $(function(){
         			var i, j;
         			var dispNum = 1;
         			
-        			//table loop
+        			//day loop
         			while(dispNum<=planTotalDay){
-        				/*console.log($(".card-count").eq(0).innerHTML);
-        				console.log(document.getElementsByClassName("card-count")[0].innerHTML);
-        				console.log($(".card-count").length);
-        				console.log(document.getElementsByClassName("card-count").length);
-        				console.log($(".card-startTime").eq(0).html());
-        				console.log(document.getElementsByClassName("card-startTime")[0].innerHTML);*/
+        				
         				//버블정렬
         				for (i = 0; i<($(".card-count"+dispNum).length - 1); i++) {
-        					
         					for(j = 0; j<($(".card-count"+dispNum).length -1 - i); j++) {
-        						console.log("돌아간다 : "+j);
-        						
         						if(parseInt($(".card-time"+dispNum).eq(j).html()) > parseInt($(".card-time"+dispNum).eq(j+1).html())) {
-        							
         							//구조 분해 할당 : [3, 5] = [5, 3] --> [5, 3]
-        							/*[rows[j].getElementsByTagName("td")[0].innerHTML, rows[j + 1].getElementsByTagName("td")[0].innerHTML]
-        							=[rows[j+1].getElementsByTagName("td")[0].innerHTML,rows[j].getElementsByTagName("td")[0].innerHTML];*/
-        							
         							[document.getElementsByClassName("card-count"+dispNum)[j].innerHTML, document.getElementsByClassName("card-count"+dispNum)[j+1].innerHTML] 
         							= [document.getElementsByClassName("card-count"+dispNum)[j+1].innerHTML, document.getElementsByClassName("card-count"+dispNum)[j].innerHTML];
-        							
         						}
         					}
         				}
-        				
         				dispNum++;
         			}
-        		}, 300);//setTimeOut End
-              
+        		}, 100);//setTimeOut End
            }
        });
    });
@@ -273,7 +250,6 @@ $(function(){
                   latitude : $(this).siblings('#latitude').html(), 
                   markerNo : $(this).siblings('p[id^=markerNo]').html()
                   }
-      
       $.ajax({
          url : "/plan/write/planDel",
          type : "POST",
@@ -281,19 +257,13 @@ $(function(){
          contentType : "application/json; charset=utf-8;",
          dataType : "text",
          success : function(data){
-            
          },
          error : function() {
             alert("simpleWithObject err");
-         },
-         complete : function() {
-            console.log(deleteMap);
          }
       });
       $(this).parent().parent().remove();
-      
    });
-         
 });
 
 /* 여행날짜 기본 값 삽입 스크립트 */

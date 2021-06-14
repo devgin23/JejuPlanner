@@ -62,7 +62,6 @@ function placesSearchCB(data, status, pagination) {
         // 검색결과가 없는경우 해야할 처리가 있다면 이곳에 작성해 주세요
     } else if (status === kakao.maps.services.Status.ERROR) {
         // 에러로 인해 검색결과가 나오지 않은 경우 해야할 처리가 있다면 이곳에 작성해 주세요
-        
     }
 }
 // 지도에 마커를 표출하는 함수입니다
@@ -259,15 +258,12 @@ $(document).on('click', 'button[id^=deletePlan]', function scheduleRemoveMarker(
 //$(document).on('click', 'li[id=mySchedule]', 
 function setMarkers(map) {
     for (var i = 0; i < scheduleMarkers.length; i++) {
-    	console.log(scheduleMarkers[i]);
-
     	//delete한 일정의 마커도 배열에 들어있기에 같이 출력되는 버그가 있음, 조건문 추가하여 유효성검사
     	if(scheduleMarkers[i].isNull == true){
     		scheduleMarkers[i].setMap(null);
     	} else {
     		scheduleMarkers[i].setMap(map);
     	}
-    	
     	scheduleInfowindows[i].close();
     }
 }
@@ -286,7 +282,6 @@ function hideMarkers() {
 
 //한국관광공사 API 세팅
   function visitKoreaAPI(place_name) {
-	
 	var serviceKey = "O04vU1%2FBaFzYfPxBOYalRBg4ol8tZGeSgRc1SDG6HnIBdhw0XE6GHIcpyCrLSFpb8x%2BRe3mVF8SWqz0nIFj7RA%3D%3D";
 	var xhr = new XMLHttpRequest();
 	var url = 'http://api.visitkorea.or.kr/openapi/service/rest/PhotoGalleryService/gallerySearchList'; //URL
@@ -302,8 +297,6 @@ function hideMarkers() {
 	xhr.onreadystatechange = function () {
 
 		if (this.readyState == 4 && this.status == 200) {
-//			console.log('Status: '+this.status+' nHeaders: '+JSON.stringify(this.getAllResponseHeaders())+'nBody: '+this.responseText);
-					
 					//출력된 JSON객체 JavaScript객체로 변환
 					var apiJson = JSON.parse(this.responseText);
 					
@@ -332,6 +325,4 @@ function hideMarkers() {
 		 	}
 		}
 	xhr.send('');
-
 };
-
