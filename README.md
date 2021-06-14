@@ -65,8 +65,9 @@ API
 
 5. 작성한 계획을 저장하고 '내 일정 보관' 에서 조회, 수정할 수 있습니다.
 
-![ReadMe%20b4c4c01d63a5444fa73ad606b0d0a150/6.jpg](ReadMe%20b4c4c01d63a5444fa73ad606b0d0a150/6.jpg)
+![Uploading 6번.jpg…]()
 
-![ReadMe%20b4c4c01d63a5444fa73ad606b0d0a150/6-1.jpg](ReadMe%20b4c4c01d63a5444fa73ad606b0d0a150/6-1.jpg)
+
+
 
 6. '공유 일정' 게시판에서 다른 사용자의 여행 계획을 열람할 수 있습니다.
