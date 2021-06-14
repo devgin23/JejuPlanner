@@ -19,6 +19,9 @@ body{
     color: #888;
     margin: 0;
 }
+h1{
+	user-select: none;
+}
 
 #main{
     display: table;
@@ -48,7 +51,7 @@ body{
 <body>
 	<div id="main">
     	<div class="fof">
-        	<h1>${msg }</h1>
+        	<h1>${msg}</h1>
     	</div>
 	</div>
 </body>
