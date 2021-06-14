@@ -33,7 +33,7 @@
   	width:100%; 
   	height:90%;
   }
-  .card-count{
+  .card-marker{
   	margin : 5px auto;
   	border-color : orange;
   }
