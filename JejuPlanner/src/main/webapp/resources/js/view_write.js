@@ -249,7 +249,6 @@ $(document).on('click', 'button[id^=deletePlan]', function scheduleRemoveMarker(
 });
 
 // 배열에 추가된 마커들을 지도에 표시하거나 삭제하는 함수입니다
-//$(document).on('click', 'li[id=mySchedule]', 
 function setMarkers(map) {
     for (var i = 0; i < scheduleMarkers.length; i++) {
     	//delete한 일정의 마커도 배열에 들어있기에 같이 출력되는 버그가 있음, 조건문 추가하여 유효성검사

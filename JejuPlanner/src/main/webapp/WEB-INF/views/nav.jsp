@@ -11,7 +11,7 @@
     	<a class="navbar-brand title-second" href="/plan/write"> Planner</a>
     </span>
     
-      <ul class="nav navbar-nav " style="flex-direction: row;">
+      <ul class="nav navbar-nav ">
         <li class="nav-item">
           <a class="nav-link" href="/plan/write">일정 만들기</a>
         </li>
@@ -36,8 +36,3 @@
       </ul>
  </div>
 </nav>
-
-<!-- 내 일정 보관 열람 POST처리를 위한 form -->
-<form name="planListForUser" action="/plan/list/user" method="POST" style="margin:0px;">
-	<input type="hidden" name="userId" value="${member.userId}"></input>
-</form>

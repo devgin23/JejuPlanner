@@ -6,20 +6,16 @@
 <html>
 <head>
 <meta charset="UTF-8">
-
 <!-- Bootstrap CSS -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
 <!-- custom css -->
 <link href="/resources/css/list.css" rel="stylesheet" type="text/css">
-
 <title>내 일정 목록</title>
 </head>
-
 <body>
 	<header>
 		<%@include file="../nav.jsp" %>
 	</header>
-	
 	<!-- 계획 출력 시작 -->
 	<c:if test="${member.userId != null}">
 		<div class="container">
@@ -44,7 +40,6 @@
 								<td><a href="<c:url value="/plan/view?planNo=${planListForUser.planNo}&userId=${planListForUser.userId}"/>">${planListForUser.planTitle}</a></td>
 								<td>${planListForUser.userId}</td>
 								<td><fmt:formatDate value="${planListForUser.regDate}" pattern="yyyy-MM-dd"/></td>
-								
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -90,17 +85,16 @@
 			document.location.href="/";
 		</script>
 	</c:if>
-	<!-- Option 1: Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js">
-    </script>
-    <script>
-
-		 document.getElementById("searchBtn").onclick = function () {
-		    
-		  var searchType = document.getElementsByName("searchType")[0].value;
-		  var keyword =  document.getElementsByName("keyword")[0].value;
-		  location.href="/plan/list/user?userId=${member.userId}&num=1&searchType="+searchType+"&keyword="+keyword;
-		 };
+	<script>
+		document.getElementById("searchBtn").onclick = function () {
+		var searchType = document.getElementsByName("searchType")[0].value;
+		var keyword =  document.getElementsByName("keyword")[0].value;
+		location.href="/plan/list/user?userId=${member.userId}&num=1&searchType="+searchType+"&keyword="+keyword;
+		};
 	</script>
+	<!-- Option 1: Bootstrap Bundle with Popper -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"
+			integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8"
+			crossorigin="anonymous">d</script> 
 </body>
 </html>

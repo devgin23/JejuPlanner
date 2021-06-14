@@ -1,14 +1,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%
-    	request.setCharacterEncoding("UTF-8");
-    %>
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>회원가입</title>
         <!-- Bootstrap -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -51,8 +47,6 @@
                 </div><!-- /.modal-dialog -->
             </div><!-- /.modal -->
             <hr/>
-
-
 
             <!-- content -->
             <div class="custom-align-content" >
@@ -106,7 +100,6 @@
                     </div>
                 </form>
             </div>     
-        
 
             <!--// 본문 들어가는 부분 -->
             <hr/>
