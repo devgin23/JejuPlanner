@@ -22,7 +22,7 @@
           <a class="nav-link" href="/plan/list?num=1">공유 일정</a>
         </li>
         <li class="nav-item ">
-          <a class="nav-link" href="#">이용 안내</a>
+          <a class="nav-link" href="https://www.notion.so/JejuPlanner-60ecfb2a02c144ad9d34b2dbd5d1fb91">이용 안내</a>
         </li>
         <li class="nav-item logout" style="padding-right: 33px; padding-left: 33px;">
         	<!-- 로그인 체크 -->
